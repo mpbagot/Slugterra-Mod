@@ -1,0 +1,16 @@
+[
+{
+  "modid": "slugterramod",
+  "name": "Slugterra Mod",
+  "description": "Deep underground, past the bedrock, another land has hidden in secret for centuries...You will discover this land",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["pack_of_14eggies, slugslinger"],
+  "credits": "slugslinger:ideas, models, textures;pack_of_14eggies:coding",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

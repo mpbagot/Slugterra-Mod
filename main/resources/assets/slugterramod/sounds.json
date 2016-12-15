@@ -1,0 +1,42 @@
+{
+    "slugs.allSlugs.squeak":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "slugs/slugsqueak"
+        ]
+    },
+    "slugs.allSlugs.formshift":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "slugs/formshift"
+        ]
+    },
+    "blasters.defender.shoot":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "blasters/defender/defendshoot"
+        ]
+    },
+    "blasters.defender.reload":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "blasters/defender/defendreload"
+        ]
+    },
+	"blasters.defender.shortreload":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "blasters/defender/defendreload_short"
+        ]
+    }
+}

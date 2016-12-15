@@ -1,0 +1,71 @@
+item.SlugTube.name=Slug Tube
+item.SlugFood.name=Slug Food
+item.TorpedoTube.name=Torpedo Shell
+item.Blaster.name=Defender Blaster
+item.ShinaiBlaster.name=Shanai's Blaster
+item.JunjieBlaster.name=Junjie's Blaster
+item.PrimeBlasterFem.name=Prime Blaster (Female)
+item.PrimeBlasterMale.name=Prime Blaster (Male)
+
+item.BlasterHandle.name=Blaster Handle
+item.BlasterFusionCore.name=Fusion Core
+item.BlasterBarrel.name=Blaster Barrel
+item.ShanaiBlasterEnd.name=Shanai's Staff End
+
+item.slingerHelmet.name=Slug Slinger Helmet
+item.slingerChestplate.name=Slug Slinger Belt
+item.slingerPants.name=Slug Slinger Pants
+item.slingerBoots.name=Slug Slinger Boots
+
+tile.SlugContainer.name=Slug Container
+tile.DropSeat.name=The Drop Seat
+tile.SlugterraGrass.name=Slugterra Cavern Grass
+tile.SlugterraDirt.name=Slugterra Cavern Dirt
+tile.SlugIce.name=Luminescent Ice
+tile.MushroomSlugterra.name=Bioluminescent Mushroom
+
+entity.InfernusSlug.name=Infernus
+entity.LariatSlug.name=Lariat
+entity.NegashadeSlug.name=Negashade
+entity.PhosphoroSlug.name=Phosphoro
+entity.JellyishSlug.name=Jellyish
+entity.MakoBreakerSlug.name=MakoBreaker
+entity.FingerlingSlug.name=Fingerling
+entity.ArmasheltSlug.name=Armashelt
+entity.DirtUrchinSlug.name=Dirt Urchin
+entity.GrenukeSlug.name=Grenuke
+entity.LavalynxSlug.name=Lavalynx
+entity.BoonDocSlug.name=Boon Doc
+entity.NeotoxSlug.name=Neotox
+entity.TazerlingSlug.name=Tazerling
+entity.HexletSlug.name=Hexlet
+entity.FlaringoSlug.name=Flaringo
+entity.SlickSilverSlug.name=Slicksilver
+
+entity.WolfMecha.name=L-KE
+
+entity.AllySlinger.name=Ally Slinger
+entity.EnemySlinger.name=Enemy Slinger
+
+item.InfernusIn.name=Captured Infernus
+item.JellyishIn.name=Captured Jellyish
+item.LariatIn.name=Captured Lariat
+item.MakoBreakerIn.name=Captured MakoBreaker
+item.NegashadeIn.name=Captured Negashade
+item.PhosphoroIn.name=Captured Phosphoro
+item.ArmasheltIn.name=Captured Armashelt
+item.DirtUrchinIn.name=Captured Dirt Urchin
+item.BoonDocIn.name=Captured Boon Doc
+item.HexletIn.name=Captured Hexlet
+item.FlaringoIn.name=Captured Flaringo
+item.TazerlingIn.name=Captured Tazerling
+item.GrenukeIn.name=Captured Grenuke
+
+itemGroup.BlasterTab=Slug Slinger Equipment
+itemGroup.MiscTab=Misc Items
+itemGroup.SlugTab=Slugs
+
+key.categories.eggies=Pack_of_14eggies Mod Keys
+key.sluginvup=Slug Hotbar Up
+key.sluginvdown=Slug Hotbar Down
+key.opensluginv=Slug Inventory
