@@ -1,13 +1,10 @@
 package com.slugterra.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.item.slugs.ItemSlug;
-import com.slugterra.lib.Strings;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 
 public class SlugsTube {
 
@@ -15,7 +12,7 @@ public class SlugsTube {
 		initialiseItem();
 		registerItem();
 	}
-	
+
 	public static Item infernus;
 	public static Item jellyish;
 	public static Item lariat;
@@ -31,7 +28,8 @@ public class SlugsTube {
 	public static Item grenuke;
 	public static Item slicksilver;
 	public static Item enigmo;
-	
+	public static Item ramstone;
+
 	public static void initialiseItem(){
 		infernus = new ItemSlug().setUnlocalizedName("InfernusIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 		jellyish = new ItemSlug().setUnlocalizedName("JellyishIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
@@ -48,6 +46,7 @@ public class SlugsTube {
 		grenuke = new ItemSlug().setUnlocalizedName("GrenukeIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 		slicksilver = new ItemSlug().setUnlocalizedName("SlickSilverIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 		enigmo = new ItemSlug().setUnlocalizedName("EnigmoIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
+		ramstone = new ItemSlug().setUnlocalizedName("RamstoneIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 	}
 	public static void registerItem(){
 		GameRegistry.registerItem(infernus, infernus.getUnlocalizedName());
@@ -65,7 +64,7 @@ public class SlugsTube {
 		GameRegistry.registerItem(grenuke, grenuke.getUnlocalizedName());
 		GameRegistry.registerItem(slicksilver, slicksilver.getUnlocalizedName());
 		GameRegistry.registerItem(enigmo, enigmo.getUnlocalizedName());
+		GameRegistry.registerItem(ramstone, ramstone.getUnlocalizedName());
 
 	}
-	
 }

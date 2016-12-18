@@ -17,6 +17,7 @@ import com.slugterra.entity.protoform.EntityLariat;
 import com.slugterra.entity.protoform.EntityMakoBreaker;
 import com.slugterra.entity.protoform.EntityNegashade;
 import com.slugterra.entity.protoform.EntityPhosphoro;
+import com.slugterra.entity.protoform.EntityRamstone;
 import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.slingers.EnemySlinger;
@@ -25,6 +26,7 @@ import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
+import com.slugterra.entity.velocity.EntityRamstoneVel;
 import com.slugterra.item.SlugterraItems;
 import com.slugterra.item.VelocitySlugItem;
 import com.slugterra.keys.KeyBindings;
@@ -43,6 +45,7 @@ import com.slugterra.model.ModelMakoBreaker;
 import com.slugterra.model.ModelMecha;
 import com.slugterra.model.ModelNegashade;
 import com.slugterra.model.ModelPhosphoro;
+import com.slugterra.model.ModelRamstone;
 import com.slugterra.model.ModelSlickSilver;
 import com.slugterra.model.ModelTazerling;
 import com.slugterra.render.RenderMecha_Wolf;
@@ -68,6 +71,7 @@ import com.slugterra.render.protoform.RenderLariat;
 import com.slugterra.render.protoform.RenderMakoBreaker;
 import com.slugterra.render.protoform.RenderNegashade;
 import com.slugterra.render.protoform.RenderPhosphoro;
+import com.slugterra.render.protoform.RenderRamstone;
 import com.slugterra.render.protoform.RenderSlickSilver;
 import com.slugterra.render.protoform.RenderTazerling;
 import com.slugterra.render.slingers.RenderEnemySlinger;
@@ -76,6 +80,7 @@ import com.slugterra.render.velocity.RenderInfernusVel;
 import com.slugterra.render.velocity.RenderLariatVel;
 import com.slugterra.render.velocity.RenderMakoBreakerVel;
 import com.slugterra.render.velocity.RenderPhosphoroVel;
+import com.slugterra.render.velocity.RenderRamstoneVel;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -100,21 +105,22 @@ public class ClientProxy extends ServerProxy{
 		
 		//entity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernus.class, new RenderInfernus(new ModelInfernus(), 1));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLariat.class, new RenderLariat(new ModelLariat(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityNegashade.class, new RenderNegashade(new ModelNegashade(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityJellyish.class, new RenderJellyish(new ModelJellyish(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoro.class, new RenderPhosphoro(new ModelPhosphoro(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreaker.class, new RenderMakoBreaker(new ModelMakoBreaker(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFingerling.class, new RenderFingerling(new ModelFingerling(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityArmashelt.class, new RenderArmashelt(new ModelArmashelt(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDirtUrchin.class, new RenderDirtUrchin(new ModelDirtUrchin(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGrenuke.class, new RenderGrenuke(new ModelGrenuke(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTazerling.class, new RenderTazerling(new ModelTazerling(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityHexlet.class, new RenderHexlet(new ModelHexlet(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlaringo.class, new RenderFlaringo(new ModelFlaringo(), 0));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoonDoc.class, new RenderBoonDoc(new ModelBoonDoc(), 0));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLariat.class, new RenderLariat(new ModelLariat(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityNegashade.class, new RenderNegashade(new ModelNegashade(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityJellyish.class, new RenderJellyish(new ModelJellyish(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoro.class, new RenderPhosphoro(new ModelPhosphoro(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreaker.class, new RenderMakoBreaker(new ModelMakoBreaker(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFingerling.class, new RenderFingerling(new ModelFingerling(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityArmashelt.class, new RenderArmashelt(new ModelArmashelt(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDirtUrchin.class, new RenderDirtUrchin(new ModelDirtUrchin(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenuke.class, new RenderGrenuke(new ModelGrenuke(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTazerling.class, new RenderTazerling(new ModelTazerling(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHexlet.class, new RenderHexlet(new ModelHexlet(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFlaringo.class, new RenderFlaringo(new ModelFlaringo(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoonDoc.class, new RenderBoonDoc(new ModelBoonDoc(), 1));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySlickSilver.class, new RenderSlickSilver(new ModelSlickSilver(), 1));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEnigmo.class, new RenderEnigmo(new ModelEnigmo(), 0));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEnigmo.class, new RenderEnigmo(new ModelEnigmo(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRamstone.class, new RenderRamstone(new ModelRamstone(), 1));
 		
 		//velocity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernusVel.class, new RenderInfernusVel(VelocitySlugItem.infernusVel));
@@ -122,6 +128,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityLariatVel.class, new RenderLariatVel(VelocitySlugItem.lariatVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreakerVel.class, new RenderMakoBreakerVel(VelocitySlugItem.makobreakerVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityArmasheltVel.class, new RenderArmasheltVel(VelocitySlugItem.armasheltVel));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRamstoneVel.class, new RenderRamstoneVel(VelocitySlugItem.ramstoneVel));
 		
 		//keybinding initialisation
 		KeyBindings.init();

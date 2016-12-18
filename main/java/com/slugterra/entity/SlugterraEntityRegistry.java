@@ -14,6 +14,7 @@ import com.slugterra.entity.protoform.EntityLariat;
 import com.slugterra.entity.protoform.EntityMakoBreaker;
 import com.slugterra.entity.protoform.EntityNegashade;
 import com.slugterra.entity.protoform.EntityPhosphoro;
+import com.slugterra.entity.protoform.EntityRamstone;
 import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
@@ -21,6 +22,7 @@ import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
+import com.slugterra.entity.velocity.EntityRamstoneVel;
 import com.slugterra.main.MainRegistry;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -51,6 +53,7 @@ public class SlugterraEntityRegistry {
 		createEntity(EntityBoonDoc.class, "BoonDocSlug", 0x179b66, 0xb9e1aa);
 		createEntity(EntitySlickSilver.class, "SlickSilverSlug", 0x9dc0d8, 0x1d3b6b);
 		createEntity(EntityEnigmo.class, "EnigmoSlug", 0x0094ff, 0xFFFFFF);
+		createEntity(EntityRamstone.class, "RamstoneSlug", 0x800000, 0x00a2e8);
 		
 		//misc entity's
 		createEntity(EntityMecha_Wolf.class, "WolfMecha", 0xD4D5C9, 0xF44C12);
@@ -61,6 +64,7 @@ public class SlugterraEntityRegistry {
 		createVelocityEntity(EntityMakoBreakerVel.class, "VelocityMakoBreaker");
 		createVelocityEntity(EntityPhosphoroVel.class, "VelocityPhosphoro");
 		createVelocityEntity(EntityArmasheltVel.class, "VelocityArmashelt");
+		createVelocityEntity(EntityRamstoneVel.class, "VelocityRamstone");
 	}
 	
 	public static void createEntity(Class entityClass, String entityName, int solidColour, int spotColour){
