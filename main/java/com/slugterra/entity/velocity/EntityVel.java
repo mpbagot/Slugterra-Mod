@@ -122,7 +122,7 @@ public class EntityVel extends EntityThrowable{
 			this.posY += (this.posY-target.posY)/60;
 			this.posZ += (this.posZ-target.posZ)/60;
 		}
-		if (this.ticksExisted == 6 && !this.worldObj.isRemote && new Random().nextInt(2) == 0){
+		if (this.ticksExisted == 4 && !this.worldObj.isRemote && new Random().nextInt(2) == 0){
 			this.impactAbility = false;
 			activateSlugAbility(false);
 		}

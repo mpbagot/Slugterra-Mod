@@ -22,6 +22,7 @@ import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
+import com.slugterra.entity.velocity.EntityBolt;
 import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
@@ -31,6 +32,7 @@ import com.slugterra.item.SlugterraItems;
 import com.slugterra.item.VelocitySlugItem;
 import com.slugterra.keys.KeyBindings;
 import com.slugterra.model.ModelArmashelt;
+import com.slugterra.model.ModelBolt;
 import com.slugterra.model.ModelBoonDoc;
 import com.slugterra.model.ModelDirtUrchin;
 import com.slugterra.model.ModelEnigmo;
@@ -48,6 +50,7 @@ import com.slugterra.model.ModelPhosphoro;
 import com.slugterra.model.ModelRamstone;
 import com.slugterra.model.ModelSlickSilver;
 import com.slugterra.model.ModelTazerling;
+import com.slugterra.render.RenderBolt;
 import com.slugterra.render.RenderMecha_Wolf;
 import com.slugterra.render.SlugTubeRender;
 import com.slugterra.render.TileEntityDropRenderer;
@@ -141,6 +144,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
 
 		//misc entity render
+		RenderingRegistry.registerEntityRenderingHandler(EntityBolt.class, new RenderBolt(new ModelBolt(), 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMecha_Wolf.class, new RenderMecha_Wolf(new ModelMecha(), 2));
 	}
 	
