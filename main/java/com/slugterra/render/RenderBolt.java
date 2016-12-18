@@ -19,21 +19,16 @@ public class RenderBolt extends Render  implements IItemRenderer {
 
 	ModelBolt slugmodel;
 	private static final ResourceLocation infernusTexture = new ResourceLocation(Strings.MODID + ":textures/item/bolt.png");
-	private ModelBase field_94151_a;
-	private int field_94150_f;
 
 	public RenderBolt(ModelBase modelBolt, int p_i1259_2_)
 	{
-		this.field_94151_a = modelBolt;
-		this.field_94150_f = p_i1259_2_;
+		slugmodel = new ModelBolt();
 	}
 
 	public RenderBolt(ModelBase p_i1260_1_) {
 		this(p_i1260_1_, 0);
 		slugmodel = new ModelBolt();
 	}
-
-
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {

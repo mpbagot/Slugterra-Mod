@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class EntityPhosphoroVel extends EntityVel{
 
 	private float damage = 6.0F;
-	public static int max = 3;
+	public static int max = 4;
 	public static int min = 0;
 
 	public EntityPhosphoroVel(World p_i1776_1_) {
@@ -81,7 +81,7 @@ public class EntityPhosphoroVel extends EntityVel{
 			//Blazerain ability
 			else if (abilint == 3){
 				for (int a=1;a<25;a++){
-					EntityBolt toSpawn = new EntityBolt(this.worldObj, this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ);
+					EntityBolt toSpawn = new EntityBolt(this.worldObj, this.posX + new Random().nextInt(a), this.posY + new Random().nextInt(a), this.posZ + new Random().nextInt(a), this.motionX, this.motionY, this.motionZ);
 					this.worldObj.spawnEntityInWorld(toSpawn);
 				}
 			}
