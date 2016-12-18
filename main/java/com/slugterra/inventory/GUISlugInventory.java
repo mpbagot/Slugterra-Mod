@@ -1,5 +1,11 @@
 package com.slugterra.inventory;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import com.slugterra.item.slugs.ItemSlug;
+import com.slugterra.lib.Strings;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -10,12 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import com.slugterra.item.slugs.ItemSlug;
-import com.slugterra.lib.Strings;
 
 public class GUISlugInventory extends GuiContainer
 {
@@ -58,6 +58,7 @@ public class GUISlugInventory extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
+		//TODO optimise all of this, :P it looks terrible
 		ItemStack slot1 = this.inventory.getStackInSlot(0);
 		ItemStack slot2 = this.inventory.getStackInSlot(1);
 		ItemStack slot3 = this.inventory.getStackInSlot(2);

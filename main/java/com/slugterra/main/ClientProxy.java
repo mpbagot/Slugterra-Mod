@@ -1,20 +1,12 @@
 package com.slugterra.main;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
-
 import com.slugterra.block.TileEntityDropEntity;
 import com.slugterra.block.TileEntitySlugContainerEntity;
 import com.slugterra.entity.EntityMecha_Wolf;
-import com.slugterra.entity.EntitySlug;
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
 import com.slugterra.entity.protoform.EntityDirtUrchin;
+import com.slugterra.entity.protoform.EntityEnigmo;
 import com.slugterra.entity.protoform.EntityFingerling;
 import com.slugterra.entity.protoform.EntityFlaringo;
 import com.slugterra.entity.protoform.EntityGrenuke;
@@ -39,6 +31,7 @@ import com.slugterra.keys.KeyBindings;
 import com.slugterra.model.ModelArmashelt;
 import com.slugterra.model.ModelBoonDoc;
 import com.slugterra.model.ModelDirtUrchin;
+import com.slugterra.model.ModelEnigmo;
 import com.slugterra.model.ModelFingerling;
 import com.slugterra.model.ModelFlaringo;
 import com.slugterra.model.ModelGrenuke;
@@ -64,6 +57,7 @@ import com.slugterra.render.blasters.RenderShinaiBlaster;
 import com.slugterra.render.protoform.RenderArmashelt;
 import com.slugterra.render.protoform.RenderBoonDoc;
 import com.slugterra.render.protoform.RenderDirtUrchin;
+import com.slugterra.render.protoform.RenderEnigmo;
 import com.slugterra.render.protoform.RenderFingerling;
 import com.slugterra.render.protoform.RenderFlaringo;
 import com.slugterra.render.protoform.RenderGrenuke;
@@ -85,6 +79,12 @@ import com.slugterra.render.velocity.RenderPhosphoroVel;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends ServerProxy{
 
@@ -114,6 +114,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlaringo.class, new RenderFlaringo(new ModelFlaringo(), 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoonDoc.class, new RenderBoonDoc(new ModelBoonDoc(), 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySlickSilver.class, new RenderSlickSilver(new ModelSlickSilver(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEnigmo.class, new RenderEnigmo(new ModelEnigmo(), 0));
 		
 		//velocity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernusVel.class, new RenderInfernusVel(VelocitySlugItem.infernusVel));

@@ -30,8 +30,7 @@ public class SlugsTube {
 	public static Item flaringo;
 	public static Item grenuke;
 	public static Item slicksilver;
-
-
+	public static Item enigmo;
 	
 	public static void initialiseItem(){
 		infernus = new ItemSlug().setUnlocalizedName("InfernusIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
@@ -48,6 +47,7 @@ public class SlugsTube {
 		flaringo = new ItemSlug().setUnlocalizedName("FlaringoIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 		grenuke = new ItemSlug().setUnlocalizedName("GrenukeIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 		slicksilver = new ItemSlug().setUnlocalizedName("SlickSilverIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
+		enigmo = new ItemSlug().setUnlocalizedName("EnigmoIn").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 	}
 	public static void registerItem(){
 		GameRegistry.registerItem(infernus, infernus.getUnlocalizedName());
@@ -64,6 +64,7 @@ public class SlugsTube {
 		GameRegistry.registerItem(flaringo, flaringo.getUnlocalizedName());
 		GameRegistry.registerItem(grenuke, grenuke.getUnlocalizedName());
 		GameRegistry.registerItem(slicksilver, slicksilver.getUnlocalizedName());
+		GameRegistry.registerItem(enigmo, enigmo.getUnlocalizedName());
 
 	}
 	

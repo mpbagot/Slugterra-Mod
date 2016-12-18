@@ -41,6 +41,7 @@ entity.TazerlingSlug.name=Tazerling
 entity.HexletSlug.name=Hexlet
 entity.FlaringoSlug.name=Flaringo
 entity.SlickSilverSlug.name=Slicksilver
+entity.EnigmoSlug.name=Enigmo
 
 entity.WolfMecha.name=L-KE
 
@@ -60,6 +61,7 @@ item.HexletIn.name=Captured Hexlet
 item.FlaringoIn.name=Captured Flaringo
 item.TazerlingIn.name=Captured Tazerling
 item.GrenukeIn.name=Captured Grenuke
+item.EnigmoIn.name=Captured Enigmo
 
 itemGroup.BlasterTab=Slug Slinger Equipment
 itemGroup.MiscTab=Misc Items

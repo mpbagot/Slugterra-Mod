@@ -1,10 +1,9 @@
 package com.slugterra.entity;
 
-import net.minecraft.entity.EntityList;
-
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
 import com.slugterra.entity.protoform.EntityDirtUrchin;
+import com.slugterra.entity.protoform.EntityEnigmo;
 import com.slugterra.entity.protoform.EntityFingerling;
 import com.slugterra.entity.protoform.EntityFlaringo;
 import com.slugterra.entity.protoform.EntityGrenuke;
@@ -25,6 +24,7 @@ import com.slugterra.entity.velocity.EntityPhosphoroVel;
 import com.slugterra.main.MainRegistry;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraft.entity.EntityList;
 
 public class SlugterraEntityRegistry {
 	
@@ -50,6 +50,7 @@ public class SlugterraEntityRegistry {
 		createEntity(EntityHexlet.class, "HexletSlug", 0xe47b16, 0xd9ae97);
 		createEntity(EntityBoonDoc.class, "BoonDocSlug", 0x179b66, 0xb9e1aa);
 		createEntity(EntitySlickSilver.class, "SlickSilverSlug", 0x9dc0d8, 0x1d3b6b);
+		createEntity(EntityEnigmo.class, "EnigmoSlug", 0x0094ff, 0xFFFFFF);
 		
 		//misc entity's
 		createEntity(EntityMecha_Wolf.class, "WolfMecha", 0xD4D5C9, 0xF44C12);

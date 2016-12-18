@@ -6,21 +6,19 @@ import com.slugterra.item.SlugsTube;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.world.World;
 
-public class EntityInfernus extends EntitySlug{
-	
-	public EntityInfernus(World p_i1738_1_) {
+public class EntityEnigmo extends EntitySlug{
+
+	public EntityEnigmo(World p_i1738_1_) {
 		super(p_i1738_1_);
-		this.isImmuneToFire = true;
-		this.slugItem = SlugsTube.infernus;
+		this.slugItem = SlugsTube.enigmo;
 	}
-	
-	public EntityInfernus(World world, String name){
+
+	public EntityEnigmo(World world, String name){
 		super(world, name);
-		this.isImmuneToFire = true;
 	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
-		return new EntityInfernus(worldObj);
+		return new EntityEnigmo(worldObj);
 	}
 }
