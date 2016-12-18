@@ -24,20 +24,20 @@ import com.slugterra.item.SlugterraItems;
 import com.slugterra.item.slugs.ItemSlug;
 
 public class EntitySlug extends EntityTameable{
-	
+
 	public boolean shouldFollow = false;
 	public static int friendship = 0;
 	public static Item slugItem;
-	public static String name;
+	public static String name = "";
 	private EntityPlayerMP slinger;
-	
+
 	public EntitySlug(World world, String nameSlug){
 		this(world);
 		this.name = nameSlug;
 		this.setCustomNameTag(this.name);
 		this.setAlwaysRenderNameTag(true);
 	}
-	
+
 	public EntitySlug(World p_i1738_1_) {
 		super(p_i1738_1_);
 		this.setSize(0.2F, 0.5F);
@@ -53,14 +53,14 @@ public class EntitySlug extends EntityTameable{
 	public boolean isAIEnabled(){
 		return true;
 	}
-	
+
 	public void setFollowSlinger(boolean shouldF){
 		this.shouldFollow = shouldF;
 		if (shouldF == true){
 			this.tasks.addTask(0, new EntitySlugAIMoveTowardsSlinger(this.slinger, this, 1.0D, 300.0F));
 		}
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
@@ -68,7 +68,7 @@ public class EntitySlug extends EntityTameable{
 		if(name != null)
 			compound.setString("EntitySlugName", name);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound){
 		super.readFromNBT(compound);
@@ -76,7 +76,7 @@ public class EntitySlug extends EntityTameable{
 		if (compound.getString("EntitySlugName") != "")
 			this.name = compound.getString("EntitySlugName");
 	}
-	
+
 	public void setSlinger(EntityPlayerMP player){
 		this.slinger = player;
 	}
@@ -94,7 +94,7 @@ public class EntitySlug extends EntityTameable{
 	}
 
 	@Override
-	public boolean interact(EntityPlayer p_70085_1_)
+	public boolean interact(EntityPlayer player)
 	{
 		Item caughtslug = slugItem;
 		ItemStack itemstack = null;
@@ -102,69 +102,75 @@ public class EntitySlug extends EntityTameable{
 		if (slugItem != null){
 			((ItemSlug) caughtslug).setInTorpedoShell(false);
 			((ItemSlug) caughtslug).updateFriendship(this.friendship, false);
-			itemstack = p_70085_1_.inventory.getCurrentItem();
+			itemstack = player.inventory.getCurrentItem();
 		}
-		ExtendedPlayer props = ExtendedPlayer.get(p_70085_1_);
-		if (itemstack != null && slugItem != null && itemstack.getItem() == SlugterraItems.slugtubeItem)
-		{
-			if (new Random().nextInt(20) == 1 || this.friendship > 30 && !this.worldObj.isRemote){
+		ExtendedPlayer props = ExtendedPlayer.get(player);
+		if ((new Random().nextInt(20) == 1 || this.friendship > 30) && !this.worldObj.isRemote){
+			if (itemstack != null && slugItem != null){
+				((ItemSlug)caughtslug).setName(this.name);
+				if (itemstack.getItem() == SlugterraItems.slugtubeItem)
+				{
+					//if (!p_70085_1_.capabilities.isCreativeMode && itemstack.stackSize <= 0)
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 
-				((ItemSlug)caughtslug).name = this.name;
-				//if (!p_70085_1_.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-				p_70085_1_.inventory.setInventorySlotContents(p_70085_1_.inventory.currentItem, null);
-				
-				//else if (!p_70085_1_.capabilities.isCreativeMode)
-				--itemstack.stackSize;
-				
-				for (int m = 0;m < props.inventory.getSizeInventory();m++){
-					if (props.inventory.getStackInSlot(m) == null){
-						inslugbelt = true;
-						props.inventory.setInventorySlotContents(m, new ItemStack((ItemSlug)caughtslug));
-						break;
-					}
-				}
-				if (inslugbelt == false)
-					p_70085_1_.inventory.addItemStackToInventory(new ItemStack(caughtslug));
-				this.setDead();
-				return isDead;
-			}
-		}
-		else if (itemstack != null && slugItem != null && itemstack.getItem() == SlugterraItems.torpedoShell){
-			if (new Random().nextInt(20) == 1 || this.friendship > 30)
-			{
-				if (!p_70085_1_.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-					p_70085_1_.inventory.setInventorySlotContents(p_70085_1_.inventory.currentItem, null);
-				
-				else if (!p_70085_1_.capabilities.isCreativeMode)
+					//else if (!p_70085_1_.capabilities.isCreativeMode)
 					--itemstack.stackSize;
-				
-				((ItemSlug)caughtslug).setInTorpedoShell(true);
-				for (int m = 0;m < props.inventory.getSizeInventory();m++){
-					if (props.inventory.getStackInSlot(m) == null){
-						inslugbelt = true;
-						props.inventory.setInventorySlotContents(m, new ItemStack((ItemSlug)caughtslug));
-						break;
+
+					for (int m = 0;m < props.inventory.getSizeInventory();m++){
+						if (props.inventory.getStackInSlot(m) == null){
+							inslugbelt = true;
+							props.inventory.setInventorySlotContents(m, new ItemStack((ItemSlug)caughtslug));
+							break;
+						}
 					}
+					if (inslugbelt == false)
+						player.inventory.addItemStackToInventory(new ItemStack(caughtslug));
+					this.setDead();
+					return isDead;
 				}
-				if (inslugbelt == false)
-					p_70085_1_.inventory.addItemStackToInventory(new ItemStack(caughtslug));
-				this.setDead();
-				return isDead;
+				else if (itemstack.getItem() == SlugterraItems.torpedoShell)
+				{					
+					if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+
+					else if (!player.capabilities.isCreativeMode)
+						--itemstack.stackSize;
+
+					((ItemSlug)caughtslug).setInTorpedoShell(true);
+					for (int m = 0;m < props.inventory.getSizeInventory();m++)
+					{
+						if (props.inventory.getStackInSlot(m) == null){
+							inslugbelt = true;
+							props.inventory.setInventorySlotContents(m, new ItemStack((ItemSlug)caughtslug));
+							break;
+						}
+					}
+					if (inslugbelt == false)
+						player.inventory.addItemStackToInventory(new ItemStack(caughtslug));
+					this.setDead();
+					return isDead;
+				}
 			}
 		}
 		else if (itemstack != null && itemstack.getItem() == SlugterraItems.slugfood)
 		{
 			this.friendship += 1;
-			if (!p_70085_1_.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-				p_70085_1_.inventory.setInventorySlotContents(p_70085_1_.inventory.currentItem, null);
-			
-			else if (!p_70085_1_.capabilities.isCreativeMode)
+			if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+
+			else if (!player.capabilities.isCreativeMode)
 				--itemstack.stackSize;
-			
+
 			this.playTameEffect(true);
 		}
 		return false;
 	}
-	
-	
+
+	public void setName(String a){
+		this.name = a;
+		this.setCustomNameTag(a);
+		this.setAlwaysRenderNameTag(true);
+	}
+
+
 }

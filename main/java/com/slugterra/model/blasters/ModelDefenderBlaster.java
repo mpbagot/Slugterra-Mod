@@ -166,6 +166,7 @@ public class ModelDefenderBlaster extends ModelBase
 		if (isFirstPerson == false){
 			Slugtube1.render(f5);
 		}
+		//this.reload = false;
 	}
 	//TODO This breaks things!!!
 	/*public void renderInventory(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){

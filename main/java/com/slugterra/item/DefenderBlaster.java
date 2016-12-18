@@ -1,22 +1,23 @@
 package com.slugterra.item;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import com.slugterra.entity.properties.ExtendedPlayer;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
 import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
+import com.slugterra.entity.velocity.EntityVel;
 import com.slugterra.item.slugs.ItemSlug;
 import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 import com.slugterra.packets.SyncPlayerPropsPacket;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class DefenderBlaster extends Item{
 	
@@ -42,24 +43,30 @@ public class DefenderBlaster extends Item{
 					((ItemSlug)selectslug.getItem()).updatePower();
 					int tempFriend = ((ItemSlug)selectslug.getItem()).friendship;
 					String name = ((ItemSlug)selectslug.getItem()).name;
+					EntityVel velocimorphEntity = null;
 					world.playSoundAtEntity((Entity)player, Strings.MODID + ":blasters.defender.shoot", 1.0F, 1.0F);
 					
-					if (player.isInWater() == false){
+					if (!player.isInWater()){
 						world.spawnParticle("smoke", player.posX, player.posY+1, player.posZ, 1.2D, 1.2D, 1.2D);
 						if (selectslug.getItem() == SlugsTube.infernus)
-							world.spawnEntityInWorld(new EntityInfernusVel(world, player, tempFriend, name).setPower(this.slugskill));
+							velocimorphEntity = new EntityInfernusVel(world, player, tempFriend, name).setPower(this.slugskill);
 
 						else if (selectslug.getItem() == SlugsTube.lariat)
-							world.spawnEntityInWorld(new EntityLariatVel(world, player, tempFriend, name).setPower(this.slugskill));
+							velocimorphEntity = new EntityLariatVel(world, player, tempFriend, name).setPower(this.slugskill);
 
 						else if (selectslug.getItem() == SlugsTube.makobreaker)
-							world.spawnEntityInWorld(new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill));
+							velocimorphEntity = new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill);
 
 						else if (selectslug.getItem() == SlugsTube.phosphoro)
-							world.spawnEntityInWorld(new EntityPhosphoroVel(world, player, tempFriend, name).setPower(this.slugskill));
+							velocimorphEntity = new EntityPhosphoroVel(world, player, tempFriend, name).setPower(this.slugskill);
 
 						else if (selectslug.getItem() == SlugsTube.armashelt)
-							world.spawnEntityInWorld(new EntityArmasheltVel(world, player, tempFriend, name).setPower(this.slugskill));
+							velocimorphEntity = new EntityArmasheltVel(world, player, tempFriend, name).setPower(this.slugskill);
+						
+						if (velocimorphEntity != null){
+							velocimorphEntity.name = name;
+							world.spawnEntityInWorld(velocimorphEntity);
+						}
 					}
 
 					else{

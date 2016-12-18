@@ -73,14 +73,14 @@ public class EntityVel extends EntityThrowable{
 			p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.damage);
 		}
 		if (!worldObj.isRemote){
+			activateSlugAbility(true);
 			EntitySlug entityToSpawn = this.protoform;
-			entityToSpawn.name = this.name;
+			entityToSpawn.setName(this.name);
 			entityToSpawn.friendship = this.friendship;
 			entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
 			entityToSpawn.setFollowSlinger(this.friendship > 30);
 		    entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 		    worldObj.spawnEntityInWorld(entityToSpawn);
-			activateSlugAbility(true);
 		}
 		if (k == 0){
 			this.setDead();

@@ -15,10 +15,12 @@ import com.slugterra.model.blasters.ModelDefenderBlaster;
 public class RenderBlaster implements IItemRenderer {
 	
     ModelDefenderBlaster launchermodel;
+    ModelDefenderBlaster lModelFPS;
     public static boolean reloading = false;
 
     public RenderBlaster() {
         launchermodel = new ModelDefenderBlaster();
+        lModelFPS = new ModelDefenderBlaster();
     }
 
     @Override
@@ -56,10 +58,8 @@ public class RenderBlaster implements IItemRenderer {
 			
 			GL11.glScalef(2.0F, 2.0F, 2.0F);
 			
-			//this case always calls when viewing in first person, even if on ground or in inventory.
-			//TODO Fix transparent rendering
-			//TODO fix animation triggering all the time.
-            launchermodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, false, reloading);
+			//this case always calls when viewing in first person.
+            lModelFPS.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, false, reloading);
             
             GL11.glPopMatrix();
             break;
@@ -77,7 +77,7 @@ public class RenderBlaster implements IItemRenderer {
             GL11.glRotatef(100F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(-18F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-80F, 0.0F, 0.0F, 1.0F);
-			GL11.glEnable(GL11.GL_BLEND);
+			//GL11.glEnable(GL11.GL_BLEND);
 			
 			GL11.glTranslatef(0.095F, 0.4F, -0.5F);
             launchermodel.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, true, false);

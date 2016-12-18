@@ -31,6 +31,7 @@ public class EntityInfernus extends EntitySlug{
 	
 	public EntityInfernus(World world, String name){
 		super(world, name);
+		this.isImmuneToFire = true;
 	}
 
 	@Override

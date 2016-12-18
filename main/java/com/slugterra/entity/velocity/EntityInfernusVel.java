@@ -45,7 +45,7 @@ public class EntityInfernusVel extends EntityVel{
 		int abilint = ability.nextInt(max + 1);
 		if (onGround){
 			//firewall ability
-			if (abilint == 0){
+			if (!this.worldObj.isRemote && abilint == 0){
 				this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 3.0F, true, false);
 				System.out.println("Activating explosion on server side");
 				this.setDead();
