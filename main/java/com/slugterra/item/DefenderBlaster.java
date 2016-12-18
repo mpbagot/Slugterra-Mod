@@ -6,6 +6,7 @@ import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
+import com.slugterra.entity.velocity.EntityRamstoneVel;
 import com.slugterra.entity.velocity.EntityVel;
 import com.slugterra.item.slugs.ItemSlug;
 import com.slugterra.lib.Strings;
@@ -20,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class DefenderBlaster extends Item{
-	
+
 	public static final boolean aimedBlaster = true;
 	private int damage;
 	private static int health = 20;
@@ -45,7 +46,7 @@ public class DefenderBlaster extends Item{
 					String name = ((ItemSlug)selectslug.getItem()).name;
 					EntityVel velocimorphEntity = null;
 					world.playSoundAtEntity((Entity)player, Strings.MODID + ":blasters.defender.shoot", 1.0F, 1.0F);
-					
+
 					if (!player.isInWater()){
 						world.spawnParticle("smoke", player.posX, player.posY+1, player.posZ, 1.2D, 1.2D, 1.2D);
 						if (selectslug.getItem() == SlugsTube.infernus)
@@ -62,7 +63,10 @@ public class DefenderBlaster extends Item{
 
 						else if (selectslug.getItem() == SlugsTube.armashelt)
 							velocimorphEntity = new EntityArmasheltVel(world, player, tempFriend, name).setPower(this.slugskill);
-						
+
+						else if (selectslug.getItem() == SlugsTube.ramstone)
+							velocimorphEntity = new EntityRamstoneVel(world, player, tempFriend, name).setPower(this.slugskill);
+
 						if (velocimorphEntity != null){
 							velocimorphEntity.name = name;
 							world.spawnEntityInWorld(velocimorphEntity);
@@ -76,18 +80,18 @@ public class DefenderBlaster extends Item{
 						else if (selectslug.getItem() == SlugsTube.jellyish)
 							//spawn jellyish
 							System.out.println("Firing Jellyish");
-							
+
 						else if (((ItemSlug) selectslug.getItem()).isInTorpedoShell() == true){
 							if (selectslug.getItem() == SlugsTube.infernus)
 								world.spawnEntityInWorld(new EntityInfernusVel(world, player, tempFriend, name).setPower(this.slugskill));
 
 							else if (selectslug.getItem() == SlugsTube.makobreaker)
 								world.spawnEntityInWorld(new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill));
-									
+
 							else if (selectslug.getItem() == SlugsTube.phosphoro)
 								world.spawnEntityInWorld(new EntityPhosphoroVel(world, player, tempFriend, name).setPower(this.slugskill));
-							}
 						}
+					}
 					if (((ItemSlug)props.inventory.getStackInSlot(props.invslot).getItem()).power > 30)this.health--;
 					props.inventory.decrStackSize(props.invslot, 1);
 					player.addExperience(2);
@@ -99,10 +103,15 @@ public class DefenderBlaster extends Item{
 		}
 		return itemstack;
 	}
-	
+
 	public void updateUpgrades(boolean[] upgradeList){
 		this.hasAccelerator = upgradeList[0];
 		this.hasExtendBarrel = upgradeList[1];
 		this.hasDoubleBarrel = upgradeList[2];
+	}
+	
+	public boolean[] getUpgrades(){
+		boolean[] a = {this.hasAccelerator, this.hasExtendBarrel, this.hasDoubleBarrel};
+		return a;
 	}
 }

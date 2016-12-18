@@ -1,8 +1,13 @@
 package com.slugterra.entity.velocity;
 
+import java.util.Random;
+
+import com.slugterra.entity.EntitySlug;
+import com.slugterra.lib.Strings;
+import com.slugterra.main.MainRegistry;
+
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -11,24 +16,24 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.slugterra.entity.EntitySlug;
-import com.slugterra.lib.Strings;
-import com.slugterra.main.MainRegistry;
-
 public class EntityVel extends EntityThrowable{
 
 	private float damage;
-    public static int power;
-    public static int min;
-    public static int friendship;
-    public static EntitySlug protoform;
-    public static String name;
-    public static int max;
-    public static int id;
+	public static int power;
+	public static int min;
+	public static Entity hitE;
+	public static boolean impactAbility = false;
+	public static boolean killColl = true;
+	public static int friendship;
+	public static EntitySlug protoform;
+	public static String name;
+	public static int max;
+	public static int id;
 	public EntityPlayerMP shooter;
-    public String elementParticle;
-    public EntityFX customParticle = null;
-    
+	public EntityPlayerMP target = null;
+	public String elementParticle;
+	public EntityFX customParticle = null;
+
 	public EntityVel(World p_i1777_1_, EntityLivingBase entity) {
 		super(p_i1777_1_, entity);
 		this.shooter = (EntityPlayerMP) entity;
@@ -52,12 +57,16 @@ public class EntityVel extends EntityThrowable{
 		super(p_i1777_1_);
 		p_i1777_1_.playSoundAtEntity((Entity)this, Strings.MODID + ":slugs.allSlugs.formshift", 1.0F, 1.0F);
 	}
-	
+
 	@Override
 	protected void onImpact(MovingObjectPosition p_70184_1_) {
 		int k = 0;
+		if (!this.worldObj.isRemote && !this.impactAbility && this.killColl)
+			activateSlugAbility(true);
+
 		if (p_70184_1_.entityHit != null)
 		{
+			this.hitE = p_70184_1_.entityHit;
 			if (p_70184_1_.entityHit instanceof EntityVel){
 				int otherpower = ((EntityVel) p_70184_1_.entityHit).power;
 				if (this.power > otherpower){
@@ -72,26 +81,28 @@ public class EntityVel extends EntityThrowable{
 			}
 			p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.damage);
 		}
-		if (!worldObj.isRemote){
-			activateSlugAbility(true);
-			EntitySlug entityToSpawn = this.protoform;
-			entityToSpawn.setName(this.name);
-			entityToSpawn.friendship = this.friendship;
-			entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
-			entityToSpawn.setFollowSlinger(this.friendship > 30);
-		    entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
-		    worldObj.spawnEntityInWorld(entityToSpawn);
-		}
-		if (k == 0){
-			this.setDead();
+		if (this.killColl){
+			if (!worldObj.isRemote){
+
+				EntitySlug entityToSpawn = this.protoform;
+				entityToSpawn.setName(this.name);
+				entityToSpawn.friendship = this.friendship;
+				entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
+				entityToSpawn.setFollowSlinger(this.friendship > 30);
+				entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
+				worldObj.spawnEntityInWorld(entityToSpawn);
+			}
+			if (k == 0){
+				this.setDead();
+			}
 		}
 	}
-	
+
 	public EntityVel setPower(float skill){
 		this.power = (int)(2+skill/10);
 		return this;
 	}
-	
+
 	public void setDamage(double p_70239_1_)
 	{
 		this.damage = (float)p_70239_1_;
@@ -101,11 +112,18 @@ public class EntityVel extends EntityThrowable{
 	{
 		return (double)this.damage;
 	}
-	
+
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		if (this.ticksExisted == 8 && !this.worldObj.isRemote){
+		this.killColl = true;
+		if (this.target != null){
+			this.posX += (this.posX-target.posX)/60;
+			this.posY += (this.posY-target.posY)/60;
+			this.posZ += (this.posZ-target.posZ)/60;
+		}
+		if (this.ticksExisted == 2 && !this.worldObj.isRemote && new Random().nextInt(2) == 0){
+			this.impactAbility = false;
 			activateSlugAbility(false);
 		}
 		this.setRotation(this.rotationYaw, this.rotationPitch+60);
@@ -121,7 +139,7 @@ public class EntityVel extends EntityThrowable{
 			}
 		}
 	}
-	
+
 	/**
 	 * Activates a random Slug ability based on the Slug
 	 */

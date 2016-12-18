@@ -6,6 +6,10 @@ import net.minecraft.entity.Entity;
 
 public class ModelShinaiBlaster extends ModelBase
 {
+	
+	public static boolean[] upgrades;
+	public static boolean reloading;
+	
   //fields
     ModelRenderer shaftofstick;
     ModelRenderer topbase;
@@ -92,9 +96,10 @@ public class ModelShinaiBlaster extends ModelBase
       setRotation(bottombottom, 0F, 0F, 0F);
   }
   
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean reloading)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
+    this.reloading = reloading;
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     shaftofstick.render(f5);
     topbase.render(f5);

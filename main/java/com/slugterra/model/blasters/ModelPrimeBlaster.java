@@ -6,6 +6,10 @@ import net.minecraft.entity.Entity;
 
 public class ModelPrimeBlaster extends ModelBase
 {
+	
+	public static boolean[] upgrades;
+	public static boolean reloading;
+	
   //fields
     ModelRenderer Barrel1;
     ModelRenderer Base;
@@ -169,9 +173,10 @@ public class ModelPrimeBlaster extends ModelBase
       setRotation(Handle, 0.5402259F, 0F, 0F);
   }
   
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean reloading)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
+    this.reloading = reloading;
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     Barrel1.render(f5);
     Base.render(f5);

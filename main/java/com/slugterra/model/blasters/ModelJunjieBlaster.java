@@ -6,6 +6,10 @@ import net.minecraft.entity.Entity;
 
 public class ModelJunjieBlaster extends ModelBase
 {
+	
+	public static boolean[] upgrades;
+	public static boolean reloading;
+	
   //fields
     ModelRenderer mainmidbody;
     ModelRenderer mainlbody;
@@ -113,9 +117,10 @@ public class ModelJunjieBlaster extends ModelBase
       setRotation(armgrip, 0F, 0F, 0F);
   }
   
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean reloading)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
+    this.reloading = reloading;
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     mainmidbody.render(f5);
     mainlbody.render(f5);

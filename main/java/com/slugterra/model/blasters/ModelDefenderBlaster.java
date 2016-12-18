@@ -11,6 +11,7 @@ public class ModelDefenderBlaster extends ModelBase
 {
 	
 	public static boolean reload;
+	public static boolean[] upgrades;
 	private int frame = 0;
 	
 	//fields
