@@ -1,4 +1,4 @@
-package com.slugterra.entity.velocity;
+package com.slugterra.entity;
 
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.init.Blocks;

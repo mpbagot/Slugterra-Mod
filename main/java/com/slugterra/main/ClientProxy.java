@@ -1,7 +1,9 @@
 package com.slugterra.main;
 
 import com.slugterra.block.TileEntityDropEntity;
+import com.slugterra.block.TileEntitySlimeRopeEntity;
 import com.slugterra.block.TileEntitySlugContainerEntity;
+import com.slugterra.entity.EntityBolt;
 import com.slugterra.entity.EntityMecha_Wolf;
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
@@ -22,7 +24,6 @@ import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
-import com.slugterra.entity.velocity.EntityBolt;
 import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
@@ -54,6 +55,7 @@ import com.slugterra.render.RenderBolt;
 import com.slugterra.render.RenderMecha_Wolf;
 import com.slugterra.render.SlugTubeRender;
 import com.slugterra.render.TileEntityDropRenderer;
+import com.slugterra.render.TileEntitySlimeRopeRenderer;
 import com.slugterra.render.TileEntitySlugContainerRenderer;
 import com.slugterra.render.blasters.RenderBlaster;
 import com.slugterra.render.blasters.RenderJunjieBlaster;
@@ -139,6 +141,7 @@ public class ClientProxy extends ServerProxy{
 		//TileEntity render
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDropEntity.class, new TileEntityDropRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlugContainerEntity.class, new TileEntitySlugContainerRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlimeRopeEntity.class, new TileEntitySlimeRopeRenderer());
 		
 		//slinger render
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));

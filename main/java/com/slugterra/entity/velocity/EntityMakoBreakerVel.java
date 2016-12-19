@@ -2,13 +2,13 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-
 import com.slugterra.entity.protoform.EntityMakoBreaker;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntitySnowball;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 
 public class EntityMakoBreakerVel extends EntityVel{
 
@@ -42,17 +42,32 @@ public class EntityMakoBreakerVel extends EntityVel{
 		Random ability = new Random();
 		int abilint = ability.nextInt(max);
 		if (onGround){
-			//ability 1
+			//finsmash
 			if (abilint == 0){
-				this.setDead();
+				if (this.hitE instanceof EntityPlayer){
+					((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.fall, this.power);
+					((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.fall, this.power);
+				}
 			}
 	
-			//ability 2
+			//Bruteeth
 			else if(abilint == 1){
-				this.setDead();
+				System.out.println("Bruteeth activated!!");
+				this.worldObj.newExplosion(this, posX, posY, posZ, 1.0F, false, true);
+				this.killColl = false;
 			}
 		}else{
-			
+			if (abilint == 0){
+				System.out.println("Razorstorm activated!!");
+				for (int a=1;a<19;a++){
+					EntitySnowball e = new EntitySnowball(worldObj, posX+ability.nextInt(a), posY+ability.nextInt(a), posZ+ability.nextInt(a));
+					e.motionX = this.motionX;
+					e.motionY = this.motionY;
+					e.motionZ = this.motionZ;
+					this.worldObj.spawnEntityInWorld(e);
+					this.setDead();
+				}
+			}
 		}
 	}
 }

@@ -3,6 +3,7 @@ package com.slugterra.entity.velocity;
 import java.util.List;
 import java.util.Random;
 
+import com.slugterra.entity.EntityBolt;
 import com.slugterra.entity.protoform.EntityPhosphoro;
 
 import net.minecraft.entity.EntityLivingBase;
