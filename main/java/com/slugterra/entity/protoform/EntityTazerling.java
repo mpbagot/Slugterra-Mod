@@ -21,9 +21,13 @@ import com.slugterra.item.slugs.ItemSlug;
 
 public class EntityTazerling extends EntitySlug{
 
-	public EntityTazerling(World p_i1738_1_) {
-		super(p_i1738_1_);
+	public EntityTazerling(World world) {
+		super(world);
 		this.slugItem = SlugsTube.tazerling;
+	}
+	
+	public EntityTazerling(World world, String name) {
+		super(world, name);
 	}
 	
 	@Override

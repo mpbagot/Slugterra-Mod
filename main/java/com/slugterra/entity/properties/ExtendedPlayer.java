@@ -79,6 +79,10 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		}
 		return canLaunch;
 	}
+	
+	public void disableBlaster() {
+		this.timeToFireAgain = 250;
+	}
 
 	public void updateTimetoFire() {
 		if (timeToFireAgain > 0)

@@ -23,17 +23,18 @@ import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
 import com.slugterra.entity.velocity.EntityRamstoneVel;
+import com.slugterra.entity.velocity.EntityTazerlingVel;
 import com.slugterra.main.MainRegistry;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.entity.EntityList;
 
 public class SlugterraEntityRegistry {
-	
+
 	public static void mainRegistry(){
 		registerEntity();
 	}
-	
+
 	public static void registerEntity(){
 		//create the parent class as uncreatable entity
 		//createVelocityEntity(EntitySlug.class, "DefaultSlug");
@@ -54,10 +55,10 @@ public class SlugterraEntityRegistry {
 		createEntity(EntitySlickSilver.class, "SlickSilverSlug", 0x9dc0d8, 0x1d3b6b);
 		createEntity(EntityEnigmo.class, "EnigmoSlug", 0x0094ff, 0xFFFFFF);
 		createEntity(EntityRamstone.class, "RamstoneSlug", 0x800000, 0x00a2e8);
-		
+
 		//misc entity's
 		createEntity(EntityMecha_Wolf.class, "WolfMecha", 0xD4D5C9, 0xF44C12);
-		
+
 		//velocity slugs
 		createVelocityEntity(EntityInfernusVel.class, "VelocityInfernus");
 		createVelocityEntity(EntityLariatVel.class, "VelocityLariat");
@@ -65,11 +66,12 @@ public class SlugterraEntityRegistry {
 		createVelocityEntity(EntityPhosphoroVel.class, "VelocityPhosphoro");
 		createVelocityEntity(EntityArmasheltVel.class, "VelocityArmashelt");
 		createVelocityEntity(EntityRamstoneVel.class, "VelocityRamstone");
+		createVelocityEntity(EntityTazerlingVel.class, "VelocityTazerling");
 	}
-	
+
 	public static void createEntity(Class entityClass, String entityName, int solidColour, int spotColour){
 		int randomId = EntityRegistry.findGlobalUniqueEntityId();
-		
+
 		EntityRegistry.registerGlobalEntityID(entityClass, entityName, randomId);
 		EntityRegistry.registerModEntity(entityClass, entityName, randomId, MainRegistry.modInstance, 32, 1, true);
 		createEgg(randomId, solidColour, spotColour);
@@ -80,7 +82,7 @@ public class SlugterraEntityRegistry {
 	}
 	public static void createVelocityEntity(Class entityClass, String entityName){
 		int randomId2 = EntityRegistry.findGlobalUniqueEntityId();
-		
+
 		EntityRegistry.registerGlobalEntityID(entityClass, entityName, randomId2);
 		EntityRegistry.registerModEntity(entityClass, entityName, randomId2, MainRegistry.modInstance, 32, 1, true);
 	}

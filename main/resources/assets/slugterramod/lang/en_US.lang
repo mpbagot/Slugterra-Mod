@@ -63,7 +63,7 @@ item.FlaringoIn.name=Captured Flaringo
 item.TazerlingIn.name=Captured Tazerling
 item.GrenukeIn.name=Captured Grenuke
 item.EnigmoIn.name=Captured Enigmo
-item.Ramstone.name=Captured Ramstone
+item.RamstoneIn.name=Captured Ramstone
 
 itemGroup.BlasterTab=Slug Slinger Equipment
 itemGroup.MiscTab=Misc Items

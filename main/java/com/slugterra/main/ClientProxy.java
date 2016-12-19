@@ -29,6 +29,7 @@ import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
 import com.slugterra.entity.velocity.EntityRamstoneVel;
+import com.slugterra.entity.velocity.EntityTazerlingVel;
 import com.slugterra.item.SlugterraItems;
 import com.slugterra.item.VelocitySlugItem;
 import com.slugterra.keys.KeyBindings;
@@ -86,6 +87,7 @@ import com.slugterra.render.velocity.RenderLariatVel;
 import com.slugterra.render.velocity.RenderMakoBreakerVel;
 import com.slugterra.render.velocity.RenderPhosphoroVel;
 import com.slugterra.render.velocity.RenderRamstoneVel;
+import com.slugterra.render.velocity.RenderTazerlingVel;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -99,7 +101,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class ClientProxy extends ServerProxy{
 
 	public void registerRenderThings(){
-		
+
 		//special item renderers
 		MinecraftForgeClient.registerItemRenderer(SlugterraItems.defenderBlaster, (IItemRenderer)new RenderBlaster());
 		MinecraftForgeClient.registerItemRenderer(SlugterraItems.slugtubeItem, (IItemRenderer)new SlugTubeRender());
@@ -107,7 +109,7 @@ public class ClientProxy extends ServerProxy{
 		MinecraftForgeClient.registerItemRenderer(SlugterraItems.junjieBlaster, (IItemRenderer)new RenderJunjieBlaster());
 		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterFemale, (IItemRenderer)new RenderPrimeBlasterFemale());
 		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterMale, (IItemRenderer)new RenderPrimeBlasterMale());
-		
+
 		//entity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernus.class, new RenderInfernus(new ModelInfernus(), 1));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLariat.class, new RenderLariat(new ModelLariat(), 1));
@@ -126,7 +128,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySlickSilver.class, new RenderSlickSilver(new ModelSlickSilver(), 1));
 		RenderingRegistry.registerEntityRenderingHandler(EntityEnigmo.class, new RenderEnigmo(new ModelEnigmo(), 1));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRamstone.class, new RenderRamstone(new ModelRamstone(), 1));
-		
+
 		//velocity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernusVel.class, new RenderInfernusVel(VelocitySlugItem.infernusVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoroVel.class, new RenderPhosphoroVel(VelocitySlugItem.phosphoroVel));
@@ -134,15 +136,16 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreakerVel.class, new RenderMakoBreakerVel(VelocitySlugItem.makobreakerVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityArmasheltVel.class, new RenderArmasheltVel(VelocitySlugItem.armasheltVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRamstoneVel.class, new RenderRamstoneVel(VelocitySlugItem.ramstoneVel));
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntityTazerlingVel.class, new RenderTazerlingVel(VelocitySlugItem.tazerlingVel));
+
 		//keybinding initialisation
 		KeyBindings.init();
-		
+
 		//TileEntity render
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDropEntity.class, new TileEntityDropRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlugContainerEntity.class, new TileEntitySlugContainerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlimeRopeEntity.class, new TileEntitySlimeRopeRenderer());
-		
+
 		//slinger render
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
 
@@ -150,7 +153,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityBolt.class, new RenderBolt(new ModelBolt(), 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMecha_Wolf.class, new RenderMecha_Wolf(new ModelMecha(), 2));
 	}
-	
+
 	@Override
 	public void generateBlasterPuff(Entity entity){
 		double motionx = entity.worldObj.rand.nextGaussian()*0.2D;
@@ -166,8 +169,8 @@ public class ClientProxy extends ServerProxy{
 			double motionx = world.rand.nextGaussian()*0.2D;
 			double motiony = world.rand.nextGaussian()*0.2D;
 			double motionz = world.rand.nextGaussian()*0.2D;
-	    	particle.setLocationAndAngles(particle.posX, particle.posY, particle.posZ, 0.0F, 0.0F);
-	    	world.spawnEntityInWorld(particle);
+			particle.setLocationAndAngles(particle.posX, particle.posY, particle.posZ, 0.0F, 0.0F);
+			world.spawnEntityInWorld(particle);
 		}
 	}
 
