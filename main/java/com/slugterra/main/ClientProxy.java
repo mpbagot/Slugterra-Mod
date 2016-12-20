@@ -23,6 +23,7 @@ import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
+import com.slugterra.entity.velocity.EntityGrenukeVel;
 import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
@@ -79,6 +80,7 @@ import com.slugterra.render.protoform.RenderSlickSilver;
 import com.slugterra.render.protoform.RenderTazerling;
 import com.slugterra.render.slingers.RenderEnemySlinger;
 import com.slugterra.render.velocity.RenderArmasheltVel;
+import com.slugterra.render.velocity.RenderGrenukeVel;
 import com.slugterra.render.velocity.RenderInfernusVel;
 import com.slugterra.render.velocity.RenderLariatVel;
 import com.slugterra.render.velocity.RenderMakoBreakerVel;
@@ -134,6 +136,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityArmasheltVel.class, new RenderArmasheltVel(VelocitySlugItem.armasheltVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRamstoneVel.class, new RenderRamstoneVel(VelocitySlugItem.ramstoneVel));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTazerlingVel.class, new RenderTazerlingVel(VelocitySlugItem.tazerlingVel));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenukeVel.class, new RenderGrenukeVel(VelocitySlugItem.grenukeVel));
 
 		//keybinding initialisation
 		KeyBindings.init();

@@ -2,6 +2,7 @@ package com.slugterra.item;
 
 import com.slugterra.entity.properties.ExtendedPlayer;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
+import com.slugterra.entity.velocity.EntityGrenukeVel;
 import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
@@ -56,6 +57,9 @@ public class DefenderBlaster extends Item{
 						else if (selectslug.getItem() == SlugsTube.lariat)
 							velocimorphEntity = new EntityLariatVel(world, player, tempFriend, name).setPower(this.slugskill);
 
+						else if (selectslug.getItem() == SlugsTube.grenuke)
+							velocimorphEntity = new EntityGrenukeVel(world, player, tempFriend, name).setPower(this.slugskill);
+
 						else if (selectslug.getItem() == SlugsTube.makobreaker)
 							velocimorphEntity = new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill);
 
@@ -103,6 +107,11 @@ public class DefenderBlaster extends Item{
 
 							else if (selectslug.getItem() == SlugsTube.ramstone)
 								world.spawnEntityInWorld(new EntityRamstoneVel(world, player, tempFriend, name).setPower(this.slugskill));
+
+							else if (selectslug.getItem() == SlugsTube.grenuke)
+								world.spawnEntityInWorld(new EntityGrenukeVel(world, player, tempFriend, name).setPower(this.slugskill));
+
+
 
 						}
 					}

@@ -17,6 +17,7 @@ public class VelocitySlugItem {
 	public static Item armasheltVel;
 	public static Item ramstoneVel;
 	public static Item tazerlingVel;
+	public static Item grenukeVel;
 	
 	public static Item bolt;
 	public static Item lightBall;
@@ -30,6 +31,7 @@ public class VelocitySlugItem {
 		armasheltVel = new Item().setFull3D().setUnlocalizedName("ArmasheltVel");
 		ramstoneVel = new Item().setFull3D().setUnlocalizedName("RamstoneVel");
 		tazerlingVel = new Item().setFull3D().setUnlocalizedName("TazerlingVel");
+		grenukeVel = new Item().setFull3D().setUnlocalizedName("GrenukeVel");
 		
 		bolt = new Item().setFull3D().setUnlocalizedName("LightBolt");
 		lightBall = new Item().setFull3D().setUnlocalizedName("LightBall");
@@ -43,6 +45,8 @@ public class VelocitySlugItem {
 		GameRegistry.registerItem(armasheltVel, armasheltVel.getUnlocalizedName());
 		GameRegistry.registerItem(ramstoneVel, ramstoneVel.getUnlocalizedName());
 		GameRegistry.registerItem(tazerlingVel, tazerlingVel.getUnlocalizedName());
+		GameRegistry.registerItem(grenukeVel, grenukeVel.getUnlocalizedName());
+		
 		GameRegistry.registerItem(bolt, bolt.getUnlocalizedName());
 		GameRegistry.registerItem(lightBall, lightBall.getUnlocalizedName());
 

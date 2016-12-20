@@ -18,6 +18,7 @@ import com.slugterra.entity.protoform.EntityRamstone;
 import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
+import com.slugterra.entity.velocity.EntityGrenukeVel;
 import com.slugterra.entity.velocity.EntityInfernusVel;
 import com.slugterra.entity.velocity.EntityLariatVel;
 import com.slugterra.entity.velocity.EntityMakoBreakerVel;
@@ -68,6 +69,7 @@ public class SlugterraEntityRegistry {
 		createVelocityEntity(EntityArmasheltVel.class, "VelocityArmashelt");
 		createVelocityEntity(EntityRamstoneVel.class, "VelocityRamstone");
 		createVelocityEntity(EntityTazerlingVel.class, "VelocityTazerling");
+		createVelocityEntity(EntityGrenukeVel.class, "VelocityGrenuke");
 	}
 
 	public static void createEntity(Class entityClass, String entityName, int solidColour, int spotColour){

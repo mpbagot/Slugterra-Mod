@@ -1,5 +1,6 @@
 package com.slugterra.entity.velocity;
 
+import java.util.List;
 import java.util.Random;
 
 import com.slugterra.block.SlugterraBlocks;
@@ -10,7 +11,9 @@ import com.slugterra.entity.protoform.EntityTazerling;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityTazerlingVel extends EntityVel{
@@ -63,8 +66,14 @@ public class EntityTazerlingVel extends EntityVel{
 
 			//tazerbolt ability
 			else if(abilint == 1){
+				List players = worldObj.playerEntities;
+				for (int a=0; a<players.size();++a){
+					if(((EntityPlayerMP) players.get(a)).getDistanceToEntity(this) < 10.0f){
+						((EntityPlayerMP)players.get(a)).attackEntityFrom(DamageSource.fall, 3.0f);
+					}
+				}
 				
-				//TODO trigger all redstone in 5 block radius + chain bolt damage
+				//TODO trigger all redstone in 5 block radius
 			}
 
 			//slugshield ability

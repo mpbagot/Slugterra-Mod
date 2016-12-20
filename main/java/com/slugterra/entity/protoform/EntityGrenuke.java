@@ -29,6 +29,10 @@ public class EntityGrenuke extends EntitySlug{
 		this.slugItem = SlugsTube.grenuke;
 	}
 	
+	public EntityGrenuke(World world, String name){
+		super(world, name);
+	}
+	
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
 		return new EntityInfernus(worldObj);

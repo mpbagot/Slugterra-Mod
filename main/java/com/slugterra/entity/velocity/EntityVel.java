@@ -23,6 +23,7 @@ public class EntityVel extends EntityThrowable{
 	private float damage;
 	public static int power;
 	public static int min;
+	public static int waitTime = -1;
 	public static Entity hitE;
 	public static boolean impactAbility = false;
 	public static boolean killColl = true;
@@ -121,6 +122,14 @@ public class EntityVel extends EntityThrowable{
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
+		if (this.waitTime > 0){
+			this.waitTime--;
+			this.motionX = 0.0f;
+			this.motionY = 0.0f;
+			this.motionZ = 0.0f;
+		} else if (this.waitTime == 0 && !this.worldObj.isRemote){
+			this.activateSlugAbility(true);
+		}
 		this.killColl = true;
 		if (this.target != null){
 			this.posX += (this.posX-target.posX)/60;
