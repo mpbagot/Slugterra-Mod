@@ -33,9 +33,8 @@ public class EntitySlug extends EntityTameable{
 
 	public EntitySlug(World world, String nameSlug){
 		this(world);
-		this.name = nameSlug;
-		this.setCustomNameTag(this.name);
-		this.setAlwaysRenderNameTag(true);
+		if (nameSlug != null && nameSlug != "")
+			this.setName(nameSlug);
 	}
 
 	public EntitySlug(World p_i1738_1_) {
@@ -96,30 +95,32 @@ public class EntitySlug extends EntityTameable{
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
-		Item caughtslug = slugItem;
+		ItemSlug caughtslug = (ItemSlug) slugItem;
 		ItemStack itemstack = null;
 		boolean inslugbelt = false;
 		if (slugItem != null){
-			((ItemSlug) caughtslug).setInTorpedoShell(false);
-			((ItemSlug) caughtslug).updateFriendship(this.friendship, false);
+			caughtslug.setInTorpedoShell(false);
+			caughtslug.updateFriendship(this.friendship, false);
 			itemstack = player.inventory.getCurrentItem();
 		}
 		ExtendedPlayer props = ExtendedPlayer.get(player);
 		if ((new Random().nextInt(20) == 1 || this.friendship > 30) && !this.worldObj.isRemote){
 			if (itemstack != null && slugItem != null){
-				((ItemSlug)caughtslug).setName(this.name);
+				caughtslug.setName(this.name);
 				if (itemstack.getItem() == SlugterraItems.slugtubeItem)
 				{
-					//if (!p_70085_1_.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+					if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 
-					//else if (!p_70085_1_.capabilities.isCreativeMode)
-					--itemstack.stackSize;
+					else if (!player.capabilities.isCreativeMode)
+						--itemstack.stackSize;
 
 					for (int m = 0;m < props.inventory.getSizeInventory();m++){
 						if (props.inventory.getStackInSlot(m) == null){
 							inslugbelt = true;
-							props.inventory.setInventorySlotContents(m, new ItemStack((ItemSlug)caughtslug));
+							System.out.println(this.name);
+							System.out.println(((ItemSlug)new ItemStack(caughtslug).getItem()).name);
+							props.inventory.setInventorySlotContents(m, new ItemStack(caughtslug));
 							break;
 						}
 					}
@@ -136,12 +137,12 @@ public class EntitySlug extends EntityTameable{
 					else if (!player.capabilities.isCreativeMode)
 						--itemstack.stackSize;
 
-					((ItemSlug)caughtslug).setInTorpedoShell(true);
+					caughtslug.setInTorpedoShell(true);
 					for (int m = 0;m < props.inventory.getSizeInventory();m++)
 					{
 						if (props.inventory.getStackInSlot(m) == null){
 							inslugbelt = true;
-							props.inventory.setInventorySlotContents(m, new ItemStack((ItemSlug)caughtslug));
+							props.inventory.setInventorySlotContents(m, new ItemStack(caughtslug));
 							break;
 						}
 					}

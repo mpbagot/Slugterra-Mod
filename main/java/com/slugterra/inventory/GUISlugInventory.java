@@ -19,8 +19,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class GUISlugInventory extends GuiContainer
 {
-	ItemSlug slug1;ItemSlug slug2;ItemSlug slug3;ItemSlug slug4;ItemSlug slug5;ItemSlug slug6;
-	
+	ItemSlug slug1;
+
 	/** x size of the inventory window in pixels. Defined as float, passed as int */
 	private float xSize_lo;
 
@@ -58,56 +58,34 @@ public class GUISlugInventory extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		//TODO optimise all of this, :P it looks terrible
-		ItemStack slot1 = this.inventory.getStackInSlot(0);
-		ItemStack slot2 = this.inventory.getStackInSlot(1);
-		ItemStack slot3 = this.inventory.getStackInSlot(2);
-		ItemStack slot4 = this.inventory.getStackInSlot(3);
-		ItemStack slot5 = this.inventory.getStackInSlot(4);
-		ItemStack slot6 = this.inventory.getStackInSlot(5);
-		
-		if(slot1 != null){slug1 = (ItemSlug) slot1.getItem();}
-		if(slot2 != null){slug2 = (ItemSlug) slot2.getItem();}
-		if(slot3 != null){slug3 = (ItemSlug) slot3.getItem();}
-		if(slot4 != null){slug4 = (ItemSlug) slot4.getItem();}
-		if(slot5 != null){slug5 = (ItemSlug) slot5.getItem();}
-		if(slot6 != null){slug6 = (ItemSlug) slot6.getItem();}
-		
-		int health1 = 0; int health2 = 0; int health3 = 0; int health4 = 0; int health5 = 0; int health6 = 0;
-		if(slug1 != null){health1 = (int)(slug1.health*2.4F);}
-		if(slug2 != null){health2 = (int)(slug2.health*2.4F);}
-		if(slug3 != null){health3 = (int)(slug3.health*2.4F);}
-		if(slug4 != null){health4 = (int)(slug4.health*2.4F);}
-		if(slug5 != null){health5 = (int)(slug5.health*2.4F);}
-		if(slug6 != null){health6 = (int)(slug6.health*2.4F);}
-		
+		int[] healths = {0,0,0,0,0,0};
+		for (int a=0; a< 6;++a){
+			ItemStack slot = this.inventory.getStackInSlot(a);
+			if (slot != null){
+				ItemSlug slug = (ItemSlug) slot.getItem();
+				if (slug != null){
+					if (a == 0)
+						slug1 = slug;
+					healths[a] = (int)(slug.health*2.4f);
+				}
+			}
+		}
+
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughealthbar2.png"));
-		
-		if (slot1 != null){
-			this.drawTexturedModalRect(9, 124, 0, 0, health1, 3);
-			this.fontRendererObj.drawString(I18n.format(slug1.name), this.xSize - this.fontRendererObj.getStringWidth(I18n.format(slug1.name)) - 100, 112, 4210752);
-		}
-		
-		if (slot2 != null){
-			this.drawTexturedModalRect(111, 15, 0, 0, health2, 3);
-		}
-		
-		if (slot3 != null){
-			this.drawTexturedModalRect(111, 40, 0, 0, health3, 3);
-		}
-		
-		if (slot4 != null){
-			this.drawTexturedModalRect(111, 63, 0, 0, health4, 3);
-		}
-		
-		if (slot5 != null){
-			this.drawTexturedModalRect(111, 87, 0, 0, health5, 3);
-		}
-		
-		if (slot6 != null){
-			this.drawTexturedModalRect(111, 111, 0, 0, health6, 3);
-		}
-		
+
+		this.drawTexturedModalRect(10, 124, 0, 0, healths[0], 3);
+		this.fontRendererObj.drawString(slug1.name, 9, 94, 4210752);
+
+		this.drawTexturedModalRect(111, 15, 0, 0, healths[1], 3);
+
+		this.drawTexturedModalRect(111, 41, 0, 0, healths[2], 3);
+
+		this.drawTexturedModalRect(111, 63, 0, 0, healths[3], 3);
+
+		this.drawTexturedModalRect(111, 88, 0, 0, healths[4], 3);
+
+		this.drawTexturedModalRect(111, 111, 0, 0, healths[5], 3);
+
 		String s = this.inventory.hasCustomInventoryName() ? this.inventory.getInventoryName() : I18n.format(this.inventory.getInventoryName());
 		this.fontRendererObj.drawString(s, this.xSize - this.fontRendererObj.getStringWidth(s) - 100, 132, 4210752);
 		this.fontRendererObj.drawString(I18n.format("Hotbar"), 120, this.ySize - 37, 4210752);

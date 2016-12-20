@@ -1,5 +1,12 @@
 package com.slugterra.gui;
 
+import org.lwjgl.opengl.GL11;
+
+import com.slugterra.entity.properties.ExtendedPlayer;
+import com.slugterra.lib.Strings;
+
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -10,20 +17,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 
-import org.lwjgl.opengl.GL11;
-
-import com.slugterra.entity.properties.ExtendedPlayer;
-import com.slugterra.lib.Strings;
-import com.slugterra.model.velocity.ModelInfurnusVel;
-
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
 public class GuiSlugBeltOverlay extends Gui{
 
 	private Minecraft mc;
 	public static int selslot;
-    protected static final RenderItem itemRenderer = new RenderItem();
+	protected static final RenderItem itemRenderer = new RenderItem();
 
 	public GuiSlugBeltOverlay(Minecraft mc){
 		super();
@@ -31,15 +29,15 @@ public class GuiSlugBeltOverlay extends Gui{
 	}
 
 	private ExtendedPlayer props;
-	
+
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event){
 		if(event.isCancelable() || event.type != ElementType.HOTBAR){
 			return;
 		}
-        ScaledResolution scaledresolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 		int k = scaledresolution.getScaledWidth();
-        int l = scaledresolution.getScaledHeight();
+		int l = scaledresolution.getScaledHeight();
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		//get player properties
@@ -49,19 +47,16 @@ public class GuiSlugBeltOverlay extends Gui{
 		}
 
 		for (int i1 = 0; i1 < 6; ++i1)
-        {
-            int j1 = k- 16 - 3;
-            int k1 = l / 2 - 87 + i1 * 22;//change last value to push up or down
-            this.renderInventorySlot(i1, 6, k1);
-        }
-		
+		{
+			int k1 = l / 2 - 87 + i1 * 22;//change last value to push up or down
+			this.renderInventorySlot(i1, 6, k1);
+		}
+
 		GL11.glEnable(GL11.GL_BLEND);
-		
-		
+
 		//rendering bar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughotbar2.png"));
-		this.drawTexturedModalRect(2, l/2-90, 0, 0, 24, 132);
-
+		this.drawTexturedModalRect(2, l/2-90, 0, 0, 24, 133);
 
 		//rendering square thing over hotbar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/hotbarsquare.png"));
@@ -77,7 +72,7 @@ public class GuiSlugBeltOverlay extends Gui{
 		if (itemstack != null)
 		{
 			float f1 = (float)itemstack.animationsToGo;
-			
+
 			if (f1 > 0.0F)
 			{
 				GL11.glPushMatrix();
@@ -86,7 +81,7 @@ public class GuiSlugBeltOverlay extends Gui{
 				GL11.glScalef(1.0F / f2, (f2 + 1.0F) / 2.0F, 1.0F);
 				GL11.glTranslatef((float)(-(p_73832_2_ + 8)), (float)(-(p_73832_3_ + 12)), 0.0F);
 			}
-			
+
 			itemRenderer.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), itemstack, p_73832_2_, p_73832_3_);
 
 			if (f1 > 0.0F)
