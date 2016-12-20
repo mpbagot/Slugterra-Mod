@@ -76,3 +76,5 @@ key.categories.eggies=Pack_of_14eggies Mod Keys
 key.sluginvup=Slug Hotbar Up
 key.sluginvdown=Slug Hotbar Down
 key.opensluginv=Slug Inventory
+
+container.inventory=Player Inventory

@@ -62,6 +62,7 @@ public class MainRegistry {
 
 	private static int modGuiIndex = 0;
 	public static final int GUI_SLUG_INV = modGuiIndex++;
+	public static final int GUI_SLUG_RACK = modGuiIndex++;
 
 	public static final int dimensionIdSlugterra = 73;
 

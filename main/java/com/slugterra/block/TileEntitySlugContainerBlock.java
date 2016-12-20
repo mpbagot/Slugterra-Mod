@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.lib.Strings;
+import com.slugterra.main.MainRegistry;
 
 public class TileEntitySlugContainerBlock extends BlockContainer{
 	
@@ -50,8 +51,7 @@ public class TileEntitySlugContainerBlock extends BlockContainer{
         }
         else
         {
-            //player.displayGUIChest();
-
+            player.openGui(MainRegistry.modInstance, MainRegistry.GUI_SLUG_RACK, world, x, y, z);;
             return true;
         }
     }

@@ -65,7 +65,7 @@ public class GuiSlugBeltOverlay extends Gui{
 
 		//rendering square thing over hotbar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/hotbarsquare.png"));
-		this.drawTexturedModalRect(1, (22 * selslot) + (l/2-92), 0, 0, 26, 26);
+		this.drawTexturedModalRect(2, (22 * selslot) + (l/2-92)+1, 0, 0, 26, 26);
 	}
 
 	private void renderInventorySlot(int p_73832_1_, int p_73832_2_, int p_73832_3_)
