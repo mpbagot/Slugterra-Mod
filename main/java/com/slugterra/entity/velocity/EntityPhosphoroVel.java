@@ -82,6 +82,7 @@ public class EntityPhosphoroVel extends EntityVel{
 			//Blazerain ability
 			else if (abilint == 3){
 				for (int a=1;a<25;a++){
+					//TODO Fix the rendering of these
 					EntityBolt toSpawn = new EntityBolt(this.worldObj, this.posX + new Random().nextInt(a), this.posY + new Random().nextInt(a), this.posZ + new Random().nextInt(a), this.motionX, this.motionY, this.motionZ);
 					this.worldObj.spawnEntityInWorld(toSpawn);
 				}

@@ -33,8 +33,8 @@ public class TileEntitySlugContainerRenderer extends TileEntitySpecialRenderer{
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-		ResourceLocation textures = (new ResourceLocation(Strings.MODID + ":textures/blocks/slugcontainer.png"));
+		GL11.glTranslatef((float) x + 0.5F, (float) y - 0.4375f, (float) z + 0.5F);
+		ResourceLocation textures = (new ResourceLocation(Strings.MODID + ":textures/blocks/container.png"));
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
 		slugcontainermodel.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);

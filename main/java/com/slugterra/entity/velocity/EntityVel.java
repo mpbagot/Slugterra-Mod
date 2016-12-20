@@ -2,7 +2,9 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
+import com.slugterra.block.SlugterraElectricWallBlock;
 import com.slugterra.entity.EntitySlug;
+import com.slugterra.entity.particles.EntityElectricElementFX;
 import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 
@@ -63,6 +65,9 @@ public class EntityVel extends EntityThrowable{
 		int k = 0;
 		if (!this.worldObj.isRemote && !this.impactAbility && this.killColl)
 			activateSlugAbility(true);
+		if (worldObj.getBlock(p_70184_1_.blockX, p_70184_1_.blockY, p_70184_1_.blockZ) instanceof SlugterraElectricWallBlock && this.elementParticle == "other" && this.customParticle instanceof EntityElectricElementFX){
+			this.killColl = false;
+		}
 
 		if (p_70184_1_.entityHit != null)
 		{

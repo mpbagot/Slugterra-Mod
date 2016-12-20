@@ -51,7 +51,7 @@ public class GuiSlugBeltOverlay extends Gui{
 		for (int i1 = 0; i1 < 6; ++i1)
         {
             int j1 = k- 16 - 3;
-            int k1 = l / 2 - 90 + i1 * 22 + 3;//change last value to push up or down
+            int k1 = l / 2 - 87 + i1 * 22;//change last value to push up or down
             this.renderInventorySlot(i1, 6, k1);
         }
 		
@@ -60,12 +60,12 @@ public class GuiSlugBeltOverlay extends Gui{
 		
 		//rendering bar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughotbar2.png"));
-		this.drawTexturedModalRect(2, 30, 0, 0, 24, 132);
+		this.drawTexturedModalRect(2, l/2-90, 0, 0, 24, 132);
 
 
 		//rendering square thing over hotbar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/hotbarsquare.png"));
-		this.drawTexturedModalRect(1, (22 * selslot) + 28, 0, 0, 26, 26);
+		this.drawTexturedModalRect(1, (22 * selslot) + (l/2-92), 0, 0, 26, 26);
 	}
 
 	private void renderInventorySlot(int p_73832_1_, int p_73832_2_, int p_73832_3_)

@@ -81,6 +81,7 @@ public class EntityRamstoneVel extends EntityVel{
 			System.out.println("Activating rockstorm");
 			if (abilint == 1) {
 				for (int a=1;a< 13;a++){
+					//TODO replace these with rocks
 					EntityFireball b = new EntitySmallFireball(worldObj, posX+getR(a), posY+getR(a), posZ+getR(a), motionX, motionY, motionZ);
 					this.worldObj.spawnEntityInWorld(b);
 				}

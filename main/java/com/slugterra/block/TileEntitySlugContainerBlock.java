@@ -3,6 +3,8 @@ package com.slugterra.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -38,4 +40,19 @@ public class TileEntitySlugContainerBlock extends BlockContainer{
 	public void registerIcons(IIconRegister icon){
 		this.blockIcon = icon.registerIcon(Strings.MODID + ":slugcontainer");
 	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
+    {
+		if (world.isRemote)
+        {
+            return true;
+        }
+        else
+        {
+            //player.displayGUIChest();
+
+            return true;
+        }
+    }
 }

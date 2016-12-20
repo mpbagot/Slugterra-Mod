@@ -19,10 +19,12 @@ item.slingerBoots.name=Slug Slinger Boots
 
 tile.SlugContainer.name=Slug Container
 tile.DropSeat.name=The Drop Seat
+tile.ElectricWall.name=Electric Wall
 tile.SlugterraGrass.name=Slugterra Cavern Grass
 tile.SlugterraDirt.name=Slugterra Cavern Dirt
 tile.SlugIce.name=Luminescent Ice
 tile.MushroomSlugterra.name=Bioluminescent Mushroom
+tile.SlimeRope.name=Slime Rope
 
 entity.InfernusSlug.name=Infernus
 entity.LariatSlug.name=Lariat
@@ -64,6 +66,7 @@ item.TazerlingIn.name=Captured Tazerling
 item.GrenukeIn.name=Captured Grenuke
 item.EnigmoIn.name=Captured Enigmo
 item.RamstoneIn.name=Captured Ramstone
+item.SlickSilverIn.name=Captured SlickSilver
 
 itemGroup.BlasterTab=Slug Slinger Equipment
 itemGroup.MiscTab=Misc Items

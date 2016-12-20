@@ -21,6 +21,7 @@ public class SlugterraBlocks {
 	public static Block slugterraDirt;
 	public static Block mushroom;
 	public static Block slugterraIce;
+	public static Block electricWall;
 
 	public static void initialiseBlock(){
 		dropSeat = new TileEntityDropBlock(Material.iron).setBlockName("DropSeat").setCreativeTab(SlugterraCreativeTabs.tabMisc);
@@ -30,6 +31,7 @@ public class SlugterraBlocks {
 		slugterraDirt = new SlugterraDirtBlock(Material.ground).setHardness(0.2F).setBlockName("SlugterraDirt").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":dirt");
 		mushroom = new SlugterraBioluminescentMushroom().setHardness(0.3F).setBlockName("MushroomSlugterra").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":mushroom");
 		slugterraIce = new SlugterraIceBlock().setBlockName("SlugIce").setBlockTextureName(Strings.MODID + ":ice");
+		electricWall = new SlugterraElectricWallBlock().setBlockName("ElectricWall").setBlockTextureName(Strings.MODID+":ewall");
 	}
 	public static void registerBlock(){
 		GameRegistry.registerBlock(slugContainer, slugContainer.getUnlocalizedName());
@@ -39,5 +41,6 @@ public class SlugterraBlocks {
 		GameRegistry.registerBlock(mushroom, mushroom.getUnlocalizedName());
 		GameRegistry.registerBlock(slugterraIce, slugterraIce.getUnlocalizedName());
 		GameRegistry.registerBlock(slimeRope, slimeRope.getUnlocalizedName());
+		GameRegistry.registerBlock(electricWall, electricWall.getUnlocalizedName());
 	}	
 }

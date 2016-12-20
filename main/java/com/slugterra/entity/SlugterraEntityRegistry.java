@@ -58,6 +58,7 @@ public class SlugterraEntityRegistry {
 
 		//misc entity's
 		createEntity(EntityMecha_Wolf.class, "WolfMecha", 0xD4D5C9, 0xF44C12);
+		createVelocityEntity(EntityLightBall.class, "LightBallEntity");
 
 		//velocity slugs
 		createVelocityEntity(EntityInfernusVel.class, "VelocityInfernus");
