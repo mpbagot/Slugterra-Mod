@@ -1,5 +1,11 @@
 package com.slugterra.render;
 
+import org.lwjgl.opengl.GL11;
+
+import com.slugterra.block.TileEntitySlugContainerEntity;
+import com.slugterra.lib.Strings;
+import com.slugterra.model.ModelSlugContainer;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -9,11 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
-
-import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelSlugContainer;
 
 public class TileEntitySlugContainerRenderer extends TileEntitySpecialRenderer{
 
@@ -37,7 +38,7 @@ public class TileEntitySlugContainerRenderer extends TileEntitySpecialRenderer{
 		ResourceLocation textures = (new ResourceLocation(Strings.MODID + ":textures/blocks/container.png"));
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
-		slugcontainermodel.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		slugcontainermodel.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F, ((TileEntitySlugContainerEntity) te).getFullSlotNum());
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 	}

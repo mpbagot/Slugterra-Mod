@@ -211,7 +211,7 @@ public class ModelSlugContainer extends ModelBase
       setRotation(Shape28, 0F, 0F, 0F);
   }
   
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, int fullSlots)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
@@ -223,27 +223,36 @@ public class ModelSlugContainer extends ModelBase
     Shape6.render(f5);
     Shape7.render(f5);
     Shape8.render(f5);
+    
+    ModelRenderer[] tubes = {Shape9, Shape10, Shape11, Shape12, Shape13,
+    						Shape14, Shape15, Shape16, Shape17, Shape18,
+    						Shape19, Shape20, Shape21, Shape22, Shape23,
+    						Shape24, Shape25, Shape26, Shape27, Shape28
+    						};
+    for (int a=0; a < fullSlots;++a){
+    	tubes[a].render(f5);
+    }
     //tubes
-    Shape9.render(f5);
-    Shape10.render(f5);
-    Shape11.render(f5);
-    Shape12.render(f5);
-    Shape13.render(f5);
-    Shape14.render(f5);
-    Shape15.render(f5);
-    Shape16.render(f5);
-    Shape17.render(f5);
-    Shape18.render(f5);
-    Shape19.render(f5);
-    Shape20.render(f5);
-    Shape21.render(f5);
-    Shape22.render(f5);
-    Shape23.render(f5);
-    Shape24.render(f5);
-    Shape25.render(f5);
-    Shape26.render(f5);
-    Shape27.render(f5);
-    Shape28.render(f5);
+    //Shape9.render(f5);
+    //Shape10.render(f5);
+    //Shape11.render(f5);
+    //Shape12.render(f5);
+    //Shape13.render(f5);
+    //Shape14.render(f5);
+    //Shape15.render(f5);
+    //Shape16.render(f5);
+    //Shape17.render(f5);
+    //Shape18.render(f5);
+    //Shape19.render(f5);
+    //Shape20.render(f5);
+    //Shape21.render(f5);
+    //Shape22.render(f5);
+    //Shape23.render(f5);
+    //Shape24.render(f5);
+    //Shape25.render(f5);
+    //Shape26.render(f5);
+    //Shape27.render(f5);
+    //Shape28.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

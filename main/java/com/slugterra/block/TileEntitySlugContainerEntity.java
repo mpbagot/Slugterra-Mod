@@ -19,7 +19,7 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 
 	/** Define the inventory size here for easy reference */
 	public static final int INV_SIZE = 20;
-
+	
 	/** Inventory's size must be same as number of slots you add to the Container class */
 	private ItemStack[] inventory = new ItemStack[INV_SIZE];
 
@@ -27,6 +27,23 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	public int getSizeInventory()
 	{
 		return inventory.length;
+	}
+	
+	public int getFirstEmptySlot(){
+		for (int a=0;a<this.inventory.length;++a){
+			if (this.inventory[a] == null){
+				return a;
+			}
+		}
+		return -1;
+	}
+	
+	public int getLastFullSlot(){
+		for (int a=this.inventory.length-1; a >= 0; --a){
+			if (this.inventory[a] != null)
+				return a;
+		}
+		return -1;
 	}
 
 	@Override
@@ -182,8 +199,16 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	}
 
 	@Override
-	public void update() {
+	public void update() {}
 
+	public int getFullSlotNum() {
+		int b = 0;
+		for (int a=0;a< this.INV_SIZE; ++a){
+			if (this.getStackInSlot(a) != null){
+				b = b+1;
+			}
+		}
+		return b;
 	}
 
 }

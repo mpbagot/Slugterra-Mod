@@ -97,7 +97,6 @@ public class EntityTazerlingVel extends EntityVel{
 				worldObj.addWeatherEffect(bolt);
 				this.createFire(2);
 				this.killColl = false;
-				//TODO spawn lightning, create circle of fire then continue on
 			}
 		}
 	}
