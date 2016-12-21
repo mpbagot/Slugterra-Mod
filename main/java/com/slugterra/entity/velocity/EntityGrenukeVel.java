@@ -36,7 +36,7 @@ public class EntityGrenukeVel extends EntityVel{
 
 	@Override
 	public void activateSlugAbility(boolean onGround){
-		Random ability = new Random();
+/*		Random ability = new Random();
 		int abilint = ability.nextInt(max + 1);
 		if (onGround){
 
@@ -51,7 +51,7 @@ public class EntityGrenukeVel extends EntityVel{
 				if (this.waitTime != 0){
 					this.waitTime = 75;
 				} else {
-					this.setDead();
+					this.killColl = true;
 					this.waitTime = -1;
 					for (int a=0;a<6;++a)
 						this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 5.0f, false, true);
@@ -64,7 +64,7 @@ public class EntityGrenukeVel extends EntityVel{
 				if (this.waitTime != 0){
 					this.waitTime = 75;
 				} else {
-					this.setDead();
+					this.killColl = true;
 					this.waitTime = -1;
 					this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 4.0f, false, true);
 				}
@@ -80,6 +80,6 @@ public class EntityGrenukeVel extends EntityVel{
 				}
 				//TODO spawn some grenade objects and spray outwards, not forwards.
 			}
-		}
+		}*/
 	}
 }

@@ -47,7 +47,6 @@ public class EntityArmasheltVel extends EntityVel{
 			if (abilint == 0){
 				System.out.println("CanonBolt Activated!");
 				this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 1.0F, false, true);
-				this.setDead();
 			}
 
 			//afterburner

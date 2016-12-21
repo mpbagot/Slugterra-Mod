@@ -69,6 +69,9 @@ public class EntityTazerlingVel extends EntityVel{
 				List players = worldObj.playerEntities;
 				for (int a=0; a<players.size();++a){
 					if(((EntityPlayerMP) players.get(a)).getDistanceToEntity(this) < 10.0f){
+						EntityPlayerMP p = ((EntityPlayerMP)players.get(a));
+						EntityLightningBolt bolt = new EntityLightningBolt(worldObj, p.posX, p.posY, p.posZ);
+						worldObj.addWeatherEffect(bolt);
 						((EntityPlayerMP)players.get(a)).attackEntityFrom(DamageSource.fall, 3.0f);
 					}
 				}

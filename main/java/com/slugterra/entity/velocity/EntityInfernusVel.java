@@ -51,7 +51,6 @@ public class EntityInfernusVel extends EntityVel{
 				this.generateFireWall();
 				//this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 3.0F, true, false);
 				System.out.println("Activating explosion on server side");
-				this.setDead();
 			}
 
 			//spikescorch ability
@@ -124,13 +123,11 @@ public class EntityInfernusVel extends EntityVel{
 					this.worldObj.spawnEntityInWorld(fireball);
 				}
 				this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 1.0f, false, true);
-				this.setDead();
 			}
 
 			//beatwave ability
 			else if (abilint == 1){
 				System.out.println("Activating beatwave!!");
-				this.setDead();
 				EntityFireball fireball = new EntityLargeFireball(this.worldObj, this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ);
 				this.worldObj.spawnEntityInWorld(fireball);
 			}

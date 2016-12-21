@@ -53,7 +53,6 @@ public class EntityPhosphoroVel extends EntityVel{
 				for (int j = 0; j < 1000; ++j){
 					this.worldObj.spawnParticle("reddust", this.posX, this.posY, this.posZ, 1.0D, 1.0D, 1.0D);
 				}
-				this.setDead();
 			}
 
 			//flashbang ability

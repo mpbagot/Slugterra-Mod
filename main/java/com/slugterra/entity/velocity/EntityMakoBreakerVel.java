@@ -54,7 +54,6 @@ public class EntityMakoBreakerVel extends EntityVel{
 			else if(abilint == 1){
 				System.out.println("Bruteeth activated!!");
 				this.worldObj.newExplosion(this, posX, posY, posZ, 1.0F, false, true);
-				this.killColl = false;
 			}
 		}else{
 			if (abilint == 0){
@@ -66,7 +65,6 @@ public class EntityMakoBreakerVel extends EntityVel{
 					e.motionY = this.motionY;
 					e.motionZ = this.motionZ;
 					this.worldObj.spawnEntityInWorld(e);
-					this.setDead();
 				}
 			}
 		}

@@ -55,7 +55,7 @@ public class EntitySlug extends EntityTameable{
 
 	public void setFollowSlinger(boolean shouldF){
 		this.shouldFollow = shouldF;
-		if (shouldF == true){
+		if (shouldF){
 			this.tasks.addTask(0, new EntitySlugAIMoveTowardsSlinger(this.slinger, this, 1.0D, 300.0F));
 		}
 	}

@@ -168,7 +168,7 @@ public class RenderVel extends Render  implements IItemRenderer {
 		}
 		else{
 			this.pitch = -180;
-			this.roll += 2;
+			this.roll = 0;
 		}
 	}
 
