@@ -138,15 +138,20 @@ public class EntityVel extends EntityThrowable{
 			activateSlugAbility(false);
 		}
 		this.setRotation(this.rotationYaw, this.rotationPitch+60);
-		if (elementParticle != "other" && elementParticle != null){
+		if (this.worldObj.isRemote && elementParticle != "other" && elementParticle != null){
 			for (int i = 0; i < 8; ++i)
 			{
+				//TODO send a packet to spawn particles everywhere!!!
+				//MainRegistry.packetPipeline.sendToAll(new TrailFXPacket());
 				this.worldObj.spawnParticle(elementParticle, this.posX, this.posY, this.posZ, 0.2D, 0.2D, 0.2D);
+				System.out.println("spawning Vanilla Particles!!!");
 			}
 		}
-		else if (customParticle != null){
+		else if (this.worldObj.isRemote && customParticle != null){
 			for (int i = 0; i < 8; ++i) {
-				MainRegistry.proxy.spawnElementalParticles(this.worldObj, customParticle);
+				//TODO send a packet to spawn particles everywhere!!!
+				MainRegistry.proxy.spawnElementalParticles(this, this.worldObj, customParticle);
+				System.out.println("Spawning Custom Particles");
 			}
 		}
 	}

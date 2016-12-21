@@ -1,9 +1,10 @@
 package com.slugterra.events;
 
-import com.slugterra.entity.EntityMecha_Wolf;
+import com.slugterra.entity.EntityMecha;
 import com.slugterra.keys.KeyBindings;
 import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
+import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.OpenGuiPacket;
 import com.slugterra.packets.UpdateSlotPacket;
 import com.slugterra.render.blasters.RenderBlaster;
@@ -39,9 +40,10 @@ public class SlugterraKeyHandler {
 			System.out.println("Opening Slug Inventory");
 			MainRegistry.packetPipeline.sendToServer(new OpenGuiPacket(MainRegistry.GUI_SLUG_INV));
 		}
-		boolean sneak = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
-		if (sneak){
-			EntityMecha_Wolf.senseJump();
+		boolean jump = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
+		if (player != null && jump && player.ridingEntity instanceof EntityMecha){
+			System.out.println("Sending Packet...");
+			MainRegistry.network.sendToServer(new MechaAnimPacket("JUMPING!!!"));
 		}
 
 

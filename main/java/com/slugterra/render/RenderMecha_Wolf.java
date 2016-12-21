@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import com.slugterra.entity.EntityMecha_Wolf;
+import com.slugterra.entity.EntityMecha;
 import com.slugterra.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -25,7 +25,7 @@ public class RenderMecha_Wolf extends RenderLiving
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityMecha_Wolf p_110775_1_)
+    protected ResourceLocation getEntityTexture(EntityMecha p_110775_1_)
     {
         return mechaTextures;
     }
@@ -35,6 +35,6 @@ public class RenderMecha_Wolf extends RenderLiving
      */
     protected ResourceLocation getEntityTexture(Entity p_110775_1_)
     {
-        return this.getEntityTexture((EntityMecha_Wolf)p_110775_1_);
+        return this.getEntityTexture((EntityMecha)p_110775_1_);
     }
 }

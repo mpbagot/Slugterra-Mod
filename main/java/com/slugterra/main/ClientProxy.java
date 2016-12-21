@@ -3,7 +3,7 @@ package com.slugterra.main;
 import com.slugterra.block.TileEntityDropEntity;
 import com.slugterra.block.TileEntitySlimeRopeEntity;
 import com.slugterra.block.TileEntitySlugContainerEntity;
-import com.slugterra.entity.EntityMecha_Wolf;
+import com.slugterra.entity.EntityMecha;
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
 import com.slugterra.entity.protoform.EntityDirtUrchin;
@@ -30,6 +30,7 @@ import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
 import com.slugterra.entity.velocity.EntityRamstoneVel;
 import com.slugterra.entity.velocity.EntityTazerlingVel;
+import com.slugterra.entity.velocity.EntityVel;
 import com.slugterra.item.SlugterraItems;
 import com.slugterra.item.VelocitySlugItem;
 import com.slugterra.keys.KeyBindings;
@@ -150,7 +151,7 @@ public class ClientProxy extends ServerProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
 
 		//misc entity render
-		RenderingRegistry.registerEntityRenderingHandler(EntityMecha_Wolf.class, new RenderMecha_Wolf(new ModelMecha(), 2));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new RenderMecha_Wolf(new ModelMecha(), 2));
 	}
 
 	@Override
@@ -162,15 +163,4 @@ public class ClientProxy extends ServerProxy{
 			entity.worldObj.spawnParticle("bubble", entity.posX, entity.posY, entity.posZ, motionx, motiony, motionz);
 		}
 	}
-	@Override
-	public void spawnElementalParticles(World world, EntityFX particle){
-		for (int i = 0; i < 5; i++){
-			double motionx = world.rand.nextGaussian()*0.2D;
-			double motiony = world.rand.nextGaussian()*0.2D;
-			double motionz = world.rand.nextGaussian()*0.2D;
-			particle.setLocationAndAngles(particle.posX, particle.posY, particle.posZ, 0.0F, 0.0F);
-			world.spawnEntityInWorld(particle);
-		}
-	}
-
 }

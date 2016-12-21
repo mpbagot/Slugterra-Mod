@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.slugterra.block.SlugterraBlocks;
 import com.slugterra.entity.EntityLightBall;
+import com.slugterra.entity.particles.EntityElectricElementFX;
 import com.slugterra.entity.properties.ExtendedPlayer;
 import com.slugterra.entity.protoform.EntityTazerling;
 
@@ -42,6 +43,7 @@ public class EntityTazerlingVel extends EntityVel{
 		else
 			this.protoform = new EntityTazerling(world, this.name);
 		this.elementParticle = "other";
+		this.customParticle = new EntityElectricElementFX(world, posX, posY, posZ, motionX, motionY, motionZ);
 	}
 
 	//TODO finish the remaining abilities
