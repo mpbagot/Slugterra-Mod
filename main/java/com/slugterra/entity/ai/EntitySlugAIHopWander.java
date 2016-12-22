@@ -19,7 +19,6 @@ public class EntitySlugAIHopWander extends EntityAIBase
     Vec3 leapTarget;
     /** The entity's motionY after leaping. */
     float leapMotionY;
-	private static final String __OBFID = "CL_00001608";
 
 	public EntitySlugAIHopWander(EntityCreature p_i1648_1_, float p_i1648_2_)
 	{

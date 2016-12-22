@@ -3,6 +3,7 @@ package com.slugterra.entity;
 import java.util.Random;
 
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -56,7 +57,8 @@ public class EntitySlug extends EntityTameable{
 	public void setFollowSlinger(boolean shouldF){
 		this.shouldFollow = shouldF;
 		if (shouldF){
-			this.tasks.addTask(0, new EntitySlugAIMoveTowardsSlinger(this.slinger, this, 1.0D, 300.0F));
+			System.out.println(String.format("Setting target owner to %s", this.slinger));
+			this.tasks.addTask(0, new EntitySlugAIMoveTowardsSlinger(this.slinger, this, 1.0D, 100.0F));
 		}
 	}
 
@@ -64,6 +66,7 @@ public class EntitySlug extends EntityTameable{
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
 		compound.setInteger("EntitySlugFriendship", friendship);
+		compound.setString("Slinger", this.slinger.getCommandSenderName());
 		if(name != null)
 			compound.setString("EntitySlugName", name);
 	}
@@ -74,6 +77,7 @@ public class EntitySlug extends EntityTameable{
 		this.friendship = compound.getInteger("EntitySlugFriendship");
 		if (compound.getString("EntitySlugName") != "")
 			this.name = compound.getString("EntitySlugName");
+		this.slinger = (EntityPlayerMP) this.worldObj.getPlayerEntityByName(compound.getString("Slinger"));
 	}
 
 	public void setSlinger(EntityPlayerMP player){
