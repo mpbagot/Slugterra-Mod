@@ -9,6 +9,8 @@ import com.slugterra.entity.particles.EntityElectricElementFX;
 import com.slugterra.entity.properties.ExtendedPlayer;
 import com.slugterra.entity.protoform.EntityTazerling;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -70,15 +72,28 @@ public class EntityTazerlingVel extends EntityVel{
 			else if(abilint == 1){
 				List players = worldObj.playerEntities;
 				for (int a=0; a<players.size();++a){
-					if(((EntityPlayerMP) players.get(a)).getDistanceToEntity(this) < 10.0f){
-						EntityPlayerMP p = ((EntityPlayerMP)players.get(a));
+					EntityPlayerMP p = ((EntityPlayerMP)players.get(a));
+					if(p.getDistanceToEntity(this) < 10.0f && p != this.shooter){
 						EntityLightningBolt bolt = new EntityLightningBolt(worldObj, p.posX, p.posY, p.posZ);
 						worldObj.addWeatherEffect(bolt);
 						((EntityPlayerMP)players.get(a)).attackEntityFrom(DamageSource.fall, 3.0f);
 					}
 				}
 				
-				//TODO trigger all redstone in 5 block radius
+				for (int a=0;a<10;++a){
+					for (int b=0;b<10;++b){
+						for (int c=0;c<3;++c){
+							int a2 = a-5;
+							int b2 = b-5;
+							int c2 = c-1;
+							Block block = this.worldObj.getBlock((int)posX+a2, (int)posY+c2, (int)posZ+b2);
+							if (block instanceof BlockRedstoneWire){
+								//TODO fix this, it doesnt actually power anything!!!
+								worldObj.setBlockMetadataWithNotify((int)posX+a2, (int)posY+c2, (int)posZ+b2, 15, 3);
+							}
+						}
+					}
+				}
 			}
 
 			//slugshield ability
@@ -96,7 +111,7 @@ public class EntityTazerlingVel extends EntityVel{
 			//quetzalbolt ability
 			if (abilint == 0){
 				System.out.println("Activating Quetzalbolt!!");
-				for (int a=1; a< 24;a++){
+				for (int a=1; a<24;a++){
 					EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(10*this.motionX)+getR(a), this.posY+getR(a), this.posZ+(10*this.motionZ)+getR(a));
 					worldObj.addWeatherEffect(bolt);
 					EntityLightBall ball = new EntityLightBall(this.worldObj, this.posX+getR(a), this.posY+getR(a), this.posZ+getR(a), this);
@@ -107,14 +122,14 @@ public class EntityTazerlingVel extends EntityVel{
 			//tazerwing ability
 			else if (abilint == 1){
 				System.out.println("Activating Tazerwing!!");
-				EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(10*this.motionX), this.posY, this.posZ+(10*this.motionZ));
+				EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(2*this.motionX), this.posY, this.posZ+(2*this.motionZ));
 				worldObj.addWeatherEffect(bolt);
 				this.createFire(2);
 				this.killColl = false;
 			}
 		}
 	}
-	
+
 	private void makeWall(String xOrY){
 		if (xOrY == "x"){
 			for (int a=0;a<20;a++){
@@ -138,7 +153,7 @@ public class EntityTazerlingVel extends EntityVel{
 			}
 		}
 	}
-	
+
 	private void createFire(int r){
 		for (int a=0; a < 2*r+1;a++){
 			for (int b=0; b < 2*r+1;b++){
@@ -148,7 +163,7 @@ public class EntityTazerlingVel extends EntityVel{
 			}
 		}
 	}
-	
+
 	private int getR(int a){
 		boolean p = new Random().nextBoolean();
 		int b = new Random().nextInt(a);

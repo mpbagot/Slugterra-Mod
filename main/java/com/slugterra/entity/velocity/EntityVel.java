@@ -51,10 +51,10 @@ public class EntityVel extends EntityThrowable{
 			this.motionY = -(this.rotationPitch/90.0F);
 		}
 		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 1.5F * 1.5F, 1.0F);
-		
+
 		this.impactAbility = false;
 		this.killColl = true;
-		
+
 		p_i1777_1_.playSoundAtEntity((Entity)this, Strings.MODID + ":slugs.allSlugs.formshift", 1.0F, 1.0F);
 	}
 
@@ -103,8 +103,10 @@ public class EntityVel extends EntityThrowable{
 		if (this.name != null)
 			entityToSpawn.setName(this.name);
 		entityToSpawn.friendship = this.friendship;
-		entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
-		entityToSpawn.setFollowSlinger(this.friendship > 30);
+		if (this.shooter != null){
+			entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
+			entityToSpawn.setFollowSlinger(this.friendship > 30);
+		}
 		entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 		worldObj.spawnEntityInWorld(entityToSpawn);
 	}

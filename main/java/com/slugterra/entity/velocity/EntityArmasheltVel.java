@@ -52,7 +52,9 @@ public class EntityArmasheltVel extends EntityVel{
 			//afterburner
 			else if(abilint == 1){
 				System.out.println("Afterburner Activated!");
-				this.riddenByEntity = this.hitE;
+				this.hitE.mountEntity(this);
+				//this.riddenByEntity = this.hitE;
+				this.motionY = 2.0f;
 				this.killColl = false;
 			}
 

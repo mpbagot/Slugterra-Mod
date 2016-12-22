@@ -54,6 +54,7 @@ public class SlugterraElectricWallBlock extends Block
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World p_149636_1_, EntityPlayer p_149636_2_, int p_149636_3_, int p_149636_4_, int p_149636_5_, int p_149636_6_)
     {
         p_149636_2_.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1);
@@ -91,6 +92,7 @@ public class SlugterraElectricWallBlock extends Block
         }
     }
     
+    @Override
     public void updateTick(World p_149674_1_, int p_149674_2_, int p_149674_3_, int p_149674_4_, Random p_149674_5_)
     {
     	if (new Random().nextInt(10) == 7){
@@ -110,12 +112,17 @@ public class SlugterraElectricWallBlock extends Block
         return 0;
     }
 
-        /**
+    /**
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
     public int getMobilityFlag()
     {
         return 2;
+    }
+    
+    @Override
+    public boolean isOpaqueCube(){
+    	return false;
     }
 }
