@@ -2,8 +2,14 @@ package com.slugterra.entity;
 
 import java.util.Random;
 
+import com.slugterra.entity.ai.EntitySlugAIHopPanic;
+import com.slugterra.entity.ai.EntitySlugAIHopWander;
+import com.slugterra.entity.ai.EntitySlugAIMoveTowardsSlinger;
+import com.slugterra.entity.properties.ExtendedPlayer;
+import com.slugterra.item.SlugterraItems;
+import com.slugterra.item.slugs.ItemSlug;
+
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -16,13 +22,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import com.slugterra.entity.ai.EntitySlugAIHopPanic;
-import com.slugterra.entity.ai.EntitySlugAIHopWander;
-import com.slugterra.entity.ai.EntitySlugAIMoveTowardsSlinger;
-import com.slugterra.entity.properties.ExtendedPlayer;
-import com.slugterra.item.SlugterraItems;
-import com.slugterra.item.slugs.ItemSlug;
 
 public class EntitySlug extends EntityTameable{
 

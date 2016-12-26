@@ -1,7 +1,12 @@
 package com.slugterra.entity.slingers;
 
 import java.util.Calendar;
+import java.util.Random;
 
+import com.slugterra.entity.velocity.EntityInfernusVel;
+import com.slugterra.item.SlugterraItems;
+
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
@@ -14,7 +19,6 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
@@ -22,18 +26,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.slugterra.entity.velocity.EntityInfernusVel;
-import com.slugterra.item.SlugterraItems;
-
-public class AllySlinger extends EntityMob implements IRangedAttackMob
+public class AllySlinger extends EntityCreature implements IRangedAttackMob
 {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
-	private static final String __OBFID = "CL_00001697";
-
+	public int texint = 0;
+	
 	public AllySlinger(World p_i1741_1_)
 	{
 		super(p_i1741_1_);
+		this.texint = new Random().nextInt(8);
+		if (new Random().nextInt(1000)  == 777){
+			this.texint = 9;
+		}
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));

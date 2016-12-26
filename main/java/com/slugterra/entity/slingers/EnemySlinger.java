@@ -1,6 +1,11 @@
 package com.slugterra.entity.slingers;
 
 import java.util.Calendar;
+import java.util.Random;
+
+import com.slugterra.entity.velocity.EntityInfernusVel;
+import com.slugterra.entity.velocity.EntityVel;
+import com.slugterra.item.SlugterraItems;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,19 +28,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.slugterra.entity.velocity.EntityInfernusVel;
-import com.slugterra.entity.velocity.EntityVel;
-import com.slugterra.item.SlugterraItems;
-
 public class EnemySlinger extends EntityMob implements IRangedAttackMob
 {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
-	private static final String __OBFID = "CL_00001697";
-
+	public int texint = 0;
+	
 	public EnemySlinger(World p_i1741_1_)
 	{
 		super(p_i1741_1_);
+		this.texint = new Random().nextInt(1);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIRestrictSun(this));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));

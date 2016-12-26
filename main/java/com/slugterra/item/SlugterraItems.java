@@ -1,14 +1,11 @@
 package com.slugterra.item;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.common.util.EnumHelper;
-
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.lib.Strings;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 
 public class SlugterraItems {
 

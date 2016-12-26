@@ -4,10 +4,6 @@ package com.slugterra.main;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-
 import com.slugterra.biomes.BiomeRegistry;
 import com.slugterra.block.SlugterraBlocks;
 import com.slugterra.block.TileEntitySlugContainerEntity;
@@ -44,6 +40,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Strings.MODID, name = Strings.name, version = Strings.version)
 

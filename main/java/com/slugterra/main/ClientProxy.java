@@ -21,6 +21,7 @@ import com.slugterra.entity.protoform.EntityPhosphoro;
 import com.slugterra.entity.protoform.EntityRamstone;
 import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
+import com.slugterra.entity.slingers.AllySlinger;
 import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
 import com.slugterra.entity.velocity.EntityGrenukeVel;
@@ -30,7 +31,6 @@ import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
 import com.slugterra.entity.velocity.EntityRamstoneVel;
 import com.slugterra.entity.velocity.EntityTazerlingVel;
-import com.slugterra.entity.velocity.EntityVel;
 import com.slugterra.item.SlugterraItems;
 import com.slugterra.item.VelocitySlugItem;
 import com.slugterra.keys.KeyBindings;
@@ -79,6 +79,7 @@ import com.slugterra.render.protoform.RenderPhosphoro;
 import com.slugterra.render.protoform.RenderRamstone;
 import com.slugterra.render.protoform.RenderSlickSilver;
 import com.slugterra.render.protoform.RenderTazerling;
+import com.slugterra.render.slingers.RenderAllySlinger;
 import com.slugterra.render.slingers.RenderEnemySlinger;
 import com.slugterra.render.velocity.RenderArmasheltVel;
 import com.slugterra.render.velocity.RenderGrenukeVel;
@@ -92,9 +93,7 @@ import com.slugterra.render.velocity.RenderTazerlingVel;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -149,7 +148,8 @@ public class ClientProxy extends ServerProxy{
 
 		//slinger render
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
-
+		RenderingRegistry.registerEntityRenderingHandler(AllySlinger.class, new RenderAllySlinger(new ModelBiped(), 0));
+		
 		//misc entity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new RenderMecha_Wolf(new ModelMecha(), 2));
 	}
