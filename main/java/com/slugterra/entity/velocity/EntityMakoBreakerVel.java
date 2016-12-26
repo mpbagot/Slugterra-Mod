@@ -2,7 +2,7 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
-import com.slugterra.entity.EntityBolt;
+import com.slugterra.entity.EntityTooth;
 import com.slugterra.entity.protoform.EntityMakoBreaker;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -56,14 +56,11 @@ public class EntityMakoBreakerVel extends EntityVel{
 				this.worldObj.newExplosion(this, posX, posY, posZ, 1.0F, false, true);
 			}
 		}else{
-			if (abilint == 0){
+			if (abilint == 0 || true){
 				System.out.println("Razorstorm activated!!");
 				for (int a=1;a<19;a++){
 					//TODO replace these with teeth objects
-					EntityBolt e = new EntityBolt(worldObj, posX+ability.nextInt(a), posY+ability.nextInt(a), posZ+ability.nextInt(a), this.motionX, this.motionY, this.motionZ);
-					e.motionX = this.motionX;
-					e.motionY = this.motionY;
-					e.motionZ = this.motionZ;
+					EntityTooth e = new EntityTooth(worldObj, posX+ability.nextInt(a), posY+ability.nextInt(a), posZ+ability.nextInt(a), this);
 					this.worldObj.spawnEntityInWorld(e);
 				}
 			}

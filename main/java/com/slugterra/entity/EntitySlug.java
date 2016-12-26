@@ -65,7 +65,8 @@ public class EntitySlug extends EntityTameable{
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
 		compound.setInteger("EntitySlugFriendship", friendship);
-		compound.setString("Slinger", this.slinger.getCommandSenderName());
+		System.out.println(this.slinger);
+		compound.setString("Slinger", this.slinger != null ? this.slinger.getCommandSenderName() : "");
 		if(name != null)
 			compound.setString("EntitySlugName", name);
 	}

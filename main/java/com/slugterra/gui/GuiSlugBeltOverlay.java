@@ -89,7 +89,7 @@ public class GuiSlugBeltOverlay extends Gui{
 				GL11.glPopMatrix();
 			}
 
-			//itemRenderer.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), itemstack, p_73832_2_, p_73832_3_);
+			itemRenderer.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), itemstack, p_73832_2_, p_73832_3_);
 		}
 	}
 

@@ -4,6 +4,7 @@ import com.slugterra.block.TileEntityDropEntity;
 import com.slugterra.block.TileEntitySlimeRopeEntity;
 import com.slugterra.block.TileEntitySlugContainerEntity;
 import com.slugterra.entity.EntityMecha;
+import com.slugterra.entity.EntityTooth;
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
 import com.slugterra.entity.protoform.EntityDirtUrchin;
@@ -53,6 +54,7 @@ import com.slugterra.model.ModelRamstone;
 import com.slugterra.model.ModelSlickSilver;
 import com.slugterra.model.ModelTazerling;
 import com.slugterra.render.RenderMecha_Wolf;
+import com.slugterra.render.RenderTooth;
 import com.slugterra.render.SlugTubeRender;
 import com.slugterra.render.TileEntityDropRenderer;
 import com.slugterra.render.TileEntitySlimeRopeRenderer;
@@ -149,9 +151,11 @@ public class ClientProxy extends ServerProxy{
 		//slinger render
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
 		RenderingRegistry.registerEntityRenderingHandler(AllySlinger.class, new RenderAllySlinger(new ModelBiped(), 0));
-		
+
 		//misc entity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new RenderMecha_Wolf(new ModelMecha(), 2));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTooth.class, new RenderTooth());
+
 	}
 
 	@Override

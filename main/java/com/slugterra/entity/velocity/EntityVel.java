@@ -2,9 +2,8 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
-import com.slugterra.block.SlugterraElectricWallBlock;
 import com.slugterra.entity.EntitySlug;
-import com.slugterra.entity.particles.EntityElectricElementFX;
+import com.slugterra.item.DefenderBlaster;
 import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 
@@ -26,7 +25,7 @@ public class EntityVel extends EntityThrowable{
 	public static Entity hitE;
 	public static boolean impactAbility = false;
 	public static boolean killColl = true;
-	public static int friendship;
+	public static int friendship = 0;
 	public static EntitySlug protoform;
 	public static String name;
 	public static int max;
@@ -39,18 +38,13 @@ public class EntityVel extends EntityThrowable{
 	public EntityVel(World p_i1777_1_, EntityLivingBase entity) {
 		super(p_i1777_1_, entity);
 		this.shooter = (EntityPlayerMP) entity;
-		this.setLocationAndAngles(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
-		this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
-		this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
-		this.setPosition(this.posX, this.posY, this.posZ);
-		this.yOffset = 0.0F;
-		this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-		this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-		this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
-		if (this.rotationPitch/180.0F > 0){
-			this.motionY = -(this.rotationPitch/90.0F);
+		
+		if (!((DefenderBlaster)this.shooter.getCurrentEquippedItem().getItem()).hasExtendBarrel){
+			float r = new Random().nextFloat()/50;
+			this.motionX = motionX + (new Random().nextBoolean() ? r : -r);
+			this.motionY = motionY + (new Random().nextBoolean() ? r : -r);
+			this.motionZ = motionZ + (new Random().nextBoolean() ? r : -r);
 		}
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 1.5F * 1.5F, 1.0F);
 
 		this.impactAbility = false;
 		this.killColl = true;
@@ -89,7 +83,8 @@ public class EntityVel extends EntityThrowable{
 		}
 		if (this.killColl){
 			if (!worldObj.isRemote){
-				this.turnToProtoform();
+				this.setDead();
+				//this.turnToProtoform();
 			}
 			if (k == 0){
 				this.setDead();
@@ -98,13 +93,12 @@ public class EntityVel extends EntityThrowable{
 	}
 
 	public void turnToProtoform() {
-		System.out.println(this.protoform);
 		EntitySlug entityToSpawn = this.protoform;
 		if (this.name != null)
 			entityToSpawn.setName(this.name);
 		entityToSpawn.friendship = this.friendship;
-		if (this.shooter != null){
-			entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
+		if (shooter != null){
+			entityToSpawn.setSlinger(this.shooter);
 			entityToSpawn.setFollowSlinger(this.friendship > 30);
 		}
 		entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
@@ -129,6 +123,10 @@ public class EntityVel extends EntityThrowable{
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
+		if (this.ticksExisted > 1500){
+			this.setDead();
+		}
+		this.motionY += this.getGravityVelocity();
 		this.killColl = true;
 		if (this.target != null){
 			this.posX += (this.posX-target.posX)/60;

@@ -14,10 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
-public class RenderVel extends Render  implements IItemRenderer {
+public class RenderVel extends Render implements IItemRenderer {
 
-	ModelBase slugmodel;
-	ModelBase smodel;
+	public ModelBase slugmodel;
+	public ModelBase smodel;
 	public ResourceLocation infernusvelTexture;// = new ResourceLocation(Strings.MODID + ":textures/entity/phosphorovel.png");
 	public ResourceLocation infernusTexture;// = new ResourceLocation(Strings.MODID + ":textures/entity/phosphoro.png");
 	public 	int pitch = -180;
@@ -142,7 +142,7 @@ public class RenderVel extends Render  implements IItemRenderer {
 		return infernusvelTexture;
 	}
 
-
+	@Override
 	public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
 	{
 		this.isProtoForm = p_76986_1_.ticksExisted < 5;
