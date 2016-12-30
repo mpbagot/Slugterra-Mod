@@ -61,7 +61,7 @@ public class EntityMakoBreakerVel extends EntityVel{
 				for (int a=1;a<19;a++){
 					//TODO replace these with teeth objects
 					EntityTooth e = new EntityTooth(worldObj, posX+ability.nextInt(a), posY+ability.nextInt(a), posZ+ability.nextInt(a), this);
-					this.worldObj.spawnEntityInWorld(e);
+					worldObj.spawnEntityInWorld(e);
 				}
 			}
 		}

@@ -19,23 +19,27 @@ public class RenderTooth extends Render implements IItemRenderer{
 	private ResourceLocation toothTexture;
 
 	public RenderTooth() {
+		System.out.println("starting RenderTooth");
 		model = new ModelTooth();
 		toothTexture = new ResourceLocation(Strings.MODID + ":textures/entity/tooth.png");
 	}
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		System.out.println("running handleRenderType()");
 		return true;
 	}
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		System.out.println("running shouldUseRenderHelper()");
 		return true;
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		System.out.println("Rendering in renderItem()");
+		return;
 	}
 
 	@Override

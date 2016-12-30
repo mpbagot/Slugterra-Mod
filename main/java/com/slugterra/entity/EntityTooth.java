@@ -24,15 +24,16 @@ public class EntityTooth extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition coll) {
-		if (coll.entityHit != null){
+		if (coll.entityHit != null && initImpact == -1){
 			coll.entityHit.attackEntityFrom(DamageSource.generic, 0.5f);
 		}
 		if (initImpact == -1){
+			System.out.println("calling onImpact() in EntityTooth.class");
 			initImpact = this.ticksExisted;
 		}
 		if (this.ticksExisted - this.initImpact > 250){
 			this.setDead();
 		}
-		
+
 	}
 }

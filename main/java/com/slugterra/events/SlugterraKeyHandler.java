@@ -22,7 +22,7 @@ public class SlugterraKeyHandler {
 	public void onKeyInput(InputEvent.KeyInputEvent event) {
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		if(KeyBindings.sluginvup.isPressed()){
-			System.out.println("Scrolling up");
+			//System.out.println("Scrolling up");
 			MainRegistry.packetPipeline.sendToServer(new UpdateSlotPacket(0));
 			RenderBlaster.reloading = true;
 			Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation(Strings.MODID+":blasters.defender.shortreload")));
@@ -30,7 +30,7 @@ public class SlugterraKeyHandler {
 		}
 
 		if(KeyBindings.sluginvdown.isPressed()){
-			System.out.println("Scrolling down");
+			//System.out.println("Scrolling down");
 			MainRegistry.packetPipeline.sendToServer(new UpdateSlotPacket(1));
 			RenderBlaster.reloading = true;
 			Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation(Strings.MODID+":blasters.defender.shortreload")));
@@ -42,7 +42,7 @@ public class SlugterraKeyHandler {
 		}
 		boolean jump = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
 		if (player != null && jump && player.ridingEntity instanceof EntityMecha){
-			System.out.println("Sending Packet...");
+			//System.out.println("Sending Packet...");
 			MainRegistry.network.sendToServer(new MechaAnimPacket("JUMPING!!!"));
 		}
 
