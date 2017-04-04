@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.slugterra.entity.velocity.EntityVel;
 import com.slugterra.model.slingers.ModelSlingerArmour;
+import com.slugterra.packets.RendPartPacket;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -40,5 +41,9 @@ public class ServerProxy
 			default: break;
 		}
 		return tutChest;
+	}
+
+	public static void postParticles(double x, double y, double z, String text) {
+		MainRegistry.network.sendToAll(new RendPartPacket(x,y,z,text));
 	}
 }

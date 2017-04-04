@@ -20,6 +20,8 @@ import com.slugterra.item.SlugterraItems;
 import com.slugterra.lib.Strings;
 import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.PacketPipeline;
+import com.slugterra.packets.ParticleSpawnPacket;
+import com.slugterra.packets.RendPartPacket;
 import com.slugterra.world.WorldGenMushrooms;
 import com.slugterra.world.WorldGeneratorBullseyeGhoul;
 import com.slugterra.world.WorldGeneratorGreatForge;
@@ -86,6 +88,8 @@ public class MainRegistry {
 		//new packets
 	    network = NetworkRegistry.INSTANCE.newSimpleChannel("SlugChannelNew");
 	    network.registerMessage(MechaAnimPacket.Handler.class, MechaAnimPacket.class, 0, Side.SERVER);
+	    network.registerMessage(ParticleSpawnPacket.Handler.class, ParticleSpawnPacket.class, 0, Side.SERVER);
+	    network.registerMessage(RendPartPacket.Handler.class, RendPartPacket.class, 0, Side.CLIENT);
 	}
 
 	/**

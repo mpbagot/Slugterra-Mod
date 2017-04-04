@@ -6,6 +6,7 @@ import com.slugterra.entity.EntitySlug;
 import com.slugterra.item.DefenderBlaster;
 import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
+import com.slugterra.packets.ParticleSpawnPacket;
 
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
@@ -138,13 +139,11 @@ public class EntityVel extends EntityThrowable{
 			activateSlugAbility(false);
 		}
 		this.setRotation(this.rotationYaw, this.rotationPitch+60);
-		if (this.worldObj.isRemote && elementParticle != "other" && elementParticle != null){
+		if (elementParticle != "other" && elementParticle != null){
 			for (int i = 0; i < 8; ++i)
 			{
-				//TODO send a packet to spawn particles everywhere!!!
-				//MainRegistry.packetPipeline.sendToAll(new TrailFXPacket());
-				this.worldObj.spawnParticle(elementParticle, this.posX, this.posY, this.posZ, 0.2D, 0.2D, 0.2D);
-				System.out.println("spawning Vanilla Particles!!!");
+				MainRegistry.network.sendToServer(new ParticleSpawnPacket(posX, posY, posZ, elementParticle));
+//				System.out.println("spawning Vanilla Particles!!!");
 			}
 		}
 		else if (this.worldObj.isRemote && customParticle != null){
