@@ -111,8 +111,8 @@ public class EntityMecha extends EntityAnimal {
 				{
 					float f2 = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
 					float f3 = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
-					this.motionX += (double)(-0.4F * f2);
-					this.motionZ += (double)(0.4F * f3);
+					this.motionX += (double)(-0.2F * f2);
+					this.motionZ += (double)(0.2F * f3);
 				}
 				net.minecraftforge.common.ForgeHooks.onLivingJump(this);
 				this.setVelocity(motionX, motionY, motionZ);
