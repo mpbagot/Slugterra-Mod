@@ -119,7 +119,7 @@ public class DefenderBlaster extends Item{
 					props.inventory.decrStackSize(props.invslot, 1);
 					player.addExperience(2);
 					player.inventory.setInventorySlotContents(player.inventory.getFirstEmptyStack(), new ItemStack(SlugterraItems.slugtubeItem));
-					MainRegistry.packetPipeline.sendTo(new SyncPlayerPropsPacket(player), (EntityPlayerMP) player);
+					MainRegistry.network.sendTo(new SyncPlayerPropsPacket(player), (EntityPlayerMP) player);
 				}
 			}
 			if (this.health <= 0)itemstack.stackSize--;
