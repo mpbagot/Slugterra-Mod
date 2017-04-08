@@ -1,18 +1,24 @@
 package com.slugterra.events;
 
+import com.slugterra.entity.EntityMecha;
 import com.slugterra.entity.properties.ExtendedPlayer;
 import com.slugterra.entity.properties.ExtendedSlingerAlly;
 import com.slugterra.entity.properties.ExtendedSlingerEnemy;
 import com.slugterra.entity.slingers.AllySlinger;
 import com.slugterra.entity.slingers.EnemySlinger;
+import com.slugterra.main.MainRegistry;
+import com.slugterra.packets.SyncPlayerPropsPacket;
 import com.slugterra.world.WorldGeneratorTheDrop;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 public class SlugterraEventHandler {
 
@@ -26,15 +32,22 @@ public class SlugterraEventHandler {
 			ExtendedPlayer.register((EntityPlayer) event.entity);
 		}
 
-		if (event.entity instanceof EntityPlayer){
-			EntityPlayer player = (EntityPlayer) event.entity;
-		}
-
 		if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(ExtendedPlayer.EXT_PROP_NAME) == null){
 			event.entity.registerExtendedProperties(ExtendedPlayer.EXT_PROP_NAME, new ExtendedPlayer((EntityPlayer) event.entity));
 		}
 	}
 
+	@SubscribeEvent
+	public void livingFall(LivingFallEvent event)
+	{
+		Entity entity = event.entity;
+		if (entity instanceof EntityPlayer && entity.ridingEntity instanceof EntityMecha) {
+			event.distance /= 5;
+		} else if (entity instanceof EntityMecha) {
+			event.distance /= 3;
+		}
+	}
+	
 	@SubscribeEvent
 	public void applySlingerProperties(EntityConstructing event)
 	{
@@ -83,5 +96,6 @@ public class SlugterraEventHandler {
 			text = "You are Stupid, Pack_of_14eggies.";
 		}
 		event.player.addChatMessage(new ChatComponentText(text));
+		MainRegistry.network.sendTo(new SyncPlayerPropsPacket(event.player), (EntityPlayerMP) event.player);
 	}
 }
