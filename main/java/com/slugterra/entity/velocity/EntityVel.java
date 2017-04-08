@@ -25,7 +25,6 @@ public class EntityVel extends EntityThrowable{
 	public static int min;
 	public static Entity hitE;
 	public static boolean impactAbility = false;
-	public static boolean killColl = true;
 	public static int friendship = 0;
 	public static EntitySlug protoform;
 	public static String name;
@@ -48,7 +47,6 @@ public class EntityVel extends EntityThrowable{
 		}
 
 		this.impactAbility = false;
-		this.killColl = true;
 
 		p_i1777_1_.playSoundAtEntity((Entity)this, Strings.MODID + ":slugs.allSlugs.formshift", 1.0F, 1.0F);
 	}
@@ -61,35 +59,29 @@ public class EntityVel extends EntityThrowable{
 	@Override
 	protected void onImpact(MovingObjectPosition p_70184_1_) {
 		int k = 0;
-		if (!this.worldObj.isRemote && this.killColl){
+		if (!this.worldObj.isRemote){
 			activateSlugAbility(true);
 		}
 
-		if (p_70184_1_.entityHit != null)
+		if (p_70184_1_.entityHit != null && !worldObj.isRemote)
 		{
 			this.hitE = p_70184_1_.entityHit;
 			if (p_70184_1_.entityHit instanceof EntityVel){
 				int otherpower = ((EntityVel) p_70184_1_.entityHit).power;
 				if (this.power > otherpower){
-					((EntityVel) p_70184_1_.entityHit).setDead();
+					((EntityVel) p_70184_1_.entityHit).turnToProtoform();
 					k = 1;
 				}
 				else if (this.power == otherpower){
-					((EntityVel) p_70184_1_.entityHit).setDead();
-					this.setDead();
+					((EntityVel) p_70184_1_.entityHit).turnToProtoform();
+					this.turnToProtoform();
 					k = 1;
 				}
 			}
 			p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.damage);
 		}
-		if (this.killColl){
-			if (!worldObj.isRemote){
-				this.setDead();
-				//this.turnToProtoform();
-			}
-			if (k == 0){
-				this.setDead();
-			}
+		if (!worldObj.isRemote){
+			this.turnToProtoform();
 		}
 	}
 
@@ -104,6 +96,7 @@ public class EntityVel extends EntityThrowable{
 		}
 		entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 		worldObj.spawnEntityInWorld(entityToSpawn);
+		this.setDead();
 	}
 
 	public EntityVel setPower(float skill){
@@ -128,7 +121,6 @@ public class EntityVel extends EntityThrowable{
 			this.setDead();
 		}
 		this.motionY += this.getGravityVelocity();
-		this.killColl = true;
 		if (this.target != null){
 			this.posX += (this.posX-target.posX)/60;
 			this.posY += (this.posY-target.posY)/60;

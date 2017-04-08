@@ -125,7 +125,6 @@ public class EntityTazerlingVel extends EntityVel{
 				EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(2*this.motionX), this.posY, this.posZ+(2*this.motionZ));
 				worldObj.addWeatherEffect(bolt);
 				this.createFire(2);
-				this.killColl = false;
 			}
 		}
 	}

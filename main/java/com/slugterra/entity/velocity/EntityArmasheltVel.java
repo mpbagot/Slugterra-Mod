@@ -55,7 +55,6 @@ public class EntityArmasheltVel extends EntityVel{
 				this.hitE.mountEntity(this);
 				//this.riddenByEntity = this.hitE;
 				this.motionY = 2.0f;
-				this.killColl = false;
 			}
 
 			//sluglift
