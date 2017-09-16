@@ -1,11 +1,6 @@
 package com.slugterra.entity.slingers;
 
 import java.util.Calendar;
-import java.util.Random;
-
-import com.slugterra.entity.velocity.EntityInfernusVel;
-import com.slugterra.entity.velocity.EntityVel;
-import com.slugterra.item.SlugterraItems;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,16 +23,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import com.slugterra.entity.velocity.EntityInfernusVel;
+import com.slugterra.entity.velocity.EntityVel;
+import com.slugterra.item.ItemRegistry;
+
 public class EnemySlinger extends EntityMob implements IRangedAttackMob
 {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
-	public int texint = 0;
-	
+	private static final String __OBFID = "CL_00001697";
+
 	public EnemySlinger(World p_i1741_1_)
 	{
 		super(p_i1741_1_);
-		this.texint = new Random().nextInt(1);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIRestrictSun(this));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
@@ -115,7 +113,7 @@ public class EnemySlinger extends EntityMob implements IRangedAttackMob
 
 		for (k = 0; k < j; ++k)
 		{
-			this.dropItem(SlugterraItems.fusionCore, 1);
+			this.dropItem(ItemRegistry.fusionCore, 1);
 		}
 	}
 
@@ -126,7 +124,7 @@ public class EnemySlinger extends EntityMob implements IRangedAttackMob
 	{
 		super.addRandomArmor();
 		//TODO: change to ghouled blaster
-		this.setCurrentItemOrArmor(0, new ItemStack(SlugterraItems.defenderBlaster));
+		this.setCurrentItemOrArmor(0, new ItemStack(ItemRegistry.defenderBlaster));
 	}
 
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
@@ -159,7 +157,7 @@ public class EnemySlinger extends EntityMob implements IRangedAttackMob
 		this.tasks.removeTask(this.aiArrowAttack);
 		ItemStack itemstack = this.getHeldItem();
 
-		if (itemstack != null && itemstack.getItem() == SlugterraItems.defenderBlaster)
+		if (itemstack != null && itemstack.getItem() == ItemRegistry.defenderBlaster)
 		{
 			this.tasks.addTask(4, this.aiArrowAttack);
 		}

@@ -2,8 +2,8 @@ package com.slugterra.keys;
 
 import org.lwjgl.input.Keyboard;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class KeyBindings {
 
@@ -11,7 +11,7 @@ public class KeyBindings {
     public static KeyBinding sluginvdown;
     public static KeyBinding opensluginv;
 
-    public static void init() {
+    public static void initialiseBindings() {
     	opensluginv = new KeyBinding("key.opensluginv", Keyboard.KEY_M, "key.categories.eggies");
     	sluginvup = new KeyBinding("key.sluginvup", Keyboard.KEY_UP, "key.categories.eggies");
     	sluginvdown = new KeyBinding("key.sluginvdown", Keyboard.KEY_DOWN, "key.categories.eggies");

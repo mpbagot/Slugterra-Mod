@@ -2,11 +2,11 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
+import com.slugterra.block.SlugterraElectricWallBlock;
 import com.slugterra.entity.EntitySlug;
-import com.slugterra.item.DefenderBlaster;
+import com.slugterra.entity.particles.EntityElectricElementFX;
 import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
-import com.slugterra.packets.ParticleSpawnPacket;
 
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
@@ -25,7 +25,8 @@ public class EntityVel extends EntityThrowable{
 	public static int min;
 	public static Entity hitE;
 	public static boolean impactAbility = false;
-	public static int friendship = 0;
+	public static boolean killColl = true;
+	public static int friendship;
 	public static EntitySlug protoform;
 	public static String name;
 	public static int max;
@@ -38,15 +39,21 @@ public class EntityVel extends EntityThrowable{
 	public EntityVel(World p_i1777_1_, EntityLivingBase entity) {
 		super(p_i1777_1_, entity);
 		this.shooter = (EntityPlayerMP) entity;
-		
-		if (!((DefenderBlaster)this.shooter.getCurrentEquippedItem().getItem()).hasExtendBarrel){
-			float r = new Random().nextFloat()/50;
-			this.motionX = motionX + (new Random().nextBoolean() ? r : -r);
-			this.motionY = motionY + (new Random().nextBoolean() ? r : -r);
-			this.motionZ = motionZ + (new Random().nextBoolean() ? r : -r);
+		this.setLocationAndAngles(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
+		this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+		this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+		this.setPosition(this.posX, this.posY, this.posZ);
+		this.yOffset = 0.0F;
+		this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+		this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+		this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+		if (this.rotationPitch/180.0F > 0){
+			this.motionY = -(this.rotationPitch/90.0F);
 		}
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 1.5F * 1.5F, 1.0F);
 
 		this.impactAbility = false;
+		this.killColl = true;
 
 		p_i1777_1_.playSoundAtEntity((Entity)this, Strings.MODID + ":slugs.allSlugs.formshift", 1.0F, 1.0F);
 	}
@@ -59,44 +66,49 @@ public class EntityVel extends EntityThrowable{
 	@Override
 	protected void onImpact(MovingObjectPosition p_70184_1_) {
 		int k = 0;
-		if (!this.worldObj.isRemote){
+		if (!this.worldObj.isRemote && this.killColl){
 			activateSlugAbility(true);
 		}
 
-		if (p_70184_1_.entityHit != null && !worldObj.isRemote)
+		if (p_70184_1_.entityHit != null)
 		{
 			this.hitE = p_70184_1_.entityHit;
 			if (p_70184_1_.entityHit instanceof EntityVel){
 				int otherpower = ((EntityVel) p_70184_1_.entityHit).power;
 				if (this.power > otherpower){
-					((EntityVel) p_70184_1_.entityHit).turnToProtoform();
+					((EntityVel) p_70184_1_.entityHit).setDead();
 					k = 1;
 				}
 				else if (this.power == otherpower){
-					((EntityVel) p_70184_1_.entityHit).turnToProtoform();
-					this.turnToProtoform();
+					((EntityVel) p_70184_1_.entityHit).setDead();
+					this.setDead();
 					k = 1;
 				}
 			}
 			p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.damage);
 		}
-		if (!worldObj.isRemote){
-			this.turnToProtoform();
+		if (this.killColl){
+			if (!worldObj.isRemote){
+				this.turnToProtoform();
+			}
+			if (k == 0){
+				this.setDead();
+			}
 		}
 	}
 
 	public void turnToProtoform() {
+		System.out.println(this.protoform);
 		EntitySlug entityToSpawn = this.protoform;
 		if (this.name != null)
 			entityToSpawn.setName(this.name);
 		entityToSpawn.friendship = this.friendship;
-		if (shooter != null){
-			entityToSpawn.setSlinger(this.shooter);
+		if (this.shooter != null){
+			entityToSpawn.setSlinger((EntityPlayerMP)this.shooter);
 			entityToSpawn.setFollowSlinger(this.friendship > 30);
 		}
 		entityToSpawn.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 		worldObj.spawnEntityInWorld(entityToSpawn);
-		this.setDead();
 	}
 
 	public EntityVel setPower(float skill){
@@ -117,10 +129,7 @@ public class EntityVel extends EntityThrowable{
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		if (this.ticksExisted > 1500){
-			this.setDead();
-		}
-		this.motionY += this.getGravityVelocity();
+		this.killColl = true;
 		if (this.target != null){
 			this.posX += (this.posX-target.posX)/60;
 			this.posY += (this.posY-target.posY)/60;
@@ -131,11 +140,13 @@ public class EntityVel extends EntityThrowable{
 			activateSlugAbility(false);
 		}
 		this.setRotation(this.rotationYaw, this.rotationPitch+60);
-		if (elementParticle != "other" && elementParticle != null){
+		if (this.worldObj.isRemote && elementParticle != "other" && elementParticle != null){
 			for (int i = 0; i < 8; ++i)
 			{
-				MainRegistry.network.sendToServer(new ParticleSpawnPacket(posX, posY, posZ, elementParticle));
-//				System.out.println("spawning Vanilla Particles!!!");
+				//TODO send a packet to spawn particles everywhere!!!
+				//MainRegistry.packetPipeline.sendToAll(new TrailFXPacket());
+				this.worldObj.spawnParticle(elementParticle, this.posX, this.posY, this.posZ, 0.2D, 0.2D, 0.2D);
+				System.out.println("spawning Vanilla Particles!!!");
 			}
 		}
 		else if (this.worldObj.isRemote && customParticle != null){

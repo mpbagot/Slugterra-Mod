@@ -2,7 +2,7 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
-import com.slugterra.entity.properties.ExtendedPlayer;
+import com.slugterra.capabilities.ExtendedPlayer;
 import com.slugterra.entity.protoform.EntityArmashelt;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -55,6 +55,7 @@ public class EntityArmasheltVel extends EntityVel{
 				this.hitE.mountEntity(this);
 				//this.riddenByEntity = this.hitE;
 				this.motionY = 2.0f;
+				this.killColl = false;
 			}
 
 			//sluglift

@@ -1,5 +1,6 @@
 package com.slugterra.inventory;
 
+import com.slugterra.item.SlugItemRegistry;
 import com.slugterra.item.slugs.ItemSlug;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.text.ITextComponent;
 
 public class InventorySlug implements IInventory
 {
@@ -34,6 +36,10 @@ public class InventorySlug implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int slot)
 	{
+		ItemStack stack = inventory[slot];
+		if (stack == null) {
+			this.setInventorySlotContents(slot, ItemStack.EMPTY);
+		}
 		return inventory[slot];
 	}
 
@@ -41,34 +47,27 @@ public class InventorySlug implements IInventory
 	public ItemStack decrStackSize(int slot, int amount)
 	{
 		ItemStack stack = getStackInSlot(slot);
-		if (stack != null)
+//		stack.setCount(stack.getCount()-amount);
+//		setInventorySlotContents(slot, stack);
+//		this.markDirty();
+//		return stack;
+		
+		if (stack != ItemStack.EMPTY)
 		{
-			if (stack.stackSize > amount)
+			if (stack.getCount() > amount)
 			{
 				stack = stack.splitStack(amount);
-				if (stack.stackSize == 0)
+				if (stack.getCount() == 0)
 				{
-					setInventorySlotContents(slot, null);
+					setInventorySlotContents(slot, ItemStack.EMPTY);
 				}
 			}
 			else
 			{
-				setInventorySlotContents(slot, null);
+				setInventorySlotContents(slot, ItemStack.EMPTY);
 			}
 
 			this.markDirty();
-		}
-		return stack;
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
-	{
-		ItemStack stack = getStackInSlot(slot);
-		System.out.println(stack);
-		if (stack != null)
-		{
-			setInventorySlotContents(slot, stack);
 		}
 		return stack;
 	}
@@ -78,22 +77,22 @@ public class InventorySlug implements IInventory
 	{
 		this.inventory[slot] = itemstack;
 		
-		if (itemstack != null && itemstack.stackSize <= this.getInventoryStackLimit())
+		if (itemstack != ItemStack.EMPTY && itemstack.getCount() <= this.getInventoryStackLimit())
 		{
-			itemstack.stackSize = this.getInventoryStackLimit();
+			itemstack.setCount(this.getInventoryStackLimit());
 		}
 
 		this.markDirty();
 	}
 
 	@Override
-	public String getInventoryName()
+	public String getName()
 	{
 		return name;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName()
+	public boolean hasCustomName()
 	{
 		return name.length() > 0;
 	}
@@ -112,23 +111,17 @@ public class InventorySlug implements IInventory
 	{
 		for (int i = 0; i < this.getSizeInventory(); ++i)
 		{
-			if (this.getStackInSlot(i) != null && this.getStackInSlot(i).stackSize == 0){
+			if (this.getStackInSlot(i) != ItemStack.EMPTY && this.getStackInSlot(i).getCount() == 0){
 				this.setInventorySlotContents(i, this.getStackInSlot(i));
 			}
 		}
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	public boolean isUsableByPlayer(EntityPlayer entityplayer)
 	{
 		return true;
 	}
-
-	@Override
-	public void openInventory() {}
-
-	@Override
-	public void closeInventory() {}
 
 	/**
 	 * This method doesn't seem to do what it claims to do, as
@@ -147,13 +140,13 @@ public class InventorySlug implements IInventory
 
 		for (int i = 0; i < getSizeInventory(); ++i)
 		{
-			if (getStackInSlot(i) != null)
-			{
+//			if (getStackInSlot(i).getCount() != 0)
+//			{
 				NBTTagCompound item = new NBTTagCompound();
 				item.setByte("Slot", (byte) i);
 				getStackInSlot(i).writeToNBT(item);
 				items.appendTag(item);
-			}
+//			}
 		}
 
 		// We're storing our items in a custom tag list using our 'tagName' from above
@@ -169,8 +162,59 @@ public class InventorySlug implements IInventory
 			NBTTagCompound item = (NBTTagCompound) items.getCompoundTagAt(i);
 			byte slot = item.getByte("Slot");
 			if (slot >= 0 && slot < getSizeInventory()) {
-				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+				inventory[slot] = new ItemStack(item);
 			}
 		}
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+//		for (int i = 0; i < getSizeInventory(); i++) {
+//			if (getStackInSlot(i) != null) {
+//				return false;
+//			}
+//		}
+//		return true;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		inventory[index].setCount(0);
+		return inventory[index];
+//		ItemStack stack = inventory[index];
+//		inventory[index] = null;
+//		return stack;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {}
+
+	@Override
+	public int getField(int id) {
+		return id;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		
 	}
 }

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 import com.slugterra.block.SlugterraBlocks;
+import com.slugterra.capabilities.ExtendedPlayer;
 import com.slugterra.entity.EntityLightBall;
 import com.slugterra.entity.particles.EntityElectricElementFX;
-import com.slugterra.entity.properties.ExtendedPlayer;
 import com.slugterra.entity.protoform.EntityTazerling;
 
 import net.minecraft.block.Block;
@@ -125,6 +125,7 @@ public class EntityTazerlingVel extends EntityVel{
 				EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(2*this.motionX), this.posY, this.posZ+(2*this.motionZ));
 				worldObj.addWeatherEffect(bolt);
 				this.createFire(2);
+				this.killColl = false;
 			}
 		}
 	}

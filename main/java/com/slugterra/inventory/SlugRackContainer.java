@@ -40,7 +40,7 @@ public class SlugRackContainer extends Container{
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return slugRack.isUseableByPlayer(player);
+		return slugRack.isUsableByPlayer(player);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class SlugRackContainer extends Container{
 				}
 			}
 
-			if (itemstack1.stackSize == 0)
+			if (itemstack1.getCount() == 0)
 			{
 				slot.putStack((ItemStack) null);
 			}
@@ -91,12 +91,12 @@ public class SlugRackContainer extends Container{
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if (itemstack1.getCount() == itemstack.getCount())
 			{
 				return null;
 			}
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.onTake(player, itemstack1);
 		}
 
 		return itemstack;

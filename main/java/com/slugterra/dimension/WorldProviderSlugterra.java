@@ -1,31 +1,30 @@
 package com.slugterra.dimension;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.DimensionManager;
-
 import com.slugterra.main.ChunkProviderSlugterra;
 import com.slugterra.main.MainRegistry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderSlugterra extends WorldProvider{
 
 	@Override
 	public void registerWorldChunkManager(){
-		this.worldChunkMgr = new WorldChunkManagerSlugterra(this.worldObj.getSeed(), this.terrainType);
-		this.dimensionId = MainRegistry.dimensionIdSlugterra;
+		this.biomeProvider = new WorldChunkManagerSlugterra(this.worldObj.getSeed(), this.terrainType);
+		this.setDimension(MainRegistry.dimensionIdSlugterra);
 	}
 	
 	@Override
-	public IChunkProvider createChunkGenerator(){
-		return new ChunkProviderSlugterra(this.worldObj, this.worldObj.getSeed());//come back here if test fails!!!
+	public IChunkGenerator createChunkGenerator(){
+		return new ChunkProviderSlugterra(this.world, this.world.getSeed());//come back here if test fails!!!
 	
 	}
 
@@ -97,8 +96,8 @@ public class WorldProviderSlugterra extends WorldProvider{
 	/**
 	 * @return the sky color
 	 */
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return worldObj.getSkyColorBody(cameraEntity, partialTicks);
+	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
+		return world.getSkyColorBody(cameraEntity, partialTicks);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -166,13 +165,13 @@ public class WorldProviderSlugterra extends WorldProvider{
 	}
 
 	@Override
-	public Vec3 drawClouds(float partialTicks) {
+	public Vec3d drawClouds(float partialTicks) {
 		return super.drawClouds(partialTicks);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float par1, float par2)
+	public Vec3d getFogColor(float par1, float par2)
 	{
 		float f2 = MathHelper.cos(par1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
 
@@ -192,7 +191,7 @@ public class WorldProviderSlugterra extends WorldProvider{
 		f3 *= f2 * 0.94F + 0.06F;
 		f4 *= f2 * 0.94F + 0.06F;
 		f5 *= f2 * 0.91F + 0.09F;
-		return Vec3.createVectorHelper((double)f3, (double)f4, (double)f5);
+		return new Vec3d((double)f3, (double)f4, (double)f5);
 	}
 
 

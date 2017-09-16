@@ -1,7 +1,7 @@
 package com.slugterra.entity.protoform;
 
 import com.slugterra.entity.EntitySlug;
-import com.slugterra.item.SlugsTube;
+import com.slugterra.item.SlugItemRegistry;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.world.World;
@@ -11,7 +11,7 @@ public class EntityInfernus extends EntitySlug{
 	public EntityInfernus(World p_i1738_1_) {
 		super(p_i1738_1_);
 		this.isImmuneToFire = true;
-		this.slugItem = SlugsTube.infernus;
+		this.slugItem = SlugItemRegistry.infernus;
 	}
 	
 	public EntityInfernus(World world, String name){

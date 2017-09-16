@@ -6,10 +6,9 @@ import com.slugterra.biomes.BiomeRegistry;
 import com.slugterra.world.bullsEye.BullseyeArchGhoul;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGeneratorBullseyeGhoul implements IWorldGenerator
 {

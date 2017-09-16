@@ -1,9 +1,10 @@
 package com.slugterra.creativetabs;
 
-import com.slugterra.item.SlugterraItems;
+import com.slugterra.item.ItemRegistry;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class CreativeTabBlasters extends CreativeTabs {
 
@@ -12,8 +13,8 @@ public class CreativeTabBlasters extends CreativeTabs {
 	}
 
 	@Override
-	public Item getTabIconItem() {
-		return SlugterraItems.defenderBlaster;
+	public ItemStack getTabIconItem() {
+		return new ItemStack(ItemRegistry.defenderBlaster);
 	}
 
 }

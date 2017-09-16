@@ -4,94 +4,73 @@ package com.slugterra.main;
 
 import java.util.List;
 
-import com.slugterra.biomes.BiomeRegistry;
-import com.slugterra.block.SlugterraBlocks;
-import com.slugterra.block.TileEntitySlugContainerEntity;
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
-import com.slugterra.dimension.WorldProviderSlugterra;
-import com.slugterra.entity.SlugterraEntityRegistry;
-import com.slugterra.entity.slingers.EntitySlingers;
 import com.slugterra.events.SlugterraEventHandler;
 import com.slugterra.events.SlugterraKeyHandler;
 import com.slugterra.gui.GUIHandler;
-import com.slugterra.gui.GuiSlugBeltOverlay;
-import com.slugterra.item.SlugsTube;
-import com.slugterra.item.SlugterraItems;
 import com.slugterra.lib.Strings;
 import com.slugterra.packets.MechaAnimPacket;
-import com.slugterra.packets.PacketPipeline;
-import com.slugterra.packets.ParticleSpawnPacket;
-import com.slugterra.packets.RendPartPacket;
+import com.slugterra.packets.OpenGuiPacket;
 import com.slugterra.packets.SyncPlayerPropsPacket;
-import com.slugterra.world.WorldGenMushrooms;
-import com.slugterra.world.WorldGeneratorBullseyeGhoul;
-import com.slugterra.world.WorldGeneratorGreatForge;
-import com.slugterra.world.WorldGeneratorShaneHideout;
-import com.slugterra.world.WorldGeneratorTheDrop;
+import com.slugterra.packets.UpdateSlotPacket;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Strings.MODID, name = Strings.name, version = Strings.version)
 
 public class MainRegistry {
 
 	@SidedProxy(clientSide = "com.slugterra.main.ClientProxy", serverSide = "com.slugterra.main.ServerProxy")
-	public static ServerProxy proxy;
+	public static CommonProxy proxy;
 
 	@Instance(Strings.MODID)
-	public static MainRegistry modInstance;
+	public static MainRegistry modInstance = new MainRegistry();
 	
 	public static boolean mcainstalled = false;
 
-	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	public static SimpleNetworkWrapper network;
 
 	private static int modGuiIndex = 0;
 	public static final int GUI_SLUG_INV = modGuiIndex++;
 	public static final int GUI_SLUG_RACK = modGuiIndex++;
 
-	public static final int dimensionIdSlugterra = 73;
+	public static final int dimensionIdSlugterra = DimensionManager.getNextFreeDimId();
 
 	/**
 	 * Loads before
 	 * @param PreEvent
 	 */
 	@EventHandler
-	public static void PreLoad(FMLPreInitializationEvent PreEvent){
+	public void PreLoad(FMLPreInitializationEvent PreEvent){
 		SlugterraCreativeTabs.initialiseTabs();
-		SlugterraItems.mainRegistry();
-		SlugterraBlocks.mainRegistry();
-		SlugsTube.mainRegistry();
-		SlugterraEntityRegistry.mainRegistry();
-		CraftingManager.mainRegistry();
-		proxy.registerRenderThings();
-		EntitySlingers.mainRegistry();
+		proxy.preInit(PreEvent);
+//		SlugterraBlocks.mainRegistry();
+//		SlugterraEntityRegistry.mainRegistry();
+//		proxy.registerRenderThings();
+//		EntitySlingers.mainRegistry();
 		//dimension stuff
-		DimensionManager.registerProviderType(dimensionIdSlugterra, WorldProviderSlugterra.class, true);
-		DimensionManager.registerDimension(dimensionIdSlugterra, dimensionIdSlugterra);
-		BiomeRegistry.mainRegistry();
+//		DimensionType dimensionTypeSlugterra = DimensionType.register("SLUGTERRA", "_slugterra", dimensionIdSlugterra, WorldProviderSlugterra.class, true);
+//		DimensionManager.registerDimension(dimensionIdSlugterra, dimensionTypeSlugterra);
+//		BiomeRegistry.mainRegistry();
 		//new packets
 	    network = NetworkRegistry.INSTANCE.newSimpleChannel("SlugChannelNew");
 	    network.registerMessage(MechaAnimPacket.Handler.class, MechaAnimPacket.class, 0, Side.SERVER);
-	    network.registerMessage(ParticleSpawnPacket.Handler.class, ParticleSpawnPacket.class, 1, Side.SERVER);
-	    network.registerMessage(RendPartPacket.Handler.class, RendPartPacket.class, 2, Side.CLIENT);
-	    network.registerMessage(SyncPlayerPropsPacket.Handler.class, SyncPlayerPropsPacket.class, 3, Side.CLIENT);
+	    network.registerMessage(OpenGuiPacket.Handler.class, OpenGuiPacket.class, 1, Side.SERVER);
+	    network.registerMessage(SyncPlayerPropsPacket.Handler.class, SyncPlayerPropsPacket.class, 2, Side.CLIENT);
+	    network.registerMessage(UpdateSlotPacket.Handler.class, UpdateSlotPacket.class, 3, Side.SERVER);
 	}
 
 	/**
@@ -99,26 +78,25 @@ public class MainRegistry {
 	 * @param event
 	 */
 	@EventHandler
-	public static void load(FMLInitializationEvent event){
-		proxy.registerRenderThings();
+	public void load(FMLInitializationEvent event){
+		proxy.init(event);
+//		proxy.registerRenderThings();
 		
-		//tile entitys
-		GameRegistry.registerTileEntity(TileEntitySlugContainerEntity.class, "tileEntitySlugContainer");
+		//tile entities
+//		GameRegistry.registerTileEntity(TileEntitySlugContainerEntity.class, "tileEntitySlugContainer");
 		
 		//events
 		MinecraftForge.EVENT_BUS.register(new SlugterraEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainRegistry.modInstance, new GUIHandler());
-		FMLCommonHandler.instance().bus().register(new SlugterraKeyHandler());
+		MinecraftForge.EVENT_BUS.register(new SlugterraKeyHandler());
 		
 		//world generators
-		GameRegistry.registerWorldGenerator(new WorldGeneratorTheDrop(), 1);
-		GameRegistry.registerWorldGenerator(new WorldGeneratorGreatForge(), 2);
-		GameRegistry.registerWorldGenerator(new WorldGeneratorBullseyeGhoul(), 2);
-		GameRegistry.registerWorldGenerator(new WorldGenMushrooms(), 1);
-		GameRegistry.registerWorldGenerator(new WorldGeneratorShaneHideout(), 3);
+//		GameRegistry.registerWorldGenerator(new WorldGeneratorTheDrop(), 1);
+//		GameRegistry.registerWorldGenerator(new WorldGeneratorGreatForge(), 2);
+//		GameRegistry.registerWorldGenerator(new WorldGeneratorBullseyeGhoul(), 2);
+//		GameRegistry.registerWorldGenerator(new WorldGenMushrooms(), 1);
+//		GameRegistry.registerWorldGenerator(new WorldGeneratorShaneHideout(), 3);
 		
-		//packet pipeline initialisation
-		packetPipeline.initialise();
 	}
 
 	/**
@@ -126,11 +104,8 @@ public class MainRegistry {
 	 * @param PostEvent
 	 */
 	@EventHandler
-	public static void PostLoad(FMLPostInitializationEvent PostEvent){
-		packetPipeline.postInitialise();
-		MinecraftForge.EVENT_BUS.register(new GuiSlugBeltOverlay(Minecraft.getMinecraft()));
-		mcainstalled = Loader.isModLoaded("mca");
-		List<ModContainer> modlist = Loader.instance().getActiveModList();
-		System.out.println(modlist);
+	public void PostLoad(FMLPostInitializationEvent PostEvent){
+		proxy.postInit(PostEvent);
+//		MinecraftForge.EVENT_BUS.register(new GuiSlugBeltOverlay(Minecraft.getMinecraft()));
 	}
 }

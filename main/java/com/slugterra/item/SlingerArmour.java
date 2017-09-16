@@ -1,33 +1,22 @@
 package com.slugterra.item;
 
+import com.slugterra.main.MainRegistry;
+
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.slugterra.main.MainRegistry;
+public class SlingerArmour extends ItemArmor {
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class SlingerArmour extends ItemArmor{
-
-	public SlingerArmour(ArmorMaterial p_i45325_1_, int p_i45325_2_, int p_i45325_3_) {
-		super(p_i45325_1_, p_i45325_2_, p_i45325_3_);
-	}
-
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
-	{
-		switch(slot){ 
-		case 2: 
-			return "slugterramod:textures/items/slugbelt.png"; //rest of texture for armour
-		default: 
-			return "slugterramod:textures/items/slugbelt.png"; //rest of texture for armour
-		} 
+	public SlingerArmour(String unlocalizedName, ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
+		super(material, renderIndex, equipmentSlot);
+		this.setUnlocalizedName(unlocalizedName);
 	}
 
 	@Override
@@ -39,7 +28,7 @@ public class SlingerArmour extends ItemArmor{
 		{
 			if(itemStack.getItem() instanceof SlingerArmour)
 			{
-				int type = ((ItemArmor)itemStack.getItem()).armorType;
+				int type = ((ItemArmor)itemStack.getItem()).armorType.getIndex();
 				if(type == 1 || type == 3)
 				{ 
 					armourModel = MainRegistry.proxy.getArmorModel(0);
@@ -50,7 +39,7 @@ public class SlingerArmour extends ItemArmor{
 				} 
 			}
 		} 
-		int type = ((ItemArmor)itemStack.getItem()).armorType;
+		int type = ((ItemArmor)itemStack.getItem()).armorType.getIndex();
 		if(type == 1 || type == 3)
 		{
 			armourModel = MainRegistry.proxy.getArmorModel(0);
@@ -75,7 +64,7 @@ public class SlingerArmour extends ItemArmor{
 			armourModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
 			if(entityLiving instanceof EntityPlayer)
 			{
-				armourModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
+				armourModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseCount() > 2;
 			}
 			return armourModel; 
 		}

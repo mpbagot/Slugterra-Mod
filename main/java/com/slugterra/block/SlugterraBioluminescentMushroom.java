@@ -6,9 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenBigMushroom;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class SlugterraBioluminescentMushroom extends BlockBush implements IGrowable
 {
@@ -59,7 +58,7 @@ public class SlugterraBioluminescentMushroom extends BlockBush implements IGrowa
 
 			for (int l1 = 0; l1 < 4; ++l1)
 			{
-				if (world.isAirBlock(i1, j1, k1) && this.canBlockStay(world, i1, j1, k1))
+				if (world.isAirBlock(new BlockPos(i1, j1, k1)) && this.canBlockStay(world, i1, j1, k1))
 				{
 					p_149674_2_ = i1;
 					p_149674_3_ = j1;
@@ -71,7 +70,7 @@ public class SlugterraBioluminescentMushroom extends BlockBush implements IGrowa
 				k1 = p_149674_4_ + rand.nextInt(3) - 1;
 			}
 
-			if (world.isAirBlock(i1, j1, k1) && this.canBlockStay(world, i1, j1, k1))
+			if (world.isAirBlock(new BlockPos(i1, j1, k1)) && this.canBlockStay(world, i1, j1, k1))
 			{
 				world.setBlock(i1, j1, k1, this, 0, 2);
 			}

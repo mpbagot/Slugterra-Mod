@@ -18,15 +18,15 @@ import net.minecraft.world.World;
 import com.slugterra.entity.EntitySlug;
 import com.slugterra.entity.ai.EntitySlugAIHopPanic;
 import com.slugterra.entity.ai.EntitySlugAIHopWander;
-import com.slugterra.item.SlugsTube;
-import com.slugterra.item.SlugterraItems;
+import com.slugterra.item.SlugItemRegistry;
+import com.slugterra.item.ItemRegistry;
 import com.slugterra.item.slugs.ItemSlug;
 
 public class EntityGrenuke extends EntitySlug{
 	
 	public EntityGrenuke(World par1World) {
 		super(par1World);
-		this.slugItem = SlugsTube.grenuke;
+		this.slugItem = SlugItemRegistry.grenuke;
 	}
 	
 	public EntityGrenuke(World world, String name){

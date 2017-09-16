@@ -1,12 +1,7 @@
 package com.slugterra.entity.slingers;
 
 import java.util.Calendar;
-import java.util.Random;
 
-import com.slugterra.entity.velocity.EntityInfernusVel;
-import com.slugterra.item.SlugterraItems;
-
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
@@ -19,6 +14,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
@@ -26,19 +22,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class AllySlinger extends EntityCreature implements IRangedAttackMob
+import com.slugterra.entity.velocity.EntityInfernusVel;
+import com.slugterra.item.ItemRegistry;
+
+public class AllySlinger extends EntityMob implements IRangedAttackMob
 {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
-	public int texint = 0;
-	
+	private static final String __OBFID = "CL_00001697";
+
 	public AllySlinger(World p_i1741_1_)
 	{
 		super(p_i1741_1_);
-		this.texint = new Random().nextInt(8);
-		if (new Random().nextInt(1000)  == 777){
-			this.texint = 9;
-		}
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -103,7 +98,7 @@ public class AllySlinger extends EntityCreature implements IRangedAttackMob
 
 		 for (k = 0; k < j; ++k)
 		 {
-			 this.dropItem(SlugterraItems.defenderBlaster, 1);
+			 this.dropItem(ItemRegistry.defenderBlaster, 1);
 		 }
 	 }
 
@@ -113,7 +108,7 @@ public class AllySlinger extends EntityCreature implements IRangedAttackMob
 	 protected void addRandomArmor()
 	 {
 		 super.addRandomArmor();
-		 this.setCurrentItemOrArmor(0, new ItemStack(SlugterraItems.defenderBlaster));
+		 this.setCurrentItemOrArmor(0, new ItemStack(ItemRegistry.defenderBlaster));
 	 }
 
 	 public IEntityLivingData onSpawnWithEgg(IEntityLivingData p_110161_1_)
@@ -149,7 +144,7 @@ public class AllySlinger extends EntityCreature implements IRangedAttackMob
 		 this.tasks.removeTask(this.aiArrowAttack);
 		 ItemStack itemstack = this.getHeldItem();
 
-		 if (itemstack != null && itemstack.getItem() == SlugterraItems.defenderBlaster)
+		 if (itemstack != null && itemstack.getItem() == ItemRegistry.defenderBlaster)
 		 {
 			 this.tasks.addTask(4, this.aiArrowAttack);
 		 }

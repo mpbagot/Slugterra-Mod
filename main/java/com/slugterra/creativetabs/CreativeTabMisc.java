@@ -1,9 +1,9 @@
 package com.slugterra.creativetabs;
 
-import com.slugterra.item.SlugterraItems;
+import com.slugterra.item.ItemRegistry;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class CreativeTabMisc extends CreativeTabs {
 
@@ -12,8 +12,8 @@ public class CreativeTabMisc extends CreativeTabs {
 	}
 
 	@Override
-	public Item getTabIconItem() {
-		return SlugterraItems.slugfood;
+	public ItemStack getTabIconItem() {
+		return new ItemStack(ItemRegistry.slugfood);
 	}
 
 }

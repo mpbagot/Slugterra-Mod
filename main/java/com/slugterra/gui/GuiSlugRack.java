@@ -24,7 +24,7 @@ public class GuiSlugRack extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-		String s = slugRack.getInventoryName();
+		String s = slugRack.getName();
 		fontRendererObj.drawString(s, xSize/2-fontRendererObj.getStringWidth(s)/2, 5, 4210752);
 		fontRendererObj.drawString("Player Inventory", 8, ySize-94, 4210752);
 	}

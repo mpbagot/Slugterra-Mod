@@ -3,9 +3,9 @@ package com.slugterra.block;
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.lib.Strings;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class SlugterraBlocks {
 
@@ -24,23 +24,23 @@ public class SlugterraBlocks {
 	public static Block electricWall;
 
 	public static void initialiseBlock(){
-		dropSeat = new TileEntityDropBlock(Material.iron).setBlockName("DropSeat").setCreativeTab(SlugterraCreativeTabs.tabMisc);
-		slimeRope = new SlugterraSlimeRope(Material.grass).setBlockName("SlimeRope").setCreativeTab(SlugterraCreativeTabs.tabMisc);
-		slugContainer = new TileEntitySlugContainerBlock(Material.iron).setBlockName("SlugContainer").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":slugcontainer");
-		slugterraGrass = new SlugterraGrassBlock(Material.ground).setHardness(0.2F).setBlockName("SlugterraGrass").setCreativeTab(SlugterraCreativeTabs.tabMisc);
-		slugterraDirt = new SlugterraDirtBlock(Material.ground).setHardness(0.2F).setBlockName("SlugterraDirt").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":dirt");
-		mushroom = new SlugterraBioluminescentMushroom().setHardness(0.3F).setBlockName("MushroomSlugterra").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":mushroom");
-		slugterraIce = new SlugterraIceBlock().setBlockName("SlugIce").setBlockTextureName(Strings.MODID + ":ice");
-		electricWall = new SlugterraElectricWallBlock().setBlockName("ElectricWall").setBlockTextureName(Strings.MODID+":ewall");
+		dropSeat = new TileEntityDropBlock(Material.IRON).setRegistryName("DropSeat").setCreativeTab(SlugterraCreativeTabs.tabMisc);
+		slimeRope = new SlugterraSlimeRope(Material.GRASS).setRegistryName("SlimeRope").setCreativeTab(SlugterraCreativeTabs.tabMisc);
+		slugContainer = new TileEntitySlugContainerBlock(Material.IRON).setRegistryName("SlugContainer").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":slugcontainer");
+		slugterraGrass = new SlugterraGrassBlock(Material.GROUND).setHardness(0.2F).setRegistryName("SlugterraGrass").setCreativeTab(SlugterraCreativeTabs.tabMisc);
+		slugterraDirt = new SlugterraDirtBlock(Material.GROUND).setHardness(0.2F).setRegistryName("SlugterraDirt").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":dirt");
+		mushroom = new SlugterraBioluminescentMushroom().setHardness(0.3F).setRegistryName("MushroomSlugterra").setCreativeTab(SlugterraCreativeTabs.tabMisc).setBlockTextureName(Strings.MODID + ":mushroom");
+		slugterraIce = new SlugterraIceBlock().setRegistryName("SlugIce").setBlockTextureName(Strings.MODID + ":ice");
+		electricWall = new SlugterraElectricWallBlock().setRegistryName("ElectricWall").setBlockTextureName(Strings.MODID+":ewall");
 	}
 	public static void registerBlock(){
-		GameRegistry.registerBlock(slugContainer, slugContainer.getUnlocalizedName());
-		GameRegistry.registerBlock(dropSeat, dropSeat.getUnlocalizedName());
-		GameRegistry.registerBlock(slugterraGrass, slugterraGrass.getUnlocalizedName());
-		GameRegistry.registerBlock(slugterraDirt, slugterraDirt.getUnlocalizedName());
-		GameRegistry.registerBlock(mushroom, mushroom.getUnlocalizedName());
-		GameRegistry.registerBlock(slugterraIce, slugterraIce.getUnlocalizedName());
-		GameRegistry.registerBlock(slimeRope, slimeRope.getUnlocalizedName());
-		GameRegistry.registerBlock(electricWall, electricWall.getUnlocalizedName());
+		GameRegistry.registerBlock(slugContainer, slugContainer.getRegistryName());
+		GameRegistry.registerBlock(dropSeat, dropSeat.getRegistryName());
+		GameRegistry.registerBlock(slugterraGrass, slugterraGrass.getRegistryName());
+		GameRegistry.registerBlock(slugterraDirt, slugterraDirt.getRegistryName());
+		GameRegistry.registerBlock(mushroom, mushroom.getRegistryName());
+		GameRegistry.registerBlock(slugterraIce, slugterraIce.getRegistryName());
+		GameRegistry.registerBlock(slimeRope, slimeRope.getRegistryName());
+		GameRegistry.registerBlock(electricWall, electricWall.getRegistryName());
 	}	
 }

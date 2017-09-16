@@ -2,14 +2,13 @@ package com.slugterra.world;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
-
 import com.slugterra.biomes.BiomeRegistry;
 import com.slugterra.world.hideout.ShaneHideout;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGeneratorShaneHideout implements IWorldGenerator
 {

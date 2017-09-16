@@ -1,14 +1,8 @@
 package com.slugterra.item.slugs;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import com.slugterra.entity.velocity.EntityVel;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSlug extends Item
 {	
@@ -58,12 +52,12 @@ public class ItemSlug extends Item
 			this.friendship += newValue;
 	}
 	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("slugterramod:" + getUnlocalizedName().substring(5));
-	}
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public void registerIcons(IIconRegister iconRegister)
+//	{
+//		itemIcon = iconRegister.registerIcon("slugterramod:" + getUnlocalizedName().substring(5));
+//	}
 	
 	public void writeToNBT(NBTTagCompound compound)
 	{

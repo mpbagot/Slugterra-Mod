@@ -2,14 +2,8 @@ package com.slugterra.entity;
 
 import java.util.Random;
 
-import com.slugterra.entity.ai.EntitySlugAIHopPanic;
-import com.slugterra.entity.ai.EntitySlugAIHopWander;
-import com.slugterra.entity.ai.EntitySlugAIMoveTowardsSlinger;
-import com.slugterra.entity.properties.ExtendedPlayer;
-import com.slugterra.item.SlugterraItems;
-import com.slugterra.item.slugs.ItemSlug;
-
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -22,6 +16,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import com.slugterra.capabilities.ExtendedPlayer;
+import com.slugterra.entity.ai.EntitySlugAIHopPanic;
+import com.slugterra.entity.ai.EntitySlugAIHopWander;
+import com.slugterra.entity.ai.EntitySlugAIMoveTowardsSlinger;
+import com.slugterra.item.ItemRegistry;
+import com.slugterra.item.slugs.ItemSlug;
 
 public class EntitySlug extends EntityTameable{
 
@@ -45,7 +46,7 @@ public class EntitySlug extends EntityTameable{
 		this.tasks.addTask(4, new EntityAILookIdle(this));
 		this.tasks.addTask(3, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 12.0F));
-		this.tasks.addTask(1, new EntityAITempt(this, 0.9D, SlugterraItems.slugfood, false));
+		this.tasks.addTask(1, new EntityAITempt(this, 0.9D, ItemRegistry.slugfood, false));
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class EntitySlug extends EntityTameable{
 	public void writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
 		compound.setInteger("EntitySlugFriendship", friendship);
-		compound.setString("Slinger", this.slinger != null ? this.slinger.getCommandSenderName() : "");
+		compound.setString("Slinger", this.slinger.getCommandSenderName());
 		if(name != null)
 			compound.setString("EntitySlugName", name);
 	}
@@ -110,7 +111,7 @@ public class EntitySlug extends EntityTameable{
 		if ((new Random().nextInt(20) == 1 || this.friendship > 30) && !this.worldObj.isRemote){
 			if (itemstack != null && slugItem != null){
 				caughtslug.setName(this.name);
-				if (itemstack.getItem() == SlugterraItems.slugtubeItem)
+				if (itemstack.getItem() == ItemRegistry.slugtubeItem)
 				{
 					if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
@@ -132,7 +133,7 @@ public class EntitySlug extends EntityTameable{
 					this.setDead();
 					return isDead;
 				}
-				else if (itemstack.getItem() == SlugterraItems.torpedoShell)
+				else if (itemstack.getItem() == ItemRegistry.torpedoShell)
 				{					
 					if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
@@ -156,7 +157,7 @@ public class EntitySlug extends EntityTameable{
 				}
 			}
 		}
-		else if (itemstack != null && itemstack.getItem() == SlugterraItems.slugfood)
+		else if (itemstack != null && itemstack.getItem() == ItemRegistry.slugfood)
 		{
 			this.friendship += 1;
 			if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)

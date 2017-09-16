@@ -61,7 +61,7 @@ public class GUISlugInventory extends GuiContainer
 		int[] healths = {0,0,0,0,0,0};
 		for (int a=0; a< 6;++a){
 			ItemStack slot = this.inventory.getStackInSlot(a);
-			if (slot != null){
+			if (slot != ItemStack.EMPTY){
 				ItemSlug slug = (ItemSlug) slot.getItem();
 				if (slug != null){
 					if (a == 0)
@@ -86,7 +86,7 @@ public class GUISlugInventory extends GuiContainer
 
 		this.drawTexturedModalRect(111, 111, 0, 0, healths[5], 3);
 
-		String s = this.inventory.hasCustomInventoryName() ? this.inventory.getInventoryName() : I18n.format(this.inventory.getInventoryName());
+		String s = this.inventory.hasCustomName() ? this.inventory.getName() : I18n.format(this.inventory.getName());
 		this.fontRendererObj.drawString(s, this.xSize - this.fontRendererObj.getStringWidth(s) - 100, 132, 4210752);
 		this.fontRendererObj.drawString(I18n.format("Hotbar"), 120, this.ySize - 37, 4210752);
 	}
@@ -102,7 +102,7 @@ public class GUISlugInventory extends GuiContainer
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		int i1;
-		drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.thePlayer);
+		drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.player);
 	}
 
 	/**
@@ -110,38 +110,38 @@ public class GUISlugInventory extends GuiContainer
 	 * copied straight from vanilla code but with renamed method parameters
 	 */
 	public static void drawPlayerModel(int x, int y, int scale, float yaw, float pitch, EntityLivingBase entity) {
-		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(x, y, 50.0F);
-		GL11.glScalef(-scale, scale, scale);
-		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-		float f2 = entity.renderYawOffset;
-		float f3 = entity.rotationYaw;
-		float f4 = entity.rotationPitch;
-		float f5 = entity.prevRotationYawHead;
-		float f6 = entity.rotationYawHead;
-		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
-		RenderHelper.enableStandardItemLighting();
-		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-((float) Math.atan(pitch / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
-		entity.renderYawOffset = (float) Math.atan(yaw / 40.0F) * 20.0F;
-		entity.rotationYaw = (float) Math.atan(yaw / 40.0F) * 40.0F;
-		entity.rotationPitch = -((float) Math.atan(pitch / 40.0F)) * 20.0F;
-		entity.rotationYawHead = entity.rotationYaw;
-		entity.prevRotationYawHead = entity.rotationYaw;
-		GL11.glTranslatef(0.0F, entity.yOffset, 0.0F);
-		RenderManager.instance.playerViewY = 180.0F;
-		RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-		entity.renderYawOffset = f2;
-		entity.rotationYaw = f3;
-		entity.rotationPitch = f4;
-		entity.prevRotationYawHead = f5;
-		entity.rotationYawHead = f6;
-		GL11.glPopMatrix();
-		RenderHelper.disableStandardItemLighting();
-		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-		OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+//		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+//		GL11.glPushMatrix();
+//		GL11.glTranslatef(x, y, 50.0F);
+//		GL11.glScalef(-scale, scale, scale);
+//		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+//		float f2 = entity.renderYawOffset;
+//		float f3 = entity.rotationYaw;
+//		float f4 = entity.rotationPitch;
+//		float f5 = entity.prevRotationYawHead;
+//		float f6 = entity.rotationYawHead;
+//		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
+//		RenderHelper.enableStandardItemLighting();
+//		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
+//		GL11.glRotatef(-((float) Math.atan(pitch / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+//		entity.renderYawOffset = (float) Math.atan(yaw / 40.0F) * 20.0F;
+//		entity.rotationYaw = (float) Math.atan(yaw / 40.0F) * 40.0F;
+//		entity.rotationPitch = -((float) Math.atan(pitch / 40.0F)) * 20.0F;
+//		entity.rotationYawHead = entity.rotationYaw;
+//		entity.prevRotationYawHead = entity.rotationYaw;
+//		GL11.glTranslatef(0.0F, (float)entity.getYOffset(), 0.0F);
+//		RenderManager.instance.playerViewY = 180.0F;
+//		RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+//		entity.renderYawOffset = f2;
+//		entity.rotationYaw = f3;
+//		entity.rotationPitch = f4;
+//		entity.prevRotationYawHead = f5;
+//		entity.rotationYawHead = f6;
+//		GL11.glPopMatrix();
+//		RenderHelper.disableStandardItemLighting();
+//		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+//		OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+//		GL11.glDisable(GL11.GL_TEXTURE_2D);
+//		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 	}
 }

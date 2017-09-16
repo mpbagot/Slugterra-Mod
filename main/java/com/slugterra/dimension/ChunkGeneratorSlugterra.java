@@ -11,18 +11,22 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
+import com.slugterra.biomes.SlugterraBiomes;
+import com.slugterra.world.WorldGenMushrooms;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCaves;
@@ -37,14 +41,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-import com.slugterra.biomes.BiomeRegistry;
-import com.slugterra.biomes.SlugterraBiomes;
-import com.slugterra.world.WorldGenMushrooms;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
-
-public class ChunkGeneratorSlugterra implements IChunkProvider {
+public class ChunkGeneratorSlugterra implements IChunkGenerator {
 
 	/** RNG. */
 	private Random rand;
@@ -112,7 +111,7 @@ public class ChunkGeneratorSlugterra implements IChunkProvider {
 		this.parabolicField = new float[25];
 		for (int j = -2; j <= 2; ++j) {
 			for (int k = -2; k <= 2; ++k) {
-				float f = 10.0F / MathHelper.sqrt_float((float)(j * j + k * k) + 0.2F);
+				float f = 10.0F / MathHelper.sqrt((float)(j * j + k * k) + 0.2F);
 				this.parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 		}
@@ -173,9 +172,9 @@ public class ChunkGeneratorSlugterra implements IChunkProvider {
 							double d15 = d10 - d16;
 							for (int k3 = 0; k3 < 4; ++k3) {
 								if ((d15 += d16) > 0.0D) {
-									blocks[j3 += short1] = Blocks.stone;//these can be set to custom blocks
+									blocks[j3 += short1] = Blocks.STONE;//these can be set to custom blocks
 								} else if (k2 * 8 + l2 < b0) {
-									blocks[j3 += short1] = Blocks.water;//these can be set to custom blocks
+									blocks[j3 += short1] = Blocks.WATER;//these can be set to custom blocks
 								} else {
 									blocks[j3 += short1] = null;//this is the air block i think.
 								}

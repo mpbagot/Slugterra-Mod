@@ -1,12 +1,9 @@
 package com.slugterra.entity.slingers;
 
-import net.minecraft.entity.EntityList;
-import mca.api.registries.VillagerRegistryMCA;
-
-import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 
-import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraft.entity.EntityList;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntitySlingers {
 	
@@ -18,19 +15,8 @@ public class EntitySlingers {
 	 * Registration for new Slingers.
 	 */
 	public static void registerSlingers(){
-		
-		if (MainRegistry.mcainstalled) {
-			
-			VillagerRegistryMCA.registerVillagerType(8, "Slinger", "/assets/slugterramod/textures/entity/slingers/allies/", Strings.MODID);
-			VillagerRegistryMCA.registerVillagerType(9, "Slinger", "/assets/slugterramod/textures/entity/slingers/enemies/", Strings.MODID);
-			
-		}
-		
-		else
-		{
 			createEntity(AllySlinger.class, "AllySlinger", 0xD85C1E, 0x4BAED7);
 			createEntity(EnemySlinger.class, "EnemySlinger", 0x191313, 0xD6141A);
-		}
 	}
 	
 	public static void createEntity(Class entityClass, String entityName, int solidColour, int spotColour){

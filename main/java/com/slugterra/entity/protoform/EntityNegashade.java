@@ -20,15 +20,15 @@ import net.minecraft.world.World;
 import com.slugterra.entity.EntitySlug;
 import com.slugterra.entity.ai.EntitySlugAIHopPanic;
 import com.slugterra.entity.ai.EntitySlugAIHopWander;
-import com.slugterra.item.SlugsTube;
-import com.slugterra.item.SlugterraItems;
+import com.slugterra.item.SlugItemRegistry;
+import com.slugterra.item.ItemRegistry;
 import com.slugterra.item.slugs.ItemSlug;
 
 public class EntityNegashade extends EntitySlug{
 
 	public EntityNegashade(World p_i1738_1_) {
 		super(p_i1738_1_);
-		this.slugItem = SlugsTube.negashade;
+		this.slugItem = SlugItemRegistry.negashade;
 	}
 
 	@Override

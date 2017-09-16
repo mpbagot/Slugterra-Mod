@@ -56,6 +56,7 @@ public class EntityInfernusVel extends EntityVel{
 			//spikescorch ability
 			else if (abilint == 2){
 				System.out.println("Activating spikescorch!!");
+				this.killColl = false;
 				if (this.motionX > 0){
 					if (this.motionZ > 0){
 						this.worldObj.setBlock(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ+1), Blocks.air);

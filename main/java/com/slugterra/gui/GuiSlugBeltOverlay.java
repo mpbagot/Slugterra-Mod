@@ -2,20 +2,20 @@ package com.slugterra.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.slugterra.entity.properties.ExtendedPlayer;
+import com.slugterra.capabilities.ExtendedPlayer;
 import com.slugterra.lib.Strings;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiSlugBeltOverlay extends Gui{
 
@@ -32,17 +32,17 @@ public class GuiSlugBeltOverlay extends Gui{
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event){
-		if(event.isCancelable() || event.type != ElementType.HOTBAR){
+		if(event.isCancelable() || event.getType() != ElementType.HOTBAR){
 			return;
 		}
-		ScaledResolution scaledresolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(this.mc);
 		int k = scaledresolution.getScaledWidth();
 		int l = scaledresolution.getScaledHeight();
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		//get player properties
 		if(props == null){
-			props = ExtendedPlayer.get((EntityPlayer)this.mc.thePlayer);
+			props = ExtendedPlayer.get((EntityPlayer)this.mc.player);
 			this.selslot = props.invslot;
 		}
 
@@ -71,7 +71,7 @@ public class GuiSlugBeltOverlay extends Gui{
 
 		if (itemstack != null)
 		{
-			float f1 = (float)itemstack.animationsToGo;
+			float f1 = (float)itemstack.getAnimationsToGo();
 
 			if (f1 > 0.0F)
 			{
@@ -82,14 +82,14 @@ public class GuiSlugBeltOverlay extends Gui{
 				GL11.glTranslatef((float)(-(p_73832_2_ + 8)), (float)(-(p_73832_3_ + 12)), 0.0F);
 			}
 
-			itemRenderer.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), itemstack, p_73832_2_, p_73832_3_);
+			itemRenderer.renderItemAndEffectIntoGUI(itemstack, p_73832_2_, p_73832_3_);
 
 			if (f1 > 0.0F)
 			{
 				GL11.glPopMatrix();
 			}
 
-			itemRenderer.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), itemstack, p_73832_2_, p_73832_3_);
+			itemRenderer.renderItemOverlayIntoGUI(this.mc.fontRendererObj, itemstack, p_73832_2_, p_73832_3_, null);
 		}
 	}
 

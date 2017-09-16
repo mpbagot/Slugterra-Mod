@@ -1,93 +1,74 @@
 package com.slugterra.events;
 
-import com.slugterra.entity.EntityMecha;
-import com.slugterra.entity.properties.ExtendedPlayer;
-import com.slugterra.entity.properties.ExtendedSlingerAlly;
-import com.slugterra.entity.properties.ExtendedSlingerEnemy;
+import com.slugterra.capabilities.BlasterProvider;
+import com.slugterra.capabilities.IBlaster;
+import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.entity.slingers.AllySlinger;
 import com.slugterra.entity.slingers.EnemySlinger;
-import com.slugterra.main.MainRegistry;
-import com.slugterra.packets.SyncPlayerPropsPacket;
+import com.slugterra.item.DefenderBlaster;
+import com.slugterra.item.ItemRegistry;
+import com.slugterra.lib.Strings;
 import com.slugterra.world.WorldGeneratorTheDrop;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
 public class SlugterraEventHandler {
 
 	public static String playername;
 	public static String text;
-
+	
+	public static final ResourceLocation BLASTER_CAP = new ResourceLocation(Strings.MODID, "blaster");
+	public static final ResourceLocation INV_CAP = new ResourceLocation(Strings.MODID, "slug_inventory");
+	
 	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event)
-	{
-		if (event.entity instanceof EntityPlayer && ExtendedPlayer.get((EntityPlayer) event.entity) == null){
-			ExtendedPlayer.register((EntityPlayer) event.entity);
-		}
-
-		if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(ExtendedPlayer.EXT_PROP_NAME) == null){
-			event.entity.registerExtendedProperties(ExtendedPlayer.EXT_PROP_NAME, new ExtendedPlayer((EntityPlayer) event.entity));
-		}
-	}
-
-	@SubscribeEvent
-	public void livingFall(LivingFallEvent event)
-	{
-		Entity entity = event.entity;
-		if (entity instanceof EntityPlayer && entity.ridingEntity instanceof EntityMecha) {
-			event.distance /= 5;
-		} else if (entity instanceof EntityMecha) {
-			event.distance /= 3;
-		}
+	public static void registerSounds(RegistryEvent.Register<SoundEvent> e) {
+		IForgeRegistry<SoundEvent> registry = e.getRegistry();
+		registry.register(SlugterraSoundEvents.blasterShot);
+		registry.register(SlugterraSoundEvents.shortReload);
+		registry.register(SlugterraSoundEvents.slugFormshift);
 	}
 	
 	@SubscribeEvent
-	public void applySlingerProperties(EntityConstructing event)
-	{
-		if (event.entity instanceof EnemySlinger && ExtendedSlingerEnemy.get((EnemySlinger)event.entity) == null){
-			ExtendedSlingerEnemy.register((EnemySlinger) event.entity);
-		}
+	public void attachItemCapability(AttachCapabilitiesEvent.Item e) {
+		if (!(e.getItemStack().getItem() instanceof DefenderBlaster)) return;
+		
+		e.addCapability(BLASTER_CAP, new BlasterProvider());
+	}
 
-		if (event.entity instanceof EnemySlinger && event.entity.getExtendedProperties(ExtendedSlingerEnemy.EXT_PROP_NAME) == null){
-			event.entity.registerExtendedProperties(ExtendedSlingerEnemy.EXT_PROP_NAME, new ExtendedSlingerEnemy((EnemySlinger) event.entity));
-		}
-
-		if (event.entity instanceof AllySlinger && ExtendedSlingerAlly.get((AllySlinger)event.entity) == null){
-			ExtendedSlingerAlly.register((AllySlinger)event.entity);
-		}
-
-		if (event.entity instanceof AllySlinger && event.entity.getExtendedProperties(ExtendedSlingerAlly.EXT_PROP_NAME) == null){
-			event.entity.registerExtendedProperties(ExtendedSlingerAlly.EXT_PROP_NAME, new ExtendedSlingerAlly((AllySlinger) event.entity));
-		}
+	@SubscribeEvent
+	public void attachEntityCapability(AttachCapabilitiesEvent<Entity> e) {
+		if (!(e.getObject() instanceof EntityPlayer || e.getObject() instanceof EnemySlinger || e.getObject() instanceof AllySlinger)) return;
+		
+		e.addCapability(INV_CAP, new SlugInventoryProvider());
 	}
 
 	@SubscribeEvent
 	public void updateUntilFire(LivingUpdateEvent event)
 	{
-		if (event.entity instanceof EntityPlayer)
-		{
-			ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
-			props.updateTimetoFire();
-		}
-		if (event.entity instanceof EnemySlinger){
-			ExtendedSlingerEnemy props = ExtendedSlingerEnemy.get((EnemySlinger) event.entity);
-			props.updateTimetoFire();
-		}
-		if (event.entity instanceof AllySlinger){
-			ExtendedSlingerAlly props = ExtendedSlingerAlly.get((AllySlinger)event.entity);
-			props.updateTimetoFire();
-		}
+		if (!(event.getEntity() instanceof EntityPlayer)) return;
+		
+		ItemStack tool = ((EntityPlayer) event.getEntity()).getHeldItemMainhand();
+		if (!(tool.getItem() instanceof DefenderBlaster)) return;
+		
+		IBlaster props = tool.getCapability(BlasterProvider.BLASTER_CAP, null);
+		props.updateTimetoFire();
+	
 	}
 
 	@SubscribeEvent
-	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event){
+	public void onPlayerLogin(PlayerLoggedInEvent event){
 
 		if (WorldGeneratorTheDrop.genmess != null){
 			text = WorldGeneratorTheDrop.genmess;
@@ -95,7 +76,6 @@ public class SlugterraEventHandler {
 		else {
 			text = "You are Stupid, Pack_of_14eggies.";
 		}
-		event.player.addChatMessage(new ChatComponentText(text));
-		MainRegistry.network.sendTo(new SyncPlayerPropsPacket(event.player), (EntityPlayerMP) event.player);
+		event.player.sendMessage(new TextComponentString(text));
 	}
 }

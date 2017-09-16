@@ -3,6 +3,8 @@ package com.slugterra.block;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -15,17 +17,14 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
-
-import com.slugterra.creativetabs.SlugterraCreativeTabs;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SlugterraIceBlock extends BlockBreakable
 {
     public SlugterraIceBlock()
     {
-        super("ice", Material.ice, false);
+        super(Material.ICE, false);
         this.slipperiness = 0.98F;
         this.setLightLevel(0.6F);
         this.setTickRandomly(true);
@@ -57,7 +56,7 @@ public class SlugterraIceBlock extends BlockBreakable
      */
     public void harvestBlock(World p_149636_1_, EntityPlayer p_149636_2_, int p_149636_3_, int p_149636_4_, int p_149636_5_, int p_149636_6_)
     {
-        p_149636_2_.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1);
+        p_149636_2_.addStat(StatList.MINE_BLOCK_STATS.get(Block.getIdFromBlock(this)), 1);
         p_149636_2_.addExhaustion(0.025F);
 
         if (this.canSilkHarvest(p_149636_1_, p_149636_2_, p_149636_3_, p_149636_4_, p_149636_5_, p_149636_6_) && EnchantmentHelper.getSilkTouchModifier(p_149636_2_))
