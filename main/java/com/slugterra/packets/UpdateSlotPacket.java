@@ -1,13 +1,17 @@
 package com.slugterra.packets;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.entity.player.EntityPlayer;
-
-import com.slugterra.entity.properties.ExtendedPlayer;
+import com.slugterra.capabilities.ExtendedPlayer;
+import com.slugterra.capabilities.ISlugInv;
+import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.gui.GuiSlugBeltOverlay;
 
-public class UpdateSlotPacket extends AbstractPacket
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+public class UpdateSlotPacket implements IMessage
 {
 	private int up;
 
@@ -21,50 +25,31 @@ public class UpdateSlotPacket extends AbstractPacket
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+	public void toBytes(ByteBuf buffer) {
 		// basic Input/Output operations, very much like DataOutputStream
 		buffer.writeInt(up);
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+	public void fromBytes(ByteBuf buffer) {
 		// basic Input/Output operations, very much like DataInputStream
 		up = buffer.readInt();
 	}
 
-	@Override
-	public void handleClientSide(EntityPlayer player)
-	{
-		ExtendedPlayer props = ExtendedPlayer.get(player);
+	public static class Handler implements IMessageHandler<UpdateSlotPacket, IMessage> {
 
-		if (up == 1)
-		{
-			props.increaseSlot();
-			GuiSlugBeltOverlay.selslot += 1;
-		}
-
-		else if (up == 0)
-		{
-			props.decreaseSlot();
-			GuiSlugBeltOverlay.selslot -= 1;
-		}
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) 
-	{
-		ExtendedPlayer props = ExtendedPlayer.get(player);
-
-		if (up == 1)
-		{
-			props.increaseSlot();
-			GuiSlugBeltOverlay.selslot = props.invslot;
-		}
-
-		else if (up == 0)
-		{
-			props.decreaseSlot();
-			GuiSlugBeltOverlay.selslot = props.invslot;
+		@Override
+		public IMessage onMessage(UpdateSlotPacket message, MessageContext ctx) {
+			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+			ISlugInv props = player.getCapability(SlugInventoryProvider.INV_CAP, null);
+			if (message.up == 1) {
+				props.increaseSlot();
+			} else if (message.up == -1) {
+				props.decreaseSlot();
+			}
+			//TODO remove this static variable
+			GuiSlugBeltOverlay.selslot += message.up;
+			return null; // no response in this case
 		}
 	}
 }

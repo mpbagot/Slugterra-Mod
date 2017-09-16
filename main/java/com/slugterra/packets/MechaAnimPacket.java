@@ -2,12 +2,12 @@ package com.slugterra.packets;
 
 import com.slugterra.entity.EntityMecha;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MechaAnimPacket implements IMessage {
 
@@ -34,9 +34,7 @@ public class MechaAnimPacket implements IMessage {
 		@Override
 		public IMessage onMessage(MechaAnimPacket message, MessageContext ctx) {
 			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-			if (player.ridingEntity instanceof EntityMecha) {
-				((EntityMecha)player.ridingEntity).senseJump();
-			}
+			((EntityMecha)player.getRidingEntity()).senseJump();
 			System.out.println(String.format("Received %s from %s", message.text, ctx.getServerHandler().playerEntity.getDisplayName()));
 			return null; // no response in this case
 		}
