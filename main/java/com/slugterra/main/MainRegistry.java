@@ -1,26 +1,22 @@
 package com.slugterra.main;
 
-//test comment for changes
-
-import java.util.List;
-
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.events.SlugterraEventHandler;
 import com.slugterra.events.SlugterraKeyHandler;
 import com.slugterra.gui.GUIHandler;
+import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.lib.Strings;
 import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.OpenGuiPacket;
 import com.slugterra.packets.SyncPlayerPropsPacket;
 import com.slugterra.packets.UpdateSlotPacket;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -106,6 +102,5 @@ public class MainRegistry {
 	@EventHandler
 	public void PostLoad(FMLPostInitializationEvent PostEvent){
 		proxy.postInit(PostEvent);
-//		MinecraftForge.EVENT_BUS.register(new GuiSlugBeltOverlay(Minecraft.getMinecraft()));
 	}
 }
