@@ -112,7 +112,7 @@ public class InventorySlug implements IInventory
 		for (int i = 0; i < this.getSizeInventory(); ++i)
 		{
 			if (this.getStackInSlot(i) != ItemStack.EMPTY && this.getStackInSlot(i).getCount() == 0){
-				this.setInventorySlotContents(i, this.getStackInSlot(i));
+				this.setInventorySlotContents(i, ItemStack.EMPTY);
 			}
 		}
 	}
@@ -175,21 +175,12 @@ public class InventorySlug implements IInventory
 	@Override
 	public boolean isEmpty() {
 		return false;
-//		for (int i = 0; i < getSizeInventory(); i++) {
-//			if (getStackInSlot(i) != null) {
-//				return false;
-//			}
-//		}
-//		return true;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		inventory[index].setCount(0);
+		inventory[index] = ItemStack.EMPTY;
 		return inventory[index];
-//		ItemStack stack = inventory[index];
-//		inventory[index] = null;
-//		return stack;
 	}
 
 	@Override
