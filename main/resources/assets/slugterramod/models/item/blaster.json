@@ -1,7 +1,7 @@
 {
 	"parent":"item/generated",
 	"textures" : {
-		"layer0":"slugterramod:items/blasterhandle"
+		"layer0":"slugterramod:items/defenderblaster"
 	},
 	"display": {
 		"thirdperson": {

@@ -1,7 +1,7 @@
 {
 	"parent":"item/generated",
 	"textures" : {
-		"layer0":"slugterramod:items/torpedo"
+		"layer0":"slugterramod:items/torpedo_tube"
 	},
 	"display": {
 		"thirdperson": {
@@ -12,7 +12,7 @@
 		"firstperson": {
 			"rotation": [ 0, -135, 25 ],
 			"translation": [ 0, 4, 2 ],
-			"scale": [ 1.7, 1.7, 1.7 ],
+			"scale": [ 1.7, 1.7, 1.7 ]
 		}
 	}
 }
