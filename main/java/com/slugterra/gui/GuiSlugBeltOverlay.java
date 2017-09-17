@@ -2,7 +2,8 @@ package com.slugterra.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.slugterra.capabilities.ExtendedPlayer;
+import com.slugterra.capabilities.ISlugInv;
+import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.lib.Strings;
 
 import net.minecraft.client.Minecraft;
@@ -21,14 +22,15 @@ public class GuiSlugBeltOverlay extends Gui{
 
 	private Minecraft mc;
 	public static int selslot;
-	protected static final RenderItem itemRenderer = new RenderItem();
+	protected RenderItem itemRenderer;
 
 	public GuiSlugBeltOverlay(Minecraft mc){
 		super();
 		this.mc = mc;
+		itemRenderer = mc.getRenderItem();
 	}
 
-	private ExtendedPlayer props;
+	private ISlugInv props;
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event){
@@ -42,21 +44,21 @@ public class GuiSlugBeltOverlay extends Gui{
 
 		//get player properties
 		if(props == null){
-			props = ExtendedPlayer.get((EntityPlayer)this.mc.player);
-			this.selslot = props.invslot;
+			props = ((EntityPlayer)this.mc.player).getCapability(SlugInventoryProvider.INV_CAP, null);
+			this.selslot = props.getSlot();
 		}
-
-		for (int i1 = 0; i1 < 6; ++i1)
-		{
-			int k1 = l / 2 - 87 + i1 * 22;//change last value to push up or down
-			this.renderInventorySlot(i1, 6, k1);
-		}
-
-		GL11.glEnable(GL11.GL_BLEND);
 
 		//rendering bar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughotbar2.png"));
 		this.drawTexturedModalRect(2, l/2-90, 0, 0, 24, 133);
+		
+		for (int i1 = 0; i1 < 6; ++i1)
+		{
+			int k1 = l / 2 - 86 + i1 * 22;//change last value to push up or down
+			this.renderInventorySlot(i1, 6, k1);
+		}
+
+		GL11.glEnable(GL11.GL_BLEND);
 
 		//rendering square thing over hotbar
 		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/hotbarsquare.png"));
@@ -67,7 +69,7 @@ public class GuiSlugBeltOverlay extends Gui{
 	{
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_BLEND);
-		ItemStack itemstack = props.inventory.getStackInSlot(p_73832_1_);
+		ItemStack itemstack = props.getInventory().getStackInSlot(p_73832_1_);
 
 		if (itemstack != null)
 		{
