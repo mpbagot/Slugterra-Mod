@@ -15,7 +15,8 @@ public class SlugterraCreativeTabs {
 	public static void initialiseTabs()
 	{
 		tabSlugs = new CreativeTabSlugs("SlugTab");
-		tabMisc = new CreativeTabMisc("MiscTab");
 		tabBlasters = new CreativeTabBlasters("BlasterTab");
+		tabMisc = new CreativeTabMisc("MiscTab");
+		
 	}
 }
