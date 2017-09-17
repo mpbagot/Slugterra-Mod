@@ -67,8 +67,6 @@ public class GuiSlugBeltOverlay extends Gui{
 
 	private void renderInventorySlot(int p_73832_1_, int p_73832_2_, int p_73832_3_)
 	{
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_BLEND);
 		ItemStack itemstack = props.getInventory().getStackInSlot(p_73832_1_);
 
 		if (itemstack != null)
