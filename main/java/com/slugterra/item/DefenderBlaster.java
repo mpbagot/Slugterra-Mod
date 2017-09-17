@@ -4,6 +4,7 @@ import com.slugterra.capabilities.BlasterProvider;
 import com.slugterra.capabilities.IBlaster;
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
 import com.slugterra.entity.velocity.EntityGrenukeVel;
 import com.slugterra.entity.velocity.EntityInfernusVel;
@@ -38,6 +39,14 @@ public class DefenderBlaster extends Item{
 	public boolean hasExtendBarrel = false;
 	public boolean hasDoubleBarrel = false;
 
+	public DefenderBlaster(String name) {
+		super();
+		setFull3D();
+		setUnlocalizedName(name);
+		setCreativeTab(SlugterraCreativeTabs.tabBlasters);
+		setMaxStackSize(1);
+	}
+	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{

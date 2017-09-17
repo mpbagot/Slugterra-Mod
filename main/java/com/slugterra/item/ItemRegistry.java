@@ -48,20 +48,15 @@ public class ItemRegistry {
 		torpedoShell = new Item().setUnlocalizedName("torpedo_tube")
 				.setCreativeTab(SlugterraCreativeTabs.tabMisc);
 		
-		defenderBlaster = new DefenderBlaster().setFull3D().setUnlocalizedName("blaster")
-				.setCreativeTab(SlugterraCreativeTabs.tabBlasters).setMaxStackSize(1);
+		defenderBlaster = new DefenderBlaster("blaster");
 		
-		shinaiBlaster = new DefenderBlaster().setFull3D().setUnlocalizedName("shinai_blaster")
-				.setCreativeTab(SlugterraCreativeTabs.tabBlasters).setMaxStackSize(1);
+		shinaiBlaster = new DefenderBlaster("shinai_blaster");
 		
-		junjieBlaster = new DefenderBlaster().setFull3D().setUnlocalizedName("junjie_blaster")
-				.setCreativeTab(SlugterraCreativeTabs.tabBlasters).setMaxStackSize(1);
+		junjieBlaster = new DefenderBlaster("junjie_blaster");
 		
-		primeBlasterMale = new DefenderBlaster().setFull3D().setUnlocalizedName("prime_blaster_male")
-				.setCreativeTab(SlugterraCreativeTabs.tabBlasters).setMaxStackSize(1);
+		primeBlasterMale = new DefenderBlaster("prime_blaster_male");
 		
-		primeBlasterFemale = new DefenderBlaster().setFull3D().setUnlocalizedName("prime_blaster_fem")
-				.setCreativeTab(SlugterraCreativeTabs.tabBlasters).setMaxStackSize(1);
+		primeBlasterFemale = new DefenderBlaster("prime_blaster_fem");
 
 		chestplate = new SlingerArmour("slinger_chestplate", slugArmorMaterial, 1, EntityEquipmentSlot.CHEST)
 				.setCreativeTab(SlugterraCreativeTabs.tabBlasters);
@@ -75,8 +70,8 @@ public class ItemRegistry {
 	
 	public static void registerItem(){
 		GameRegistry.register(slugtubeItem.setRegistryName(slugtubeItem.getUnlocalizedName().substring(5)));
-		GameRegistry.register(slugfood.setRegistryName(slugfood.getUnlocalizedName().substring(5)));
 		GameRegistry.register(torpedoShell.setRegistryName(torpedoShell.getUnlocalizedName().substring(5)));
+		GameRegistry.register(slugfood.setRegistryName(slugfood.getUnlocalizedName().substring(5)));
 		
 		GameRegistry.register(defenderBlaster.setRegistryName(defenderBlaster.getUnlocalizedName().substring(5)));
 		GameRegistry.register(shinaiBlaster.setRegistryName(shinaiBlaster.getUnlocalizedName().substring(5)));
