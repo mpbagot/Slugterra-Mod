@@ -2,7 +2,6 @@ package com.slugterra.gui;
 
 import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.inventory.ContainerSlug;
-import com.slugterra.inventory.GUISlugInventory;
 import com.slugterra.inventory.SlugRackContainer;
 import com.slugterra.main.MainRegistry;
 
