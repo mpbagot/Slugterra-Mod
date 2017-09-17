@@ -51,7 +51,6 @@ public class ItemRenderRegistry {
 	public static void registerItemRenderer(FMLPreInitializationEvent e, Item item) {
 		ModelLoader.setCustomModelResourceLocation(item, 0,
 				new ModelResourceLocation(item.getRegistryName(), "inventory"));
-		//Strings.MODID+":"+
 	}
 	
 }
