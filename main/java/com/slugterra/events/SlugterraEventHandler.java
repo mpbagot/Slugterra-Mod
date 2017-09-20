@@ -6,13 +6,11 @@ import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.entity.slingers.AllySlinger;
 import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.item.DefenderBlaster;
-import com.slugterra.item.ItemRegistry;
 import com.slugterra.lib.Strings;
 import com.slugterra.world.WorldGeneratorTheDrop;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -74,7 +72,7 @@ public class SlugterraEventHandler {
 			text = WorldGeneratorTheDrop.genmess;
 		}
 		else {
-			text = "You are Stupid, Pack_of_14eggies.";
+			text = "[ERROR] The Drop failed to generate correctly.";
 		}
 		event.player.sendMessage(new TextComponentString(text));
 	}
