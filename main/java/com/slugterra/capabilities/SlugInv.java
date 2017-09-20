@@ -30,6 +30,11 @@ public class SlugInv implements ISlugInv{
 	}
 	
 	@Override
+	public void saveInventoryToNBT(NBTTagCompound inventory) {
+		this.inventory.writeToNBT(inventory);
+	}
+	
+	@Override
 	public void setInventory(InventorySlug inventory) {
 		this.inventory = inventory;
 	}

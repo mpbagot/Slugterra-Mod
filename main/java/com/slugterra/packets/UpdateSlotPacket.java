@@ -1,6 +1,5 @@
 package com.slugterra.packets;
 
-import com.slugterra.capabilities.ExtendedPlayer;
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.gui.GuiSlugBeltOverlay;

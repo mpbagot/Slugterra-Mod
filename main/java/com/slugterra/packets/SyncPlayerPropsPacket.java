@@ -1,11 +1,9 @@
 package com.slugterra.packets;
 
-import com.slugterra.capabilities.ExtendedPlayer;
-import com.slugterra.inventory.ContainerSlug;
-import com.slugterra.main.MainRegistry;
+import com.slugterra.capabilities.ISlugInv;
+import com.slugterra.capabilities.SlugInventoryProvider;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,6 +22,7 @@ public class SyncPlayerPropsPacket implements IMessage
 
 	// this will store our ExtendedPlayer data, allowing us to easily read and write
 	private NBTTagCompound data;
+	private int slot;
 
 	// The basic, no-argument constructor MUST be included to use the new automated handling
 	public SyncPlayerPropsPacket() {}
@@ -33,16 +32,20 @@ public class SyncPlayerPropsPacket implements IMessage
 		// create a new tag compound
 		data = new NBTTagCompound();
 		// and save our player's data into it
-		ExtendedPlayer.get(player).saveNBTData(data);
-	}
+		ISlugInv props = player.getCapability(SlugInventoryProvider.INV_CAP, null);
+		props.saveInventoryToNBT(data);
+		slot = props.getSlot();
+}
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		data = ByteBufUtils.readTag(buf);
+		slot = buf.readInt();
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
+		buf.writeInt(slot);
 		ByteBufUtils.writeTag(buf, data);
 	}
 
@@ -51,7 +54,10 @@ public class SyncPlayerPropsPacket implements IMessage
 		@Override
 		public IMessage onMessage(SyncPlayerPropsPacket message, MessageContext ctx) {
 			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-			ExtendedPlayer.get(player).loadNBTData(message.data);
+			//Load the data back into the player capability
+			ISlugInv props = player.getCapability(SlugInventoryProvider.INV_CAP, null);
+			props.loadInventory(message.data);
+			props.setSlot(message.slot);
 			return null; // no response in this case
 		}
 	}
