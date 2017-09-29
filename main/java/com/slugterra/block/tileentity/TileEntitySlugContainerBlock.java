@@ -1,4 +1,4 @@
-package com.slugterra.block;
+package com.slugterra.block.tileentity;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.item.slugs.ItemSlug;
@@ -17,6 +17,7 @@ public class TileEntitySlugContainerBlock extends BlockContainer{
 	public TileEntitySlugContainerBlock(Material material){
 		super(material);
 		this.setCreativeTab(SlugterraCreativeTabs.tabMisc);
+		this.setRegistryName("SlugContainer");
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 

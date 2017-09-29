@@ -1,4 +1,4 @@
-package com.slugterra.block;
+package com.slugterra.block.tileentity;
 
 import com.slugterra.item.slugs.ItemSlug;
 

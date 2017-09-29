@@ -1,0 +1,11 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "up": "slugterramod:blocks/dirt_top",
+        "down": "slugterramod:blocks/dirt",
+        "north": "slugterramod:blocks/dirt_side",
+        "south": "slugterramod:blocks/dirt_side",
+        "east": "slugterramod:blocks/dirt_side",
+        "west": "slugterramod:blocks/dirt_side"
+    }
+}

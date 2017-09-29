@@ -1,4 +1,4 @@
-package com.slugterra.block;
+package com.slugterra.block.tileentity;
 
 import net.minecraft.tileentity.TileEntity;
 

@@ -1,4 +1,4 @@
-package com.slugterra.block;
+package com.slugterra.block.tileentity;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,6 +21,7 @@ public class TileEntityDropBlock extends BlockContainer{
 	public TileEntityDropBlock(Material material){
 		super(material);
 		this.setCreativeTab(SlugterraCreativeTabs.tabMisc);
+		this.setRegistryName("DropSeat");
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.7F, 1.0F);
 	}
 	

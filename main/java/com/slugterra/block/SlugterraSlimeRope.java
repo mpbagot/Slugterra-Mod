@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.slugterra.block.tileentity.TileEntitySlimeRopeEntity;
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.dimension.TeleporterSlugterra;
 import com.slugterra.lib.Strings;
@@ -23,6 +24,8 @@ public class SlugterraSlimeRope extends BlockContainer{
 	public SlugterraSlimeRope(Material material){
 		super(material);
 		this.setCreativeTab(SlugterraCreativeTabs.tabMisc);
+		this.setUnlocalizedName("slime_rope");
+		this.setRegistryName(this.getUnlocalizedName().substring(5));
 		this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
 	}
 	

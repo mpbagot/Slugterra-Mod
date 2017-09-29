@@ -2,6 +2,8 @@ package com.slugterra.block;
 
 import java.util.Random;
 
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -17,6 +19,9 @@ public class SlugterraBioluminescentMushroom extends BlockBush implements IGrowa
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.setTickRandomly(true);
 		this.setLightLevel(1.0F);
+		setHardness(0.3F);
+		setRegistryName("MushroomSlugterra");
+		setCreativeTab(SlugterraCreativeTabs.tabMisc);
 	}
 
 	/**

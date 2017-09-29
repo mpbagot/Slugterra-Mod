@@ -1,15 +1,17 @@
 package com.slugterra.block;
 
-import com.slugterra.lib.Strings;
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
 
 public class SlugterraDirtBlock extends Block{
 
-	protected SlugterraDirtBlock(Material p_i45394_1_) {
-		super(p_i45394_1_);
+	protected SlugterraDirtBlock(Material mat) {
+		super(mat);
+		setHardness(0.2F);
+		setUnlocalizedName("slugterra_dirt");
+		setRegistryName(getUnlocalizedName().substring(5));
+		setCreativeTab(SlugterraCreativeTabs.tabMisc);
 	}
 }
