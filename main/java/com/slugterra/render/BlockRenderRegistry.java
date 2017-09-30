@@ -17,7 +17,7 @@ public class BlockRenderRegistry {
 //		register(BlockRegistry.slugContainer);
 		register(BlockRegistry.slugterraDirt);
 		register(BlockRegistry.slugterraGrass);
-//		register(BlockRegistry.slugterraIce);
+		register(BlockRegistry.slugterraIce);
 	}
 	
 	public static void register(Block block) {

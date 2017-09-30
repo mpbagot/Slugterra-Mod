@@ -32,7 +32,7 @@ public class BlockRegistry {
 		slugterraGrass = new SlugterraGrassBlock(Material.GRASS);
 		slugterraDirt = new SlugterraDirtBlock(Material.GROUND);
 //		mushroom = new SlugterraBioluminescentMushroom();//.setBlockTextureName(Strings.MODID + ":mushroom");
-//		slugterraIce = new SlugterraIceBlock().setUnlocalizedName("slug_ice");//.setBlockTextureName(Strings.MODID + ":ice");
+		slugterraIce = new SlugterraIceBlock().setUnlocalizedName("slug_ice");//.setBlockTextureName(Strings.MODID + ":ice");
 		electricWall = new SlugterraElectricWallBlock();
 	}
 	public static void registerBlock(){
@@ -41,7 +41,7 @@ public class BlockRegistry {
 		GameRegistry.register(slugterraGrass);
 		GameRegistry.register(slugterraDirt);
 //		GameRegistry.register(mushroom.setRegistryName(mushroom.getUnlocalizedName().substring(5)));
-//		GameRegistry.register(slugterraIce.setRegistryName(slugterraIce.getUnlocalizedName().substring(5)));
+		GameRegistry.register(slugterraIce);
 //		GameRegistry.register(slimeRope);
 		GameRegistry.register(electricWall);
 	}	

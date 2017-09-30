@@ -3,18 +3,26 @@ package com.slugterra.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBreakable;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SlugterraElectricWallBlock extends Block
+public class SlugterraElectricWallBlock extends BlockBreakable
 {
+    private final boolean ignoreSimilarity = false;
+	
     public SlugterraElectricWallBlock()
     {
-        super(Material.GLASS);
+        super(Material.GLASS, false);
         this.slipperiness = 0.98F;
         this.setLightLevel(0.7F);
         this.setTickRandomly(true);
@@ -22,17 +30,42 @@ public class SlugterraElectricWallBlock extends Block
         this.setUnlocalizedName("electric_wall");
         this.setRegistryName(getUnlocalizedName().substring(5));
     }
-
-    /**
-     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-     */
-    @SideOnly(Side.CLIENT)
-    public int getRenderBlockPass()
+    
+    @Override
+    public boolean isFullCube(IBlockState state)
     {
-        return 1;
+        return false;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+        Block block = iblockstate.getBlock();
+
+        if (this == BlockRegistry.electricWall)
+        {
+            if (blockState != iblockstate)
+            {
+                return true;
+            }
+
+            if (block == this)
+            {
+                return false;
+            }
+        }
+
+        return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 
-        
+
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
+    
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random p_149674_5_)
     {
@@ -53,8 +86,8 @@ public class SlugterraElectricWallBlock extends Block
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
-    public int getMobilityFlag()
+    public EnumPushReaction getMobilityFlag(IBlockState state)
     {
-        return 2;
+        return EnumPushReaction.IGNORE;
     }
 }

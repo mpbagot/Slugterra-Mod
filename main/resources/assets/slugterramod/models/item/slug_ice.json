@@ -1,5 +1,5 @@
 {
-    "parent": "slugterramod:block/slugterra_grass",
+    "parent": "slugterramod:block/slug_ice",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

@@ -1,5 +1,6 @@
 package com.slugterra.main;
 
+import com.slugterra.render.BlockRenderRegistry;
 import com.slugterra.render.ItemRenderRegistry;
 import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.keys.KeyBindings;
@@ -14,12 +15,13 @@ public class ClientProxy extends CommonProxy{
 
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
-		ItemRenderRegistry.registerItemRenderers(e);
 		KeyBindings.initialiseBindings();
+		ItemRenderRegistry.registerItemRenderers(e);
 	}
 	
 	public void init(FMLInitializationEvent e) {
 		super.init(e);
+		BlockRenderRegistry.registerBlockRenderers();
 	}
 	
 	public void postInit(FMLPostInitializationEvent e) {
