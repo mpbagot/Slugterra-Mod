@@ -12,7 +12,7 @@ public class BlockRenderRegistry {
 	public static void registerBlockRenderers() {
 //		register(BlockRegistry.dropSeat);
 		register(BlockRegistry.electricWall);
-//		register(BlockRegistry.mushroom);
+		register(BlockRegistry.mushroom);
 //		register(BlockRegistry.slimeRope);
 //		register(BlockRegistry.slugContainer);
 		register(BlockRegistry.slugterraDirt);

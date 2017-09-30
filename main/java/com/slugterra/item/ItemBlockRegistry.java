@@ -29,7 +29,7 @@ public class ItemBlockRegistry {
 //		slugContainer = new ItemBlock(BlockRegistry.slugContainer);
 		slugterraDirt = new ItemBlock(BlockRegistry.slugterraDirt);
 		slugterraGrass = new ItemBlock(BlockRegistry.slugterraGrass);
-//		mushroom = new ItemBlock(BlockRegistry.mushroom);
+		mushroom = new ItemBlock(BlockRegistry.mushroom);
 		slugterraIce = new ItemBlock(BlockRegistry.slugterraIce);
 		electricWall = new ItemBlock(BlockRegistry.electricWall);
 	}
@@ -39,7 +39,7 @@ public class ItemBlockRegistry {
 //		GameRegistry.register(dropSeat.setRegistryName(dropSeat.getUnlocalizedName().substring(5)));
 		GameRegistry.register(slugterraGrass.setUnlocalizedName("slugterra_grass").setRegistryName("slugterra_grass"));
 		GameRegistry.register(slugterraDirt.setRegistryName(slugterraDirt.getUnlocalizedName().substring(5)));
-//		GameRegistry.register(mushroom.setRegistryName(mushroom.getUnlocalizedName().substring(5)));
+		GameRegistry.register(mushroom.setRegistryName(mushroom.getUnlocalizedName().substring(5)));
 		GameRegistry.register(slugterraIce.setRegistryName(slugterraIce.getUnlocalizedName().substring(5)));
 //		GameRegistry.register(slimeRope.setRegistryName(slimeRope.getUnlocalizedName().substring(5)));
 		GameRegistry.register(electricWall.setUnlocalizedName("electric_wall").setRegistryName("electric_wall"));
