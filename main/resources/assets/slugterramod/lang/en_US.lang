@@ -19,11 +19,11 @@ item.slinger_boots.name=Slug Slinger Boots
 
 tile.SlugContainer.name=Slug Container
 tile.DropSeat.name=The Drop Seat
-tile.ElectricWall.name=Electric Wall
-tile.SlugterraGrass.name=Slugterra Cavern Grass
-tile.SlugterraDirt.name=Slugterra Cavern Dirt
-tile.SlugIce.name=Luminescent Ice
-tile.MushroomSlugterra.name=Bioluminescent Mushroom
+tile.electric_wall.name=Electric Wall
+tile.slugterra_grass.name=Slugterra Cavern Grass
+tile.slugterra_dirt.name=Slugterra Cavern Dirt
+tile.slug_ice.name=Luminescent Ice
+tile.slugterra_mushroom.name=Bioluminescent Mushroom
 tile.SlimeRope.name=Slime Rope
 
 entity.InfernusSlug.name=Infernus
