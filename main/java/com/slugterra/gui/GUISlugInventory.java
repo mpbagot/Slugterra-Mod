@@ -1,7 +1,6 @@
 package com.slugterra.gui;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import com.slugterra.inventory.ContainerSlug;
 import com.slugterra.inventory.InventorySlug;
@@ -32,18 +31,18 @@ public class GUISlugInventory extends GuiContainer
 	private float ySize_lo;
 
 	/** Normally I use '(ModInfo.MOD_ID, "textures/...")', but it can be done this way as well */
-	private static final ResourceLocation iconLocation = new ResourceLocation("slugterramod:textures/gui/sluginventorynew.png");
+	private static final ResourceLocation iconLocation = new ResourceLocation(Strings.MODID, "textures/gui/sluginventorynew.png");
 
 	/** Could use IInventory type to be more generic, but this way will save an import... */
 	private final InventorySlug inventory;
 	private final EntityPlayer player;
 
-	public GUISlugInventory(EntityPlayer player, InventoryPlayer inventoryPlayer, InventorySlug inventoryCustom)
+	public GUISlugInventory(EntityPlayer entityPlayer, InventoryPlayer inventoryPlayer, InventorySlug inventoryCustom)
 	{
-		super(new ContainerSlug(player, inventoryPlayer, inventoryCustom));
+		super(new ContainerSlug(entityPlayer, inventoryPlayer, inventoryCustom));
 
 		this.inventory = inventoryCustom;
-		this.player = player;
+		this.player = entityPlayer;
 		// if you need the player for something later on, store it in a local variable here as well
 	}
 
@@ -64,21 +63,21 @@ public class GUISlugInventory extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		int[] healths = {0,0,0,0,0,0};
-		for (int a=0; a< 6;++a){
+		int[] healths = {0, 0, 0, 0, 0, 0};
+		for (int a = 0; a < 6; ++a) {
 			ItemStack slot = this.inventory.getStackInSlot(a);
-			if (slot != ItemStack.EMPTY){
+			if (slot != ItemStack.EMPTY) {
 				ItemSlug slug = (ItemSlug) slot.getItem();
-				if (slug != null){
+				if (slug != null) {
 					if (a == 0)
 						slug1 = slug;
-					healths[a] = (int)(slug.health*2.4f);
+					healths[a] = (int)(slug.health * 2.4f);
 				}
 			}
 		}
 
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughealthbar2.png"));
-
+		//TODO Fix the darkening of the health bars
 		this.drawTexturedModalRect(10, 124, 0, 0, healths[0], 3);
 		this.fontRendererObj.drawString(slug1.name, 9, 94, 4210752);
 
@@ -108,7 +107,6 @@ public class GUISlugInventory extends GuiContainer
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		int i1;
 		drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.player);
 	}
 
