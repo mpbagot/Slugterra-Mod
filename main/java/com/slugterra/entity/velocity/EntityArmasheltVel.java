@@ -8,6 +8,7 @@ import com.slugterra.entity.protoform.EntityArmashelt;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityArmasheltVel extends EntityVel{
@@ -31,7 +32,7 @@ public class EntityArmasheltVel extends EntityVel{
 	public EntityArmasheltVel(World world, EntityLivingBase entity)
 	{
 		super(world, entity);
-		this.elementParticle = "blockcrack";
+		this.elementParticle = EnumParticleTypes.BLOCK_CRACK;
 		if (this.name != null)
 			this.protoform = new EntityArmashelt(world, this.name);
 		else

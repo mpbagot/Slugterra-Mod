@@ -9,5 +9,5 @@ public class SlugterraSoundEvents {
 	
 	public static SoundEvent shortReload = new SoundEvent(new ResourceLocation(Strings.MODID, "blasters.defender.shortreload"));
 	public static SoundEvent blasterShot = new SoundEvent(new ResourceLocation(Strings.MODID, "blasters.defender.shoot"));
-	public static SoundEvent slugFormshift = new SoundEvent(new ResourceLocation(Strings.MODID, "slugs.allSlugs.formshift"));
+	public static SoundEvent slugFormshift = new SoundEvent(new ResourceLocation(Strings.MODID, "slugs.allslugs.formshift"));
 }

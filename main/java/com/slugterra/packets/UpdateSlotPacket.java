@@ -2,7 +2,6 @@ package com.slugterra.packets;
 
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
-import com.slugterra.gui.GuiSlugBeltOverlay;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -47,7 +46,7 @@ public class UpdateSlotPacket implements IMessage
 				props.decreaseSlot();
 			}
 			//TODO remove this static variable
-			GuiSlugBeltOverlay.selslot += message.up;
+//			GuiSlugBeltOverlay.selslot += message.up;
 			return null; // no response in this case
 		}
 	}

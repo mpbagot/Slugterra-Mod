@@ -2,8 +2,8 @@
 {
   "modid": "slugterramod",
   "name": "Slugterra Mod",
-  "description": "Deep underground, past the bedrock, another land has hidden in secret for centuries...You will discover this land",
-  "version": "${version}",
+  "description": "Deep underground, past the bedrock, the realm of Slugterra has remained, undiscovered. Now but an obscure tale to those topside, but a land brimming with power for those willing to take the journey. Will you brave the drop and become the hero of Slugterra?",
+  "version": "0.7",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
