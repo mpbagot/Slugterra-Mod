@@ -27,13 +27,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class DefenderBlaster extends Item{
 
-	public static final boolean aimedBlaster = true;
 	private int damage;
-	private static int health = 20;
+	private int health = 20;
 	private float slugskill;
 	public boolean hasAccelerator = false;
 	public boolean hasExtendBarrel = false;
@@ -54,97 +54,84 @@ public class DefenderBlaster extends Item{
 			IBlaster blasterProps = player.getHeldItemMainhand().getCapability(BlasterProvider.BLASTER_CAP, null);
 			ISlugInv invProps = player.getCapability(SlugInventoryProvider.INV_CAP, null);
 			
-			if (blasterProps.reCheckFiring() == true) {
-				ItemStack selectslug = invProps.getInventory().getStackInSlot(invProps.getSlot());
-				if (selectslug != ItemStack.EMPTY) {
-					((ItemSlug)selectslug.getItem()).skill += 0.5F;
-					this.slugskill = ((ItemSlug)selectslug.getItem()).skill;
-					((ItemSlug)selectslug.getItem()).updateFriendship(1, true);
-					((ItemSlug)selectslug.getItem()).updatePower();
-					int tempFriend = ((ItemSlug)selectslug.getItem()).friendship;
-					String name = ((ItemSlug)selectslug.getItem()).name;
+			if (blasterProps.isReadyToFire()) {
+				InventorySlug inventory = invProps.getInventory();
+				ItemStack selectedStack = inventory.getStackInSlot(invProps.getSlot());
+				
+				if (selectedStack != ItemStack.EMPTY) {
+					ItemSlug selectedSlug = (ItemSlug) selectedStack.getItem();
+					
+					selectedSlug.skill += 0.5F;
+					this.slugskill = selectedSlug.skill;
+					selectedSlug.updateFriendship(1, true);
+					selectedSlug.updatePower();
+					
+					int tempFriend = selectedSlug.friendship;
+					String name = selectedSlug.name;
 					EntityVel velocimorphEntity = null;
 					player.playSound(SlugterraSoundEvents.blasterShot, 1.0F, 1.0F);
 
-					if (!player.isInWater()){
-//						world.spawnParticle("smoke", player.posX, player.posY+1, player.posZ, 1.2D, 1.2D, 1.2D);
-						if (selectslug.getItem() == SlugItemRegistry.infernus)
+					// Fire a normal slug if not in water, or it is in a torpedo shell
+					if (!player.isInWater() || selectedSlug.isInTorpedoShell()){
+						world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, player.posX, player.posY+1, player.posZ, 1.2D, 1.2D, 1.2D);
+						
+						if (selectedSlug == SlugItemRegistry.infernus)
 							velocimorphEntity = new EntityInfernusVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.lariat)
+						else if (selectedSlug == SlugItemRegistry.lariat)
 							velocimorphEntity = new EntityLariatVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.grenuke)
+						else if (selectedSlug == SlugItemRegistry.grenuke)
 							velocimorphEntity = new EntityGrenukeVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.makobreaker)
+						else if (selectedSlug == SlugItemRegistry.makobreaker)
 							velocimorphEntity = new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.phosphoro)
+						else if (selectedSlug == SlugItemRegistry.phosphoro)
 							velocimorphEntity = new EntityPhosphoroVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.armashelt)
+						else if (selectedSlug == SlugItemRegistry.armashelt)
 							velocimorphEntity = new EntityArmasheltVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.ramstone)
+						else if (selectedSlug == SlugItemRegistry.ramstone)
 							velocimorphEntity = new EntityRamstoneVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.tazerling)
+						else if (selectedSlug == SlugItemRegistry.tazerling)
 							velocimorphEntity = new EntityTazerlingVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						if (velocimorphEntity != null){
-							velocimorphEntity.name = name;
-							world.spawnEntity(velocimorphEntity);
-						}
-					}
+					} else {
+						// Or, fire an aquatic slug if in the water.
+						if (selectedSlug == SlugItemRegistry.lariat)
+							velocimorphEntity = new EntityLariatVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-					else{
-						if (selectslug.getItem() == SlugItemRegistry.lariat)
-							world.spawnEntity(new EntityLariatVel(world, player, tempFriend, name).setPower(this.slugskill));
+						else if (selectedSlug == SlugItemRegistry.makobreaker)
+							velocimorphEntity = new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill);
 
-						else if (selectslug.getItem() == SlugItemRegistry.makobreaker)
-							world.spawnEntity(new EntityMakoBreakerVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-						else if (selectslug.getItem() == SlugItemRegistry.jellyish)
+						else if (selectedSlug == SlugItemRegistry.jellyish)
 							//spawn jellyish
 							System.out.println("Firing Jellyish");
 
-						else if (((ItemSlug) selectslug.getItem()).isInTorpedoShell() == true){
-							if (selectslug.getItem() == SlugItemRegistry.infernus)
-								world.spawnEntity(new EntityInfernusVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-							else if (selectslug.getItem() == SlugItemRegistry.phosphoro)
-								world.spawnEntity(new EntityPhosphoroVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-							else if (selectslug.getItem() == SlugItemRegistry.tazerling)
-								world.spawnEntity(new EntityTazerlingVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-							else if (selectslug.getItem() == SlugItemRegistry.armashelt)
-								world.spawnEntity(new EntityArmasheltVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-							else if (selectslug.getItem() == SlugItemRegistry.ramstone)
-								world.spawnEntity(new EntityRamstoneVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-							else if (selectslug.getItem() == SlugItemRegistry.grenuke)
-								world.spawnEntity(new EntityGrenukeVel(world, player, tempFriend, name).setPower(this.slugskill));
-
-
-
-						}
 					}
-					if (((ItemSlug)invProps.getInventory().getStackInSlot(invProps.getSlot()).getItem()).power > 30)this.health--;
 					
-					InventorySlug inventory = invProps.getInventory();
-					inventory.decrStackSize(invProps.getSlot(), 1);
-					invProps.setInventory(inventory);
-					
-					player.addExperience(2);
-					player.inventory.setInventorySlotContents(player.inventory.getFirstEmptyStack(), new ItemStack(ItemRegistry.slugtubeItem));
-					MainRegistry.network.sendTo(new SyncPlayerPropsPacket(player), (EntityPlayerMP) player);
+					if (velocimorphEntity != null) {
+						velocimorphEntity.name = name;
+						world.spawnEntity(velocimorphEntity);
+
+
+						if (selectedSlug.power > 30)
+							this.health--;
+
+						inventory.decrStackSize(invProps.getSlot(), 1);
+						invProps.setInventory(inventory);
+
+						player.addExperience(2);
+						player.inventory.addItemStackToInventory(new ItemStack(ItemRegistry.slugtubeItem));
+						MainRegistry.network.sendTo(new SyncPlayerPropsPacket(player), (EntityPlayerMP) player);
+					}
 				}
 			}
 		}
-		return new ActionResult(EnumActionResult.SUCCESS, new ItemStack(this));
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, new ItemStack(this));
 	}
 
 	public void updateUpgrades(boolean[] upgradeList){
