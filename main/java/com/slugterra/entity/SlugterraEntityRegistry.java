@@ -25,68 +25,65 @@ import com.slugterra.entity.velocity.EntityMakoBreakerVel;
 import com.slugterra.entity.velocity.EntityPhosphoroVel;
 import com.slugterra.entity.velocity.EntityRamstoneVel;
 import com.slugterra.entity.velocity.EntityTazerlingVel;
+import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 
-import cpw.mods.fml.common.registry.EntityRegistry;
-import net.minecraft.entity.EntityList;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class SlugterraEntityRegistry {
 
-	public static void mainRegistry(){
+	public static int entityID = 0;
+	
+	public static void mainRegistry() {
 		registerEntity();
 	}
 
-	public static void registerEntity(){
-		//create the parent class as uncreatable entity
-		//createVelocityEntity(EntitySlug.class, "DefaultSlug");
-		createEntity(EntityInfernus.class, "InfernusSlug", 0xFF962E, 0xFF0000);
-		createEntity(EntityLariat.class, "LariatSlug", 0x73B806, 0x00687D);
-		createEntity(EntityJellyish.class, "JellyishSlug", 0xB2BF48, 0x33819C);
-		createEntity(EntityNegashade.class, "NegashadeSlug", 0x0C161E, 0x1293B9);
-		createEntity(EntityPhosphoro.class, "PhosphoroSlug", 0x8BE4E4, 0x1A4190);
-		createEntity(EntityMakoBreaker.class, "MakoBreakerSlug", 0xBCAB83, 0x8A211E);
-		createEntity(EntityFingerling.class, "FingerlingSlug", 0xC0693E, 0xC0A851);
-		createEntity(EntityArmashelt.class, "ArmasheltSlug", 0x00FFFF, 0xFFA407);
-		createEntity(EntityDirtUrchin.class, "DirtUrchinSlug",0x7d7c45, 0xe1ceb3);
-		createEntity(EntityGrenuke.class, "GrenukeSlug", 0xb2b238, 0x333300);
-		createEntity(EntityTazerling.class, "TazerlingSlug", 0x0b65f7, 0xe9b641);
-		createEntity(EntityFlaringo.class, "FlaringoSlug", 0xe47b16, 0xdddcdb);
-		createEntity(EntityHexlet.class, "HexletSlug", 0xe47b16, 0xd9ae97);
-		createEntity(EntityBoonDoc.class, "BoonDocSlug", 0x179b66, 0xb9e1aa);
-		createEntity(EntitySlickSilver.class, "SlickSilverSlug", 0x9dc0d8, 0x1d3b6b);
-		createEntity(EntityEnigmo.class, "EnigmoSlug", 0x0094ff, 0xFFFFFF);
-		createEntity(EntityRamstone.class, "RamstoneSlug", 0x800000, 0x00a2e8);
+	public static void registerEntity() {
+		createEntity(EntityInfernus.class, "infernus_slug", 0xFF962E, 0xFF0000);
+		createEntity(EntityLariat.class, "lariat_slug", 0x73B806, 0x00687D);
+		createEntity(EntityJellyish.class, "jellyish_slug", 0xB2BF48, 0x33819C);
+		createEntity(EntityNegashade.class, "negashade_slug", 0x0C161E, 0x1293B9);
+		createEntity(EntityPhosphoro.class, "phosphoro_slug", 0x8BE4E4, 0x1A4190);
+		createEntity(EntityMakoBreaker.class, "mako_breaker_slug", 0xBCAB83, 0x8A211E);
+		createEntity(EntityFingerling.class, "fingerling_slug", 0xC0693E, 0xC0A851);
+		createEntity(EntityArmashelt.class, "armashelt_slug", 0x00FFFF, 0xFFA407);
+		createEntity(EntityDirtUrchin.class, "dirt_urchin_slug", 0x7d7c45, 0xe1ceb3);
+		createEntity(EntityGrenuke.class, "grenuke_slug", 0xb2b238, 0x333300);
+		createEntity(EntityTazerling.class, "tazerling_slug", 0x0b65f7, 0xe9b641);
+		createEntity(EntityFlaringo.class, "flaringo_slug", 0xe47b16, 0xdddcdb);
+		createEntity(EntityHexlet.class, "hexlet_slug", 0xe47b16, 0xd9ae97);
+		createEntity(EntityBoonDoc.class, "boon_doc_slug", 0x179b66, 0xb9e1aa);
+		createEntity(EntitySlickSilver.class, "slick_silver_slug", 0x9dc0d8, 0x1d3b6b);
+		createEntity(EntityEnigmo.class, "enigmo_slug", 0x0094ff, 0xFFFFFF);
+		createEntity(EntityRamstone.class, "ramstone_slug", 0x800000, 0x00a2e8);
 
-		//misc entity's
-		createEntity(EntityMecha.class, "WolfMecha", 0xD4D5C9, 0xF44C12);
-		createVelocityEntity(EntityLightBall.class, "LightBallEntity");
+		// misc entity's
+		createEntity(EntityMecha.class, "wolf_mecha", 0xD4D5C9, 0xF44C12);
+		createVelocityEntity(EntityLightBall.class, "light_ball_entity");
 
-		//velocity slugs
-		createVelocityEntity(EntityInfernusVel.class, "VelocityInfernus");
-		createVelocityEntity(EntityLariatVel.class, "VelocityLariat");
-		createVelocityEntity(EntityMakoBreakerVel.class, "VelocityMakoBreaker");
-		createVelocityEntity(EntityPhosphoroVel.class, "VelocityPhosphoro");
-		createVelocityEntity(EntityArmasheltVel.class, "VelocityArmashelt");
-		createVelocityEntity(EntityRamstoneVel.class, "VelocityRamstone");
-		createVelocityEntity(EntityTazerlingVel.class, "VelocityTazerling");
-		createVelocityEntity(EntityGrenukeVel.class, "VelocityGrenuke");
+		// velocity slugs
+		createVelocityEntity(EntityInfernusVel.class, "velocity_infernus");
+		createVelocityEntity(EntityLariatVel.class, "velocity_lariat");
+		createVelocityEntity(EntityMakoBreakerVel.class, "velocity_makoBreaker");
+		createVelocityEntity(EntityPhosphoroVel.class, "velocity_phosphoro");
+		createVelocityEntity(EntityArmasheltVel.class, "velocity_armashelt");
+		createVelocityEntity(EntityRamstoneVel.class, "velocity_ramstone");
+		createVelocityEntity(EntityTazerlingVel.class, "velocity_tazerling");
+		createVelocityEntity(EntityGrenukeVel.class, "velocity_grenuke");
 	}
 
-	public static void createEntity(Class entityClass, String entityName, int solidColour, int spotColour){
-		int randomId = EntityRegistry.findGlobalUniqueEntityId();
+	public static void createEntity(Class<? extends Entity> entityClass, String entityName, int solidColour, int spotColour) {
+		ResourceLocation registryName = createVelocityEntity(entityClass, entityName);
 
-		EntityRegistry.registerGlobalEntityID(entityClass, entityName, randomId);
-		EntityRegistry.registerModEntity(entityClass, entityName, randomId, MainRegistry.modInstance, 32, 1, true);
-		createEgg(randomId, solidColour, spotColour);
+		EntityRegistry.registerEgg(registryName, solidColour, spotColour);
 	}
 
-	private static void createEgg(int randomId, int solidColour, int spotColour) {
-		EntityList.entityEggs.put(Integer.valueOf(randomId), new EntityList.EntityEggInfo(randomId, solidColour, spotColour));
-	}
-	public static void createVelocityEntity(Class entityClass, String entityName){
-		int randomId2 = EntityRegistry.findGlobalUniqueEntityId();
+	public static ResourceLocation createVelocityEntity(Class<? extends Entity> entityClass, String entityName){
+		ResourceLocation registryName = new ResourceLocation(Strings.MODID, entityName);
 
-		EntityRegistry.registerGlobalEntityID(entityClass, entityName, randomId2);
-		EntityRegistry.registerModEntity(entityClass, entityName, randomId2, MainRegistry.modInstance, 32, 1, true);
+		EntityRegistry.registerModEntity(registryName, entityClass, entityName, entityID++, MainRegistry.modInstance, 32, 1, true);
+		return registryName;
 	}
 }

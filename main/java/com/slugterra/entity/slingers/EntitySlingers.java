@@ -1,8 +1,11 @@
 package com.slugterra.entity.slingers;
 
+import com.slugterra.entity.SlugterraEntityRegistry;
+import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 
-import net.minecraft.entity.EntityList;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntitySlingers {
@@ -19,17 +22,11 @@ public class EntitySlingers {
 			createEntity(EnemySlinger.class, "EnemySlinger", 0x191313, 0xD6141A);
 	}
 	
-	public static void createEntity(Class entityClass, String entityName, int solidColour, int spotColour){
-		int randomId = EntityRegistry.findGlobalUniqueEntityId();
-		
-		EntityRegistry.registerGlobalEntityID(entityClass, entityName, randomId);
-		EntityRegistry.registerModEntity(entityClass, entityName, randomId, MainRegistry.modInstance, 32, 1, true);
-		createEgg(randomId, solidColour, spotColour);
-	}
+	public static void createEntity(Class<? extends Entity> entityClass, String entityName, int solidColour, int spotColour) {
+		ResourceLocation registryName = new ResourceLocation(Strings.MODID, entityName);
 
-	private static void createEgg(int randomId, int solidColour, int spotColour) {
-		EntityList.entityEggs.put(Integer.valueOf(randomId), new EntityList.EntityEggInfo(randomId, solidColour, spotColour));
+		EntityRegistry.registerModEntity(registryName, entityClass, entityName, SlugterraEntityRegistry.entityID++, MainRegistry.modInstance, 32, 1, false);
+		EntityRegistry.registerEgg(registryName, solidColour, spotColour);
 	}
-
 }
 
