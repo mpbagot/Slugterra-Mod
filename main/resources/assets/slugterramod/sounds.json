@@ -1,18 +1,18 @@
 {
-    "slugs.allSlugs.squeak":
+    "slugs.allslugs.squeak":
     {
         "category": "neutral",
         "sounds":
         [
-            "slugs/slugsqueak"
+            "slugterramod:slugs/slugsqueak"
         ]
     },
-    "slugs.allSlugs.formshift":
+    "slugs.allslugs.formshift":
     {
         "category": "neutral",
         "sounds":
         [
-            "slugs/formshift"
+            "slugterramod:slugs/formshift"
         ]
     },
     "blasters.defender.shoot":
@@ -20,7 +20,7 @@
         "category": "neutral",
         "sounds":
         [
-            "blasters/defender/defendshoot"
+            "slugterramod:blasters/defender/defendshoot"
         ]
     },
     "blasters.defender.reload":
@@ -28,7 +28,7 @@
         "category": "neutral",
         "sounds":
         [
-            "blasters/defender/defendreload"
+            "slugterramod:blasters/defender/defendreload"
         ]
     },
 	"blasters.defender.shortreload":
@@ -36,7 +36,7 @@
         "category": "neutral",
         "sounds":
         [
-            "blasters/defender/defendreload_short"
+            "slugterramod:blasters/defender/defendreload_short"
         ]
     }
 }
