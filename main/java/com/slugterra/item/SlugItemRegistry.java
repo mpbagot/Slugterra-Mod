@@ -1,9 +1,7 @@
 package com.slugterra.item;
 
-import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.item.slugs.ItemSlug;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class SlugItemRegistry {
@@ -13,58 +11,58 @@ public class SlugItemRegistry {
 		registerItem();
 	}
 
-	public static Item infernus;
-	public static Item jellyish;
-	public static Item lariat;
-	public static Item makobreaker;
-	public static Item negashade;
-	public static Item phosphoro;
-	public static Item armashelt;
-	public static Item dirturchin;
-	public static Item hexlet;
-	public static Item boondoc;
-	public static Item tazerling;
-	public static Item flaringo;
-	public static Item grenuke;
-	public static Item slicksilver;
-	public static Item enigmo;
-	public static Item ramstone;
+	public static ItemSlug infernus;
+	public static ItemSlug jellyish;
+	public static ItemSlug lariat;
+	public static ItemSlug makobreaker;
+	public static ItemSlug negashade;
+	public static ItemSlug phosphoro;
+	public static ItemSlug armashelt;
+	public static ItemSlug dirturchin;
+	public static ItemSlug hexlet;
+	public static ItemSlug boondoc;
+	public static ItemSlug tazerling;
+	public static ItemSlug flaringo;
+	public static ItemSlug grenuke;
+	public static ItemSlug slicksilver;
+	public static ItemSlug enigmo;
+	public static ItemSlug ramstone;
 
 	public static void initialiseItem(){
-		infernus = new ItemSlug().setUnlocalizedName("infernus_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		jellyish = new ItemSlug().setUnlocalizedName("jellyish_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		lariat = new ItemSlug().setUnlocalizedName("lariat_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		makobreaker = new ItemSlug().setUnlocalizedName("makobreaker_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		negashade = new ItemSlug().setUnlocalizedName("negashade_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		phosphoro = new ItemSlug().setUnlocalizedName("phosphoro_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		armashelt = new ItemSlug().setUnlocalizedName("armashelt_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		dirturchin = new ItemSlug().setUnlocalizedName("dirt_urchin_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		hexlet = new ItemSlug().setUnlocalizedName("hexlet_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		boondoc = new ItemSlug().setUnlocalizedName("boon_doc_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		tazerling = new ItemSlug().setUnlocalizedName("tazerling_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		flaringo = new ItemSlug().setUnlocalizedName("flaringo_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		grenuke = new ItemSlug().setUnlocalizedName("grenuke_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		slicksilver = new ItemSlug().setUnlocalizedName("slick_silver_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		enigmo = new ItemSlug().setUnlocalizedName("enigmo_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
-		ramstone = new ItemSlug().setUnlocalizedName("ramstone_in").setCreativeTab(SlugterraCreativeTabs.tabSlugs);
+		infernus = new ItemSlug("infernus");
+		jellyish = new ItemSlug("jellyish");
+		lariat = new ItemSlug("lariat");
+		makobreaker = new ItemSlug("makobreaker");
+		negashade = new ItemSlug("negashade");
+		phosphoro = new ItemSlug("phosphoro");
+		armashelt = new ItemSlug("armashelt");
+		dirturchin = new ItemSlug("dirt_urchin");
+		hexlet = new ItemSlug("hexlet");
+		boondoc = new ItemSlug("boon_doc");
+		tazerling = new ItemSlug("tazerling");
+		flaringo = new ItemSlug("flaringo");
+		grenuke = new ItemSlug("grenuke");
+		slicksilver = new ItemSlug("slick_silver");
+		enigmo = new ItemSlug("enigmo");
+		ramstone = new ItemSlug("ramstone");
 	}
 	public static void registerItem(){
-		GameRegistry.register(infernus.setRegistryName(infernus.getUnlocalizedName().substring(5)));
-		GameRegistry.register(jellyish.setRegistryName(jellyish.getUnlocalizedName().substring(5)));
-		GameRegistry.register(lariat.setRegistryName(lariat.getUnlocalizedName().substring(5)));
-		GameRegistry.register(makobreaker.setRegistryName(makobreaker.getUnlocalizedName().substring(5)));
-		GameRegistry.register(negashade.setRegistryName(negashade.getUnlocalizedName().substring(5)));
-		GameRegistry.register(phosphoro.setRegistryName(phosphoro.getUnlocalizedName().substring(5)));
-		GameRegistry.register(armashelt.setRegistryName(armashelt.getUnlocalizedName().substring(5)));
-		GameRegistry.register(dirturchin.setRegistryName(dirturchin.getUnlocalizedName().substring(5)));
-		GameRegistry.register(hexlet.setRegistryName(hexlet.getUnlocalizedName().substring(5)));
-		GameRegistry.register(boondoc.setRegistryName(boondoc.getUnlocalizedName().substring(5)));
-		GameRegistry.register(tazerling.setRegistryName(tazerling.getUnlocalizedName().substring(5)));
-		GameRegistry.register(flaringo.setRegistryName(flaringo.getUnlocalizedName().substring(5)));
-		GameRegistry.register(grenuke.setRegistryName(grenuke.getUnlocalizedName().substring(5)));
-		GameRegistry.register(slicksilver.setRegistryName(slicksilver.getUnlocalizedName().substring(5)));
-		GameRegistry.register(enigmo.setRegistryName(enigmo.getUnlocalizedName().substring(5)));
-		GameRegistry.register(ramstone.setRegistryName(ramstone.getUnlocalizedName().substring(5)));
+		GameRegistry.register(infernus);
+		GameRegistry.register(jellyish);
+		GameRegistry.register(lariat);
+		GameRegistry.register(makobreaker);
+		GameRegistry.register(negashade);
+		GameRegistry.register(phosphoro);
+		GameRegistry.register(armashelt);
+		GameRegistry.register(dirturchin);
+		GameRegistry.register(hexlet);
+		GameRegistry.register(boondoc);
+		GameRegistry.register(tazerling);
+		GameRegistry.register(flaringo);
+		GameRegistry.register(grenuke);
+		GameRegistry.register(slicksilver);
+		GameRegistry.register(enigmo);
+		GameRegistry.register(ramstone);
 
 	}
 }

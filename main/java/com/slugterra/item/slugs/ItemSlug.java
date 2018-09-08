@@ -1,5 +1,7 @@
 package com.slugterra.item.slugs;
 
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,20 +9,22 @@ import net.minecraft.nbt.NBTTagCompound;
 public class ItemSlug extends Item
 {	
 	private boolean inShell;
-	public static int friendship = 0;
-	public static int power = 0;
-	public static String name =  "";
+	public int friendship = 0;
+	public int power = 0;
+	public String name =  "";
 	public static int maxhealth = 20;
-	public static int health;
-	public static float skill;
+	public int health;
+	public float skill;
 
-	public ItemSlug()
+	public ItemSlug(String name)
 	{
 		super();
 		setMaxStackSize(1);
 		health = maxhealth;
 		skill = 0.0F;
-		
+		setCreativeTab(SlugterraCreativeTabs.tabSlugs);
+		setUnlocalizedName(name.toLowerCase() + "_in");
+		setRegistryName(name.toLowerCase() + "_in");
 	}
 
 	// Without this method, your inventory will NOT work!!!
@@ -82,5 +86,5 @@ public class ItemSlug extends Item
 	public void updatePower() {
 		power = (int)this.skill/10;
 	}
-
+	
 }

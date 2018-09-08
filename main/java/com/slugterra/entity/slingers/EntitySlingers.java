@@ -18,8 +18,8 @@ public class EntitySlingers {
 	 * Registration for new Slingers.
 	 */
 	public static void registerSlingers(){
-			createEntity(AllySlinger.class, "AllySlinger", 0xD85C1E, 0x4BAED7);
-			createEntity(EnemySlinger.class, "EnemySlinger", 0x191313, 0xD6141A);
+			createEntity(AllySlinger.class, "ally_slinger", 0xD85C1E, 0x4BAED7);
+			createEntity(EnemySlinger.class, "enemy_slinger", 0x191313, 0xD6141A);
 	}
 	
 	public static void createEntity(Class<? extends Entity> entityClass, String entityName, int solidColour, int spotColour) {
