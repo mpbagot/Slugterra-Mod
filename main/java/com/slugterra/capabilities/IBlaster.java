@@ -2,7 +2,7 @@ package com.slugterra.capabilities;
 
 public interface IBlaster {
 
-	public boolean reCheckFiring();
+	public boolean isReadyToFire();
 	
 	public void disableBlaster();
 

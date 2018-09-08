@@ -6,21 +6,15 @@ public class Blaster implements IBlaster {
 	private int timeToFireAgain = 0;
 	
 	public void setDelay(int delay) {
-		this.timeToFireAgain = delay;
-		this.canLaunch = this.timeToFireAgain == 0;
+		timeToFireAgain = delay;
+		canLaunch = timeToFireAgain == 0;
 	}
 	
-	public boolean reCheckFiring()
+	public boolean isReadyToFire()
 	{
-		if (this.timeToFireAgain != 0)
-		{
-			return false;
-		}
-		else
-		{
+		if (timeToFireAgain == 0)
 			timeToFireAgain = 40;
-			return true;
-		}
+		return timeToFireAgain == 0;
 	}
 	
 	public void disableBlaster() {
@@ -32,6 +26,8 @@ public class Blaster implements IBlaster {
 			--timeToFireAgain;
 		else
 			timeToFireAgain = 0;
+
+		canLaunch = timeToFireAgain == 0;
 	}
 	
 	public int getDelay() {
