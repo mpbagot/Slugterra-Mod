@@ -2,8 +2,16 @@ package com.slugterra.entity;
 
 import java.util.Random;
 
+import com.slugterra.capabilities.ISlugInv;
+import com.slugterra.capabilities.SlugInventoryProvider;
+import com.slugterra.entity.ai.EntitySlugAIHopPanic;
+import com.slugterra.entity.ai.EntitySlugAIHopWander;
+import com.slugterra.entity.ai.EntitySlugAIMoveTowardsSlinger;
+import com.slugterra.inventory.InventorySlug;
+import com.slugterra.item.ItemRegistry;
+import com.slugterra.item.slugs.ItemSlug;
+
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -12,25 +20,21 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import com.slugterra.capabilities.ExtendedPlayer;
-import com.slugterra.entity.ai.EntitySlugAIHopPanic;
-import com.slugterra.entity.ai.EntitySlugAIHopWander;
-import com.slugterra.entity.ai.EntitySlugAIMoveTowardsSlinger;
-import com.slugterra.item.ItemRegistry;
-import com.slugterra.item.slugs.ItemSlug;
 
 public class EntitySlug extends EntityTameable{
 
 	public boolean shouldFollow = false;
-	public static int friendship = 0;
-	public static Item slugItem;
-	public static String name = "";
+	public int friendship = 0;
+	public ItemSlug slugItem;
+	public String name = "";
 	private EntityPlayerMP slinger;
+	private Random rand = new Random();
 
 	public EntitySlug(World world, String nameSlug){
 		this(world);
@@ -38,8 +42,8 @@ public class EntitySlug extends EntityTameable{
 			this.setName(nameSlug);
 	}
 
-	public EntitySlug(World p_i1738_1_) {
-		super(p_i1738_1_);
+	public EntitySlug(World world) {
+		super(world);
 		this.setSize(0.2F, 0.5F);
 		this.tasks.addTask(0, new EntitySlugAIHopWander(this, 0.5F));
 		this.tasks.addTask(5, new EntitySlugAIHopPanic(this, 0.5D));
@@ -49,10 +53,10 @@ public class EntitySlug extends EntityTameable{
 		this.tasks.addTask(1, new EntityAITempt(this, 0.9D, ItemRegistry.slugfood, false));
 	}
 
-	@Override
-	public boolean isAIEnabled(){
-		return true;
-	}
+//	@Override
+//	public boolean isAIEnabled(){
+//		return true;
+//	}
 
 	public void setFollowSlinger(boolean shouldF){
 		this.shouldFollow = shouldF;
@@ -63,11 +67,12 @@ public class EntitySlug extends EntityTameable{
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound){
-		super.writeToNBT(compound);
+	public void writeEntityToNBT(NBTTagCompound compound){
+//		super.writeToNBT(compound);
 		compound.setInteger("EntitySlugFriendship", friendship);
-		compound.setString("Slinger", this.slinger.getCommandSenderName());
-		if(name != null)
+		if (this.slinger != null)
+			compound.setString("Slinger", this.slinger.getName());
+		if(this.name != null)
 			compound.setString("EntitySlugName", name);
 	}
 
@@ -77,7 +82,8 @@ public class EntitySlug extends EntityTameable{
 		this.friendship = compound.getInteger("EntitySlugFriendship");
 		if (compound.getString("EntitySlugName") != "")
 			this.name = compound.getString("EntitySlugName");
-		this.slinger = (EntityPlayerMP) this.worldObj.getPlayerEntityByName(compound.getString("Slinger"));
+		if (compound.getString("Slinger") != "")
+			this.slinger = (EntityPlayerMP) this.world.getPlayerEntityByName(compound.getString("Slinger"));
 	}
 
 	public void setSlinger(EntityPlayerMP player){
@@ -87,88 +93,86 @@ public class EntitySlug extends EntityTameable{
 	@Override
 	protected void applyEntityAttributes(){
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
-		return new EntitySlug(worldObj);
+		return new EntitySlug(world);
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player)
-	{
-		ItemSlug caughtslug = (ItemSlug) slugItem;
-		ItemStack itemstack = null;
-		boolean inslugbelt = false;
-		if (slugItem != null){
-			caughtslug.setInTorpedoShell(false);
-			caughtslug.updateFriendship(this.friendship, false);
-			itemstack = player.inventory.getCurrentItem();
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand stack) {
+		ItemStack itemstack = player.inventory.getCurrentItem();
+		if (this.slugItem != null){
+			this.slugItem.setInTorpedoShell(false);
+			this.slugItem.updateFriendship(this.friendship, false);
+			this.slugItem.setName(this.name);
 		}
-		ExtendedPlayer props = ExtendedPlayer.get(player);
-		if ((new Random().nextInt(20) == 1 || this.friendship > 30) && !this.worldObj.isRemote){
-			if (itemstack != null && slugItem != null){
-				caughtslug.setName(this.name);
-				if (itemstack.getItem() == ItemRegistry.slugtubeItem)
-				{
-					if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-					else if (!player.capabilities.isCreativeMode)
-						--itemstack.stackSize;
-
-					for (int m = 0;m < props.inventory.getSizeInventory();m++){
-						if (props.inventory.getStackInSlot(m) == null){
-							inslugbelt = true;
-							System.out.println(this.name);
-							System.out.println(((ItemSlug)new ItemStack(caughtslug).getItem()).name);
-							props.inventory.setInventorySlotContents(m, new ItemStack(caughtslug));
-							break;
-						}
-					}
-					if (inslugbelt == false)
-						player.inventory.addItemStackToInventory(new ItemStack(caughtslug));
-					this.setDead();
-					return isDead;
-				}
-				else if (itemstack.getItem() == ItemRegistry.torpedoShell)
-				{					
-					if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-					else if (!player.capabilities.isCreativeMode)
-						--itemstack.stackSize;
-
-					caughtslug.setInTorpedoShell(true);
-					for (int m = 0;m < props.inventory.getSizeInventory();m++)
-					{
-						if (props.inventory.getStackInSlot(m) == null){
-							inslugbelt = true;
-							props.inventory.setInventorySlotContents(m, new ItemStack(caughtslug));
-							break;
-						}
-					}
-					if (inslugbelt == false)
-						player.inventory.addItemStackToInventory(new ItemStack(caughtslug));
-					this.setDead();
-					return isDead;
+		
+		if (itemstack == ItemStack.EMPTY) {
+			return EnumActionResult.FAIL;
+		}
+		
+		// Raise friendship by feeding the slug
+		if (itemstack.getItem() == ItemRegistry.slugfood) {
+			this.friendship += 1;
+			this.playTameEffect(true);
+			
+			// Deiterate the food stack.
+			if (!player.capabilities.isCreativeMode) {
+				if (itemstack.getCount() <= 1) {
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+				} else {
+					itemstack.setCount(itemstack.getCount()-1);
 				}
 			}
 		}
-		else if (itemstack != null && itemstack.getItem() == ItemRegistry.slugfood)
-		{
-			this.friendship += 1;
-			if (!player.capabilities.isCreativeMode && itemstack.stackSize <= 0)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-			else if (!player.capabilities.isCreativeMode)
-				--itemstack.stackSize;
-
-			this.playTameEffect(true);
+		
+		// Catch the slug using various slug tube types if lucky
+		else if ((rand.nextInt(20) == 7 || this.friendship > 30) && this.slugItem != null && !this.world.isRemote) {
+			
+			if (itemstack.getItem() == ItemRegistry.slugtubeItem) {
+			} else if (itemstack.getItem() == ItemRegistry.torpedoShell) {	
+				this.slugItem.setInTorpedoShell(true);
+			} else {
+				return EnumActionResult.FAIL;
+			}
+				
+			return this.catchSlug(player);
 		}
-		return false;
+		
+		return EnumActionResult.SUCCESS;
+	}
+	
+	private EnumActionResult catchSlug(EntityPlayer player) {
+		ItemStack itemstack = player.inventory.getCurrentItem();
+		ISlugInv props = player.getCapability(SlugInventoryProvider.INV_CAP, null);
+		InventorySlug inventory = props.getInventory();
+		ItemStack caughtSlugStack = new ItemStack(this.slugItem);
+		
+		// Add the slug to either the slug belt inventory, or to the main inventory.
+		if (!inventory.addItemStackToInventory(caughtSlugStack)) {
+			if (!player.inventory.addItemStackToInventory(caughtSlugStack)) {
+				//If both fail, return an interaction failure.
+				return EnumActionResult.FAIL;
+			}
+		}
+		
+		// Deiterate the slugtube stack if the slug has been collected correctly.
+		if (!player.capabilities.isCreativeMode) {
+			if (itemstack.getCount() <= 1) {
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+			} else {
+				itemstack.setCount(itemstack.getCount()-1);
+			}
+		}
+		
+		//Save the inventory, and destroy the entity.
+		props.setInventory(inventory);
+		this.setDead();
+		return EnumActionResult.SUCCESS;
 	}
 
 	public void setName(String a){
