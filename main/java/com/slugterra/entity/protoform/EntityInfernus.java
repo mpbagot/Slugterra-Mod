@@ -21,6 +21,6 @@ public class EntityInfernus extends EntitySlug{
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
-		return new EntityInfernus(worldObj);
+		return new EntityInfernus(this.world);
 	}
 }

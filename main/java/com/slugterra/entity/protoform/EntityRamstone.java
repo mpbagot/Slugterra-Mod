@@ -19,6 +19,6 @@ public class EntityRamstone extends EntitySlug{
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
-		return new EntityRamstone(worldObj);
+		return new EntityRamstone(world);
 	}
 }

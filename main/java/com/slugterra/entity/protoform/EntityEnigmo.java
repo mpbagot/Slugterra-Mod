@@ -19,6 +19,6 @@ public class EntityEnigmo extends EntitySlug{
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
-		return new EntityEnigmo(worldObj);
+		return new EntityEnigmo(world);
 	}
 }
