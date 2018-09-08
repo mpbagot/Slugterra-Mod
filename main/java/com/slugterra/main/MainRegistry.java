@@ -1,17 +1,17 @@
 package com.slugterra.main;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
+import com.slugterra.entity.SlugterraEntityRegistry;
+import com.slugterra.entity.slingers.EntitySlingers;
 import com.slugterra.events.SlugterraEventHandler;
 import com.slugterra.events.SlugterraKeyHandler;
 import com.slugterra.gui.GUIHandler;
-import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.lib.Strings;
 import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.OpenGuiPacket;
 import com.slugterra.packets.SyncPlayerPropsPacket;
 import com.slugterra.packets.UpdateSlotPacket;
 
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -54,9 +54,9 @@ public class MainRegistry {
 		SlugterraCreativeTabs.initialiseTabs();
 		proxy.preInit(PreEvent);
 //		SlugterraBlocks.mainRegistry();
-//		SlugterraEntityRegistry.mainRegistry();
+		SlugterraEntityRegistry.mainRegistry();
 //		proxy.registerRenderThings();
-//		EntitySlingers.mainRegistry();
+		EntitySlingers.mainRegistry();
 		//dimension stuff
 //		DimensionType dimensionTypeSlugterra = DimensionType.register("SLUGTERRA", "_slugterra", dimensionIdSlugterra, WorldProviderSlugterra.class, true);
 //		DimensionManager.registerDimension(dimensionIdSlugterra, dimensionTypeSlugterra);
