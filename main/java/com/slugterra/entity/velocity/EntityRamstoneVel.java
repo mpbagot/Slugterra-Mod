@@ -10,14 +10,16 @@ import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityRamstoneVel extends EntityVel{
 
 	private float damage = 6.0F;
-	public static int power = 2;
-	public static int min = 0;
-	public static int max = 4;
+	public int power = 2;
+	public int min = 0;
+	public int max = 4;
 
 	public EntityRamstoneVel(World p_i1776_1_) {
 		super(p_i1776_1_);
@@ -37,7 +39,7 @@ public class EntityRamstoneVel extends EntityVel{
 			this.protoform = new EntityRamstone(world);
 		else
 			this.protoform = new EntityRamstone(world, this.name);
-		this.elementParticle = "blockcrack";
+		this.elementParticle = EnumParticleTypes.BLOCK_CRACK;
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class EntityRamstoneVel extends EntityVel{
 			if (abilint == 0){
 				System.out.println("Activating rockhorn");
 				if (this.hitE != null){
-					this.hitE.attackEntityFrom(DamageSource.fall, this.power*1.5f);
+					this.hitE.attackEntityFrom(DamageSource.FALL, this.power*1.5f);
 				}
 			}
 
@@ -57,7 +59,7 @@ public class EntityRamstoneVel extends EntityVel{
 			else if(abilint == 1){
 				if (this.hitE instanceof EntityPlayer){
 					for (int a =0;a< 5; a++){
-						((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.fall, this.power/3.0f);
+						((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.FALL, this.power/3.0f);
 					}
 				}
 			}
@@ -82,8 +84,8 @@ public class EntityRamstoneVel extends EntityVel{
 			if (abilint == 1) {
 				for (int a=1;a< 13;a++){
 					//TODO replace these with rocks
-					EntityFireball b = new EntitySmallFireball(worldObj, posX+getR(a), posY+getR(a), posZ+getR(a), motionX, motionY, motionZ);
-					this.worldObj.spawnEntityInWorld(b);
+					EntityFireball b = new EntitySmallFireball(world, posX+getR(a), posY+getR(a), posZ+getR(a), motionX, motionY, motionZ);
+					this.world.spawnEntity(b);
 				}
 			}
 		}
@@ -115,9 +117,9 @@ public class EntityRamstoneVel extends EntityVel{
 	private void makePlus(int x, int y, int z){
 		for (int a=-1;a<2;a++){
 			for (int b=-1;b<2;b++){
-				this.worldObj.setBlock(x+a, y, z+b, Blocks.air);
+				this.world.setBlockToAir(new BlockPos(x+a, y, z+b));
 				if (a==0 && b==0)
-					this.worldObj.setBlock(x, y-1, z, Blocks.air);
+					this.world.setBlockToAir(new BlockPos(x, y-1, z));
 			}
 		}
 	}
@@ -135,20 +137,20 @@ public class EntityRamstoneVel extends EntityVel{
 			for (int a=0;a<20;a++){
 				for (int b=0;b<6;b++){
 					if (b<3){
-						this.worldObj.setBlock((int)this.posX+1, (int)this.posY+b, (int)this.posZ+(10-a), Blocks.stone);
-						this.worldObj.setBlock((int)this.posX+3, (int)this.posY+b, (int)this.posZ+(10-a), Blocks.stone);
+						this.world.setBlock((int)this.posX+1, (int)this.posY+b, (int)this.posZ+(10-a), Blocks.stone);
+						this.world.setBlock((int)this.posX+3, (int)this.posY+b, (int)this.posZ+(10-a), Blocks.stone);
 					}
-					this.worldObj.setBlock((int)this.posX+2, (int)this.posY+b, (int)this.posZ+(10-a), Blocks.stone);
+					this.world.setBlock((int)this.posX+2, (int)this.posY+b, (int)this.posZ+(10-a), Blocks.stone);
 				}
 			}
 		} else {
 			for (int a=0;a<20;a++){
 				for (int b=0;b<6;b++){
 					if (b<3){
-						this.worldObj.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+1, Blocks.stone);
-						this.worldObj.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+3, Blocks.stone);
+						this.world.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+1, Blocks.stone);
+						this.world.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+3, Blocks.stone);
 					}
-					this.worldObj.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+2, Blocks.stone);
+					this.world.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+2, Blocks.stone);
 				}
 			}
 		}

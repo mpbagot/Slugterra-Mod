@@ -2,20 +2,22 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
-import com.slugterra.block.SlugterraBlocks;
+import com.slugterra.block.BlockRegistry;
 import com.slugterra.entity.protoform.EntityLariat;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityLariatVel extends EntityVel{
 
 	private float damage = 6.0F;
-	public static int min = 0;
-	public static int max = 2;
+	public int min = 0;
+	public int max = 2;
 
 	public EntityLariatVel(World p_i1776_1_) {
 		super(p_i1776_1_);
@@ -35,7 +37,7 @@ public class EntityLariatVel extends EntityVel{
 			this.protoform = new EntityLariat(world);
 		else
 			this.protoform = new EntityLariat(world, this.name);
-		this.elementParticle = "bubble";
+		this.elementParticle = EnumParticleTypes.WATER_BUBBLE;
 	}
 
 	@Override
@@ -47,8 +49,8 @@ public class EntityLariatVel extends EntityVel{
 			if (abilint == 0){
 				System.out.println("Stringler actvated!!!");
 				int y = 0;
-				while (this.worldObj.getBlock((int)this.posX, (int)this.posY-y, (int)this.posZ) == Blocks.air){
-					this.worldObj.setBlock((int)this.posX, (int)this.posY-y, (int)this.posZ, SlugterraBlocks.slimeRope);
+				while (this.world.getBlockState(new BlockPos((int)this.posX, (int)this.posY-y, (int)this.posZ)).getBlock() == Blocks.AIR){
+					this.world.setBlock((int)this.posX, (int)this.posY-y, (int)this.posZ, BlockRegistry.slimeRope);
 					y++;
 				}
 			}
@@ -56,7 +58,8 @@ public class EntityLariatVel extends EntityVel{
 			//Stinklash ability
 			else if(abilint == 1){
 				if (this.hitE instanceof EntityPlayer){
-					((EntityPlayer)this.hitE).addPotionEffect(new PotionEffect(9, 125));
+					//TODO Get the correct Potion object
+					((EntityPlayer)this.hitE).addPotionEffect(new PotionEffect(null, 9, 125));
 				}
 			}
 		} else {

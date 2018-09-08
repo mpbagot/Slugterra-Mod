@@ -10,6 +10,8 @@ import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityInfernusVel extends EntityVel{
@@ -37,7 +39,7 @@ public class EntityInfernusVel extends EntityVel{
 			this.protoform = new EntityInfernus(world);
 		else
 			this.protoform = new EntityInfernus(world, this.name);
-		this.elementParticle = "flame";
+		this.elementParticle = EnumParticleTypes.FLAME;
 	}
 
 	@Override
@@ -57,46 +59,40 @@ public class EntityInfernusVel extends EntityVel{
 			else if (abilint == 2){
 				System.out.println("Activating spikescorch!!");
 				this.killColl = false;
-				if (this.motionX > 0){
-					if (this.motionZ > 0){
-						this.worldObj.setBlock(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ+1), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1), Blocks.air);
+				if (this.motionX > 0) {
+					if (this.motionZ > 0) {
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
 
-					} else if (this.motionZ < 0){
-						this.worldObj.setBlock(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ-1), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1), Blocks.air);
-
-					} else {
-						this.worldObj.setBlock(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ), Blocks.air);
+					} else if (this.motionZ < 0) {
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
 
 					}
-				} else if (this.motionX < 0){
-					if (this.motionZ > 0){
-						this.worldObj.setBlock(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ+1), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1), Blocks.air);
+					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ)));
 
-					} else if (this.motionZ < 0){
-						this.worldObj.setBlock(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ-1), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ), Blocks.air);
-						this.worldObj.setBlock(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1), Blocks.air);
+				} else if (this.motionX < 0) {
+					if (this.motionZ > 0) {
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
 
-					} else {
-						this.worldObj.setBlock(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ), Blocks.air);
+					} else if (this.motionZ < 0) {
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
+						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
 
 					}
+					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ)));
+
 				} else {
-					this.worldObj.setBlock(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1), Blocks.air);
-					this.worldObj.setBlock(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1), Blocks.air);
+					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
+					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
 
 				}
 			}
 
 			//flamespire ability
 			else if(abilint == 1){
-				new WorldGeneratorFlameSpire().generateSlugterra(this.worldObj, new Random(), (int)this.posX, (int)this.posZ);
+				new WorldGeneratorFlameSpire().generateSlugterra(this.world, new Random(), (int)this.posX, (int)this.posZ);
 			}
 
 			else if (abilint == 3){
@@ -119,24 +115,24 @@ public class EntityInfernusVel extends EntityVel{
 					double x = this.posX + new Random().nextInt(i)*plus2;
 					double y = this.posY + new Random().nextInt(i)*plus2;
 					double z = this.posZ + new Random().nextInt(i)*plus2;
-					EntityFireball fireball = new EntitySmallFireball(this.worldObj, x, y, z, this.motionX, this.motionY-0.5f, this.motionZ);
-					this.worldObj.spawnEntityInWorld(fireball);
+					EntityFireball fireball = new EntitySmallFireball(this.world, x, y, z, this.motionX, this.motionY-0.5f, this.motionZ);
+					this.world.spawnEntity(fireball);
 				}
-				this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 1.0f, false, true);
+				this.world.newExplosion(this, this.posX, this.posY, this.posZ, 1.0f, false, true);
 			}
 
 			//beatwave ability
 			else if (abilint == 1){
 				System.out.println("Activating beatwave!!");
-				EntityFireball fireball = new EntityLargeFireball(this.worldObj, this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ);
-				this.worldObj.spawnEntityInWorld(fireball);
+				EntityFireball fireball = new EntityLargeFireball(this.world, this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ);
+				this.world.spawnEntity(fireball);
 			}
 
 			//flashfire ability
 			else if (abilint == 2){
 				System.out.println("Activating flashfire!!");				
-				EntityFireball fireball = new EntitySmallFireball(this.worldObj, this.posX, this.posY, this.posZ, this.motionX*2, this.motionY, this.motionZ*2);
-				this.worldObj.spawnEntityInWorld(fireball);
+				EntityFireball fireball = new EntitySmallFireball(this.world, this.posX, this.posY, this.posZ, this.motionX*2, this.motionY, this.motionZ*2);
+				this.world.spawnEntity(fireball);
 			}
 		}
 	}
@@ -169,9 +165,9 @@ public class EntityInfernusVel extends EntityVel{
 	private void makePlus(int x, int y, int z, boolean trench){
 		for (int a=-1;a<2;a++){
 			for (int b=-1;b<2;b++){
-				this.worldObj.setBlock(x+a, y, z+b, Blocks.fire);
+				this.world.setBlock(x+a, y, z+b, Blocks.FIRE);
 				if (trench && a==0 && b==0){
-					this.worldObj.setBlock(x, y-1, z, Blocks.fire);
+					this.world.setBlock(x, y-1, z, Blocks.FIRE);
 				}
 			}
 		}
