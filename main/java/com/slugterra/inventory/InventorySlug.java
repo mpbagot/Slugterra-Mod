@@ -1,9 +1,9 @@
 package com.slugterra.inventory;
 
-import com.slugterra.item.SlugItemRegistry;
 import com.slugterra.item.slugs.ItemSlug;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,6 +72,21 @@ public class InventorySlug implements IInventory
 		return stack;
 	}
 
+	public boolean addItemStackToInventory(ItemStack stack) {
+		if (stack == ItemStack.EMPTY) {
+			return false;
+		}
+
+		for (int m = 0; m < this.getSizeInventory(); m++){
+			ItemStack itemstack = this.getStackInSlot(m);
+			if (itemstack == ItemStack.EMPTY || itemstack.getItem() == Items.AIR){
+				this.setInventorySlotContents(m, stack);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack itemstack)
 	{
