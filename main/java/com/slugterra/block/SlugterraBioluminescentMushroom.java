@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class SlugterraBioluminescentMushroom extends BlockMushroom implements IGrowable
@@ -25,6 +26,11 @@ public class SlugterraBioluminescentMushroom extends BlockMushroom implements IG
 		setRegistryName(getUnlocalizedName().substring(5));
 		setCreativeTab(SlugterraCreativeTabs.tabMisc);
 	}
+	
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return MUSHROOM_AABB;
+    }
 
 	/**
 	 * is the block grass, dirt or farmland

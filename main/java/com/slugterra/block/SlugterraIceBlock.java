@@ -58,7 +58,7 @@ public class SlugterraIceBlock extends BlockBreakable
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random p_149674_5_)
     {
-    	if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity())
+    	if (world.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity(world, pos))
         {
             if (!world.provider.isSurfaceWorld())
             {
