@@ -2,9 +2,7 @@ package com.slugterra.item;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.lib.Strings;
-import com.slugterra.render.ItemRenderRegistry;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;

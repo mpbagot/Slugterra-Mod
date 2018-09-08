@@ -3,7 +3,6 @@ package com.slugterra.creativetabs;
 import com.slugterra.item.ItemRegistry;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class CreativeTabBlasters extends CreativeTabs {

@@ -2,9 +2,7 @@ package com.slugterra.render;
 
 import com.slugterra.item.ItemRegistry;
 import com.slugterra.item.SlugItemRegistry;
-import com.slugterra.lib.Strings;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;

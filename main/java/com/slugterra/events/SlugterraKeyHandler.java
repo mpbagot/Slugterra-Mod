@@ -2,7 +2,6 @@ package com.slugterra.events;
 
 import com.slugterra.entity.EntityMecha;
 import com.slugterra.keys.KeyBindings;
-import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.OpenGuiPacket;
@@ -10,11 +9,7 @@ import com.slugterra.packets.UpdateSlotPacket;
 import com.slugterra.render.blasters.RenderBlaster;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSound;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
