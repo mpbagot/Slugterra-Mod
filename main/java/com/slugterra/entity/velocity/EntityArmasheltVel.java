@@ -2,12 +2,14 @@ package com.slugterra.entity.velocity;
 
 import java.util.Random;
 
-import com.slugterra.capabilities.ExtendedPlayer;
+import com.slugterra.capabilities.ISlugInv;
+import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.entity.protoform.EntityArmashelt;
+import com.slugterra.inventory.InventorySlug;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
@@ -47,13 +49,13 @@ public class EntityArmasheltVel extends EntityVel{
 			//canonbolt ability
 			if (abilint == 0){
 				System.out.println("CanonBolt Activated!");
-				this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 1.0F, false, true);
+				this.world.newExplosion(this, this.posX, this.posY, this.posZ, 1.0F, false, true);
 			}
 
 			//afterburner
 			else if(abilint == 1){
 				System.out.println("Afterburner Activated!");
-				this.hitE.mountEntity(this);
+				this.hitE.startRiding(this);
 				//this.riddenByEntity = this.hitE;
 				this.motionY = 2.0f;
 				this.killColl = false;
@@ -62,17 +64,19 @@ public class EntityArmasheltVel extends EntityVel{
 			//sluglift
 			else if(abilint == 2){
 				System.out.println("SlugLift Activated!");
-				EntityPlayerMP p = (EntityPlayerMP)this.worldObj.getClosestPlayerToEntity(this, 2.0F);
+				EntityPlayerMP p = (EntityPlayerMP)this.world.getClosestPlayerToEntity(this, 2.0F);
 				if (p != this.shooter && p != null){
-					ExtendedPlayer props = ExtendedPlayer.get(p);
-					props.inventory.setInventorySlotContents(new Random().nextInt(5), null);
+					ISlugInv props = p.getCapability(SlugInventoryProvider.INV_CAP, null);
+					InventorySlug inventory = props.getInventory();
+					inventory.setInventorySlotContents(new Random().nextInt(5), ItemStack.EMPTY);
+					props.setInventory(inventory);
 				}
 			}
 		}
 		//bruise missile
 		else{
 			System.out.println("Bruise Missile Activated!");
-			EntityPlayerMP enemy = (EntityPlayerMP)this.worldObj.getClosestPlayerToEntity(this, 20.0f);
+			EntityPlayerMP enemy = (EntityPlayerMP)this.world.getClosestPlayerToEntity(this, 20.0f);
 			if (enemy != this.shooter){
 				this.target = enemy;
 				this.impactAbility = false;
