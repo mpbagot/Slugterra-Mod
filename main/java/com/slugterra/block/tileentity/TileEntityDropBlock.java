@@ -1,70 +1,53 @@
 package com.slugterra.block.tileentity;
 
+import com.slugterra.block.state.DropBlockState;
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
+import com.slugterra.dimension.TeleporterSlugterra;
+import com.slugterra.main.MainRegistry;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import com.slugterra.creativetabs.SlugterraCreativeTabs;
-import com.slugterra.dimension.TeleporterSlugterra;
-import com.slugterra.lib.Strings;
-import com.slugterra.main.MainRegistry;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-
-public class TileEntityDropBlock extends BlockContainer{
+public class TileEntityDropBlock extends BlockContainer {
 	
-	public TileEntityDropBlock(Material material){
+	public TileEntityDropBlock(Material material) {
 		super(material);
 		this.setCreativeTab(SlugterraCreativeTabs.tabMisc);
-		this.setRegistryName("DropSeat");
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.7F, 1.0F);
+		this.setRegistryName("drop_seat");
+		this.setDefaultState(new DropBlockState());
+		this.getDefaultState().isOpaqueCube();
 	}
 	
-	public TileEntity createNewTileEntity(World world, int num){
+	public TileEntity createNewTileEntity(World world, int num) {
 		return new TileEntityDropEntity();
 	}
 	
-	@Override
-	public int getRenderType(){
-		return -1;
-	}
-	
-	@Override
-	public boolean isOpaqueCube(){
-		return false;
-	}
-	
-	public boolean renderAsNormalBlock(){
-		return false;
-	}
-	
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-    {
-        if (entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP)
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        if (entity.getRidingEntity() == null && entity.getRecursivePassengers().isEmpty() && entity instanceof EntityPlayerMP)
         {
         	EntityPlayerMP player = (EntityPlayerMP) entity;
         	FMLCommonHandler.instance().getMinecraftServerInstance();
-        	MinecraftServer server = MinecraftServer.getServer();
+        	MinecraftServer server = Minecraft.getMinecraft().getIntegratedServer().getServer();
         	
-        	if (player.timeUntilPortal > 0){
+        	if (player.timeUntilPortal > 0) {
         		player.timeUntilPortal = 10;
-        	}
-        	else if (player.dimension != MainRegistry.dimensionIdSlugterra){
+        	} else if (player.dimension != MainRegistry.dimensionIdSlugterra) {
         		player.timeUntilPortal = 10;
-        		player.mcServer.getConfigurationManager().transferPlayerToDimension(player, MainRegistry.dimensionIdSlugterra, new TeleporterSlugterra(server.worldServerForDimension(MainRegistry.dimensionIdSlugterra)));
-        	}
-        	else{
-
+        		player.mcServer.getPlayerList().transferPlayerToDimension(player, MainRegistry.dimensionIdSlugterra, new TeleporterSlugterra(server.worldServerForDimension(MainRegistry.dimensionIdSlugterra)));
+        	} else {
         		player.timeUntilPortal = 10;
-        		player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterSlugterra(server.worldServerForDimension(0)));
+        		player.mcServer.getPlayerList().transferPlayerToDimension(player, 0, new TeleporterSlugterra(server.worldServerForDimension(0)));
         	}
         }
     }
+
 	public boolean tryToCreatePortal(World world, int x, int y, int z){
     	return false;
     }
