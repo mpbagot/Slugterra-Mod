@@ -149,7 +149,7 @@ public class SlugRackInventory implements IInventory
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		NBTTagList items = compound.getTagList(tagName, 10);
-		this.inventory = new ItemStack[this.INV_SIZE];
+		this.inventory = new ItemStack[INV_SIZE];
 		
 		for (int i = 0; i < items.tagCount(); ++i) {
 			
