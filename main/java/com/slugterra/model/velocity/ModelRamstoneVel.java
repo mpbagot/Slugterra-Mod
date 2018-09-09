@@ -1,7 +1,5 @@
 package com.slugterra.model.velocity;
 
-import com.slugterra.model.ModelRamstone;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
