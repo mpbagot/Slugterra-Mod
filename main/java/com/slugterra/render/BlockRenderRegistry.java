@@ -1,7 +1,6 @@
 package com.slugterra.render;
 
 import com.slugterra.block.BlockRegistry;
-import com.slugterra.lib.Strings;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -10,10 +9,10 @@ import net.minecraft.item.Item;
 
 public class BlockRenderRegistry {
 	public static void registerBlockRenderers() {
-//		register(BlockRegistry.dropSeat);
+		register(BlockRegistry.dropSeat);
 		register(BlockRegistry.electricWall);
 		register(BlockRegistry.mushroom);
-//		register(BlockRegistry.slimeRope);
+		register(BlockRegistry.slimeRope);
 //		register(BlockRegistry.slugContainer);
 		register(BlockRegistry.slugterraDirt);
 		register(BlockRegistry.slugterraGrass);
@@ -22,6 +21,6 @@ public class BlockRenderRegistry {
 	
 	public static void register(Block block) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-		.register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Strings.MODID+":"+block.getUnlocalizedName().substring(5), "inventory"));
+		.register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}
 }
