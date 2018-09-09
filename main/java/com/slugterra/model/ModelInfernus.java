@@ -15,7 +15,7 @@ public class ModelInfernus extends ModelBase
     ModelRenderer Left_leg;
     ModelRenderer Right_antenna;
     ModelRenderer Left_antenna;
-    ModelRenderer Tail_1;
+    ModelRenderer Tail1;
     ModelRenderer Tail2;
   
   public ModelInfernus()
@@ -71,12 +71,12 @@ public class ModelInfernus extends ModelBase
       Left_antenna.setTextureSize(64, 32);
       Left_antenna.mirror = true;
       setRotation(Left_antenna, 0F, 0F, 0F);
-      Tail_1 = new ModelRenderer(this, 36, 4);
-      Tail_1.addBox(-3F, 0F, -2F, 3, 1, 4);
-      Tail_1.setRotationPoint(0F, 23F, 2F);
-      Tail_1.setTextureSize(64, 32);
-      Tail_1.mirror = true;
-      setRotation(Tail_1, 0F, 1.570796F, 0F);
+      Tail1 = new ModelRenderer(this, 36, 4);
+      Tail1.addBox(-3F, 0F, -2F, 3, 1, 4);
+      Tail1.setRotationPoint(0F, 23F, 2F);
+      Tail1.setTextureSize(64, 32);
+      Tail1.mirror = true;
+      setRotation(Tail1, 0F, 1.570796F, 0F);
       Tail2 = new ModelRenderer(this, 40, 0);
       Tail2.addBox(0F, 0F, -1.466667F, 2, 1, 3);
       Tail2.setRotationPoint(0F, 22F, 2F);
@@ -85,6 +85,7 @@ public class ModelInfernus extends ModelBase
       setRotation(Tail2, 0F, 4.712389F, 0.0174533F);
   }
   
+  @Override
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
@@ -97,7 +98,7 @@ public class ModelInfernus extends ModelBase
     Left_leg.render(f5);
     Right_antenna.render(f5);
     Left_antenna.render(f5);
-    Tail_1.render(f5);
+    Tail1.render(f5);
     Tail2.render(f5);
   }
   
