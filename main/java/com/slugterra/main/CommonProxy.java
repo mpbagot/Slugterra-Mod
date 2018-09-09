@@ -34,5 +34,7 @@ public class CommonProxy {
 	public void postInit(FMLPostInitializationEvent e) {
 		
 	}
+
+	public void registerRenderThings() {}
 	
 }

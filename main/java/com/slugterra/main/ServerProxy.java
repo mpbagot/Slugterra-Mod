@@ -29,7 +29,7 @@ public class ServerProxy extends CommonProxy
 //	private static final ModelSlingerArmour tutChest = new ModelSlingerArmour();
 //	private static final ModelSlingerArmour tutLegs = new ModelSlingerArmour();
 //
-//	public void registerRenderThings() {}
+	public void registerRenderThings() {}
 //
 //	public void generateBlasterPuff(Entity entity){}
 //	public void spawnElementalParticles(EntityVel e, World world, EntityFX entity){

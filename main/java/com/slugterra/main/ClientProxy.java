@@ -1,12 +1,48 @@
 package com.slugterra.main;
 
-import com.slugterra.render.BlockRenderRegistry;
-import com.slugterra.render.ItemRenderRegistry;
+import com.slugterra.entity.protoform.EntityArmashelt;
+import com.slugterra.entity.protoform.EntityBoonDoc;
+import com.slugterra.entity.protoform.EntityDirtUrchin;
+import com.slugterra.entity.protoform.EntityEnigmo;
+import com.slugterra.entity.protoform.EntityFingerling;
+import com.slugterra.entity.protoform.EntityFlaringo;
+import com.slugterra.entity.protoform.EntityGrenuke;
+import com.slugterra.entity.protoform.EntityHexlet;
+import com.slugterra.entity.protoform.EntityInfernus;
+import com.slugterra.entity.protoform.EntityJellyish;
+import com.slugterra.entity.protoform.EntityLariat;
+import com.slugterra.entity.protoform.EntityMakoBreaker;
+import com.slugterra.entity.protoform.EntityNegashade;
+import com.slugterra.entity.protoform.EntityPhosphoro;
+import com.slugterra.entity.protoform.EntityRamstone;
+import com.slugterra.entity.protoform.EntitySlickSilver;
+import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.keys.KeyBindings;
+import com.slugterra.model.ModelArmashelt;
+import com.slugterra.model.ModelBoonDoc;
+import com.slugterra.model.ModelDirtUrchin;
+import com.slugterra.model.ModelEnigmo;
+import com.slugterra.model.ModelFingerling;
+import com.slugterra.model.ModelFlaringo;
+import com.slugterra.model.ModelGrenuke;
+import com.slugterra.model.ModelHexlet;
+import com.slugterra.model.ModelInfernus;
+import com.slugterra.model.ModelJellyish;
+import com.slugterra.model.ModelLariat;
+import com.slugterra.model.ModelMakoBreaker;
+import com.slugterra.model.ModelNegashade;
+import com.slugterra.model.ModelPhosphoro;
+import com.slugterra.model.ModelRamstone;
+import com.slugterra.model.ModelSlickSilver;
+import com.slugterra.model.ModelTazerling;
+import com.slugterra.render.BlockRenderRegistry;
+import com.slugterra.render.ItemRenderRegistry;
+import com.slugterra.render.SlugRenderFactory;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -29,7 +65,8 @@ public class ClientProxy extends CommonProxy{
 		MinecraftForge.EVENT_BUS.register(new GuiSlugBeltOverlay(Minecraft.getMinecraft()));
 	}
 	
-//	public void registerRenderThings(){
+	@Override
+	public void registerRenderThings(){
 //
 //		//special item renderers
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.defenderBlaster, (IItemRenderer)new RenderBlaster());
@@ -38,26 +75,26 @@ public class ClientProxy extends CommonProxy{
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.junjieBlaster, (IItemRenderer)new RenderJunjieBlaster());
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterFemale, (IItemRenderer)new RenderPrimeBlasterFemale());
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterMale, (IItemRenderer)new RenderPrimeBlasterMale());
-//
-//		//entity render
-//		RenderingRegistry.registerEntityRenderingHandler(EntityInfernus.class, new RenderInfernus(new ModelInfernus(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityLariat.class, new RenderLariat(new ModelLariat(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityNegashade.class, new RenderNegashade(new ModelNegashade(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityJellyish.class, new RenderJellyish(new ModelJellyish(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoro.class, new RenderPhosphoro(new ModelPhosphoro(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreaker.class, new RenderMakoBreaker(new ModelMakoBreaker(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityFingerling.class, new RenderFingerling(new ModelFingerling(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityArmashelt.class, new RenderArmashelt(new ModelArmashelt(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityDirtUrchin.class, new RenderDirtUrchin(new ModelDirtUrchin(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityGrenuke.class, new RenderGrenuke(new ModelGrenuke(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityTazerling.class, new RenderTazerling(new ModelTazerling(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityHexlet.class, new RenderHexlet(new ModelHexlet(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityFlaringo.class, new RenderFlaringo(new ModelFlaringo(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityBoonDoc.class, new RenderBoonDoc(new ModelBoonDoc(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntitySlickSilver.class, new RenderSlickSilver(new ModelSlickSilver(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityEnigmo.class, new RenderEnigmo(new ModelEnigmo(), 1));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityRamstone.class, new RenderRamstone(new ModelRamstone(), 1));
-//
+
+		//entity render
+		RenderingRegistry.registerEntityRenderingHandler(EntityInfernus.class, new SlugRenderFactory(new ModelInfernus(), "infernus"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLariat.class, new SlugRenderFactory(new ModelLariat(), "lariat"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityNegashade.class, new SlugRenderFactory(new ModelNegashade(), "negashade"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityJellyish.class, new SlugRenderFactory(new ModelJellyish(), "jellyish"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoro.class, new SlugRenderFactory(new ModelPhosphoro(), "phosphoro"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreaker.class, new SlugRenderFactory(new ModelMakoBreaker(), "makobreaker"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFingerling.class, new SlugRenderFactory(new ModelFingerling(), "fingerling"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityArmashelt.class, new SlugRenderFactory(new ModelArmashelt(), "armashelt"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDirtUrchin.class, new SlugRenderFactory(new ModelDirtUrchin(), "dirturchin"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenuke.class, new SlugRenderFactory(new ModelGrenuke(), "grenuke"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTazerling.class, new SlugRenderFactory(new ModelTazerling(), "tazerling"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHexlet.class, new SlugRenderFactory(new ModelHexlet(), "hexlet"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFlaringo.class, new SlugRenderFactory(new ModelFlaringo(), "flaringo"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoonDoc.class, new SlugRenderFactory(new ModelBoonDoc(), "boondoc"));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySlickSilver.class, new SlugRenderFactory(new ModelSlickSilver(), "slicksilver"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEnigmo.class, new SlugRenderFactory(new ModelEnigmo(), "enigmo"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRamstone.class, new SlugRenderFactory(new ModelRamstone(), "ramstone"));
+
 //		//velocity render
 //		RenderingRegistry.registerEntityRenderingHandler(EntityInfernusVel.class, new RenderInfernusVel(VelocitySlugItem.infernusVel));
 //		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoroVel.class, new RenderPhosphoroVel(VelocitySlugItem.phosphoroVel));
@@ -78,8 +115,8 @@ public class ClientProxy extends CommonProxy{
 //
 //		//misc entity render
 //		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new RenderMecha_Wolf(new ModelMecha(), 2));
-//	}
-//
+	}
+
 //	@Override
 //	public void generateBlasterPuff(Entity entity){
 //		double motionx = entity.world.rand.nextGaussian()*0.2D;

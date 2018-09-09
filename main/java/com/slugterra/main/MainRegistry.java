@@ -55,7 +55,7 @@ public class MainRegistry {
 		proxy.preInit(PreEvent);
 //		SlugterraBlocks.mainRegistry();
 		SlugterraEntityRegistry.mainRegistry();
-//		proxy.registerRenderThings();
+		proxy.registerRenderThings();
 		EntitySlingers.mainRegistry();
 		//dimension stuff
 //		DimensionType dimensionTypeSlugterra = DimensionType.register("SLUGTERRA", "_slugterra", dimensionIdSlugterra, WorldProviderSlugterra.class, true);
@@ -76,7 +76,7 @@ public class MainRegistry {
 	@EventHandler
 	public void load(FMLInitializationEvent event){
 		proxy.init(event);
-//		proxy.registerRenderThings();
+		proxy.registerRenderThings();
 		
 		//tile entities
 //		GameRegistry.registerTileEntity(TileEntitySlugContainerEntity.class, "tileEntitySlugContainer");
