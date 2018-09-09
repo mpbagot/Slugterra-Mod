@@ -52,11 +52,11 @@ public class ClientProxy extends CommonProxy{
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
 		KeyBindings.initialiseBindings();
-		ItemRenderRegistry.registerItemRenderers(e);
 	}
 	
 	public void init(FMLInitializationEvent e) {
 		super.init(e);
+		ItemRenderRegistry.registerItemRenderers(e);
 		BlockRenderRegistry.registerBlockRenderers();
 	}
 	
