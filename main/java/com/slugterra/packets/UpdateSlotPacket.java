@@ -45,8 +45,6 @@ public class UpdateSlotPacket implements IMessage
 			} else if (message.up == -1) {
 				props.decreaseSlot();
 			}
-			//TODO remove this static variable
-//			GuiSlugBeltOverlay.selslot += message.up;
 			return null; // no response in this case
 		}
 	}
