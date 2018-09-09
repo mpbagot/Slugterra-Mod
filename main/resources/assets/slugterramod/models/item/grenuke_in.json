@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "slugterramod:items/slick_silver_in"
+        "layer0": "slugterramod:items/grenuke_in"
     },
     "display": {
         "thirdperson": {

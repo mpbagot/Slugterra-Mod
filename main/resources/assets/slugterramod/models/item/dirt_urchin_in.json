@@ -1,8 +1,8 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "slugterramod:items/slick_silver_in"
-    },
+        "layer0": "slugterramod:items/dirt_urchin_in"
+    }, 
     "display": {
         "thirdperson": {
             "rotation": [-90, 0, 0],

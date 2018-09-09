@@ -1,14 +1,14 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "slugterramod:items/slick_silver_in"
+        "layer0": "slugterramod:items/phosphoro_in"
     },
     "display": {
         "thirdperson": {
             "rotation": [-90, 0, 0],
             "translation": [0, 1, -3],
             "scale": [0.55, 0.55, 0.55]
-        },
+        }, 
         "firstperson": {
             "rotation": [0, -135, 25],
             "translation": [0, 4, 2],
