@@ -1,5 +1,6 @@
 package com.slugterra.main;
 
+import com.slugterra.entity.EntityMecha;
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
 import com.slugterra.entity.protoform.EntityDirtUrchin;
@@ -19,25 +20,27 @@ import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.keys.KeyBindings;
-import com.slugterra.model.ModelArmashelt;
-import com.slugterra.model.ModelBoonDoc;
-import com.slugterra.model.ModelDirtUrchin;
-import com.slugterra.model.ModelEnigmo;
-import com.slugterra.model.ModelFingerling;
-import com.slugterra.model.ModelFlaringo;
-import com.slugterra.model.ModelGrenuke;
-import com.slugterra.model.ModelHexlet;
-import com.slugterra.model.ModelInfernus;
-import com.slugterra.model.ModelJellyish;
-import com.slugterra.model.ModelLariat;
-import com.slugterra.model.ModelMakoBreaker;
-import com.slugterra.model.ModelNegashade;
-import com.slugterra.model.ModelPhosphoro;
-import com.slugterra.model.ModelRamstone;
-import com.slugterra.model.ModelSlickSilver;
-import com.slugterra.model.ModelTazerling;
+import com.slugterra.model.ModelMecha;
+import com.slugterra.model.protoform.ModelArmashelt;
+import com.slugterra.model.protoform.ModelBoonDoc;
+import com.slugterra.model.protoform.ModelDirtUrchin;
+import com.slugterra.model.protoform.ModelEnigmo;
+import com.slugterra.model.protoform.ModelFingerling;
+import com.slugterra.model.protoform.ModelFlaringo;
+import com.slugterra.model.protoform.ModelGrenuke;
+import com.slugterra.model.protoform.ModelHexlet;
+import com.slugterra.model.protoform.ModelInfernus;
+import com.slugterra.model.protoform.ModelJellyish;
+import com.slugterra.model.protoform.ModelLariat;
+import com.slugterra.model.protoform.ModelMakoBreaker;
+import com.slugterra.model.protoform.ModelNegashade;
+import com.slugterra.model.protoform.ModelPhosphoro;
+import com.slugterra.model.protoform.ModelRamstone;
+import com.slugterra.model.protoform.ModelSlickSilver;
+import com.slugterra.model.protoform.ModelTazerling;
 import com.slugterra.render.BlockRenderRegistry;
 import com.slugterra.render.ItemRenderRegistry;
+import com.slugterra.render.MechaRenderFactory;
 import com.slugterra.render.SlugRenderFactory;
 
 import net.minecraft.client.Minecraft;
@@ -114,7 +117,7 @@ public class ClientProxy extends CommonProxy{
 //		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
 //
 //		//misc entity render
-//		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new RenderMecha_Wolf(new ModelMecha(), 2));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new MechaRenderFactory(new ModelMecha(), "wolf", 2));
 	}
 
 //	@Override

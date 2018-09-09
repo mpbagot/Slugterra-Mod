@@ -1,10 +1,10 @@
-package com.slugterra.model;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelNegashade extends ModelBase
+public class ModelPhosphoro extends ModelBase
 {
   //fields
     ModelRenderer Head;
@@ -19,7 +19,7 @@ public class ModelNegashade extends ModelBase
     ModelRenderer Tail2;
     ModelRenderer Shape1;
   
-  public ModelNegashade()
+  public ModelPhosphoro()
   {
     textureWidth = 64;
     textureHeight = 32;
@@ -38,13 +38,13 @@ public class ModelNegashade extends ModelBase
       setRotation(Body, 0F, 0F, 0F);
       Right_arm = new ModelRenderer(this, 0, 10);
       Right_arm.addBox(-0.5F, -0.5F, 0F, 1, 1, 1);
-      Right_arm.setRotationPoint(2F, 21F, -1F);
+      Right_arm.setRotationPoint(2F, 20F, -1F);
       Right_arm.setTextureSize(64, 32);
       Right_arm.mirror = true;
       setRotation(Right_arm, 0F, 1.570796F, 0F);
       Left_arm = new ModelRenderer(this, 0, 10);
       Left_arm.addBox(-0.5F, -0.5F, -1F, 1, 1, 1);
-      Left_arm.setRotationPoint(-2F, 21F, -1F);
+      Left_arm.setRotationPoint(-2F, 20F, -1F);
       Left_arm.setTextureSize(64, 32);
       Left_arm.mirror = true;
       setRotation(Left_arm, 0F, 1.570796F, 0F);

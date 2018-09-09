@@ -1,11 +1,10 @@
-
-package com.slugterra.model;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelLariat extends ModelBase
+public class ModelMakoBreaker extends ModelBase
 {
   //fields
     ModelRenderer Head;
@@ -18,9 +17,10 @@ public class ModelLariat extends ModelBase
     ModelRenderer Left_antenna;
     ModelRenderer Tail_1;
     ModelRenderer Tail2;
-    ModelRenderer Shape1;
+    ModelRenderer toptopfin;
+    ModelRenderer bottomtopfin;
   
-  public ModelLariat()
+  public ModelMakoBreaker()
   {
     textureWidth = 64;
     textureHeight = 32;
@@ -73,24 +73,30 @@ public class ModelLariat extends ModelBase
       Left_antenna.setTextureSize(64, 32);
       Left_antenna.mirror = true;
       setRotation(Left_antenna, 0F, 0F, 0F);
-      Tail_1 = new ModelRenderer(this, 36, 4);
-      Tail_1.addBox(-3F, 0F, -2F, 3, 1, 4);
-      Tail_1.setRotationPoint(0F, 23F, 2F);
+      Tail_1 = new ModelRenderer(this, 0, 13);
+      Tail_1.addBox(-3F, 0F, -2F, 3, 1, 1);
+      Tail_1.setRotationPoint(1.5F, 23F, 2F);
       Tail_1.setTextureSize(64, 32);
       Tail_1.mirror = true;
       setRotation(Tail_1, 0F, 1.570796F, 0F);
       Tail2 = new ModelRenderer(this, 40, 0);
-      Tail2.addBox(0F, 0F, -1.466667F, 2, 1, 3);
-      Tail2.setRotationPoint(0F, 22F, 2F);
+      Tail2.addBox(0F, 0F, -1.466667F, 2, 2, 1);
+      Tail2.setRotationPoint(-1F, 21F, 2F);
       Tail2.setTextureSize(64, 32);
       Tail2.mirror = true;
       setRotation(Tail2, 0F, 4.712389F, 0.0174533F);
-      Shape1 = new ModelRenderer(this, 14, 10);
-      Shape1.addBox(0F, 0F, 0F, 6, 3, 5);
-      Shape1.setRotationPoint(-3F, 14F, -2F);
-      Shape1.setTextureSize(64, 32);
-      Shape1.mirror = true;
-      setRotation(Shape1, 0F, 0F, 0F);
+      toptopfin = new ModelRenderer(this, 55, 0);
+      toptopfin.addBox(0F, 0F, -0.5F, 2, 2, 1);
+      toptopfin.setRotationPoint(0F, 14F, 2F);
+      toptopfin.setTextureSize(64, 32);
+      toptopfin.mirror = true;
+      setRotation(toptopfin, 0F, 4.712389F, 0.0174533F);
+      bottomtopfin = new ModelRenderer(this, 47, 0);
+      bottomtopfin.addBox(0F, 0F, -0.5F, 3, 1, 1);
+      bottomtopfin.setRotationPoint(0F, 16F, 2F);
+      bottomtopfin.setTextureSize(64, 32);
+      bottomtopfin.mirror = true;
+      setRotation(bottomtopfin, 0F, 4.712389F, 0.0174533F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -107,7 +113,8 @@ public class ModelLariat extends ModelBase
     Left_antenna.render(f5);
     Tail_1.render(f5);
     Tail2.render(f5);
-    Shape1.render(f5);
+    toptopfin.render(f5);
+    bottomtopfin.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

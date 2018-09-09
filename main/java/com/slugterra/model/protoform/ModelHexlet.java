@@ -1,10 +1,10 @@
-package com.slugterra.model;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelFlaringo extends ModelBase
+public class ModelHexlet extends ModelBase
 {
   //fields
     ModelRenderer Body;
@@ -19,7 +19,7 @@ public class ModelFlaringo extends ModelBase
     ModelRenderer Shape1;
     ModelRenderer Shape2;
   
-  public ModelFlaringo()
+  public ModelHexlet()
   {
     textureWidth = 64;
     textureHeight = 32;
@@ -80,13 +80,13 @@ public class ModelFlaringo extends ModelBase
       setRotation(Head2, 0F, 0F, 0F);
       Shape1 = new ModelRenderer(this, 49, 0);
       Shape1.addBox(-0.5F, -3F, -0.5F, 1, 3, 1);
-      Shape1.setRotationPoint(1F, 13F, -1F);
+      Shape1.setRotationPoint(1F, 14F, -1F);
       Shape1.setTextureSize(64, 32);
       Shape1.mirror = true;
       setRotation(Shape1, 0F, 0F, 0.1745329F);
       Shape2 = new ModelRenderer(this, 55, 0);
       Shape2.addBox(-0.5F, -3F, -0.5F, 1, 3, 1);
-      Shape2.setRotationPoint(-1F, 13F, -1F);
+      Shape2.setRotationPoint(-1F, 14F, -1F);
       Shape2.setTextureSize(64, 32);
       Shape2.mirror = true;
       setRotation(Shape2, 0F, 0F, -0.1745329F);

@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelPhosphoro;
+import com.slugterra.model.protoform.ModelPhosphoro;
 import com.slugterra.model.velocity.ModelPhosphoroVel;
 
 import net.minecraft.client.Minecraft;

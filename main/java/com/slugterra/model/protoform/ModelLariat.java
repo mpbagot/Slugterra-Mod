@@ -1,10 +1,11 @@
-package com.slugterra.model;
+
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelJellyish extends ModelBase
+public class ModelLariat extends ModelBase
 {
   //fields
     ModelRenderer Head;
@@ -17,10 +18,9 @@ public class ModelJellyish extends ModelBase
     ModelRenderer Left_antenna;
     ModelRenderer Tail_1;
     ModelRenderer Tail2;
-    ModelRenderer Fatbody;
-    ModelRenderer Fathead;
+    ModelRenderer Shape1;
   
-  public ModelJellyish()
+  public ModelLariat()
   {
     textureWidth = 64;
     textureHeight = 32;
@@ -85,18 +85,12 @@ public class ModelJellyish extends ModelBase
       Tail2.setTextureSize(64, 32);
       Tail2.mirror = true;
       setRotation(Tail2, 0F, 4.712389F, 0.0174533F);
-      Fatbody = new ModelRenderer(this, 36, 10);
-      Fatbody.addBox(0F, 0F, 0F, 5, 3, 4);
-      Fatbody.setRotationPoint(-2.5F, 20F, -2F);
-      Fatbody.setTextureSize(64, 32);
-      Fatbody.mirror = true;
-      setRotation(Fatbody, 0F, 0F, 0F);
-      Fathead = new ModelRenderer(this, 14, 10);
-      Fathead.addBox(0F, 0F, 0F, 6, 3, 5);
-      Fathead.setRotationPoint(-3F, 14F, -2F);
-      Fathead.setTextureSize(64, 32);
-      Fathead.mirror = true;
-      setRotation(Fathead, 0F, 0F, 0F);
+      Shape1 = new ModelRenderer(this, 14, 10);
+      Shape1.addBox(0F, 0F, 0F, 6, 3, 5);
+      Shape1.setRotationPoint(-3F, 14F, -2F);
+      Shape1.setTextureSize(64, 32);
+      Shape1.mirror = true;
+      setRotation(Shape1, 0F, 0F, 0F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -113,8 +107,7 @@ public class ModelJellyish extends ModelBase
     Left_antenna.render(f5);
     Tail_1.render(f5);
     Tail2.render(f5);
-    Fatbody.render(f5);
-    Fathead.render(f5);
+    Shape1.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

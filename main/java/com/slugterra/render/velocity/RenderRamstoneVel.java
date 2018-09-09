@@ -1,7 +1,7 @@
 package com.slugterra.render.velocity;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelRamstone;
+import com.slugterra.model.protoform.ModelRamstone;
 import com.slugterra.model.velocity.ModelRamstoneVel;
 
 import net.minecraft.item.Item;

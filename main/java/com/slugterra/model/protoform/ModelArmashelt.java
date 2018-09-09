@@ -1,4 +1,4 @@
-package com.slugterra.model;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

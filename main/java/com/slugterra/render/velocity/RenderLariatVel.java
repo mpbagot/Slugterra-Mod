@@ -1,7 +1,7 @@
 package com.slugterra.render.velocity;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelLariat;
+import com.slugterra.model.protoform.ModelLariat;
 import com.slugterra.model.velocity.ModelLariatVel;
 
 import net.minecraft.item.Item;

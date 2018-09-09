@@ -1,10 +1,10 @@
-package com.slugterra.model;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelInfernus extends ModelBase
+public class ModelNegashade extends ModelBase
 {
   //fields
     ModelRenderer Head;
@@ -15,10 +15,11 @@ public class ModelInfernus extends ModelBase
     ModelRenderer Left_leg;
     ModelRenderer Right_antenna;
     ModelRenderer Left_antenna;
-    ModelRenderer Tail1;
+    ModelRenderer Tail_1;
     ModelRenderer Tail2;
+    ModelRenderer Shape1;
   
-  public ModelInfernus()
+  public ModelNegashade()
   {
     textureWidth = 64;
     textureHeight = 32;
@@ -37,13 +38,13 @@ public class ModelInfernus extends ModelBase
       setRotation(Body, 0F, 0F, 0F);
       Right_arm = new ModelRenderer(this, 0, 10);
       Right_arm.addBox(-0.5F, -0.5F, 0F, 1, 1, 1);
-      Right_arm.setRotationPoint(2F, 19F, -1F);
+      Right_arm.setRotationPoint(2F, 21F, -1F);
       Right_arm.setTextureSize(64, 32);
       Right_arm.mirror = true;
       setRotation(Right_arm, 0F, 1.570796F, 0F);
       Left_arm = new ModelRenderer(this, 0, 10);
       Left_arm.addBox(-0.5F, -0.5F, -1F, 1, 1, 1);
-      Left_arm.setRotationPoint(-2F, 19F, -1F);
+      Left_arm.setRotationPoint(-2F, 21F, -1F);
       Left_arm.setTextureSize(64, 32);
       Left_arm.mirror = true;
       setRotation(Left_arm, 0F, 1.570796F, 0F);
@@ -71,21 +72,26 @@ public class ModelInfernus extends ModelBase
       Left_antenna.setTextureSize(64, 32);
       Left_antenna.mirror = true;
       setRotation(Left_antenna, 0F, 0F, 0F);
-      Tail1 = new ModelRenderer(this, 36, 4);
-      Tail1.addBox(-3F, 0F, -2F, 3, 1, 4);
-      Tail1.setRotationPoint(0F, 23F, 2F);
-      Tail1.setTextureSize(64, 32);
-      Tail1.mirror = true;
-      setRotation(Tail1, 0F, 1.570796F, 0F);
+      Tail_1 = new ModelRenderer(this, 36, 4);
+      Tail_1.addBox(-3F, 0F, -2F, 3, 1, 4);
+      Tail_1.setRotationPoint(0F, 23F, 2F);
+      Tail_1.setTextureSize(64, 32);
+      Tail_1.mirror = true;
+      setRotation(Tail_1, 0F, 1.570796F, 0F);
       Tail2 = new ModelRenderer(this, 40, 0);
       Tail2.addBox(0F, 0F, -1.466667F, 2, 1, 3);
       Tail2.setRotationPoint(0F, 22F, 2F);
       Tail2.setTextureSize(64, 32);
       Tail2.mirror = true;
       setRotation(Tail2, 0F, 4.712389F, 0.0174533F);
+      Shape1 = new ModelRenderer(this, 14, 10);
+      Shape1.addBox(0F, 0F, 0F, 6, 3, 5);
+      Shape1.setRotationPoint(-3F, 14F, -2F);
+      Shape1.setTextureSize(64, 32);
+      Shape1.mirror = true;
+      setRotation(Shape1, 0F, 0F, 0F);
   }
   
-  @Override
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
@@ -98,8 +104,9 @@ public class ModelInfernus extends ModelBase
     Left_leg.render(f5);
     Right_antenna.render(f5);
     Left_antenna.render(f5);
-    Tail1.render(f5);
+    Tail_1.render(f5);
     Tail2.render(f5);
+    Shape1.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

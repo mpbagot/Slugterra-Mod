@@ -1,6 +1,4 @@
-package com.slugterra.model;
-
-import org.lwjgl.opengl.GL11;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

@@ -1,7 +1,7 @@
 package com.slugterra.render.velocity;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelArmashelt;
+import com.slugterra.model.protoform.ModelArmashelt;
 import com.slugterra.model.velocity.ModelArmasheltVel;
 
 import net.minecraft.item.Item;

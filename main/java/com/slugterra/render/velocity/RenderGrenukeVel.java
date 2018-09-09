@@ -1,7 +1,7 @@
 package com.slugterra.render.velocity;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelGrenuke;
+import com.slugterra.model.protoform.ModelGrenuke;
 import com.slugterra.model.velocity.ModelGrenukeVel;
 
 import net.minecraft.item.Item;

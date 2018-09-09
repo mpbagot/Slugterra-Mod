@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelInfernus;
+import com.slugterra.model.protoform.ModelInfernus;
 import com.slugterra.model.velocity.ModelInfurnusVel;
 
 import net.minecraft.client.Minecraft;

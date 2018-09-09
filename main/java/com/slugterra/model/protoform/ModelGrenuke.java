@@ -1,4 +1,4 @@
-package com.slugterra.model;
+package com.slugterra.model.protoform;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -77,12 +77,12 @@ public class ModelGrenuke extends ModelBase
 		earr.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
+//	private void setRotation(ModelRenderer model, float x, float y, float z)
+//	{
+//		model.rotateAngleX = x;
+//		model.rotateAngleY = y;
+//		model.rotateAngleZ = z;
+//	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{

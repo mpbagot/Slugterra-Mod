@@ -1,7 +1,7 @@
 package com.slugterra.render.velocity;
 
 import com.slugterra.lib.Strings;
-import com.slugterra.model.ModelMakoBreaker;
+import com.slugterra.model.protoform.ModelMakoBreaker;
 import com.slugterra.model.velocity.ModelMakoBreakerVel;
 
 import net.minecraft.item.Item;
