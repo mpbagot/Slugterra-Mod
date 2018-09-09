@@ -1,7 +1,6 @@
 package com.slugterra.render;
 
 import com.slugterra.entity.EntitySlug;
-import com.slugterra.render.protoform.RenderSlug;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
