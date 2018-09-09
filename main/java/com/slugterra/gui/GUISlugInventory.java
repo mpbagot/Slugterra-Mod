@@ -79,7 +79,8 @@ public class GUISlugInventory extends GuiContainer
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughealthbar2.png"));
 		//TODO Fix the darkening of the health bars
 		this.drawTexturedModalRect(10, 124, 0, 0, healths[0], 3);
-		this.fontRendererObj.drawString(slug1.name, 9, 94, 4210752);
+		if (slug1 != null)
+			this.fontRendererObj.drawString(slug1.name, 9, 94, 4210752);
 
 		this.drawTexturedModalRect(111, 15, 0, 0, healths[1], 3);
 
