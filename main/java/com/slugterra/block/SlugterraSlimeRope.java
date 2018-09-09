@@ -2,6 +2,7 @@ package com.slugterra.block;
 
 import com.slugterra.block.tileentity.TileEntitySlimeRopeEntity;
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
+import com.slugterra.lib.Strings;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,7 +22,7 @@ public class SlugterraSlimeRope extends BlockContainer{
 		super(material);
 		this.setCreativeTab(SlugterraCreativeTabs.tabMisc);
 		this.setUnlocalizedName("slime_rope");
-		this.setRegistryName(getUnlocalizedName().substring(5));
+		this.setRegistryName(Strings.MODID, "slime_rope");
 	}
 	
 	@Override

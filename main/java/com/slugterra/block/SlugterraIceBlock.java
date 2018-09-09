@@ -3,6 +3,7 @@ package com.slugterra.block;
 import java.util.Random;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
+import com.slugterra.lib.Strings;
 
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.EnumPushReaction;
@@ -23,7 +24,7 @@ public class SlugterraIceBlock extends BlockBreakable
         super(Material.ICE, false);
         this.slipperiness = 0.98F;
         this.setUnlocalizedName("slug_ice");
-        this.setRegistryName(this.getUnlocalizedName().substring(5));
+        this.setRegistryName(Strings.MODID, "slug_ice");
         this.setLightLevel(0.6F);
         this.setTickRandomly(true);
         this.setCreativeTab(SlugterraCreativeTabs.tabMisc);

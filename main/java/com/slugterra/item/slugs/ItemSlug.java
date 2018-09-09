@@ -1,6 +1,7 @@
 package com.slugterra.item.slugs;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
+import com.slugterra.lib.Strings;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ public class ItemSlug extends Item
 		skill = 0.0F;
 		setCreativeTab(SlugterraCreativeTabs.tabSlugs);
 		setUnlocalizedName(name.toLowerCase() + "_in");
-		setRegistryName(name.toLowerCase() + "_in");
+		setRegistryName(Strings.MODID, name.toLowerCase() + "_in");
 	}
 
 	// Without this method, your inventory will NOT work!!!

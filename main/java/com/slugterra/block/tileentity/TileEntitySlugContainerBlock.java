@@ -17,7 +17,7 @@ public class TileEntitySlugContainerBlock extends BlockContainer{
 	public TileEntitySlugContainerBlock(Material material){
 		super(material);
 		this.setCreativeTab(SlugterraCreativeTabs.tabMisc);
-		this.setRegistryName("SlugContainer");
+		this.setRegistryName(Strings.MODID, "slug_container");
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 

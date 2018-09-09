@@ -17,6 +17,7 @@ import com.slugterra.entity.velocity.EntityVel;
 import com.slugterra.events.SlugterraSoundEvents;
 import com.slugterra.inventory.InventorySlug;
 import com.slugterra.item.slugs.ItemSlug;
+import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 import com.slugterra.packets.SyncPlayerPropsPacket;
 
@@ -43,6 +44,7 @@ public class DefenderBlaster extends Item{
 		super();
 		setFull3D();
 		setUnlocalizedName(name);
+		setRegistryName(Strings.MODID, name);
 		setCreativeTab(SlugterraCreativeTabs.tabBlasters);
 		setMaxStackSize(1);
 	}

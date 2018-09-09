@@ -2,6 +2,8 @@ package com.slugterra.block;
 
 import java.util.Random;
 
+import com.slugterra.lib.Strings;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.EnumPushReaction;
@@ -27,7 +29,7 @@ public class SlugterraElectricWallBlock extends BlockBreakable
         this.setTickRandomly(true);
         this.fullBlock = false;
         this.setUnlocalizedName("electric_wall");
-        this.setRegistryName(getUnlocalizedName().substring(5));
+        this.setRegistryName(Strings.MODID, "electric_wall");
     }
     
     @Override

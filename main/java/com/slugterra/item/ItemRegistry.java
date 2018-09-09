@@ -56,8 +56,7 @@ public class ItemRegistry {
 		
 		primeBlasterFemale = new DefenderBlaster("prime_blaster_fem");
 
-		chestplate = new SlingerArmour("slinger_chestplate", slugArmorMaterial, 1, EntityEquipmentSlot.CHEST)
-				.setCreativeTab(SlugterraCreativeTabs.tabBlasters);
+		chestplate = new SlingerArmour("slinger_chestplate", slugArmorMaterial, 1, EntityEquipmentSlot.CHEST);
 		
 		//blaster pieces
 		blasterHandle = new Item().setUnlocalizedName("blaster_handle").setCreativeTab(SlugterraCreativeTabs.tabMisc);
@@ -71,13 +70,13 @@ public class ItemRegistry {
 		GameRegistry.register(torpedoShell.setRegistryName(torpedoShell.getUnlocalizedName().substring(5)));
 		GameRegistry.register(slugfood.setRegistryName(slugfood.getUnlocalizedName().substring(5)));
 		
-		GameRegistry.register(defenderBlaster.setRegistryName(defenderBlaster.getUnlocalizedName().substring(5)));
-		GameRegistry.register(shinaiBlaster.setRegistryName(shinaiBlaster.getUnlocalizedName().substring(5)));
-		GameRegistry.register(junjieBlaster.setRegistryName(junjieBlaster.getUnlocalizedName().substring(5)));
-		GameRegistry.register(primeBlasterMale.setRegistryName(primeBlasterMale.getUnlocalizedName().substring(5)));
-		GameRegistry.register(primeBlasterFemale.setRegistryName(primeBlasterFemale.getUnlocalizedName().substring(5)));
+		GameRegistry.register(defenderBlaster);
+		GameRegistry.register(shinaiBlaster);
+		GameRegistry.register(junjieBlaster);
+		GameRegistry.register(primeBlasterMale);
+		GameRegistry.register(primeBlasterFemale);
 		
-		GameRegistry.register(chestplate.setRegistryName(chestplate.getUnlocalizedName().substring(5)));
+		GameRegistry.register(chestplate);
 		
 		GameRegistry.register(blasterHandle.setRegistryName(blasterHandle.getUnlocalizedName().substring(5)));
 		GameRegistry.register(fusionCore.setRegistryName(fusionCore.getUnlocalizedName().substring(5)));

@@ -1,9 +1,10 @@
 package com.slugterra.item;
 
+import com.slugterra.creativetabs.SlugterraCreativeTabs;
+import com.slugterra.lib.Strings;
 import com.slugterra.main.MainRegistry;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -17,6 +18,8 @@ public class SlingerArmour extends ItemArmor {
 	public SlingerArmour(String unlocalizedName, ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
 		super(material, renderIndex, equipmentSlot);
 		this.setUnlocalizedName(unlocalizedName);
+		setRegistryName(Strings.MODID, unlocalizedName);
+		setCreativeTab(SlugterraCreativeTabs.tabBlasters);
 	}
 
 	@Override
