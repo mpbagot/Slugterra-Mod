@@ -26,9 +26,7 @@ public class ServerProxy extends CommonProxy
 	
 //	private Minecraft mc;
 //	
-//	private static final ModelSlingerArmour tutChest = new ModelSlingerArmour();
-//	private static final ModelSlingerArmour tutLegs = new ModelSlingerArmour();
-//
+
 	public void registerRenderThings() {}
 //
 //	public void generateBlasterPuff(Entity entity){}
@@ -41,14 +39,5 @@ public class ServerProxy extends CommonProxy
 //		world.spawnEntityInWorld(p);
 //	}
 //		
-//	public ModelBiped getArmorModel(int id)
-//	{
-//		switch (id)
-//		{
-//			case 0: return tutChest;
-//			case 1: return tutLegs;
-//			default: break;
-//		}
-//		return tutChest;
-//	}
+	
 }

@@ -17,19 +17,22 @@ public class ItemRegistry {
 		registerItem();
 	}
 	
-	public static ArmorMaterial slugArmorMaterial = EnumHelper.addArmorMaterial("slugarmor", Strings.MODID+":slugbelt", 15, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+	public static ArmorMaterial slugbeltArmorMaterial = EnumHelper.addArmorMaterial("slugbelt", Strings.MODID + ":slugbelt", 15, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
 	
 	public static Item slugtubeItem;
 	public static Item torpedoShell;
 	public static Item slugfood;
+	
 	//blasters
 	public static Item defenderBlaster;
 	public static Item shinaiBlaster;
 	public static Item junjieBlaster;
 	public static Item primeBlasterMale;
 	public static Item primeBlasterFemale;
+	
 	//armour pieces
 	public static Item chestplate;
+	
 	//Blaster Pieces
 	public static Item blasterHandle;
 	public static Item fusionCore;
@@ -56,7 +59,7 @@ public class ItemRegistry {
 		
 		primeBlasterFemale = new DefenderBlaster("prime_blaster_fem");
 
-		chestplate = new SlingerArmour("slinger_chestplate", slugArmorMaterial, 1, EntityEquipmentSlot.CHEST);
+		chestplate = new SlingerArmour(slugbeltArmorMaterial, 1, EntityEquipmentSlot.CHEST);
 		
 		//blaster pieces
 		blasterHandle = new Item().setUnlocalizedName("blaster_handle").setCreativeTab(SlugterraCreativeTabs.tabMisc);

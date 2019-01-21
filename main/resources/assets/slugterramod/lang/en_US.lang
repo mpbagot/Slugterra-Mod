@@ -12,10 +12,7 @@ item.fusion_core.name=Fusion Core
 item.blaster_barrel.name=Blaster Barrel
 item.shanai_blaster_end.name=Shanai's Staff End
 
-item.slinger_helmet.name=Slug Slinger Helmet
-item.slinger_chestplate.name=Slug Slinger Belt
-item.slinger_pants.name=Slug Slinger Pants
-item.slinger_boots.name=Slug Slinger Boots
+item.slinger_slugbelt.name=Slug Slinger Belt
 
 tile.slug_container.name=Slug Container
 tile.drop_seat.name=The Drop Seat
