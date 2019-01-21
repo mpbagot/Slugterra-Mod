@@ -1,2 +1,2 @@
 # Slugterra-Mod
-Public Repo to allow people to view and assist with the Development of the Slugterra Mod
+Public repository to allow people to view the source code of, and assist with the development of, the Slugterra Mod
