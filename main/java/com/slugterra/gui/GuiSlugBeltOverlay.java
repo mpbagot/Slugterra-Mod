@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
+import com.slugterra.item.SlingerArmour;
 import com.slugterra.lib.Strings;
 
 import net.minecraft.client.Minecraft;
@@ -11,6 +12,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -23,33 +25,33 @@ public class GuiSlugBeltOverlay extends Gui{
 	private Minecraft mc;
 	public static int selslot;
 	protected RenderItem itemRenderer;
-
+	private ISlugInv props;
+	
 	public GuiSlugBeltOverlay(Minecraft mc){
 		super();
 		this.mc = mc;
-		itemRenderer = mc.getRenderItem();
+		this.itemRenderer = mc.getRenderItem();
+//		this.props = mc.player.getCapability(SlugInventoryProvider.INV_CAP, null);
 	}
-
-	private ISlugInv props;
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event){
 		if(event.isCancelable() || event.getType() != ElementType.HOTBAR){
 			return;
+		} else if (!(this.mc.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() instanceof SlingerArmour)) {
+			// If the player isn't using a slinger belt, disable the bar
+			return;
 		}
 		ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-		int k = scaledresolution.getScaledWidth();
+//		int k = scaledresolution.getScaledWidth();
 		int l = scaledresolution.getScaledHeight();
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		//get player properties
-		if(props == null){
-			props = ((EntityPlayer)this.mc.player).getCapability(SlugInventoryProvider.INV_CAP, null);
-			this.selslot = props.getSlot();
-		}
+		props = ((EntityPlayer)this.mc.player).getCapability(SlugInventoryProvider.INV_CAP, null);
 
 		//rendering bar
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughotbar2.png"));
+		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID, "textures/gui/slughotbar2.png"));
 		this.drawTexturedModalRect(2, l/2-90, 0, 0, 24, 133);
 		
 		for (int i1 = 0; i1 < 6; ++i1)
@@ -61,8 +63,8 @@ public class GuiSlugBeltOverlay extends Gui{
 		GL11.glEnable(GL11.GL_BLEND);
 
 		//rendering square thing over hotbar
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/hotbarsquare.png"));
-		this.drawTexturedModalRect(2, (22 * selslot) + (l/2-92)+1, 0, 0, 26, 26);
+		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID, "textures/gui/hotbarsquare.png"));
+		this.drawTexturedModalRect(2, (22 * props.getSlot()) + (l/2-92)+1, 0, 0, 26, 26);
 	}
 
 	private void renderInventorySlot(int p_73832_1_, int p_73832_2_, int p_73832_3_)
