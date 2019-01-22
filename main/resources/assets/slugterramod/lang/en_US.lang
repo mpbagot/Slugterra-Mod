@@ -1,9 +1,9 @@
 item.slug_tube.name=Slug Tube
 item.slug_food.name=Slug Food
 item.torpedo_tube.name=Torpedo Shell
-item.blaster.name=Defender Blaster
-item.shinai_blaster.name=Shanai's Blaster
-item.junjie_blaster.name=Junjie's Blaster
+item.defender_blaster.name=Defender Blaster
+item.boonx2_blaster.name=Shanai's Blaster
+item.sparkwing_blaster.name=Junjie's Blaster
 item.prime_blaster_fem.name=Prime Blaster (Female)
 item.prime_blaster_male.name=Prime Blaster (Male)
 

@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 public class ItemRenderRegistry {
@@ -18,8 +17,8 @@ public class ItemRenderRegistry {
 		registerItemRenderer(ItemRegistry.torpedoShell);
 		
 		registerItemRenderer(ItemRegistry.defenderBlaster);
-		registerItemRenderer(ItemRegistry.shinaiBlaster);
-		registerItemRenderer(ItemRegistry.junjieBlaster);
+		registerItemRenderer(ItemRegistry.boonx2Blaster);
+		registerItemRenderer(ItemRegistry.sparkwingBlaster);
 		registerItemRenderer(ItemRegistry.primeBlasterFemale);
 		registerItemRenderer(ItemRegistry.primeBlasterMale);
 		
@@ -48,12 +47,7 @@ public class ItemRenderRegistry {
 		registerItemRenderer(SlugItemRegistry.ramstone);
 	}
 	
-	public static void registerItem/*Renderer*/(Item item) {
-		ModelLoader.setCustomModelResourceLocation(item, 0,
-				new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
-	
-	public static void registerItemRenderer/*Init*/(Item item) {
+	public static void registerItemRenderer(Item item) {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
 		renderItem.getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));

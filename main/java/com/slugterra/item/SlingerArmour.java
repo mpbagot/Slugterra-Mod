@@ -2,7 +2,7 @@ package com.slugterra.item;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.lib.Strings;
-import com.slugterra.main.MainRegistry;
+import com.slugterra.main.ClientProxy;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,7 +32,7 @@ public class SlingerArmour extends ItemArmor {
 		
 		if(itemStack.getItem() instanceof SlingerArmour)
 		{
-			armourModel = MainRegistry.proxy.getArmorModel();  
+			armourModel = ClientProxy.getArmorModel();  
 		}
 		
 		if(armourModel != null)

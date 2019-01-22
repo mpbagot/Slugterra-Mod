@@ -38,12 +38,14 @@ import com.slugterra.model.protoform.ModelPhosphoro;
 import com.slugterra.model.protoform.ModelRamstone;
 import com.slugterra.model.protoform.ModelSlickSilver;
 import com.slugterra.model.protoform.ModelTazerling;
+import com.slugterra.model.slingers.ModelSlingerArmour;
 import com.slugterra.render.BlockRenderRegistry;
 import com.slugterra.render.ItemRenderRegistry;
 import com.slugterra.render.MechaRenderFactory;
 import com.slugterra.render.SlugRenderFactory;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -52,6 +54,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy{
 
+	private static final ModelSlingerArmour slingerBelt = new ModelSlingerArmour();
+	
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
 		KeyBindings.initialiseBindings();
@@ -72,10 +76,7 @@ public class ClientProxy extends CommonProxy{
 	public void registerRenderThings(){
 //
 //		//special item renderers
-//		MinecraftForgeClient.registerItemRenderer(SlugterraItems.defenderBlaster, (IItemRenderer)new RenderBlaster());
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.slugtubeItem, (IItemRenderer)new SlugTubeRender());
-//		MinecraftForgeClient.registerItemRenderer(SlugterraItems.shinaiblaster, (IItemRenderer)new RenderShinaiBlaster());
-//		MinecraftForgeClient.registerItemRenderer(SlugterraItems.junjieBlaster, (IItemRenderer)new RenderJunjieBlaster());
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterFemale, (IItemRenderer)new RenderPrimeBlasterFemale());
 //		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterMale, (IItemRenderer)new RenderPrimeBlasterMale());
 
@@ -129,4 +130,8 @@ public class ClientProxy extends CommonProxy{
 //			entity.world.spawnParticle("bubble", entity.posX, entity.posY, entity.posZ, motionx, motiony, motionz);
 //		}
 //	}
+	
+	public static ModelBiped getArmorModel() {
+		return slingerBelt;
+	}
 }

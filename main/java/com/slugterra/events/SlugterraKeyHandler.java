@@ -9,7 +9,6 @@ import com.slugterra.main.MainRegistry;
 import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.OpenGuiPacket;
 import com.slugterra.packets.UpdateSlotPacket;
-import com.slugterra.render.blasters.RenderBlaster;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -30,8 +29,6 @@ public class SlugterraKeyHandler {
 			System.out.println("Scrolling up");
 			MainRegistry.network.sendToServer(new UpdateSlotPacket(-1));
 			props.decreaseSlot();
-			//TODO remove this static variable
-			RenderBlaster.reloading = true;
 			player.playSound(SlugterraSoundEvents.shortReload, 1.0F, 1.0F);
 
 		}
@@ -40,8 +37,6 @@ public class SlugterraKeyHandler {
 			System.out.println("Scrolling down");
 			MainRegistry.network.sendToServer(new UpdateSlotPacket(1));
 			props.increaseSlot();
-			//TODO as above
-			RenderBlaster.reloading = true;
 			player.playSound(SlugterraSoundEvents.shortReload, 1.0F, 1.0F);
 
 		}

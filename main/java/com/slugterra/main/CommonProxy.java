@@ -10,17 +10,13 @@ import com.slugterra.capabilities.SlugInvStorage;
 import com.slugterra.item.ItemBlockRegistry;
 import com.slugterra.item.ItemRegistry;
 import com.slugterra.item.SlugItemRegistry;
-import com.slugterra.model.slingers.ModelSlingerArmour;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
-
-	private static final ModelSlingerArmour slingerBelt = new ModelSlingerArmour();
 	
 	public void preInit(FMLPreInitializationEvent e) {
 		ItemRegistry.registerItems();
@@ -41,7 +37,5 @@ public class CommonProxy {
 
 	public void registerRenderThings() {}
 	
-	public ModelBiped getArmorModel() {
-		return slingerBelt;
-	}
+	
 }

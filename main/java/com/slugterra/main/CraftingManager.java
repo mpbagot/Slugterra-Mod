@@ -22,7 +22,7 @@ public class CraftingManager {
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.chestplate, 1), new Object[]{" ST", "STS", "TS ", 'S', Items.STRING, 'T', ItemRegistry.slugtubeItem});
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.defenderBlaster, 1), new Object[]{"F  ", "TIC", "F H", 'F', ItemRegistry.frontBarrel, 'T', ItemRegistry.slugtubeItem, 'I', Items.IRON_INGOT, 'C', ItemRegistry.fusionCore, 'H', ItemRegistry.blasterHandle});
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.shanaiBlasterEnd, 2), new Object[]{"FT "," C ", " S ", 'F', ItemRegistry.frontBarrel, 'C', ItemRegistry.fusionCore, 'T', ItemRegistry.slugtubeItem, 'S', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ItemRegistry.shinaiBlaster, 1), new Object[]{"  T"," S ","T  ",'S', Items.STICK, 'T', ItemRegistry.shanaiBlasterEnd});
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.boonx2Blaster, 1), new Object[]{"  T"," S ","T  ",'S', Items.STICK, 'T', ItemRegistry.shanaiBlasterEnd});
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.frontBarrel, 4), new Object[]{" LI","IIL","   ", 'L', Items.LAVA_BUCKET, 'I', Items.IRON_INGOT});
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.blasterHandle, 2), new Object[]{"II ","S S"," II", 'I', Items.IRON_INGOT, 'S', Items.STICK});
 		

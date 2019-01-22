@@ -5,7 +5,7 @@ import com.slugterra.capabilities.IBlaster;
 import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.entity.slingers.AllySlinger;
 import com.slugterra.entity.slingers.EnemySlinger;
-import com.slugterra.item.DefenderBlaster;
+import com.slugterra.item.BlasterBase;
 import com.slugterra.lib.Strings;
 import com.slugterra.world.WorldGeneratorTheDrop;
 
@@ -40,7 +40,7 @@ public class SlugterraEventHandler {
 	
 	@SubscribeEvent
 	public void attachItemCapability(AttachCapabilitiesEvent.Item e) {
-		if (!(e.getItemStack().getItem() instanceof DefenderBlaster)) return;
+		if (!(e.getItemStack().getItem() instanceof BlasterBase)) return;
 		
 		e.addCapability(BLASTER_CAP, new BlasterProvider());
 	}
@@ -58,7 +58,7 @@ public class SlugterraEventHandler {
 		if (!(event.getEntity() instanceof EntityPlayer)) return;
 		
 		ItemStack tool = ((EntityPlayer) event.getEntity()).getHeldItemMainhand();
-		if (!(tool.getItem() instanceof DefenderBlaster)) return;
+		if (!(tool.getItem() instanceof BlasterBase)) return;
 		
 		IBlaster props = tool.getCapability(BlasterProvider.BLASTER_CAP, null);
 		props.updateTimetoFire();

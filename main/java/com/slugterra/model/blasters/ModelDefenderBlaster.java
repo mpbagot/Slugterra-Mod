@@ -1,7 +1,5 @@
 package com.slugterra.model.blasters;
 
-import com.slugterra.render.blasters.RenderBlaster;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -9,7 +7,7 @@ import net.minecraft.entity.Entity;
 public class ModelDefenderBlaster extends ModelBase
 {
 	
-	public static boolean reload;
+	public boolean reload;
 	public static boolean[] upgrades;
 	private int frame = 0;
 	
@@ -195,7 +193,6 @@ public class ModelDefenderBlaster extends ModelBase
 			}
 			if (frame >= 20){
 				reload = false;
-				RenderBlaster.reloading = false;
 				frame = 0;
 				this.Slugtube1.rotateAngleZ = this.Slugtube2.rotateAngleZ = (float) Math.PI;
 				//System.out.println(this.Slugtube2.rotateAngleZ);

@@ -25,8 +25,8 @@ public class ItemRegistry {
 	
 	//blasters
 	public static Item defenderBlaster;
-	public static Item shinaiBlaster;
-	public static Item junjieBlaster;
+	public static Item boonx2Blaster;
+	public static Item sparkwingBlaster;
 	public static Item primeBlasterMale;
 	public static Item primeBlasterFemale;
 	
@@ -49,15 +49,15 @@ public class ItemRegistry {
 		torpedoShell = new Item().setUnlocalizedName("torpedo_tube")
 				.setCreativeTab(SlugterraCreativeTabs.tabMisc);
 		
-		defenderBlaster = new DefenderBlaster("blaster");
+		defenderBlaster = new BlasterBase("defender_blaster");
 		
-		shinaiBlaster = new DefenderBlaster("shinai_blaster");
+		boonx2Blaster = new BlasterBase("boonx2_blaster");
 		
-		junjieBlaster = new DefenderBlaster("junjie_blaster");
+		sparkwingBlaster = new BlasterBase("sparkwing_blaster");
 		
-		primeBlasterMale = new DefenderBlaster("prime_blaster_male");
+		primeBlasterMale = new BlasterBase("prime_blaster_male");
 		
-		primeBlasterFemale = new DefenderBlaster("prime_blaster_fem");
+		primeBlasterFemale = new BlasterBase("prime_blaster_fem");
 
 		chestplate = new SlingerArmour(slugbeltArmorMaterial, 1, EntityEquipmentSlot.CHEST);
 		
@@ -74,8 +74,8 @@ public class ItemRegistry {
 		GameRegistry.register(slugfood.setRegistryName(slugfood.getUnlocalizedName().substring(5)));
 		
 		GameRegistry.register(defenderBlaster);
-		GameRegistry.register(shinaiBlaster);
-		GameRegistry.register(junjieBlaster);
+		GameRegistry.register(boonx2Blaster);
+		GameRegistry.register(sparkwingBlaster);
 		GameRegistry.register(primeBlasterMale);
 		GameRegistry.register(primeBlasterFemale);
 		
