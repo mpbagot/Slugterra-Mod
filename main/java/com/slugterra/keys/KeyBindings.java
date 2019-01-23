@@ -12,9 +12,9 @@ public class KeyBindings {
     public static KeyBinding opensluginv;
 
     public static void initialiseBindings() {
-    	opensluginv = new KeyBinding("key.opensluginv", Keyboard.KEY_M, "key.categories.eggies");
-    	sluginvup = new KeyBinding("key.sluginvup", Keyboard.KEY_UP, "key.categories.eggies");
-    	sluginvdown = new KeyBinding("key.sluginvdown", Keyboard.KEY_DOWN, "key.categories.eggies");
+    	opensluginv = new KeyBinding("key.opensluginv", Keyboard.KEY_M, "key.categories.slugterra");
+    	sluginvup = new KeyBinding("key.sluginvup", Keyboard.KEY_UP, "key.categories.slugterra");
+    	sluginvdown = new KeyBinding("key.sluginvdown", Keyboard.KEY_DOWN, "key.categories.slugterra");
     	
         ClientRegistry.registerKeyBinding(sluginvup);
         ClientRegistry.registerKeyBinding(sluginvdown);
