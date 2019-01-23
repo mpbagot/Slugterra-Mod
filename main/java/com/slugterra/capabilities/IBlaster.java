@@ -4,11 +4,11 @@ public interface IBlaster {
 
 	public boolean isReadyToFire();
 	
-	public void disableBlaster();
+	public void disableBlaster(float seconds);
 
 	public void updateTimetoFire();
 	
 	public int getDelay();
 	
-	public void setDelay(int delay);
+	public void setDelay(float delay);
 }

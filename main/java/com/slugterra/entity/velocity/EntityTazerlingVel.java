@@ -60,6 +60,7 @@ public class EntityTazerlingVel extends EntityVel{
 				if (p != null){
 					ExtendedPlayer props = ExtendedPlayer.get(p);
 					props.disableBlaster();
+					props.disableBlaster(12.5f);
 				}
 			}
 

@@ -115,6 +115,9 @@ public class BlasterBase extends Item{
 					}
 					
 					if (velocimorphEntity != null) {
+						// Disable the blaster for 2 seconds
+						blasterProps.setDelay(2f);
+
 						velocimorphEntity.name = name;
 						world.spawnEntity(velocimorphEntity);
 

@@ -16,7 +16,7 @@ public class BlasterStorage implements IStorage<IBlaster> {
 
 	@Override
 	public void readNBT(Capability<IBlaster> capability, IBlaster instance, EnumFacing side, NBTBase nbt) {
-		instance.setDelay(((NBTPrimitive) nbt).getInt());
+		instance.setDelay(((NBTPrimitive) nbt).getInt() / 20);
 		
 	}
 
