@@ -19,8 +19,6 @@ public class ItemRenderRegistry {
 		registerItemRenderer(ItemRegistry.defenderBlaster);
 		registerItemRenderer(ItemRegistry.boonx2Blaster);
 		registerItemRenderer(ItemRegistry.sparkwingBlaster);
-		registerItemRenderer(ItemRegistry.primeBlasterFemale);
-		registerItemRenderer(ItemRegistry.primeBlasterMale);
 		
 		registerItemRenderer(ItemRegistry.chestplate);
 		

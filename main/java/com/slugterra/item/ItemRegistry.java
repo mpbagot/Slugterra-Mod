@@ -27,8 +27,6 @@ public class ItemRegistry {
 	public static Item defenderBlaster;
 	public static Item boonx2Blaster;
 	public static Item sparkwingBlaster;
-	public static Item primeBlasterMale;
-	public static Item primeBlasterFemale;
 	
 	//armour pieces
 	public static Item chestplate;
@@ -54,10 +52,6 @@ public class ItemRegistry {
 		boonx2Blaster = new BlasterBase("boonx2_blaster");
 		
 		sparkwingBlaster = new BlasterBase("sparkwing_blaster");
-		
-		primeBlasterMale = new BlasterBase("prime_blaster_male");
-		
-		primeBlasterFemale = new BlasterBase("prime_blaster_fem");
 
 		chestplate = new SlingerArmour(slugbeltArmorMaterial, 1, EntityEquipmentSlot.CHEST);
 		
@@ -76,8 +70,6 @@ public class ItemRegistry {
 		GameRegistry.register(defenderBlaster);
 		GameRegistry.register(boonx2Blaster);
 		GameRegistry.register(sparkwingBlaster);
-		GameRegistry.register(primeBlasterMale);
-		GameRegistry.register(primeBlasterFemale);
 		
 		GameRegistry.register(chestplate);
 		
