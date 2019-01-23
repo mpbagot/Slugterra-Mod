@@ -24,6 +24,7 @@ import com.slugterra.packets.SyncPlayerPropsPacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemAir;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -52,14 +53,22 @@ public class BlasterBase extends Item{
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
 		if (!world.isRemote){
-			IBlaster blasterProps = player.getHeldItemMainhand().getCapability(BlasterProvider.BLASTER_CAP, null);
+			IBlaster blasterProps = player.getHeldItem(hand).getCapability(BlasterProvider.BLASTER_CAP, null);
 			ISlugInv invProps = player.getCapability(SlugInventoryProvider.INV_CAP, null);
 			
 			if (blasterProps.isReadyToFire()) {
 				InventorySlug inventory = invProps.getInventory();
-				ItemStack selectedStack = inventory.getStackInSlot(invProps.getSlot());
+				int slot = invProps.getSlot();
+				if (hand == EnumHand.OFF_HAND) {
+					slot = (slot + 1) % InventorySlug.INV_SIZE;
+				} else if (player.getHeldItemOffhand().getItem() instanceof BlasterBase && !this.hasDoubleBarrel && !((BlasterBase)player.getHeldItemOffhand().getItem()).hasDoubleBarrel) {
+					// If the main hand is firing a single slug, and the off-hand is also holding a single-slug weapon, try to fire it too
+					System.out.println("Firing two blasters simultenously!");
+					player.getHeldItemOffhand().getItem().onItemRightClick(world, player, EnumHand.OFF_HAND);
+				}
+				ItemStack selectedStack = inventory.getStackInSlot(slot);
 				
-				if (selectedStack != ItemStack.EMPTY) {
+				if (selectedStack != ItemStack.EMPTY && !(selectedStack.getItem() instanceof ItemAir)) {
 					ItemSlug selectedSlug = (ItemSlug) selectedStack.getItem();
 					
 					selectedSlug.skill += 0.5F;
@@ -125,7 +134,7 @@ public class BlasterBase extends Item{
 						if (selectedSlug.power > 30)
 							this.health--;
 
-						inventory.decrStackSize(invProps.getSlot(), 1);
+						inventory.decrStackSize(slot, 1);
 						invProps.setInventory(inventory);
 
 						player.addExperience(2);
