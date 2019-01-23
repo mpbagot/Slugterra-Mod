@@ -57,12 +57,18 @@ public class SlugterraEventHandler {
 	{
 		if (!(event.getEntity() instanceof EntityPlayer)) return;
 		
-		ItemStack tool = ((EntityPlayer) event.getEntity()).getHeldItemMainhand();
-		if (!(tool.getItem() instanceof BlasterBase)) return;
+		ItemStack toolRight = ((EntityPlayer) event.getEntity()).getHeldItemMainhand();
+		ItemStack toolLeft = ((EntityPlayer) event.getEntity()).getHeldItemOffhand();
+
+		if (toolRight.getItem() instanceof BlasterBase) {
+			IBlaster props = toolRight.getCapability(BlasterProvider.BLASTER_CAP, null);
+			props.updateTimetoFire();
+		}
 		
-		IBlaster props = tool.getCapability(BlasterProvider.BLASTER_CAP, null);
-		props.updateTimetoFire();
-	
+		if (toolLeft.getItem() instanceof BlasterBase) {
+			IBlaster props = toolLeft.getCapability(BlasterProvider.BLASTER_CAP, null);
+			props.updateTimetoFire();
+		}
 	}
 
 	@SubscribeEvent
