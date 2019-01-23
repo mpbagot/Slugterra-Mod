@@ -3,6 +3,7 @@ package com.slugterra.events;
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
 import com.slugterra.entity.EntityMecha;
+import com.slugterra.inventory.ContainerSlug;
 import com.slugterra.item.SlingerArmour;
 import com.slugterra.keys.KeyBindings;
 import com.slugterra.main.MainRegistry;
@@ -42,9 +43,11 @@ public class SlugterraKeyHandler {
 		}
 		
 		// Open the slug inventory if the key is pressed, and the player is wearing a slug belt
-		if(KeyBindings.opensluginv.isPressed() && player != null && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() instanceof SlingerArmour){
-			System.out.println("Opening Slug Inventory");
-			MainRegistry.network.sendToServer(new OpenGuiPacket(MainRegistry.GUI_SLUG_INV));
+		if(KeyBindings.opensluginv.isPressed() && player != null) {
+			if (player.openContainer instanceof ContainerSlug || player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() instanceof SlingerArmour) {
+				System.out.println("Opening Slug Inventory");
+				MainRegistry.network.sendToServer(new OpenGuiPacket(MainRegistry.GUI_SLUG_INV));
+			}
 		}
 		
 		boolean jump = Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed();
