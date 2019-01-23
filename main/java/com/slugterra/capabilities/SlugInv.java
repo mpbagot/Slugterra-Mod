@@ -25,17 +25,17 @@ public class SlugInv implements ISlugInv{
 	}
 	
 	@Override
-	public void loadInventory(NBTTagCompound inventory) {
-		System.out.println("Reading Inventory Capability from NBT Storage!!!!");
-		this.inventory.readFromNBT(inventory);
-		inventory.setInteger("Slot", this.invslot);
+	public void loadInventory(NBTTagCompound compound) {
+		this.inventory.readFromNBT(compound);
+		this.invslot = compound.getInteger("Slot");
 	}
 	
 	@Override
-	public void saveInventoryToNBT(NBTTagCompound inventory) {
-		System.out.println("Writing Inventory Capability to NBT Storage!!!!");
-		this.inventory.writeToNBT(inventory);
-		this.invslot = inventory.getInteger("Slot");
+	public NBTTagCompound saveInventoryToNBT(NBTTagCompound compound) {
+		this.inventory.writeToNBT(compound);
+		compound.setInteger("Slot", this.invslot);
+		
+		return compound;
 	}
 	
 	@Override
