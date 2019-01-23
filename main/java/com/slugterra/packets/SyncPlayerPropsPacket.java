@@ -4,8 +4,9 @@ import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -29,18 +30,16 @@ public class SyncPlayerPropsPacket implements IMessage
 
 	// We need to initialize our data, so provide a suitable constructor:
 	public SyncPlayerPropsPacket(EntityPlayer player) {
-		// create a new tag compound
-		data = new NBTTagCompound();
-		// and save our player's data into it
+		// create a new tag compound and save the player data into it
 		ISlugInv props = player.getCapability(SlugInventoryProvider.INV_CAP, null);
-		props.saveInventoryToNBT(data);
+		data = props.saveInventoryToNBT(new NBTTagCompound());
 		slot = props.getSlot();
 }
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		data = ByteBufUtils.readTag(buf);
 		slot = buf.readInt();
+		data = ByteBufUtils.readTag(buf);
 	}
 
 	@Override
@@ -53,7 +52,8 @@ public class SyncPlayerPropsPacket implements IMessage
 
 		@Override
 		public IMessage onMessage(SyncPlayerPropsPacket message, MessageContext ctx) {
-			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+			// Since this is a client side handler, we can access the singleton Minecraft instance
+			EntityPlayerSP player = Minecraft.getMinecraft().player;
 			//Load the data back into the player capability
 			ISlugInv props = player.getCapability(SlugInventoryProvider.INV_CAP, null);
 			props.loadInventory(message.data);
