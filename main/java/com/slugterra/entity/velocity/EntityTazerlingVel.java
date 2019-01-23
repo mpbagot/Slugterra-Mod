@@ -3,20 +3,24 @@ package com.slugterra.entity.velocity;
 import java.util.List;
 import java.util.Random;
 
-import com.slugterra.block.SlugterraBlocks;
-import com.slugterra.capabilities.ExtendedPlayer;
+import com.slugterra.block.BlockRegistry;
+import com.slugterra.capabilities.BlasterProvider;
+import com.slugterra.capabilities.IBlaster;
 import com.slugterra.entity.EntityLightBall;
-import com.slugterra.entity.particles.EntityElectricElementFX;
+import com.slugterra.entity.particles.ElectricElementParticle;
 import com.slugterra.entity.protoform.EntityTazerling;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityTazerlingVel extends EntityVel{
@@ -44,8 +48,8 @@ public class EntityTazerlingVel extends EntityVel{
 			this.protoform = new EntityTazerling(world);
 		else
 			this.protoform = new EntityTazerling(world, this.name);
-		this.elementParticle = "other";
-		this.customParticle = new EntityElectricElementFX(world, posX, posY, posZ, motionX, motionY, motionZ);
+		this.elementParticle = null;
+		this.customParticle = new ElectricElementParticle(world, posX, posY, posZ, motionX, motionY, motionZ);
 	}
 
 	//TODO finish the remaining abilities
@@ -56,10 +60,9 @@ public class EntityTazerlingVel extends EntityVel{
 		if (onGround){
 			//circuit burst ability
 			if (abilint == 0){
-				EntityPlayer p = this.worldObj.getClosestPlayerToEntity(this, 5.0f+this.power);
+				EntityPlayer p = this.world.getClosestPlayerToEntity(this, 5.0f+this.power);
 				if (p != null){
-					ExtendedPlayer props = ExtendedPlayer.get(p);
-					props.disableBlaster();
+					IBlaster props = p.getCapability(BlasterProvider.BLASTER_CAP, null);
 					props.disableBlaster(12.5f);
 				}
 			}
@@ -71,13 +74,13 @@ public class EntityTazerlingVel extends EntityVel{
 
 			//tazerbolt ability
 			else if(abilint == 1){
-				List players = worldObj.playerEntities;
+				List<EntityPlayer> players = world.playerEntities;
 				for (int a=0; a<players.size();++a){
 					EntityPlayerMP p = ((EntityPlayerMP)players.get(a));
 					if(p.getDistanceToEntity(this) < 10.0f && p != this.shooter){
-						EntityLightningBolt bolt = new EntityLightningBolt(worldObj, p.posX, p.posY, p.posZ);
-						worldObj.addWeatherEffect(bolt);
-						((EntityPlayerMP)players.get(a)).attackEntityFrom(DamageSource.fall, 3.0f);
+						EntityLightningBolt bolt = new EntityLightningBolt(world, p.posX, p.posY, p.posZ, true);
+						world.addWeatherEffect(bolt);
+						((EntityPlayerMP)players.get(a)).attackEntityFrom(DamageSource.FALL, 3.0f);
 					}
 				}
 				
@@ -87,10 +90,9 @@ public class EntityTazerlingVel extends EntityVel{
 							int a2 = a-5;
 							int b2 = b-5;
 							int c2 = c-1;
-							Block block = this.worldObj.getBlock((int)posX+a2, (int)posY+c2, (int)posZ+b2);
+							Block block = this.world.getBlockState(new BlockPos((int)posX+a2, (int)posY+c2, (int)posZ+b2)).getBlock();
 							if (block instanceof BlockRedstoneWire){
-								//TODO fix this, it doesnt actually power anything!!!
-								worldObj.setBlockMetadataWithNotify((int)posX+a2, (int)posY+c2, (int)posZ+b2, 15, 3);
+								//TODO Power the redstone wire at maximum strength
 							}
 						}
 					}
@@ -113,18 +115,18 @@ public class EntityTazerlingVel extends EntityVel{
 			if (abilint == 0){
 				System.out.println("Activating Quetzalbolt!!");
 				for (int a=1; a<24;a++){
-					EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(10*this.motionX)+getR(a), this.posY+getR(a), this.posZ+(10*this.motionZ)+getR(a));
-					worldObj.addWeatherEffect(bolt);
-					EntityLightBall ball = new EntityLightBall(this.worldObj, this.posX+getR(a), this.posY+getR(a), this.posZ+getR(a), this);
-					worldObj.spawnEntityInWorld(ball);
+					EntityLightningBolt bolt = new EntityLightningBolt(this.world, this.posX+(10*this.motionX)+getR(a), this.posY+getR(a), this.posZ+(10*this.motionZ)+getR(a), true);
+					world.addWeatherEffect(bolt);
+					EntityLightBall ball = new EntityLightBall(this.world, this.posX+getR(a), this.posY+getR(a), this.posZ+getR(a), this);
+					world.spawnEntity(ball);
 				}
 			}
 
 			//tazerwing ability
 			else if (abilint == 1){
 				System.out.println("Activating Tazerwing!!");
-				EntityLightningBolt bolt = new EntityLightningBolt(this.worldObj, this.posX+(2*this.motionX), this.posY, this.posZ+(2*this.motionZ));
-				worldObj.addWeatherEffect(bolt);
+				EntityLightningBolt bolt = new EntityLightningBolt(this.world, this.posX+(2*this.motionX), this.posY, this.posZ+(2*this.motionZ), false);
+				world.addWeatherEffect(bolt);
 				this.createFire(2);
 				this.killColl = false;
 			}
@@ -136,20 +138,20 @@ public class EntityTazerlingVel extends EntityVel{
 			for (int a=0;a<20;a++){
 				for (int b=0;b<6;b++){
 					if (b<3){
-						this.worldObj.setBlock((int)this.posX+1, (int)this.posY+b, (int)this.posZ+(10-a), SlugterraBlocks.electricWall);
-						this.worldObj.setBlock((int)this.posX+3, (int)this.posY+b, (int)this.posZ+(10-a), SlugterraBlocks.electricWall);
+						this.world.setBlockState(new BlockPos((int)this.posX+1, (int)this.posY+b, (int)this.posZ+(10-a)), BlockRegistry.electricWall.getDefaultState());
+						this.world.setBlockState(new BlockPos((int)this.posX+3, (int)this.posY+b, (int)this.posZ+(10-a)), BlockRegistry.electricWall.getDefaultState());
 					}
-					this.worldObj.setBlock((int)this.posX+2, (int)this.posY+b, (int)this.posZ+(10-a), SlugterraBlocks.electricWall);
+					this.world.setBlockState(new BlockPos((int)this.posX+2, (int)this.posY+b, (int)this.posZ+(10-a)), BlockRegistry.electricWall.getDefaultState());
 				}
 			}
 		} else {
 			for (int a=0;a<20;a++){
 				for (int b=0;b<6;b++){
 					if (b<3){
-						this.worldObj.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+1, SlugterraBlocks.electricWall);
-						this.worldObj.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+3, SlugterraBlocks.electricWall);
+						this.world.setBlockState(new BlockPos((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+1), BlockRegistry.electricWall.getDefaultState());
+						this.world.setBlockState(new BlockPos((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+3), BlockRegistry.electricWall.getDefaultState());
 					}
-					this.worldObj.setBlock((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+2, SlugterraBlocks.electricWall);
+					this.world.setBlockState(new BlockPos((int)this.posX+(10-a), (int)this.posY+b, (int)this.posZ+2), BlockRegistry.electricWall.getDefaultState());
 				}
 			}
 		}
@@ -159,7 +161,7 @@ public class EntityTazerlingVel extends EntityVel{
 		for (int a=0; a < 2*r+1;a++){
 			for (int b=0; b < 2*r+1;b++){
 				if (a*a+b*b == r*r){
-					this.worldObj.setBlock((int)this.posX+(r-a), (int)this.posY, (int)this.posZ+(r-b), Blocks.fire);
+					this.world.setBlockState(new BlockPos((int)this.posX+(r-a), (int)this.posY, (int)this.posZ+(r-b)), Blocks.FIRE.getDefaultState());	
 				}
 			}
 		}

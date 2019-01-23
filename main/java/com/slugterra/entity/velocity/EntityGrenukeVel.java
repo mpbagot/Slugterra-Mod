@@ -7,7 +7,8 @@ import com.slugterra.entity.protoform.EntityGrenuke;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityGrenukeVel extends EntityVel{
@@ -34,7 +35,7 @@ public class EntityGrenukeVel extends EntityVel{
 			this.protoform = new EntityGrenuke(world);
 		else
 			this.protoform = new EntityGrenuke(world, this.name);
-		this.elementParticle = "flame";
+		this.elementParticle = EnumParticleTypes.FLAME;
 	}
 
 	@Override
@@ -56,13 +57,13 @@ public class EntityGrenukeVel extends EntityVel{
 			if (abilint == 1){
 				System.out.println("Activating mushboom!!");
 				for (int a=0;a<6;++a)
-					this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 5.0f, false, true);
+					this.world.newExplosion(this, this.posX, this.posY, this.posZ, 5.0f, false, true);
 			}
 
 			//nuklock ability
 			else if(abilint == 0){
 				System.out.println("Activating Nuklock!!!");
-				this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 4.0f, false, true);
+				this.world.newExplosion(this, this.posX, this.posY, this.posZ, 4.0f, false, true);
 			}
 
 		} else {
@@ -70,8 +71,8 @@ public class EntityGrenukeVel extends EntityVel{
 			if (abilint == 1){
 				System.out.println("Activating spikesploder!!");
 				for (int a=1; a < 25;++a){
-					EntityFireball ball = new EntitySmallFireball(worldObj, this.posX, this.posY, this.posZ, this.motionX*new Random().nextFloat(), this.motionY*new Random().nextFloat(), this.motionZ * new Random().nextFloat());
-					worldObj.spawnEntityInWorld(ball);
+					EntityFireball ball = new EntitySmallFireball(world, this.posX, this.posY, this.posZ, this.motionX*new Random().nextFloat(), this.motionY*new Random().nextFloat(), this.motionZ * new Random().nextFloat());
+					world.spawnEntity(ball);
 				}
 				//TODO spawn some grenade objects and spray outwards, not forwards.
 			}
@@ -79,8 +80,8 @@ public class EntityGrenukeVel extends EntityVel{
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition p_70184_1_) {
-		if (!this.worldObj.isRemote && !this.waiting){
+	protected void onImpact(RayTraceResult result) {
+		if (!this.world.isRemote && !this.waiting){
 			this.activateSlugAbility(true);
 		}
 	}
@@ -94,7 +95,7 @@ public class EntityGrenukeVel extends EntityVel{
 			this.motionY = 0.0f;
 			this.motionZ = 0.0f;
 		}
-		if (!this.worldObj.isRemote && waitTime < 0){
+		if (!this.world.isRemote && waitTime < 0){
 			this.activateSlugAbility(true);
 			this.turnToProtoform();
 			this.setDead();

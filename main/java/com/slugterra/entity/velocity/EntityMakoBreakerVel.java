@@ -8,6 +8,7 @@ import com.slugterra.entity.protoform.EntityMakoBreaker;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityMakoBreakerVel extends EntityVel{
@@ -30,7 +31,7 @@ public class EntityMakoBreakerVel extends EntityVel{
 	public EntityMakoBreakerVel(World world, EntityLivingBase entity)
 	{
 		super(world, entity);
-		this.elementParticle = "bubble";
+		this.elementParticle = EnumParticleTypes.WATER_BUBBLE;
 		if (this.name == null)
 			this.protoform = new EntityMakoBreaker(world);
 		else
@@ -45,26 +46,26 @@ public class EntityMakoBreakerVel extends EntityVel{
 			//finsmash
 			if (abilint == 0){
 				if (this.hitE instanceof EntityPlayer){
-					((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.fall, this.power);
-					((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.fall, this.power);
+					((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.FALL, this.power);
+					((EntityPlayer)this.hitE).attackEntityFrom(DamageSource.FALL, this.power);
 				}
 			}
 
 			//Bruteeth
 			else if(abilint == 1){
 				System.out.println("Bruteeth activated!!");
-				this.worldObj.newExplosion(this, posX, posY, posZ, 1.0F, false, true);
+				this.world.newExplosion(this, posX, posY, posZ, 1.0F, false, true);
 			}
 		}else{
 			if (abilint == 0){
 				System.out.println("Razorstorm activated!!");
 				for (int a=1;a<19;a++){
 					//TODO replace these with teeth objects
-					EntityBolt e = new EntityBolt(worldObj, posX+ability.nextInt(a), posY+ability.nextInt(a), posZ+ability.nextInt(a), this.motionX, this.motionY, this.motionZ);
+					EntityBolt e = new EntityBolt(world, posX+ability.nextInt(a), posY+ability.nextInt(a), posZ+ability.nextInt(a), this.motionX, this.motionY, this.motionZ);
 					e.motionX = this.motionX;
 					e.motionY = this.motionY;
 					e.motionZ = this.motionZ;
-					this.worldObj.spawnEntityInWorld(e);
+					this.world.spawnEntity(e);
 				}
 			}
 		}

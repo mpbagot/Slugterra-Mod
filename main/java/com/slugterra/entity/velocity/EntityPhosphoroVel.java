@@ -9,7 +9,9 @@ import com.slugterra.entity.protoform.EntityPhosphoro;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityPhosphoroVel extends EntityVel{
@@ -32,7 +34,7 @@ public class EntityPhosphoroVel extends EntityVel{
 	public EntityPhosphoroVel(World world, EntityLivingBase entity)
 	{
 		super(world, entity);
-		this.elementParticle = "crit";
+		this.elementParticle = EnumParticleTypes.CRIT;
 		if (this.name == null)
 			this.protoform = new EntityPhosphoro(world);
 		else
@@ -49,20 +51,20 @@ public class EntityPhosphoroVel extends EntityVel{
 			//arcalyte ability
 			if (abilint == 0){
 				System.out.println("Arcalyte activated!!");
-				worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2.0F, false);
+				this.world.createExplosion(this, this.posX, this.posY, this.posZ, 2.0F, false);
 				for (int j = 0; j < 1000; ++j){
-					this.worldObj.spawnParticle("reddust", this.posX, this.posY, this.posZ, 1.0D, 1.0D, 1.0D);
+					this.world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX, this.posY, this.posZ, 1.0D, 1.0D, 1.0D);
 				}
 			}
 
 			//flashbang ability
 			else if(abilint == 1){
 				System.out.println("flashbang activated!!");
-				List players = this.worldObj.playerEntities;
-				for (int a=0;a<players.size();a++){
+				List<EntityPlayer> players = this.world.playerEntities;
+				for (int a = 0; a < players.size(); a++){
 					if(((EntityPlayer)players.get(a)).canEntityBeSeen(this)){
-						((EntityPlayer)players.get(a)).addPotionEffect(new PotionEffect(15, 75));
-						((EntityPlayer)players.get(a)).addPotionEffect(new PotionEffect(16, 75));
+						((EntityPlayer)players.get(a)).addPotionEffect(new PotionEffect(Potion.REGISTRY.getObjectById(15), 75));
+						((EntityPlayer)players.get(a)).addPotionEffect(new PotionEffect(Potion.REGISTRY.getObjectById(16), 75));
 					}
 				}
 			}
@@ -70,10 +72,10 @@ public class EntityPhosphoroVel extends EntityVel{
 			//Beamblaze ability
 			else if (abilint == 2){
 				System.out.println("Beamblaze activated!!");
-				EntityPlayerMP player = (EntityPlayerMP) this.worldObj.getClosestPlayerToEntity(this, 30.0f);
+				EntityPlayerMP player = (EntityPlayerMP) this.world.getClosestPlayerToEntity(this, 30.0f);
 				if (player != null){
-					player.addPotionEffect(new PotionEffect(15, 125));
-					player.addPotionEffect(new PotionEffect(16, 125));
+					player.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObjectById(15), 125));
+					player.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObjectById(16), 125));
 					player.setFire(2);
 				}
 			}
@@ -82,8 +84,8 @@ public class EntityPhosphoroVel extends EntityVel{
 			else if (abilint == 3){
 				for (int a=1;a<25;a++){
 					//TODO Fix the rendering of these
-					EntityBolt toSpawn = new EntityBolt(this.worldObj, this.posX + new Random().nextInt(a), this.posY + new Random().nextInt(a), this.posZ + new Random().nextInt(a), this.motionX, this.motionY, this.motionZ);
-					this.worldObj.spawnEntityInWorld(toSpawn);
+					EntityBolt toSpawn = new EntityBolt(this.world, this.posX + new Random().nextInt(a), this.posY + new Random().nextInt(a), this.posZ + new Random().nextInt(a), this.motionX, this.motionY, this.motionZ);
+					this.world.spawnEntity(toSpawn);
 				}
 			}
 		}

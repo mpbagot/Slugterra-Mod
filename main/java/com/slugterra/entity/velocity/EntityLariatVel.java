@@ -8,6 +8,7 @@ import com.slugterra.entity.protoform.EntityLariat;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -50,7 +51,7 @@ public class EntityLariatVel extends EntityVel{
 				System.out.println("Stringler actvated!!!");
 				int y = 0;
 				while (this.world.getBlockState(new BlockPos((int)this.posX, (int)this.posY-y, (int)this.posZ)).getBlock() == Blocks.AIR){
-					this.world.setBlock((int)this.posX, (int)this.posY-y, (int)this.posZ, BlockRegistry.slimeRope);
+					this.world.setBlockState(new BlockPos((int)this.posX, (int)this.posY-y, (int)this.posZ), BlockRegistry.slimeRope.getDefaultState());
 					y++;
 				}
 			}
@@ -58,8 +59,8 @@ public class EntityLariatVel extends EntityVel{
 			//Stinklash ability
 			else if(abilint == 1){
 				if (this.hitE instanceof EntityPlayer){
-					//TODO Get the correct Potion object
-					((EntityPlayer)this.hitE).addPotionEffect(new PotionEffect(null, 9, 125));
+					// Nauseate the player
+					((EntityPlayer)this.hitE).addPotionEffect(new PotionEffect(Potion.REGISTRY.getObjectById(9), 125));
 				}
 			}
 		} else {

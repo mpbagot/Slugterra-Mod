@@ -61,38 +61,38 @@ public class EntityInfernusVel extends EntityVel{
 				this.killColl = false;
 				if (this.motionX > 0) {
 					if (this.motionZ > 0) {
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX+1), Math.round(this.posY), Math.round(this.posZ+1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX), Math.round(this.posY), Math.round(this.posZ+1)));
 
 					} else if (this.motionZ < 0) {
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX+1), Math.round(this.posY), Math.round(this.posZ-1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX), Math.round(this.posY), Math.round(this.posZ-1)));
 
 					}
-					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX+1), Math.round((float)this.posY), Math.round((float)this.posZ)));
+					this.world.setBlockToAir(new BlockPos(Math.round(this.posX+1), Math.round(this.posY), Math.round(this.posZ)));
 
 				} else if (this.motionX < 0) {
 					if (this.motionZ > 0) {
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX-1), Math.round(this.posY), Math.round(this.posZ+1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX), Math.round(this.posY), Math.round(this.posZ+1)));
 
 					} else if (this.motionZ < 0) {
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
-						this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX-1), Math.round(this.posY), Math.round(this.posZ-1)));
+						this.world.setBlockToAir(new BlockPos(Math.round(this.posX), Math.round(this.posY), Math.round(this.posZ-1)));
 
 					}
-					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX-1), Math.round((float)this.posY), Math.round((float)this.posZ)));
+					this.world.setBlockToAir(new BlockPos(Math.round(this.posX-1), Math.round(this.posY), Math.round((float)this.posZ)));
 
 				} else {
-					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ+1)));
-					this.world.setBlockToAir(new BlockPos(Math.round((float)this.posX), Math.round((float)this.posY), Math.round((float)this.posZ-1)));
+					this.world.setBlockToAir(new BlockPos(Math.round(this.posX), Math.round(this.posY), Math.round(this.posZ+1)));
+					this.world.setBlockToAir(new BlockPos(Math.round(this.posX), Math.round(this.posY), Math.round(this.posZ-1)));
 
 				}
 			}
 
 			//flamespire ability
 			else if(abilint == 1){
-				new WorldGeneratorFlameSpire().generateSlugterra(this.world, new Random(), (int)this.posX, (int)this.posZ);
+				//new WorldGeneratorFlameSpire().generateSlugterra(this.world, new Random(), (int)this.posX, (int)this.posZ);
 			}
 
 			else if (abilint == 3){
@@ -163,11 +163,13 @@ public class EntityInfernusVel extends EntityVel{
 	}
 	
 	private void makePlus(int x, int y, int z, boolean trench){
-		for (int a=-1;a<2;a++){
-			for (int b=-1;b<2;b++){
-				this.world.setBlock(x+a, y, z+b, Blocks.FIRE);
-				if (trench && a==0 && b==0){
-					this.world.setBlock(x, y-1, z, Blocks.FIRE);
+		for (int a=-1;a<2;a++)
+		{
+			for (int b=-1;b<2;b++)
+			{
+				this.world.setBlockState(new BlockPos(x+a, y, z+b), Blocks.FIRE.getDefaultState());
+				if (trench && a==0 && b==0) {
+					this.world.setBlockState(new BlockPos(x, y-1, z), Blocks.FIRE.getDefaultState());
 				}
 			}
 		}
