@@ -12,7 +12,7 @@ public interface ISlugInv {
 	public InventorySlug getInventory();
 	public void setInventory(InventorySlug inventory);
 	public void loadInventory(NBTTagCompound inventory);
-	public void saveInventoryToNBT(NBTTagCompound inventory);
+	public NBTTagCompound saveInventoryToNBT(NBTTagCompound inventory);
 	
 	public void increaseSlot();
 

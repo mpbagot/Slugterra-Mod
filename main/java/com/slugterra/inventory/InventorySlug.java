@@ -149,25 +149,26 @@ public class InventorySlug implements IInventory
 		return itemstack.getItem() instanceof ItemSlug;
 	}
 
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		NBTTagList items = new NBTTagList();
 
 		for (int i = 0; i < getSizeInventory(); ++i)
 		{
-//			if (getStackInSlot(i).getCount() != 0)
-//			{
+			if (getStackInSlot(i).getCount() != 0)
+			{
 				NBTTagCompound item = new NBTTagCompound();
 				item.setByte("Slot", (byte) i);
 				getStackInSlot(i).writeToNBT(item);
 				items.appendTag(item);
-//			}
+			}
 		}
 
 		// We're storing our items in a custom tag list using our 'tagName' from above
 		// to prevent potential conflicts
 		compound.setTag(tagName, items);
 
+		return compound;
 	}
 
 	public void readFromNBT(NBTTagCompound compound)
