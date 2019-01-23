@@ -4,6 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInventoryProvider;
+import com.slugterra.inventory.InventorySlug;
+import com.slugterra.item.BlasterBase;
 import com.slugterra.item.SlingerArmour;
 import com.slugterra.lib.Strings;
 
@@ -62,9 +64,15 @@ public class GuiSlugBeltOverlay extends Gui{
 
 		GL11.glEnable(GL11.GL_BLEND);
 
-		//rendering square thing over hotbar
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID, "textures/gui/hotbarsquare.png"));
-		this.drawTexturedModalRect(2, (22 * props.getSlot()) + (l/2-92)+1, 0, 0, 26, 26);
+		//rendering selector squares over hotbar
+		if (this.mc.player.getHeldItemOffhand().getItem() instanceof BlasterBase) {
+			this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID, "textures/gui/hotbarsquare.png"));
+			this.drawTexturedModalRect(2, (22 * ((props.getSlot() + 1) % InventorySlug.INV_SIZE)) + (l/2-92)+1, 0, 0, 26, 26);
+		}
+		if (this.mc.player.getHeldItemMainhand().getItem() instanceof BlasterBase) {
+			this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID, "textures/gui/hotbarsquare.png"));
+			this.drawTexturedModalRect(2, (22 * props.getSlot()) + (l/2-92)+1, 0, 0, 26, 26);
+		}
 	}
 
 	private void renderInventorySlot(int p_73832_1_, int p_73832_2_, int p_73832_3_)
