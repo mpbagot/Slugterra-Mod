@@ -36,11 +36,7 @@ public class SlugterraEntityRegistry {
 
 	public static int entityID = 0;
 	
-	public static void mainRegistry() {
-		registerEntity();
-	}
-
-	public static void registerEntity() {
+	public static void registerEntities() {
 		createEntityWithEgg(EntityInfernus.class, "infernus_slug", 0xFF962E, 0xFF0000);
 		createEntityWithEgg(EntityLariat.class, "lariat_slug", 0x73B806, 0x00687D);
 		createEntityWithEgg(EntityJellyish.class, "jellyish_slug", 0xB2BF48, 0x33819C);

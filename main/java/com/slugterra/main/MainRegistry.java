@@ -55,8 +55,7 @@ public class MainRegistry {
 	public void PreLoad(FMLPreInitializationEvent PreEvent){
 		SlugterraCreativeTabs.initialiseTabs();
 		proxy.preInit(PreEvent);
-//		SlugterraBlocks.mainRegistry();
-		SlugterraEntityRegistry.mainRegistry();
+		SlugterraEntityRegistry.registerEntities();
 		proxy.registerRenderThings();
 		EntitySlingers.mainRegistry();
 		
