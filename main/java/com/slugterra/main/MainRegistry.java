@@ -11,6 +11,7 @@ import com.slugterra.packets.MechaAnimPacket;
 import com.slugterra.packets.OpenGuiPacket;
 import com.slugterra.packets.SyncPlayerPropsPacket;
 import com.slugterra.packets.UpdateSlotPacket;
+import com.slugterra.world.WorldGeneratorTheDrop;
 
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Strings.MODID, name = Strings.name, version = Strings.version)
@@ -57,11 +59,13 @@ public class MainRegistry {
 		SlugterraEntityRegistry.mainRegistry();
 		proxy.registerRenderThings();
 		EntitySlingers.mainRegistry();
-		//dimension stuff
+		
+		// Dimension and Biomes
 //		DimensionType dimensionTypeSlugterra = DimensionType.register("SLUGTERRA", "_slugterra", dimensionIdSlugterra, WorldProviderSlugterra.class, true);
 //		DimensionManager.registerDimension(dimensionIdSlugterra, dimensionTypeSlugterra);
 //		BiomeRegistry.mainRegistry();
-		//new packets
+		
+		// Packets
 	    network = NetworkRegistry.INSTANCE.newSimpleChannel("SlugChannelNew");
 	    network.registerMessage(MechaAnimPacket.Handler.class, MechaAnimPacket.class, 0, Side.SERVER);
 	    network.registerMessage(OpenGuiPacket.Handler.class, OpenGuiPacket.class, 1, Side.SERVER);
@@ -87,7 +91,7 @@ public class MainRegistry {
 		MinecraftForge.EVENT_BUS.register(new SlugterraKeyHandler());
 		
 		//world generators
-//		GameRegistry.registerWorldGenerator(new WorldGeneratorTheDrop(), 1);
+		GameRegistry.registerWorldGenerator(new WorldGeneratorTheDrop(), 1);
 //		GameRegistry.registerWorldGenerator(new WorldGeneratorGreatForge(), 2);
 //		GameRegistry.registerWorldGenerator(new WorldGeneratorBullseyeGhoul(), 2);
 //		GameRegistry.registerWorldGenerator(new WorldGenMushrooms(), 1);

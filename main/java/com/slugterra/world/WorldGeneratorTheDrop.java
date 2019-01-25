@@ -6,6 +6,8 @@ import java.util.Random;
 import com.slugterra.world.theDrop.TheDropStructure;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -30,24 +32,22 @@ public class WorldGeneratorTheDrop implements IWorldGenerator
 	{
 		TheDropStructure drops = new TheDropStructure();
 
-		for(int x = 0;x<2;x++)
-		{
-			int i = chunkX + rand.nextInt(16);
-			int k = chunkZ + rand.nextInt(16);
-			int j = world.getHeight(i, k);
-			if(!hasGenned){
-				genmess = ("The Drop Is Spawning At: " + i + "/" + j + "/" + k);
-				//tell players the generation message here
-				List players = world.playerEntities;
-				for (int a = 0; a< players.size();a++){
+		int i = chunkX + rand.nextInt(16);
+		int k = chunkZ + rand.nextInt(16);
+		int j = world.getHeight(i, k);
+		if(!hasGenned) {
+			// Attempt to generate. If successful, send out a message. If not, wait and try again later
+			hasGenned = drops.generate(world, rand, new BlockPos(i, j - 20, k));
+			if (hasGenned) {
+				genmess = ("The Drop has spawned at: " + (i + 2) + "/" + j + "/" + (k + 9));
+				// Alert players about the drop's location.
+				List<EntityPlayer> players = world.playerEntities;
+				for (int a = 0; a < players.size();a++)
+				{
 					EntityPlayer player = (EntityPlayer) players.get(a);
-					//TODO FIX THIS!!!
-					//player.addChatMessage(new ChatComponentText(genmess));
+					player.sendMessage(new TextComponentString(genmess));
 				}
-				hasGenned = true;
-				drops.generate(world, rand, i, j-20, k);
 			}
 		}
-
 	}
 }
