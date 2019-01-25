@@ -3,6 +3,7 @@ package com.slugterra.entity.velocity;
 import java.util.Random;
 
 import com.slugterra.entity.EntitySlug;
+import com.slugterra.entity.particles.ParticleSpawner;
 import com.slugterra.events.SlugterraSoundEvents;
 
 import net.minecraft.client.particle.Particle;
@@ -16,7 +17,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityVel extends EntityThrowable{
+public class EntityVel extends EntityThrowable {
 
 	private float damage;
 	public int power;
@@ -127,30 +128,29 @@ public class EntityVel extends EntityThrowable{
 	public void onUpdate(){
 		super.onUpdate();
 		this.killColl = true;
-		if (this.target != null){
-			this.posX += (this.posX-target.posX)/60;
-			this.posY += (this.posY-target.posY)/60;
-			this.posZ += (this.posZ-target.posZ)/60;
+		if (this.target != null) {
+			// Accelerate towards the target if applicable
+			this.motionX += (this.posX-target.posX)/30;
+			this.motionY += (this.posY-target.posY)/30;
+			this.motionZ += (this.posZ-target.posZ)/30;
 		}
-		if (this.ticksExisted == 4 && !this.world.isRemote && new Random().nextInt(2) == 0){
+		if (this.ticksExisted == 4 && !this.world.isRemote && new Random().nextInt(2) == 0) {
 			this.impactAbility = true;
 			activateSlugAbility(false);
 		}
+		
 		this.setRotation(this.rotationYaw, this.rotationPitch+60);
-		if (this.world.isRemote && elementParticle != null){
-			for (int i = 0; i < 8; ++i)
-			{
-				//TODO send a packet to spawn particles everywhere!!!
-				//MainRegistry.packetPipeline.sendToAll(new TrailFXPacket());
-				this.world.spawnParticle(elementParticle, this.posX, this.posY, this.posZ, rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
-				System.out.println("spawning Vanilla Particles!!!");
+		
+		for (int i = 0; i < 8; ++i)
+		{
+			//TODO Synchronise particles between clients
+			if (elementParticle != null) {
+				this.world.spawnParticle(elementParticle, this.posX, this.posY, this.posZ, rand.nextDouble()/10, rand.nextDouble()/10, rand.nextDouble()/10);
+				//System.out.println("spawning Vanilla Particles!!!");
 			}
-		}
-		else if (this.world.isRemote && customParticle != null){
-			for (int i = 0; i < 8; ++i) {
-				//TODO send a packet to spawn particles everywhere!!!
-//				MainRegistry.proxy.spawnElementalParticles(this, this.world, customParticle);
-				System.out.println("Spawning Custom Particles");
+			else if (customParticle != null) {
+				ParticleSpawner.spawnParticleAtEntity(customParticle, this, rand);
+				//System.out.println("Spawning Custom Particles");
 			}
 		}
 	}
