@@ -1,6 +1,5 @@
 package com.slugterra.block;
 
-import com.slugterra.block.tileentity.TileEntityDropBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,7 +22,7 @@ public class BlockRegistry {
 	public static Block electricWall;
 
 	public static void initialiseBlock(){
-		dropSeat = new TileEntityDropBlock(Material.IRON);
+		dropSeat = new SlugterraDropBlock(Material.IRON);
 		slimeRope = new SlugterraSlimeRope(Material.LEAVES);
 //		slugContainer = new TileEntitySlugContainerBlock(Material.IRON);//.setBlockTextureName(Strings.MODID + ":slugcontainer");
 		slugterraGrass = new SlugterraGrassBlock(Material.GRASS);
