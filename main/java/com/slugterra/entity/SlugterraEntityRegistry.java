@@ -1,5 +1,6 @@
 package com.slugterra.entity;
 
+import com.slugterra.block.tileentity.TileEntitySlugContainerEntity;
 import com.slugterra.entity.protoform.EntityArmashelt;
 import com.slugterra.entity.protoform.EntityBoonDoc;
 import com.slugterra.entity.protoform.EntityDirtUrchin;
@@ -33,6 +34,7 @@ import com.slugterra.main.MainRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class SlugterraEntityRegistry {
 
@@ -72,6 +74,9 @@ public class SlugterraEntityRegistry {
 		createEntity(EntityRamstoneVel.class, "velocity_ramstone");
 		createEntity(EntityTazerlingVel.class, "velocity_tazerling");
 		createEntity(EntityGrenukeVel.class, "velocity_grenuke");
+		
+		// tile entities
+		GameRegistry.registerTileEntity(TileEntitySlugContainerEntity.class, "slug_container_entity");
 	}
 
 	public static void createEntityWithEgg(Class<? extends Entity> entityClass, String entityName, int solidColour, int spotColour) {

@@ -7,11 +7,10 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
-public class TileEntitySlugContainerEntity extends TileEntity implements ISidedInventory, IUpdatePlayerListBox {
+public class TileEntitySlugContainerEntity extends TileEntity implements ISidedInventory {
 
 	private final String name = "Slug Rack";
 
@@ -21,7 +20,15 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	public static final int INV_SIZE = 20;
 	
 	/** Inventory's size must be same as number of slots you add to the Container class */
-	private ItemStack[] inventory = new ItemStack[INV_SIZE];
+	private ItemStack[] inventory = new ItemStack[]{
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, 
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, 
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, 
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+			};
+
+	private boolean hasChanged = false;
 
 	@Override
 	public int getSizeInventory()
@@ -29,9 +36,23 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 		return inventory.length;
 	}
 	
+	public int getItemCount()
+	{
+		int count = 0;
+		for (int a = 0; a < getSizeInventory(); a++)
+		{
+			if (this.getStackInSlot(a) != ItemStack.EMPTY) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
 	public int getFirstEmptySlot(){
-		for (int a=0;a<this.inventory.length;++a){
-			if (this.inventory[a] == null){
+		for (int a = 0;a < this.inventory.length;++a)
+		{
+			if (this.inventory[a] == ItemStack.EMPTY) {
 				return a;
 			}
 		}
@@ -39,8 +60,9 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	}
 	
 	public int getLastFullSlot(){
-		for (int a=this.inventory.length-1; a >= 0; --a){
-			if (this.inventory[a] != null)
+		for (int a = this.inventory.length - 1; a >= 0; --a)
+		{
+			if (this.inventory[a] != ItemStack.EMPTY)
 				return a;
 		}
 		return -1;
@@ -56,34 +78,22 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	public ItemStack decrStackSize(int slot, int amount)
 	{
 		ItemStack stack = getStackInSlot(slot);
-		if (stack != null)
+		if (stack != ItemStack.EMPTY)
 		{
-			if (stack.stackSize > amount)
+			if (stack.getCount() > amount)
 			{
 				stack = stack.splitStack(amount);
-				if (stack.stackSize == 0)
+				if (stack.getCount() == 0)
 				{
-					setInventorySlotContents(slot, null);
+					this.removeStackFromSlot(slot);
 				}
 			}
 			else
 			{
-				setInventorySlotContents(slot, null);
+				removeStackFromSlot(slot);
 			}
 
 			this.markDirty();
-		}
-		return stack;
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
-	{
-		ItemStack stack = getStackInSlot(slot);
-		System.out.println(stack);
-		if (stack != null)
-		{
-			setInventorySlotContents(slot, stack);
 		}
 		return stack;
 	}
@@ -93,9 +103,9 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	{
 		this.inventory[slot] = itemstack;
 
-		if (itemstack != null && itemstack.stackSize <= this.getInventoryStackLimit())
+		if (itemstack != ItemStack.EMPTY && itemstack.getCount() <= this.getInventoryStackLimit())
 		{
-			itemstack.stackSize = this.getInventoryStackLimit();
+			itemstack.setCount(this.getInventoryStackLimit());
 		}
 
 		this.markDirty();
@@ -103,12 +113,12 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return name;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		return name.length() > 0;
 	}
 
@@ -120,25 +130,20 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	@Override
 	public void markDirty()
 	{
-		for (int i = 0; i < this.getSizeInventory(); ++i)
-		{
-			if (this.getStackInSlot(i) != null && this.getStackInSlot(i).stackSize == 0){
-				this.setInventorySlotContents(i, this.getStackInSlot(i));
-			}
-		}
+		hasChanged = true;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	public boolean isUsableByPlayer(EntityPlayer entityplayer)
 	{
 		return true;
 	}
 
 	@Override
-	public void openInventory() {}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public void closeInventory() {}
+	public void closeInventory(EntityPlayer player) {}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
@@ -147,13 +152,13 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound) {
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		NBTTagList items = new NBTTagList();
 
 		for (int i = 0; i < getSizeInventory(); ++i)
 		{
-			if (getStackInSlot(i) != null)
+			if (getStackInSlot(i) instanceof ItemStack)
 			{
 				NBTTagCompound item = new NBTTagCompound();
 				item.setByte("Slot", (byte) i);
@@ -164,6 +169,9 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 
 		compound.setTag(tagName, items);
 
+		hasChanged = false;
+		
+		return compound;
 	}
 
 	@Override
@@ -178,37 +186,74 @@ public class TileEntitySlugContainerEntity extends TileEntity implements ISidedI
 			byte slot = item.getByte("Slot");
 
 			if (slot >= 0 && slot < getSizeInventory()) {
-				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+				inventory[slot] = new ItemStack(item);
 			}
 		}
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getSlotsForFace(EnumFacing side) {
 		return null;
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemstack, int direction) {
+	public boolean canInsertItem(int index, ItemStack itemstack, EnumFacing direction) {
 		return isItemValidForSlot(index, itemstack);
 	}
 
 	@Override
-	public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
 		return true;
 	}
 
-	@Override
-	public void update() {}
-
 	public int getFullSlotNum() {
 		int b = 0;
-		for (int a=0;a< this.INV_SIZE; ++a){
-			if (this.getStackInSlot(a) != null){
+		for (int a=0;a< INV_SIZE; ++a){
+			if (this.getStackInSlot(a) != ItemStack.EMPTY){
 				b = b+1;
 			}
 		}
 		return b;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		for (int i = 0; i < this.getSizeInventory(); i++) {
+			if (this.getStackInSlot(i) != ItemStack.EMPTY)
+				return false;
+		}
+		return true;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		ItemStack stack = getStackInSlot(index);
+		this.setInventorySlotContents(index, ItemStack.EMPTY);
+		return stack;
+	}
+
+	
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		for (int i = 0; i < this.getSizeInventory(); i++)
+		{
+			this.removeStackFromSlot(i);
+		}
 	}
 
 }

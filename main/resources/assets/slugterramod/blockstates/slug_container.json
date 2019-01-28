@@ -1,0 +1,9 @@
+{
+   "multipart": [
+       {   "apply": { "model": "slugterramod:slug_container" }},
+       {   "when" : { "item_count" : "1" },
+           "apply" : { "model" : "slugterramod:slug_container/1" }
+       }
+       
+   ]
+}
