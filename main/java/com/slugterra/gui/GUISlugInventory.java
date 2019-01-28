@@ -35,15 +35,12 @@ public class GUISlugInventory extends GuiContainer
 
 	/** Could use IInventory type to be more generic, but this way will save an import... */
 	private final InventorySlug inventory;
-	private final EntityPlayer player;
 
 	public GUISlugInventory(EntityPlayer entityPlayer, InventoryPlayer inventoryPlayer, InventorySlug inventoryCustom)
 	{
 		super(new ContainerSlug(entityPlayer, inventoryPlayer, inventoryCustom));
 
 		this.inventory = inventoryCustom;
-		this.player = entityPlayer;
-		// if you need the player for something later on, store it in a local variable here as well
 	}
 
 	/**
