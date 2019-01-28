@@ -1,6 +1,5 @@
 package com.slugterra.entity.particles;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
