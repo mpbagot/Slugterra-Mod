@@ -75,12 +75,6 @@ public class ClientProxy extends CommonProxy{
 	
 	@Override
 	public void registerRenderThings(){
-//
-//		//special item renderers
-//		MinecraftForgeClient.registerItemRenderer(SlugterraItems.slugtubeItem, (IItemRenderer)new SlugTubeRender());
-//		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterFemale, (IItemRenderer)new RenderPrimeBlasterFemale());
-//		MinecraftForgeClient.registerItemRenderer(SlugterraItems.primeBlasterMale, (IItemRenderer)new RenderPrimeBlasterMale());
-
 		//entity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernus.class, new SlugRenderFactory(new ModelInfernus(), "infernus"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLariat.class, new SlugRenderFactory(new ModelLariat(), "lariat"));
