@@ -35,6 +35,7 @@ public class WorldGeneratorTheDrop implements IWorldGenerator
 		int i = chunkX + rand.nextInt(16);
 		int k = chunkZ + rand.nextInt(16);
 		int j = world.getHeight(i, k);
+		
 		if(!hasGenned) {
 			// Attempt to generate. If successful, send out a message. If not, wait and try again later
 			hasGenned = drops.generate(world, rand, new BlockPos(i, j - 20, k));

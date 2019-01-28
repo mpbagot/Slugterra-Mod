@@ -10,10 +10,12 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGeneratorFlameSpire implements IWorldGenerator
 {
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
-			IChunkProvider chunkProvider) {
+	public void generate(World world, Random random, int chunkX, int chunkZ) {
 		Flamespire flamespire = new Flamespire();
 		flamespire.generate(world, random, new BlockPos(chunkX, world.getHeight(chunkX, chunkZ), chunkZ));	
 	}
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
+			IChunkProvider chunkProvider) {}
 }
