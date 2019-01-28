@@ -1,6 +1,7 @@
-package com.slugterra.render;
+package com.slugterra.render.factory;
 
 import com.slugterra.entity.EntityMecha;
+import com.slugterra.render.RenderMecha;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;

@@ -41,8 +41,8 @@ import com.slugterra.model.protoform.ModelTazerling;
 import com.slugterra.model.slingers.ModelSlingerArmour;
 import com.slugterra.render.BlockRenderRegistry;
 import com.slugterra.render.ItemRenderRegistry;
-import com.slugterra.render.MechaRenderFactory;
-import com.slugterra.render.SlugRenderFactory;
+import com.slugterra.render.factory.MechaRenderFactory;
+import com.slugterra.render.factory.SlugRenderFactory;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
