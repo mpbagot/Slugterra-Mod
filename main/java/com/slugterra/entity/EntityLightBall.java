@@ -5,13 +5,13 @@ import com.slugterra.entity.velocity.EntityVel;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityLightBall extends EntityThrowable{
 
-	public EntityLightBall(World p_i1777_1_, double posx, double posy, double posz, EntityVel entity) {
-		super(p_i1777_1_, posx, posy, posz);
+	public EntityLightBall(World world, double posx, double posy, double posz, EntityVel entity) {
+		super(world, posx, posy, posz);
 		this.motionX = entity.motionX;
 		this.motionY = entity.motionY;
 		this.motionZ = entity.motionZ;
@@ -23,11 +23,11 @@ public class EntityLightBall extends EntityThrowable{
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition coll) {
-		if (!worldObj.isRemote)
-			worldObj.setBlock(coll.blockX, coll.blockY+1, coll.blockZ, Blocks.fire);
+	protected void onImpact(RayTraceResult coll) {
+		if (!world.isRemote)
+			world.setBlockState(coll.getBlockPos().add(0, 1, 0), Blocks.FIRE.getDefaultState());
 		if (coll.entityHit != null){
-			coll.entityHit.attackEntityFrom(DamageSource.fall, 0.5F);
+			coll.entityHit.attackEntityFrom(DamageSource.FALL, 0.5F);
 		}
 		this.setDead();
 	}

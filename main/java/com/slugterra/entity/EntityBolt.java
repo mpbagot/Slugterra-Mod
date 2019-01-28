@@ -2,7 +2,7 @@ package com.slugterra.entity;
 
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityBolt extends EntityFireball {
@@ -17,8 +17,8 @@ public class EntityBolt extends EntityFireball {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition coll) {
-		this.worldObj.setBlock(coll.blockX, coll.blockY, coll.blockZ, Blocks.fire);
+	protected void onImpact(RayTraceResult coll) {
+		this.world.setBlockState(coll.getBlockPos(), Blocks.FIRE.getDefaultState());
 	}
 
 }
