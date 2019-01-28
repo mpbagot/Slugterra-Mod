@@ -18,6 +18,8 @@ import com.slugterra.entity.protoform.EntityPhosphoro;
 import com.slugterra.entity.protoform.EntityRamstone;
 import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
+import com.slugterra.entity.slingers.AllySlinger;
+import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.keys.KeyBindings;
 import com.slugterra.model.ModelMecha;
@@ -111,11 +113,14 @@ public class ClientProxy extends CommonProxy{
 //		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlugContainerEntity.class, new TileEntitySlugContainerRenderer());
 //		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlimeRopeEntity.class, new TileEntitySlimeRopeRenderer());
 //
-//		//slinger render
-//		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class, new RenderEnemySlinger(new ModelBiped(), 0));
-//
 //		//misc entity render
 		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new MechaRenderFactory(new ModelMecha(), "wolf", 2));
+		//slinger render
+		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class,
+				new SlingerRenderFactory(0));
+		RenderingRegistry.registerEntityRenderingHandler(AllySlinger.class,
+				new SlingerRenderFactory(1));
+
 	}
 
 //	@Override
