@@ -1,20 +1,17 @@
 package com.slugterra.block;
 
-import com.slugterra.block.tileentity.TileEntitySlimeRopeEntity;
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
 import com.slugterra.lib.Strings;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
-public class SlugterraSlimeRope extends BlockContainer{
+public class SlugterraSlimeRope extends Block {
 	
 	private final AxisAlignedBB AABB = new AxisAlignedBB(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
 	
@@ -30,11 +27,6 @@ public class SlugterraSlimeRope extends BlockContainer{
     {
         return AABB;
     }
-	
-	@Override
-	public TileEntity createNewTileEntity(World world, int num){
-		return new TileEntitySlimeRopeEntity();
-	}
 	
 	@Override
 	public boolean isOpaqueCube(IBlockState state){
