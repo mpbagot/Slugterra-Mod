@@ -66,6 +66,7 @@ public class SlugterraKeyHandler {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onGuiKeyInput(GuiScreenEvent.KeyboardInputEvent.Pre event) {
 		System.out.println(event.getGui());
