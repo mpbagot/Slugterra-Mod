@@ -44,6 +44,7 @@ import com.slugterra.model.slingers.ModelSlingerArmour;
 import com.slugterra.render.BlockRenderRegistry;
 import com.slugterra.render.ItemRenderRegistry;
 import com.slugterra.render.factory.MechaRenderFactory;
+import com.slugterra.render.factory.SlingerRenderFactory;
 import com.slugterra.render.factory.SlugRenderFactory;
 
 import net.minecraft.client.Minecraft;
@@ -112,15 +113,14 @@ public class ClientProxy extends CommonProxy{
 //		//TileEntity render
 //		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlugContainerEntity.class, new TileEntitySlugContainerRenderer());
 //		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlimeRopeEntity.class, new TileEntitySlimeRopeRenderer());
-//
-//		//misc entity render
-		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new MechaRenderFactory(new ModelMecha(), "wolf", 2));
 		//slinger render
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class,
 				new SlingerRenderFactory(0));
 		RenderingRegistry.registerEntityRenderingHandler(AllySlinger.class,
 				new SlingerRenderFactory(1));
 
+		//misc entity render
+		RenderingRegistry.registerEntityRenderingHandler(EntityMecha.class, new MechaRenderFactory(new ModelMecha(), "wolf", 1.2f));
 	}
 
 //	@Override
