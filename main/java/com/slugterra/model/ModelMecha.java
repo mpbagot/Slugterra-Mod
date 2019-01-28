@@ -1,5 +1,9 @@
 package com.slugterra.model;
 
+import java.util.HashMap;
+
+import com.slugterra.entity.EntityMecha;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -8,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 public class ModelMecha extends ModelBase
 {
 
+	HashMap<String, Float> angles = new HashMap<String, Float>();
 
 	//fields
 	ModelRenderer FusionCore;
@@ -193,6 +198,7 @@ public class ModelMecha extends ModelBase
 		TopTopBackLeftLeg.setTextureSize(128, 128);
 		TopTopBackLeftLeg.mirror = true;
 		setRotation(TopTopBackLeftLeg, 0F, 0F, 0F);
+//		TopTopBackLeftLeg.mirror = false;
 		BottomTopBackLeftLeg = new ModelRenderer(this, 84, 0);
 		BottomTopBackLeftLeg.addBox(-0.5F, 2F, -1.5F, 1, 3, 3);
 		BottomTopBackLeftLeg.setRotationPoint(5F, 13.5F, 10F);
@@ -439,51 +445,59 @@ public class ModelMecha extends ModelBase
 	private void setRotation(ModelRenderer model, float x, float y, float z)
 	{
 		model.rotateAngleX = x;
+		angles.put(model.toString(), x);
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float limbSwingTick, float limbSwingAmplitude, float ageInTicks, float newHeadYaw, float headPitch, float scale, Entity entity)
 	{
-		float f6 = (180F / (float)Math.PI);
+		if (entity instanceof EntityMecha && ((EntityMecha)entity).isMechaFlying) {
+			return;
+		}
+		
+		float speed = (float) (entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
+		float swingMult = 1f;
+		limbSwingAmplitude = 4f * speed;
 
 		//front right leg
-		this.FootFrontRightLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.MiddleFrontRightLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.FrontRightToe3.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.FrontRightToe2.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.FrontRightToe1.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.TopFrontRightLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.BottomTopFrontRightLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
+		ModelRenderer[] frontRightModels = {
+				FootFrontRightLeg, MiddleFrontRightLeg, FrontRightToe3, FrontRightToe2,
+				FrontRightToe1, TopFrontRightLeg, BottomTopFrontRightLeg
+		};
+		float calcAngle = -MathHelper.sin(limbSwingTick * swingMult) * limbSwingAmplitude;
+		for (ModelRenderer model : frontRightModels) {
+			model.rotateAngleX = angles.get(model.toString()) + calcAngle;
+		}
 
 		//back right leg
-		this.BackRightToe1.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.BackRightToe2.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.BackRightToe3.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.BottomBackRightLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.MiddleBackRightLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.TopTopBackRightLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.BottomTopBackRightLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.FootBackRightLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-
+		ModelRenderer[] backRightModels = {
+				FootBackRightLeg, MiddleBackRightLeg, BackRightToe3, BackRightToe2,
+				BackRightToe1, TopTopBackRightLeg, BottomTopBackRightLeg, BottomBackRightLeg
+		};
+		calcAngle = -MathHelper.cos(limbSwingTick * swingMult) * limbSwingAmplitude;
+		for (ModelRenderer model : backRightModels) {
+			model.rotateAngleX = angles.get(model.toString()) + calcAngle;
+		}
 
 		//front left leg
-		this.FootFrontLeftLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.MiddleFrontLeftLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.FrontLeftToe3.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.FrontLeftToe2.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.FrontLeftToe1.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.TopFrontLeftLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
-		this.BottomTopFrontLeftLeg.rotateAngleX = -MathHelper.cos(f1 * 0.6662F + (float)Math.PI) * 1.4F * f1;
+		ModelRenderer[] frontLeftModels = {
+				FootFrontLeftLeg, MiddleFrontLeftLeg, FrontLeftToe3, FrontLeftToe2,
+				FrontLeftToe1, TopFrontLeftLeg, BottomTopFrontLeftLeg
+		};
+		calcAngle = MathHelper.sin(limbSwingTick * swingMult) * limbSwingAmplitude;
+		for (ModelRenderer model : frontLeftModels) {
+			model.rotateAngleX = angles.get(model.toString()) + calcAngle;
+		}
 
 		//back left leg
-		this.BackLeftToe1.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.BackLeftToe2.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.BackLeftToe3.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.BottomBackLeftLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.MiddleBackLeftLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.TopTopBackLeftLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.BottomTopBackLeftLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
-		this.FootBackLeftLeg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f1;
+		ModelRenderer[] backLeftModels = {
+				BackLeftToe1, BackLeftToe2, BackLeftToe3, BottomBackLeftLeg,
+				MiddleBackLeftLeg, TopTopBackLeftLeg, BottomTopBackLeftLeg, FootBackLeftLeg
+		};
+		calcAngle = MathHelper.cos(limbSwingTick * swingMult) * limbSwingAmplitude;
+		for (ModelRenderer model : backLeftModels) {
+			model.rotateAngleX = angles.get(model.toString()) + calcAngle;
+		}
 	}
 }
