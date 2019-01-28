@@ -15,7 +15,7 @@ public class ContainerSlug extends Container
 
 	public ContainerSlug(EntityPlayer player, InventoryPlayer inventoryPlayer, InventorySlug inventoryCustom)
 	{
-		int i;
+		int i = HOTBAR_END;
 
 		this.addSlotToContainer(new SlotSlugInv(inventoryCustom, 0, 13, 104));
 		this.addSlotToContainer(new SlotSlugInv(inventoryCustom, 1, 88, 7));
@@ -26,7 +26,7 @@ public class ContainerSlug extends Container
 
 		for (i = 0; i < 9; ++i)
 		{
-			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 143));
+			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 144));
 		}
 	}
 
@@ -46,7 +46,7 @@ public class ContainerSlug extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -58,9 +58,9 @@ public class ContainerSlug extends Container
 			if (par2 < INV_START)
 			{
 				// try to place in player inventory / action bar
-				if (!this.mergeItemStack(itemstack1, INV_START, INV_START + 8 + 1, true))
+				if (!this.mergeItemStack(itemstack1, INV_START, INV_START + 9, true))
 				{
-					return null;
+					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
@@ -73,14 +73,14 @@ public class ContainerSlug extends Container
 				{
 					if (!this.mergeItemStack(itemstack1, 0, InventorySlug.INV_SIZE, false))
 					{
-						return null;
+						return ItemStack.EMPTY;
 					}
 				}
 			}
 
 			if (itemstack1.getCount() == 0)
 			{
-				slot.putStack((ItemStack) null);
+				slot.putStack(ItemStack.EMPTY);
 			}
 			else
 			{
@@ -89,7 +89,7 @@ public class ContainerSlug extends Container
 
 			if (itemstack1.getCount() == itemstack.getCount())
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			slot.onTake(player, itemstack1);
