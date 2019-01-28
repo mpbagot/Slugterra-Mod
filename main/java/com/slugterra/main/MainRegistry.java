@@ -1,8 +1,6 @@
 package com.slugterra.main;
 
 import com.slugterra.creativetabs.SlugterraCreativeTabs;
-import com.slugterra.entity.SlugterraEntityRegistry;
-import com.slugterra.entity.slingers.EntitySlingers;
 import com.slugterra.events.SlugterraEventHandler;
 import com.slugterra.events.SlugterraKeyHandler;
 import com.slugterra.gui.GUIHandler;
@@ -55,9 +53,7 @@ public class MainRegistry {
 	public void PreLoad(FMLPreInitializationEvent PreEvent){
 		SlugterraCreativeTabs.initialiseTabs();
 		proxy.preInit(PreEvent);
-		SlugterraEntityRegistry.registerEntities();
 		proxy.registerRenderThings();
-		EntitySlingers.mainRegistry();
 		
 		// Dimension and Biomes
 //		DimensionType dimensionTypeSlugterra = DimensionType.register("SLUGTERRA", "_slugterra", dimensionIdSlugterra, WorldProviderSlugterra.class, true);

@@ -7,6 +7,7 @@ import com.slugterra.capabilities.IBlaster;
 import com.slugterra.capabilities.ISlugInv;
 import com.slugterra.capabilities.SlugInv;
 import com.slugterra.capabilities.SlugInvStorage;
+import com.slugterra.entity.SlugterraEntityRegistry;
 import com.slugterra.item.ItemBlockRegistry;
 import com.slugterra.item.ItemRegistry;
 import com.slugterra.item.SlugItemRegistry;
@@ -23,6 +24,7 @@ public class CommonProxy {
 		SlugItemRegistry.registerItems();
 		BlockRegistry.registerBlocks();
 		ItemBlockRegistry.registerBlocks();
+		SlugterraEntityRegistry.registerEntities();
 	}
 	
 	public void init(FMLInitializationEvent e) {

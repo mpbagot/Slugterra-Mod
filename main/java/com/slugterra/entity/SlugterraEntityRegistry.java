@@ -17,6 +17,8 @@ import com.slugterra.entity.protoform.EntityPhosphoro;
 import com.slugterra.entity.protoform.EntityRamstone;
 import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
+import com.slugterra.entity.slingers.AllySlinger;
+import com.slugterra.entity.slingers.EnemySlinger;
 import com.slugterra.entity.velocity.EntityArmasheltVel;
 import com.slugterra.entity.velocity.EntityGrenukeVel;
 import com.slugterra.entity.velocity.EntityInfernusVel;
@@ -55,8 +57,10 @@ public class SlugterraEntityRegistry {
 		createEntityWithEgg(EntityEnigmo.class, "enigmo_slug", 0x0094ff, 0xFFFFFF);
 		createEntityWithEgg(EntityRamstone.class, "ramstone_slug", 0x800000, 0x00a2e8);
 
-		// misc entity's
+		// misc entities
 		createEntityWithEgg(EntityMecha.class, "wolf_mecha", 0xD4D5C9, 0xF44C12);
+		createEntityWithEgg(AllySlinger.class, "ally_slinger", 0xD85C1E, 0x4BAED7);
+		createEntityWithEgg(EnemySlinger.class, "enemy_slinger", 0x191313, 0xD6141A);
 		createEntity(EntityLightBall.class, "light_ball_entity");
 
 		// velocity slugs
