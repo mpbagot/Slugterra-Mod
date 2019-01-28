@@ -30,14 +30,14 @@ public class EntityVel extends EntityThrowable {
 	public String name;
 	public int max;
 	public int id;
-	public EntityPlayerMP shooter;
+	public Entity shooter;
 	public EntityPlayerMP target = null;
 	public EnumParticleTypes elementParticle;
 	public Particle customParticle = null;
 
 	public EntityVel(World world, EntityLivingBase entity) {
 		super(world, entity);
-		this.shooter = (EntityPlayerMP) entity;
+		this.shooter = entity;
 		this.setLocationAndAngles(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
 		this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
 		this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
