@@ -53,11 +53,6 @@ public class EntitySlug extends EntityTameable{
 		this.tasks.addTask(1, new EntityAITempt(this, 0.9D, ItemRegistry.slugfood, false));
 	}
 
-//	@Override
-//	public boolean isAIEnabled(){
-//		return true;
-//	}
-
 	public void setFollowSlinger(boolean shouldF){
 		this.shouldFollow = shouldF;
 		if (shouldF){
