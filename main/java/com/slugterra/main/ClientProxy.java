@@ -110,7 +110,6 @@ public class ClientProxy extends CommonProxy{
 //		RenderingRegistry.registerEntityRenderingHandler(EntityGrenukeVel.class, new RenderGrenukeVel(VelocitySlugItem.grenukeVel));
 //
 //		//TileEntity render
-//		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDropEntity.class, new TileEntityDropRenderer());
 //		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlugContainerEntity.class, new TileEntitySlugContainerRenderer());
 //		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlimeRopeEntity.class, new TileEntitySlimeRopeRenderer());
 //

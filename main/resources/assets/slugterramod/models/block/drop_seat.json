@@ -1,0 +1,48 @@
+{
+	"textures": {
+		"texture0": "slugterramod:blocks/drop_seat0",
+		"particle": "slugterramod:blocks/drop_seat0",
+		"texture1": "slugterramod:blocks/drop_seat1",
+		"texture2": "slugterramod:blocks/drop_seat2",
+		"texture3": "slugterramod:blocks/drop_seat3",
+		"texture4": "slugterramod:blocks/drop_seat4"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 1, 16, 9], "texture": "#texture0"},
+				"east": {"uv": [0, 1, 16, 9], "texture": "#texture0"},
+				"south": {"uv": [0, 1, 16, 9], "texture": "#texture0"},
+				"west": {"uv": [0, 1, 16, 9], "texture": "#texture0"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#texture1"},
+				"down": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#texture2"}
+			}
+		},
+		{
+			"from": [1, 6, 16],
+			"to": [15, 12, 19],
+			"faces": {
+				"north": {"uv": [1, 9, 15, 15], "texture": "#texture4"},
+				"east": {"uv": [1, 1, 4, 7], "texture": "#texture3"},
+				"south": {"uv": [1, 1, 15, 7], "texture": "#texture4"},
+				"west": {"uv": [1, 9, 4, 15], "texture": "#texture3"},
+				"up": {"uv": [6, 1, 9, 15], "rotation": 90, "texture": "#texture3"},
+				"down": {"uv": [11, 1, 14, 15], "rotation": 270, "texture": "#texture3"}
+			}
+		},
+		{
+			"from": [1, 6, -3],
+			"to": [15, 12, 0],
+			"faces": {
+				"north": {"uv": [1, 9, 15, 15], "texture": "#texture4"},
+				"east": {"uv": [1, 1, 4, 7], "texture": "#texture3"},
+				"south": {"uv": [1, 1, 15, 7], "texture": "#texture4"},
+				"west": {"uv": [1, 9, 4, 15], "texture": "#texture3"},
+				"up": {"uv": [6, 1, 9, 15], "rotation": 90, "texture": "#texture3"},
+				"down": {"uv": [11, 1, 14, 15], "rotation": 270, "texture": "#texture3"}
+			}
+		}
+	]
+}
