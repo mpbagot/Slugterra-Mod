@@ -41,6 +41,13 @@ public class EntityMecha extends EntityAnimal {
 	}
 
 	@Override
+	public void updatePassenger(Entity passenger) {
+		if (this.isPassenger(passenger)) {
+            passenger.setPosition(this.posX, this.posY + 0.3D, this.posZ);
+        }
+	}
+	
+	@Override
 	public void onLivingUpdate(){
 		if (isMechaFlying){
 			boostFuel -= 1;
