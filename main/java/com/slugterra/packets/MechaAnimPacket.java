@@ -34,8 +34,8 @@ public class MechaAnimPacket implements IMessage {
 		@Override
 		public IMessage onMessage(MechaAnimPacket message, MessageContext ctx) {
 			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-			((EntityMecha)player.getRidingEntity()).senseJump();
-			System.out.println(String.format("Received %s from %s", message.text, ctx.getServerHandler().playerEntity.getDisplayName()));
+			if (player.getRidingEntity() instanceof EntityMecha)
+				((EntityMecha)player.getRidingEntity()).senseJump();
 			return null; // no response in this case
 		}
 	}
