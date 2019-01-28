@@ -53,8 +53,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy{
-
-	private static final ModelSlingerArmour slingerBelt = new ModelSlingerArmour();
 	
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
@@ -131,6 +129,6 @@ public class ClientProxy extends CommonProxy{
 //	}
 	
 	public static ModelBiped getArmorModel() {
-		return slingerBelt;
+		return new ModelSlingerArmour();
 	}
 }
