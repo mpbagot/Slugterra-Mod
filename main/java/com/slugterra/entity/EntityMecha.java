@@ -1,24 +1,26 @@
 package com.slugterra.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class EntityMecha extends EntityAnimal {
 
-	private int field_110285_bP;
-	private float jumpPower = 0.0F;
-	private boolean field_110294_bI;
-	public static boolean isMechaJumping = false;
-	public static boolean isMechaFlying = false;
-	public static boolean isAirborne = false;
-	public static int boostFuel = 10;
+//	private int field_110285_bP;
+	public boolean isMechaJumping = false;
+	public boolean isMechaFlying = false;
+	public boolean isAirborne = false;
+	public int boostFuel = 10;
 
 	public EntityMecha(World world) {
 		super(world);
@@ -26,19 +28,16 @@ public class EntityMecha extends EntityAnimal {
 		this.tasks.addTask(1, new EntityAISwimming(this));
 	}
 
-	public boolean isAIEnabled(){
-		return true;
-	}
-
+	@Override
 	protected void applyEntityAttributes(){
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
 	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable p_90011_1_) {
-		return new EntityMecha(worldObj);
+		return new EntityMecha(world);
 	}
 
 	@Override
@@ -50,52 +49,54 @@ public class EntityMecha extends EntityAnimal {
 	}
 
 	public void senseJump(){
-		System.out.println(this.worldObj.isRemote);
-		if (onGround){
+		System.out.println(this.world.isRemote);
+		if (onGround) {
 			System.out.println("setting jump var to true!");
 			this.motionY = 1.0;
 			isMechaJumping = true;
-		} else if (boostFuel > 0)
-		{
+		} else if (boostFuel > 0) {
 			System.out.println("Flipping flight var");
 			isMechaFlying = !isMechaFlying;
 		}
 	}
 
 	@Override
-	public boolean interact(EntityPlayer p_70085_1_)
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand stack)
 	{
-		p_70085_1_.mountEntity(this);
-		return true;
+		player.startRiding(this);
+		return EnumActionResult.SUCCESS;
 	}
 
 	@Override
-	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
+	public void moveEntityWithHeading(float strafe, float forward)
 	{
-		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
+		if (this.isBeingRidden() && this.getPassengers().size() > 0 && this.getPassengers().get(0) instanceof EntityLivingBase)
 		{
+			Entity rider = this.getPassengers().get(0);
+			
 			//System.out.println(this.onGround);
-			this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
-			this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
+			this.prevRotationYaw = this.rotationYaw = rider.rotationYaw;
+			this.rotationPitch = rider.rotationPitch * 0.5F;
 			this.setRotation(this.rotationYaw, this.rotationPitch);
-			p_70612_1_ = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.5F;
-			p_70612_2_ = ((EntityLivingBase)this.riddenByEntity).moveForward*(this.onGround ? 0.5f : 0.5f);
+			strafe = ((EntityLivingBase)rider).moveStrafing * 0.5F;
+			forward = ((EntityLivingBase)rider).moveForward * 0.5F;
 
-			if (p_70612_2_ <= 0.0F)
+			if (forward <= 0.0F)
 			{
-				p_70612_2_ *= 0.25F;
-				this.field_110285_bP = 0;
+				// Half the speed if we're going backwards
+				forward *= 0.5F;
 			}
 
-			if (!worldObj.isRemote && this.isMechaJumping)
-			{
-				System.out.println("Jumping!");
-				this.motionY = 1.0;
-				this.isMechaJumping = false;
-			}
-			if (!this.worldObj.isRemote && this.isMechaFlying){
-				this.motionY = 0.2;
-				--boostFuel;
+			if (!world.isRemote) {
+				if (this.isMechaJumping) {
+					System.out.println("Jumping!");
+					this.motionY = 1.0;
+					this.isMechaJumping = false;
+				}
+				if (this.isMechaFlying){
+					this.motionY = 0.2;
+					--boostFuel;
+				}
 			}
 			
 			if (this.boostFuel < 1){
@@ -104,21 +105,20 @@ public class EntityMecha extends EntityAnimal {
 			
 			if (this.motionY > 0.0 && this.boostFuel > 0){
 				this.isAirBorne = true;
-				if (!this.worldObj.isRemote)
-					this.motionY -= 0.0005;
-
-				if (this.isMechaFlying && !this.worldObj.isRemote)
+				
+				if (this.isMechaFlying && !this.world.isRemote)
 				{
+					//TODO This accelerates infinitely. Instead, the speed should just be 1.4x
+//					forward *= 3f;
 					float f2 = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
 					float f3 = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
-					this.motionX += (double)(-0.4F * f2);
-					this.motionZ += (double)(0.4F * f3);
+					this.motionX += (double)(-0.05F * f2);
+					this.motionZ += (double)(0.05F * f3);
 				}
 				net.minecraftforge.common.ForgeHooks.onLivingJump(this);
-				this.setVelocity(motionX, motionY, motionZ);
-
 			}
-			if (this.onGround){
+			
+			if (this.onGround) {
 				this.isAirBorne = false;
 				if (this.boostFuel < 100)
 					this.boostFuel++;
@@ -127,15 +127,15 @@ public class EntityMecha extends EntityAnimal {
 			this.stepHeight = 1.0F;
 			this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
 
-			if (!this.worldObj.isRemote)
+			if (!this.world.isRemote)
 			{
 				this.setAIMoveSpeed(0.5F);
-				super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
+				super.moveEntityWithHeading(strafe, forward);
 			}
 
-			double d1 = this.posX - this.prevPosX;
-			double d0 = this.posZ - this.prevPosZ;
-			float f4 = MathHelper.sqrt_double(d1 * d1 + d0 * d0) * 4.0F;
+			double dx = this.posX - this.prevPosX;
+			double dz = this.posZ - this.prevPosZ;
+			float f4 = MathHelper.sqrt(dx * dx + dz * dz) * 4.0F;
 
 			if (f4 > 1.0F)
 			{
@@ -150,11 +150,27 @@ public class EntityMecha extends EntityAnimal {
 		{
 			this.stepHeight = 0.5F;
 			this.jumpMovementFactor = 0.02F;
-			super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
+			super.moveEntityWithHeading(strafe, forward);
 		}
 	}
+	
+	@Override
+	public void fall(float distance, float damageMultiplier)
+    {
+        int i = MathHelper.ceil((distance * 0.5F - 15.0F) * damageMultiplier);
 
-	protected void fall(float f1){
-		super.fall(f1);
-	}
+        if (i > 0)
+        {
+            this.attackEntityFrom(DamageSource.FALL, (float)i);
+
+            if (this.isBeingRidden())
+            {
+                for (Entity entity : this.getRecursivePassengers())
+                {
+                    entity.attackEntityFrom(DamageSource.FALL, (float)i);
+                }
+            }
+
+        }
+    }
 }
