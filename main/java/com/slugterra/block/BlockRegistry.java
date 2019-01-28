@@ -27,7 +27,7 @@ public class BlockRegistry {
 //		slugContainer = new TileEntitySlugContainerBlock(Material.IRON);//.setBlockTextureName(Strings.MODID + ":slugcontainer");
 		slugterraGrass = new SlugterraGrassBlock(Material.GRASS);
 		slugterraDirt = new SlugterraDirtBlock(Material.GROUND);
-		mushroom = new SlugterraBioluminescentMushroom();
+		mushroom = new SlugterraGlowingMushroom();
 		slugterraIce = new SlugterraIceBlock();
 		electricWall = new SlugterraElectricWallBlock();
 	}

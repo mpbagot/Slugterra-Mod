@@ -12,12 +12,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class SlugterraBioluminescentMushroom extends BlockMushroom implements IGrowable
+public class SlugterraGlowingMushroom extends BlockMushroom implements IGrowable
 {
 	private static float f = 0.2f;
 	private static final AxisAlignedBB MUSHROOM_AABB = new AxisAlignedBB(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 	
-	protected SlugterraBioluminescentMushroom()
+	protected SlugterraGlowingMushroom()
 	{
 		this.setTickRandomly(true);
 		this.setLightLevel(1.0F);
