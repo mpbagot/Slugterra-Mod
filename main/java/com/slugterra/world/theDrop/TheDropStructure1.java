@@ -1,6 +1,8 @@
 package com.slugterra.world.theDrop;
 import java.util.Random;
 
+import com.slugterra.block.BlockRegistry;
+
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockStoneSlab;
@@ -858,7 +860,7 @@ public class TheDropStructure1 {
 		bookNbt.setTag("pages", pagesList);
 		
 		bookNbt.setTag("title", new NBTTagString("Journal"));
-		bookNbt.setTag("author", new NBTTagString("Shane")); //TODO What was his name?
+		bookNbt.setTag("author", new NBTTagString("Will Shane"));
 		
 		// Create the book itemstack with the created data
 		ItemStack stack = new ItemStack(Items.WRITTEN_BOOK);
@@ -1039,9 +1041,9 @@ public class TheDropStructure1 {
 		world.setBlockState(pos.add(10, 2, 9), Blocks.AIR.getDefaultState());
 		world.setBlockState(pos.add(11, 2, 9), Blocks.AIR.getDefaultState());
 		world.setBlockState(pos.add(12, 2, 9), Blocks.AIR.getDefaultState());
-		//      world.setBlockState(pos.add(13, 2, 9), BlockRegistry.dropSeat.getDefaultState());
+		world.setBlockState(pos.add(13, 2, 9), BlockRegistry.dropSeat.getDefaultState());
 		world.setBlockState(pos.add(14, 2, 9), Blocks.IRON_BLOCK.getDefaultState());
-		world.setBlockState(pos.add(15, 2, 9), Blocks.AIR.getDefaultState());
+		world.setBlockState(pos.add(15, 2, 9), Blocks.GLOWSTONE.getDefaultState());
 		world.setBlockState(pos.add(16, 2, 9), Blocks.AIR.getDefaultState());
 		world.setBlockState(pos.add(17, 2, 9), Blocks.AIR.getDefaultState());
 		world.setBlockState(pos.add(18, 2, 9), Blocks.LAPIS_BLOCK.getDefaultState());
