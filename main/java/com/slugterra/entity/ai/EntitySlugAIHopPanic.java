@@ -1,12 +1,10 @@
 package com.slugterra.entity.ai;
 
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class EntitySlugAIHopPanic extends EntityAIBase
 {
@@ -14,8 +12,7 @@ public class EntitySlugAIHopPanic extends EntityAIBase
 	private double xPosition;
 	private double yPosition;
 	private double zPosition;
-	private double speed;
-    Vec3 leapTarget;
+    Vec3d leapTarget;
     double leapMotionY;
 
 	public EntitySlugAIHopPanic(EntityCreature p_i1648_1_, double p_i1648_2_)
@@ -36,7 +33,7 @@ public class EntitySlugAIHopPanic extends EntityAIBase
         }
 		else
 		{
-			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 5, 4);
+			Vec3d vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 5, 4);
 
 			if (vec3 == null)
 			{
@@ -68,7 +65,7 @@ public class EntitySlugAIHopPanic extends EntityAIBase
 	{
 		double d0 = this.leapTarget.xCoord - this.entity.posX;
 		double d1 = this.leapTarget.zCoord - this.entity.posZ;
-		float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+		float f = MathHelper.sqrt(d0 * d0 + d1 * d1);
 		this.entity.motionX += d0 / (double)f * 0.5D * 0.800000011920929D + this.entity.motionX * 0.20000000298023224D;
 		this.entity.motionZ += d1 / (double)f * 0.5D * 0.800000011920929D + this.entity.motionZ * 0.20000000298023224D;
 		this.entity.motionY = this.leapMotionY;

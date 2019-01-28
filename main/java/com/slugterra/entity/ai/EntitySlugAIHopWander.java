@@ -1,12 +1,10 @@
 package com.slugterra.entity.ai;
 
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class EntitySlugAIHopWander extends EntityAIBase
 {
@@ -14,9 +12,8 @@ public class EntitySlugAIHopWander extends EntityAIBase
 	private double xPosition;
 	private double yPosition;
 	private double zPosition;
-	private double speed;
     /** The entity that the leaper is leaping towards. */
-    Vec3 leapTarget;
+    Vec3d leapTarget;
     /** The entity's motionY after leaping. */
     float leapMotionY;
 
@@ -42,18 +39,18 @@ public class EntitySlugAIHopWander extends EntityAIBase
 		}
 		else
 		{
-			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+			Vec3d Vec3d = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
 
-			if (vec3 == null)
+			if (Vec3d == null)
 			{
 				return false;
 			}
 			else
 			{
-				this.xPosition = vec3.xCoord;
-				this.yPosition = vec3.yCoord;
-				this.zPosition = vec3.zCoord;
-				this.leapTarget = vec3;
+				this.xPosition = Vec3d.xCoord;
+				this.yPosition = Vec3d.yCoord;
+				this.zPosition = Vec3d.zCoord;
+				this.leapTarget = Vec3d;
 				return true;
 			}
 		}
@@ -74,7 +71,7 @@ public class EntitySlugAIHopWander extends EntityAIBase
 	{
 		double d0 = this.leapTarget.xCoord - this.entity.posX;
 		double d1 = this.leapTarget.zCoord - this.entity.posZ;
-		float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+		float f = MathHelper.sqrt(d0 * d0 + d1 * d1);
 		this.entity.motionX += (d0 / (double)f * 0.5D * 0.800000011920929D + this.entity.motionX * 0.20000000298023224D)/2;
 		this.entity.motionZ += (d1 / (double)f * 0.5D * 0.800000011920929D + this.entity.motionZ * 0.20000000298023224D)/2;
 		this.entity.motionY = (double)this.leapMotionY;

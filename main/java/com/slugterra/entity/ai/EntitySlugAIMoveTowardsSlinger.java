@@ -2,14 +2,12 @@ package com.slugterra.entity.ai;
 
 import com.slugterra.entity.EntitySlug;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class EntitySlugAIMoveTowardsSlinger extends EntityAIBase
 {
@@ -22,13 +20,12 @@ public class EntitySlugAIMoveTowardsSlinger extends EntityAIBase
 	private double speed;
 	/** If the distance to the target theEntity is further than this, this AI task will not run. */
 	private float maxTargetDistance;
-	private static final String __OBFID = "CL_00001599";
-
-	public EntitySlugAIMoveTowardsSlinger(EntityPlayerMP player, EntitySlug p_i1640_1_, double p_i1640_2_, float p_i1640_4_)
+	
+	public EntitySlugAIMoveTowardsSlinger(EntityPlayerMP player, EntitySlug slug, double speed, float maxDistance)
 	{
-		this.theEntity = p_i1640_1_;
-		this.speed = p_i1640_2_;
-		this.maxTargetDistance = p_i1640_4_;
+		this.theEntity = slug;
+		this.speed = speed;
+		this.maxTargetDistance = maxDistance;
 		this.targetEntity = player;
 		this.setMutexBits(1);
 	}
@@ -45,10 +42,10 @@ public class EntitySlugAIMoveTowardsSlinger extends EntityAIBase
 		}
 		else if (this.targetEntity.getDistanceToEntity(this.theEntity) > (double)(maxTargetDistance))
 		{
-			ChunkCoordinates v3 = this.targetEntity.getBedLocation(this.targetEntity.dimension);
-			Vec3 vec3 = null;
+			BlockPos v3 = this.targetEntity.getBedLocation(this.targetEntity.dimension);
+			Vec3d vec3 = null;
 			if (v3 != null){
-				Vec3 v4 = Vec3.createVectorHelper(v3.posX, v3.posY, v3.posZ);
+				Vec3d v4 = new Vec3d(v3.getX(), v3.getY(), v3.getZ());
 				vec3 = RandomPositionGenerator.findRandomTargetBlockTowards(this.theEntity, 16, 7, v4);
 			}
 			if (vec3 == null)
@@ -65,17 +62,17 @@ public class EntitySlugAIMoveTowardsSlinger extends EntityAIBase
 		}
 		else
 		{
-			Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockTowards(this.theEntity, 16, 7, Vec3.createVectorHelper(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ));
+			Vec3d Vec3 = RandomPositionGenerator.findRandomTargetBlockTowards(this.theEntity, 16, 7, new Vec3d(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ));
 
-			if (vec3 == null)
+			if (Vec3 == null)
 			{
 				return false;
 			}
 			else
 			{
-				this.movePosX = vec3.xCoord;
-				this.movePosY = vec3.yCoord;
-				this.movePosZ = vec3.zCoord;
+				this.movePosX = Vec3.xCoord;
+				this.movePosY = Vec3.yCoord;
+				this.movePosZ = Vec3.zCoord;
 				return true;
 			}
 		}
@@ -107,7 +104,7 @@ public class EntitySlugAIMoveTowardsSlinger extends EntityAIBase
 			//theEntity.setPositionAndRotation(theEntity.posX, theEntity.posY, theEntity.posZ, theEntity.rotationYaw, theEntity.rotationPitch);
 			double d0 = this.movePosX - this.theEntity.posX;
 			double d1 = this.movePosZ - this.theEntity.posZ;
-			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+			float f = MathHelper.sqrt(d0 * d0 + d1 * d1);
 			this.theEntity.motionX += (d0 / (double)f * 0.5D * 0.800000011920929D + this.theEntity.motionX * 0.20000000298023224D)/2;
 			this.theEntity.motionZ += (d1 / (double)f * 0.5D * 0.800000011920929D + this.theEntity.motionZ * 0.20000000298023224D)/2;
 			this.theEntity.motionY = (double)this.leapMotionY;
