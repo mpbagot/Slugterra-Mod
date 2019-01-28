@@ -12,14 +12,12 @@ import com.slugterra.entity.protoform.EntityTazerling;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
-import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -60,7 +58,7 @@ public class EntityTazerlingVel extends EntityVel{
 		if (onGround){
 			//circuit burst ability
 			if (abilint == 0){
-				EntityPlayer p = this.world.getClosestPlayerToEntity(this, 5.0f+this.power);
+				EntityPlayer p = this.world.getClosestPlayerToEntity(this, 5.0f+power);
 				if (p != null){
 					IBlaster props = p.getCapability(BlasterProvider.BLASTER_CAP, null);
 					props.disableBlaster(12.5f);
