@@ -50,8 +50,8 @@ public class EntityLariatVel extends EntityVel{
 			if (abilint == 0){
 				System.out.println("Stringler actvated!!!");
 				int y = 0;
-				while (this.world.getBlockState(new BlockPos((int)this.posX, (int)this.posY-y, (int)this.posZ)).getBlock() == Blocks.AIR){
-					this.world.setBlockState(new BlockPos((int)this.posX, (int)this.posY-y, (int)this.posZ), BlockRegistry.slimeRope.getDefaultState());
+				while (this.world.getBlockState(new BlockPos((int)posX, (int)posY-y, (int)posZ)).getBlock() == Blocks.AIR){
+					this.world.setBlockState(new BlockPos((int)posX, (int)posY-y, (int)posZ), BlockRegistry.slimeRope.getDefaultState());
 					y++;
 				}
 			}
