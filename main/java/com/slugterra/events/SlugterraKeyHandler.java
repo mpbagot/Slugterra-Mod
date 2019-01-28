@@ -69,7 +69,6 @@ public class SlugterraKeyHandler {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onGuiKeyInput(GuiScreenEvent.KeyboardInputEvent.Pre event) {
-		System.out.println(event.getGui());
 		if (event.getGui() instanceof GUISlugInventory && Keyboard.isKeyDown(KeyBindings.opensluginv.getKeyCode())) {
 			System.out.println("Toggling slug inventory GUI.");
 			MainRegistry.network.sendToServer(new OpenGuiPacket(MainRegistry.GUI_SLUG_INV));
