@@ -92,7 +92,7 @@ public class EntityInfernusVel extends EntityVel{
 
 			//flamespire ability
 			else if(abilint == 1){
-				//new WorldGeneratorFlameSpire().generateSlugterra(this.world, new Random(), (int)this.posX, (int)this.posZ);
+				new WorldGeneratorFlameSpire().generate(this.world, new Random(), (int)this.posX, (int)this.posZ);
 			}
 
 			else if (abilint == 3){
