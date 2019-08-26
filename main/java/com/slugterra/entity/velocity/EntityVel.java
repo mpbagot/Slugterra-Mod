@@ -37,6 +37,7 @@ public class EntityVel extends EntityThrowable {
 
 	public EntityVel(World world, EntityLivingBase entity) {
 		super(world, entity);
+		System.out.println("Creating Velocimorph entity");
 		this.shooter = entity;
 		this.setLocationAndAngles(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
 		this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
@@ -48,7 +49,7 @@ public class EntityVel extends EntityThrowable {
 		if (this.rotationPitch/180.0F > 0){
 			this.motionY = -(this.rotationPitch/90.0F);
 		}
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 1.5F * 1.5F, 1.0F);
+		//this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 1.5F * 1.5F, 1.0F);
 
 		this.impactAbility = false;
 		this.killColl = true;
@@ -96,7 +97,6 @@ public class EntityVel extends EntityThrowable {
 	}
 
 	public void turnToProtoform() {
-		System.out.println(this.protoform);
 		EntitySlug entityToSpawn = this.protoform;
 		if (this.name != null)
 			entityToSpawn.setName(this.name);
@@ -124,6 +124,11 @@ public class EntityVel extends EntityThrowable {
 		return (double)this.damage;
 	}
 
+	@Override
+	public boolean hasNoGravity() {
+		return true;
+	}
+	
 	@Override
 	public void onUpdate(){
 		super.onUpdate();

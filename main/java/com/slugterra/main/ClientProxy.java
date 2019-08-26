@@ -20,6 +20,14 @@ import com.slugterra.entity.protoform.EntitySlickSilver;
 import com.slugterra.entity.protoform.EntityTazerling;
 import com.slugterra.entity.slingers.AllySlinger;
 import com.slugterra.entity.slingers.EnemySlinger;
+import com.slugterra.entity.velocity.EntityArmasheltVel;
+import com.slugterra.entity.velocity.EntityGrenukeVel;
+import com.slugterra.entity.velocity.EntityInfernusVel;
+import com.slugterra.entity.velocity.EntityLariatVel;
+import com.slugterra.entity.velocity.EntityMakoBreakerVel;
+import com.slugterra.entity.velocity.EntityPhosphoroVel;
+import com.slugterra.entity.velocity.EntityRamstoneVel;
+import com.slugterra.entity.velocity.EntityTazerlingVel;
 import com.slugterra.gui.GuiSlugBeltOverlay;
 import com.slugterra.keys.KeyBindings;
 import com.slugterra.model.ModelMecha;
@@ -41,11 +49,20 @@ import com.slugterra.model.protoform.ModelRamstone;
 import com.slugterra.model.protoform.ModelSlickSilver;
 import com.slugterra.model.protoform.ModelTazerling;
 import com.slugterra.model.slingers.ModelSlingerArmour;
+import com.slugterra.model.velocity.ModelArmasheltVel;
+import com.slugterra.model.velocity.ModelGrenukeVel;
+import com.slugterra.model.velocity.ModelInfernusVel;
+import com.slugterra.model.velocity.ModelLariatVel;
+import com.slugterra.model.velocity.ModelMakoBreakerVel;
+import com.slugterra.model.velocity.ModelPhosphoroVel;
+import com.slugterra.model.velocity.ModelRamstoneVel;
+import com.slugterra.model.velocity.ModelTazerlingVel;
 import com.slugterra.render.BlockRenderRegistry;
 import com.slugterra.render.ItemRenderRegistry;
 import com.slugterra.render.factory.MechaRenderFactory;
 import com.slugterra.render.factory.SlingerRenderFactory;
 import com.slugterra.render.factory.SlugRenderFactory;
+import com.slugterra.render.factory.SlugVelRenderFactory;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -95,18 +112,23 @@ public class ClientProxy extends CommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityRamstone.class, new SlugRenderFactory(new ModelRamstone(), "ramstone"));
 
 //		//velocity render
-//		RenderingRegistry.registerEntityRenderingHandler(EntityInfernusVel.class, new RenderInfernusVel(VelocitySlugItem.infernusVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoroVel.class, new RenderPhosphoroVel(VelocitySlugItem.phosphoroVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityLariatVel.class, new RenderLariatVel(VelocitySlugItem.lariatVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreakerVel.class, new RenderMakoBreakerVel(VelocitySlugItem.makobreakerVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityArmasheltVel.class, new RenderArmasheltVel(VelocitySlugItem.armasheltVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityRamstoneVel.class, new RenderRamstoneVel(VelocitySlugItem.ramstoneVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityTazerlingVel.class, new RenderTazerlingVel(VelocitySlugItem.tazerlingVel));
-//		RenderingRegistry.registerEntityRenderingHandler(EntityGrenukeVel.class, new RenderGrenukeVel(VelocitySlugItem.grenukeVel));
-//
-//		//TileEntity render
-//		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlugContainerEntity.class, new TileEntitySlugContainerRenderer());
-//		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlimeRopeEntity.class, new TileEntitySlimeRopeRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(EntityInfernusVel.class,
+				new SlugVelRenderFactory(new ModelInfernusVel(), new ModelInfernus(), "infernus"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhosphoroVel.class,
+				new SlugVelRenderFactory(new ModelPhosphoroVel(), new ModelPhosphoro(), "phosphoro"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLariatVel.class,
+				new SlugVelRenderFactory(new ModelLariatVel(), new ModelLariat(), "lariat"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMakoBreakerVel.class,
+				new SlugVelRenderFactory(new ModelMakoBreakerVel(), new ModelMakoBreaker(), "makobreaker"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityArmasheltVel.class,
+				new SlugVelRenderFactory(new ModelArmasheltVel(), new ModelArmashelt(), "armashelt"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRamstoneVel.class,
+				new SlugVelRenderFactory(new ModelRamstoneVel(), new ModelRamstone(), "ramstone"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTazerlingVel.class,
+				new SlugVelRenderFactory(new ModelTazerlingVel(), new ModelTazerling(), "tazerling"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenukeVel.class,
+				new SlugVelRenderFactory(new ModelGrenukeVel(), new ModelGrenuke(), "grenuke"));
+
 		//slinger render
 		RenderingRegistry.registerEntityRenderingHandler(EnemySlinger.class,
 				new SlingerRenderFactory(0));

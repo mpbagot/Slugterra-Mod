@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelInfurnusVel extends ModelBase
+public class ModelInfernusVel extends ModelBase
 {
 	//fields
 	ModelRenderer body;
@@ -17,7 +17,7 @@ public class ModelInfurnusVel extends ModelBase
 	ModelRenderer antr;
 	ModelRenderer antl;
 
-	public ModelInfurnusVel()
+	public ModelInfernusVel()
 	{
 		textureWidth = 78;
 		textureHeight = 32;
