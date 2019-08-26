@@ -60,6 +60,7 @@ public class GUISlugInventory extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
+		// Load the healths for the slugs in the slug belt inventory
 		int[] healths = {0, 0, 0, 0, 0, 0};
 		for (int a = 0; a < 6; ++a) {
 			ItemStack slot = this.inventory.getStackInSlot(a);
@@ -73,22 +74,24 @@ public class GUISlugInventory extends GuiContainer
 			}
 		}
 
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(Strings.MODID + ":textures/gui/slughealthbar2.png"));
+		// Bind the health bar image to the render engine, then draw the health bars (which will use the bound texture)
+		this.mc.renderEngine.bindTexture(new ResourceLocation(Strings.MODID, "textures/gui/slughealthbar2.png"));
 		//TODO Fix the darkening of the health bars
 		this.drawTexturedModalRect(10, 124, 0, 0, healths[0], 3);
 		if (slug1 != null)
 			this.fontRendererObj.drawString(slug1.name, 9, 94, 4210752);
 
-		this.drawTexturedModalRect(111, 15, 0, 0, healths[1], 3);
+		this.drawTexturedModalRect(111, 15, 0, 3, healths[1], 3);
 
-		this.drawTexturedModalRect(111, 41, 0, 0, healths[2], 3);
+		this.drawTexturedModalRect(111, 41, 0, 6, healths[2], 3);
 
-		this.drawTexturedModalRect(111, 63, 0, 0, healths[3], 3);
+		this.drawTexturedModalRect(111, 63, 0, 9, healths[3], 3);
 
-		this.drawTexturedModalRect(111, 88, 0, 0, healths[4], 3);
+		this.drawTexturedModalRect(111, 88, 0, 12, healths[4], 3);
 
-		this.drawTexturedModalRect(111, 111, 0, 0, healths[5], 3);
+		this.drawTexturedModalRect(111, 111, 0, 15, healths[5], 3);
 
+		// Lastly, draw the inventory name and "Hotbar"
 		String s = this.inventory.hasCustomName() ? this.inventory.getName() : I18n.format(this.inventory.getName());
 		this.fontRendererObj.drawString(s, this.xSize - this.fontRendererObj.getStringWidth(s) - 100, 132, 4210752);
 		this.fontRendererObj.drawString(I18n.format("Hotbar"), 120, this.ySize - 37, 4210752);
