@@ -6,7 +6,7 @@ import net.minecraft.world.gen.layer.GenLayerZoom;
 
 import com.slugterra.biomes.SlugterraGenLayerBiome;
 
-public abstract class GenLayerSlugterra extends GenLayer
+public class GenLayerSlugterra extends GenLayer
 {
 	public GenLayerSlugterra(long seed) {
 		super(seed);
@@ -22,8 +22,6 @@ public abstract class GenLayerSlugterra extends GenLayer
 		biomes = new GenLayerZoom(1002L, biomes);
 		biomes = new GenLayerZoom(1003L, biomes);
 		biomes = new GenLayerZoom(1004L, biomes);
-
-
 
 
 		GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);

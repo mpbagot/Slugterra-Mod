@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -14,11 +15,11 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class WorldProviderSlugterra extends WorldProvider{
+public class WorldProviderSlugterra extends WorldProvider {
 
 	@Override
-	public void registerWorldChunkManager(){
-		this.biomeProvider = new WorldChunkManagerSlugterra(this.worldObj.getSeed(), this.terrainType);
+	public void init(){
+		this.biomeProvider = new BiomeProviderSlugterra(this.world.getSeed(), this.world.getWorldInfo().getTerrainType());
 		this.setDimension(MainRegistry.dimensionIdSlugterra);
 	}
 	
@@ -122,14 +123,6 @@ public class WorldProviderSlugterra extends WorldProvider{
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	/** @return the high of the clouds */
-	public float getCloudHeight()
-	{
-		return this.terrainType.getCloudHeight();
-	}
-
-	@Override
 	public ChunkCoordinates getEntrancePortalLocation()
 	{
 		return new ChunkCoordinates(50, 5, 0);
@@ -165,11 +158,6 @@ public class WorldProviderSlugterra extends WorldProvider{
 	}
 
 	@Override
-	public Vec3d drawClouds(float partialTicks) {
-		return super.drawClouds(partialTicks);
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(float par1, float par2)
 	{
@@ -192,6 +180,12 @@ public class WorldProviderSlugterra extends WorldProvider{
 		f4 *= f2 * 0.94F + 0.06F;
 		f5 *= f2 * 0.91F + 0.09F;
 		return new Vec3d((double)f3, (double)f4, (double)f5);
+	}
+
+	@Override
+	public DimensionType getDimensionType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

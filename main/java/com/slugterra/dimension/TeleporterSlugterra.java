@@ -14,8 +14,8 @@ public class TeleporterSlugterra extends Teleporter {
 	public TeleporterSlugterra(WorldServer world) {
 		super(world);
 
-		this.worldServerInstance = world;
-		this.random = new Random(world.getSeed());
+		worldServerInstance = world;
+		random = new Random(world.getSeed());
 	}
 	
 	@Override
